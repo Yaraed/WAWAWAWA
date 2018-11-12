@@ -26,7 +26,6 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'androidx.appcompat:appcompat:1.0.1'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
@@ -36,4 +35,30 @@ dependencies {
     implementation project(':middleware:weyeelog')
     implementation project(':middleware:weyeestorage')
     implementation project(':posres')
+
+    // Support库
+    implementation rootProject.ext.supportLibs
+    // 网络请求库
+    implementation rootProject.ext.retrofitLibs
+    // RxJava2
+    implementation rootProject.ext.rxJavaLibs
+    // dagger2
+    implementation rootProject.ext.dagger.dagger2
+    annotationProcessor rootProject.ext.dagger.dagger2Compiler
+    // butterknife
+    implementation rootProject.ext.butterknife.butterknife
+    annotationProcessor rootProject.ext.butterknife.butterknifeCompiler
+    // glide
+    implementation rootProject.ext.glide.glide
+    implementation(rootProject.ext.glide.glideOkhttp) {
+        exclude group: 'glide-parent'
+    }
+    annotationProcessor rootProject.ext.glide.glideCompiler
+    //logger
+    implementation rootProject.ext.loggerLibs
+    // util
+    implementation rootProject.ext.utilLibs
+    // leakCanary
+    debugImplementation rootProject.ext.leakCanary.canaryDebug
+    releaseImplementation rootProject.ext.leakCanary.canaryRelease
 }
