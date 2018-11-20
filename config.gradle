@@ -1,0 +1,111 @@
+ext {
+    android = [
+            applicationId    : "com.weyee.pos",
+            compileSdkVersion: 28,
+            buildToolsVersion: "28.0.3",
+            minSdkVersion    : 14,
+            targetSdkVersion : 28,
+            versionCode      : 1,
+            versionName      : "0.0.1",
+
+            DEBUG            : "true",
+            TAG              : "\"Letion\""
+    ]
+
+    dependVersion = [
+            androidXSdkVersion        : "1.0.2",
+            constraintLayoutSdkVersion: "2.0.0-alpha2",
+            retrofitSdkVersion        : "2.3.0",
+            okhttpSdkVersion          : "3.9.0",
+            dagger2SdkVersion         : "2.12",
+            glideSdkVersion           : "4.2.0",
+            rx2SdkJava                : "2.1.5",
+            rx2SdkAndroid             : "2.0.1",
+            rxlifecycle2SdkVersion    : "2.2.0",
+            rx2SdkBus                 : "2.0.0",
+            rx2SdkPermission          : "0.9.5@aar",
+            rx2SdkErrorhandler        : "2.1.1",
+            loggerVersion             : "2.1.1",
+            androidUtilCodeVersion    : "1.13.13",
+            butterknifeSdkVersion     : "8.8.1",
+            canarySdkVersion          : "1.5.4",
+
+
+            lifecycleSdkVersion       : "1.1.0"
+    ]
+
+    supportDeps = [
+            supportv4       : "androidx.core:core:$dependVersion.androidXSdkVersion",
+            appcompat       : "com.android.support:appcompat-v7:$dependVersion.androidXSdkVersion",
+            recyclerview    : "androidx.legacy:legacy-support-v4:$dependVersion.androidXSdkVersion",
+            cardview        : "com.android.support:cardview-v7:$dependVersion.androidXSdkVersion",
+            design          : "com.google.android.material:material:$dependVersion.androidXSdkVersion",
+            annotations     : "com.android.support:support-annotations:$dependVersion.androidXSdkVersion",
+            constraintlayout: "androidx.constraintlayout:constraintlayout:$dependVersion.constraintLayoutSdkVersion"
+    ]
+
+    dagger = [
+            "dagger2"        : "com.google.dagger:dagger:$dependVersion.dagger2SdkVersion",
+            "dagger2Compiler": "com.google.dagger:dagger-compiler:$dependVersion.dagger2SdkVersion"
+    ]
+
+    retrofit = [
+            retrofit                : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",
+            retrofitConverterGson   : "com.squareup.retrofit2:converter-gson:$dependVersion.retrofitSdkVersion",
+            retrofitAdapterRxjava2  : "com.squareup.retrofit2:adapter-rxjava2:$dependVersion.retrofitSdkVersion",
+            okhttp3LoggerInterceptor: "com.squareup.okhttp3:logging-interceptor:$dependVersion.okhttpSdkVersion",
+            okhttp3                 : "com.squareup.okhttp3:okhttp:$dependVersion.okhttpSdkVersion",
+            okhttp3Urlconnection    : "com.squareup.okhttp:okhttp-urlconnection:2.0.0"
+    ]
+
+    rxJava = [
+            rxJava               : "io.reactivex.rxjava2:rxjava:$dependVersion.rx2SdkJava",
+            rxAndroid            : "io.reactivex.rxjava2:rxandroid:$dependVersion.rx2SdkAndroid",
+            rxlifecycle          : "com.trello.rxlifecycle2:rxlifecycle:$dependVersion.rxlifecycle2SdkVersion",
+            rxlifecycleAndroid   : "com.trello.rxlifecycle2:rxlifecycle-android:$dependVersion.rxlifecycle2SdkVersion",
+            rxlifecycleComponents: "com.trello.rxlifecycle2:rxlifecycle-components:$dependVersion.rxlifecycle2SdkVersion",
+            rxBus                : "com.hwangjr.rxbus:rxbus:$dependVersion.rx2SdkBus",
+            rxPermissions        : "com.tbruyelle.rxpermissions2:rxpermissions:$dependVersion.rx2SdkPermission",
+            rxErrorhandler       : "me.jessyan:rxerrorhandler:$dependVersion.rx2SdkErrorhandler",
+    ]
+
+    glide = [
+            glide        : "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion",
+            glideCompiler: "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion",
+            glideOkhttp  : "com.github.bumptech.glide:okhttp3-integration:$dependVersion.glideSdkVersion"
+    ]
+
+    leakCanary = [
+            canaryDebug  : "com.squareup.leakcanary:leakcanary-android:$dependVersion.canarySdkVersion",
+            canaryRelease: "com.squareup.leakcanary:leakcanary-android-no-op:$dependVersion.canarySdkVersion"
+    ]
+
+    log = [
+            logger: "com.orhanobut:logger:$dependVersion.loggerVersion"
+    ]
+
+    util = [
+            androidUtilCode: "com.blankj:utilcode:$dependVersion.androidUtilCodeVersion"
+    ]
+
+    butterknife = [
+            butterknife        : "com.jakewharton:butterknife:$dependVersion.butterknifeSdkVersion",
+            butterknifeCompiler: "com.jakewharton:butterknife-compiler:$dependVersion.butterknifeSdkVersion"
+    ]
+
+    lifecycle = [
+            runtime   : "android.arch.lifecycle:runtime:$dependVersion.lifecycleSdkVersion",
+            extensions: "android.arch.lifecycle:extensions:$dependVersion.lifecycleSdkVersion",
+            compiler  : "android.arch.lifecycle:compiler:$dependVersion.lifecycleSdkVersion",
+    ]
+
+    supportLibs = supportDeps.values()
+    daggerLibs = dagger.values()
+    retrofitLibs = retrofit.values()
+    rxJavaLibs = rxJava.values()
+    glideLibs = glide.values()
+    leakCanaryLibs = leakCanary.values()
+    loggerLibs = log.values()
+    utilLibs = util.values()
+    lifecycleLibs = lifecycle.values()
+}
