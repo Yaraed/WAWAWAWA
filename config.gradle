@@ -1,0 +1,42 @@
+ext {
+    // 安卓常规配置
+    android = [
+            compileSdkVersion: 28,
+            applicationId    : "com.letion.core",
+            minSdkVersion    : 14,
+            targetSdkVersion : 28,
+            versionCode      : 1,  //修改版本号需要+1
+            versionName      : "1.0",
+
+
+            supportVersion   : '1.0.2'
+    ]
+
+
+    dependVersion = [
+            androidXSdkVersion        : "1.0.2",
+            constraintLayoutSdkVersion: "2.0.0-alpha2",
+            retrofitSdkVersion        : "2.3.0",
+            okhttpSdkVersion          : "3.9.0",
+            dagger2SdkVersion         : "2.12",
+            glideSdkVersion           : "4.2.0",
+            rx2SdkJava                : "2.1.5",
+            rx2SdkAndroid             : "2.0.1",
+            rxlifecycle2SdkVersion    : "2.2.0",
+            rx2SdkBus                 : "2.0.0",
+            rx2SdkPermission          : "0.9.5@aar",
+            rx2SdkErrorhandler        : "2.1.1",
+            loggerVersion             : "2.1.1",
+            androidUtilCodeVersion    : "1.13.13",
+            butterknifeSdkVersion     : "8.8.1",
+            canarySdkVersion          : "1.5.4",
+
+
+            lifecycleSdkVersion       : "1.1.0"
+    ]
+
+    libs = [
+            appcompat_v7    : "androidx.appcompat:appcompat:$dependVersion.androidXSdkVersion",
+            constraintlayout: "androidx.constraintlayout:constraintlayout:$dependVersion.constraintLayoutSdkVersion"
+    ]
+}
