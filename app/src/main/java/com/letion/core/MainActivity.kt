@@ -3,6 +3,7 @@ package com.letion.core
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
 import java.nio.charset.Charset
 
@@ -12,6 +13,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tvContent.text = printJson(parseJson(readJson()))
+        Thread {
+            while (true) {
+                ShortcutBadger.applyCount(applicationContext, (Math.random() * 1000).toInt())
+                Thread.sleep(2000)
+            }
+        }.start()
     }
 
     fun readJson(): String {
