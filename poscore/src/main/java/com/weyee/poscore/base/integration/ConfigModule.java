@@ -2,12 +2,12 @@ package com.weyee.poscore.base.integration;
 
 import android.app.Application;
 import android.content.Context;
-import android.support.v4.app.FragmentManager;
 
-import com.letion.geetionlib.base.delegate.AppDelegate;
-import com.letion.geetionlib.di.module.GlobalConfigModule;
+import com.weyee.poscore.base.delegate.AppDelegate;
 
 import java.util.List;
+
+import androidx.fragment.app.FragmentManager;
 
 /**
  * 此接口可以给框架配置一些参数,需要实现类实现后,并在AndroidManifest中声明该实现类

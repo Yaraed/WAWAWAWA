@@ -1,16 +1,6 @@
 package com.weyee.poscore.di.module;
 
 import android.app.Application;
-import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v4.util.ArrayMap;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.letion.geetionlib.base.integration.IRepositoryManager;
-import com.letion.geetionlib.base.integration.RepositoryManager;
-
-import java.util.Map;
 
 import javax.inject.Singleton;
 
@@ -32,30 +22,5 @@ public class AppModule {
     @Provides
     public Application provideApplication() {
         return mApplication;
-    }
-
-    @Singleton
-    @Provides
-    public Gson provideGson(Application application, @Nullable GsonConfiguration configuration){
-        GsonBuilder builder = new GsonBuilder();
-        if (configuration != null)
-            configuration.configGson(application, builder);
-        return builder.create();
-    }
-
-    @Singleton
-    @Provides
-    public IRepositoryManager provideRepositoryManager(RepositoryManager repositoryManager) {
-        return repositoryManager;
-    }
-
-    @Singleton
-    @Provides
-    public Map<String, Object> provideExtras(){
-        return new ArrayMap<>();
-    }
-
-    public interface GsonConfiguration {
-        void configGson(Context context, GsonBuilder builder);
     }
 }

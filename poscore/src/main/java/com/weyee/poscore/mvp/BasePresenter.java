@@ -3,14 +3,8 @@ package com.weyee.poscore.mvp;
 import android.os.Handler;
 import android.os.Message;
 
-import com.letion.geetionlib.vender.rxerrorhandler.RxErrorHandler;
-
-import org.simple.eventbus.EventBus;
 
 import java.lang.ref.WeakReference;
-
-import io.reactivex.disposables.CompositeDisposable;
-import io.reactivex.disposables.Disposable;
 
 /**
  * Created by liu-feng on 2017/6/5.

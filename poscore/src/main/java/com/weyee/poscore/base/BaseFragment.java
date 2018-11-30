@@ -1,21 +1,22 @@
 package com.weyee.poscore.base;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.letion.geetionlib.base.delegate.IFragment;
-import com.letion.geetionlib.mvp.IPresenter;
-import com.trello.rxlifecycle2.components.support.RxFragment;
+import com.weyee.poscore.base.delegate.IFragment;
+import com.weyee.poscore.mvp.IPresenter;
 
 import javax.inject.Inject;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by liu-feng on 2017/6/5.
  */
-public abstract class BaseFragment<P extends IPresenter> extends RxFragment implements IFragment {
+public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IFragment {
     protected final String TAG = this.getClass().getSimpleName();
     @Inject
     protected P mPresenter;
@@ -28,16 +29,15 @@ public abstract class BaseFragment<P extends IPresenter> extends RxFragment impl
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable
-            Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         return inflater.inflate(getResourceId(), container, false);
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (mPresenter != null) mPresenter.onDestroy();//释放资源
-        this.mPresenter = null;
+        //释放资源
+        if (mPresenter != null) mPresenter.onDestroy(); this.mPresenter = null;
     }
 
 

@@ -8,9 +8,6 @@ import android.os.Parcelable;
  */
 public interface ActivityDelegate extends Parcelable {
 
-    String LAYOUT_LINEARLAYOUT = "LinearLayout";
-    String LAYOUT_FRAMELAYOUT = "FrameLayout";
-    String LAYOUT_RELATIVELAYOUT = "RelativeLayout";
     String ACTIVITY_DELEGATE = "activity_delegate";
 
     void onCreate(Bundle savedInstanceState);

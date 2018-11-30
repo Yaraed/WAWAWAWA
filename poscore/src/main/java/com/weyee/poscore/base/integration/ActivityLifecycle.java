@@ -4,17 +4,14 @@ import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.letion.geetionlib.base.delegate.ActivityDelegate;
-import com.letion.geetionlib.base.delegate.ActivityDelegateImpl;
-import com.letion.geetionlib.base.delegate.FragmentDelegate;
-import com.letion.geetionlib.base.delegate.FragmentDelegateImpl;
-import com.letion.geetionlib.base.delegate.IActivity;
-import com.letion.geetionlib.base.delegate.IFragment;
+import com.weyee.poscore.base.delegate.ActivityDelegate;
+import com.weyee.poscore.base.delegate.ActivityDelegateImpl;
+import com.weyee.poscore.base.delegate.FragmentDelegate;
+import com.weyee.poscore.base.delegate.FragmentDelegateImpl;
+import com.weyee.poscore.base.delegate.IActivity;
+import com.weyee.poscore.base.delegate.IFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +19,10 @@ import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 /**
  * Created by liu-feng on 2017/6/5.
@@ -69,8 +70,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
          * 如果这个Activity返回false的话,这个Activity将不能使用{@link FragmentDelegate},意味着
          * {@link com.jess.arms.base.BaseFragment}也不能使用
          */
-        boolean useFragment = activity instanceof IActivity ? ((IActivity) activity).useFragment
-                () : true;
+        boolean useFragment = !(activity instanceof IActivity) || ((IActivity) activity).useFragment();
         if (activity instanceof FragmentActivity && useFragment) {
 
             if (mFragmentLifecycle == null) {
@@ -82,8 +82,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
 
             if (mFragmentLifecycles == null) {
                 mFragmentLifecycles = new ArrayList<>();
-                List<ConfigModule> modules = (List<ConfigModule>) mExtras.get(ConfigModule.class
-                        .getName());
+                List<ConfigModule> modules = (List<ConfigModule>) mExtras.get(ConfigModule.class.getName());
                 for (ConfigModule module : modules) {
                     module.injectFragmentLifecycle(mApplication, mFragmentLifecycles);
                 }
@@ -147,8 +146,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
     public void onActivityDestroyed(Activity activity) {
         mAppManager.removeActivity(activity);
 
-        boolean useFragment = activity instanceof IActivity ? ((IActivity) activity).useFragment
-                () : true;
+        boolean useFragment = !(activity instanceof IActivity) || ((IActivity) activity).useFragment();
         if (activity instanceof FragmentActivity && useFragment) {
             if (mFragmentLifecycle != null) {
                 ((FragmentActivity) activity).getSupportFragmentManager()
@@ -189,8 +187,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
                 FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f);
                 if (fragmentDelegate == null) {
                     fragmentDelegate = new FragmentDelegateImpl(fm, f);
-                    f.getArguments().putParcelable(FragmentDelegate.FRAGMENT_DELEGATE,
-                            fragmentDelegate);
+                    f.getArguments().putParcelable(FragmentDelegate.FRAGMENT_DELEGATE,fragmentDelegate);
                 }
                 fragmentDelegate.onAttach(context);
             }

@@ -3,15 +3,13 @@ package com.weyee.poscore.base.delegate;
 import android.app.Application;
 import android.content.Context;
 
-import com.letion.geetionlib.base.App;
-import com.letion.geetionlib.base.integration.ActivityLifecycle;
-import com.letion.geetionlib.base.integration.ConfigModule;
-import com.letion.geetionlib.base.integration.ManifestParser;
-import com.letion.geetionlib.di.component.AppComponent;
-import com.letion.geetionlib.di.component.DaggerAppComponent;
-import com.letion.geetionlib.di.module.AppModule;
-import com.letion.geetionlib.di.module.ClientModule;
-import com.letion.geetionlib.di.module.GlobalConfigModule;
+
+import com.weyee.poscore.base.App;
+import com.weyee.poscore.base.integration.ActivityLifecycle;
+import com.weyee.poscore.base.integration.ConfigModule;
+import com.weyee.poscore.base.integration.ManifestParser;
+import com.weyee.poscore.di.component.AppComponent;
+import com.weyee.poscore.di.module.AppModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +51,10 @@ public class AppDelegate implements App {
         this.mApplication = application;
         mAppComponent = DaggerAppComponent
                 .builder()
-                .appModule(new AppModule(mApplication))//提供application
-                .clientModule(new ClientModule())//用于提供okhttp和retrofit的单例
-                .globalConfigModule(getGlobalConfigModule(mApplication, mModules))//全局配置
+                //提供application
+                .appModule(new AppModule(mApplication))
+                //全局配置
+                .globalConfigModule(getGlobalConfigModule(mApplication, mModules))
                 .build();
         mAppComponent.inject(this);
 

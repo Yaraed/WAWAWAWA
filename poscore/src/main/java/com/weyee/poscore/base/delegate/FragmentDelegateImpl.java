@@ -3,14 +3,13 @@ package com.weyee.poscore.base.delegate;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Parcel;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.letion.geetionlib.base.App;
+import com.weyee.poscore.base.App;
+import com.weyee.sdk.event.EventBus;
 
-import org.simple.eventbus.EventBus;
-
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
@@ -18,14 +17,13 @@ import butterknife.Unbinder;
  * Created by liu-feng on 2017/6/5.
  */
 public class FragmentDelegateImpl implements FragmentDelegate {
-    private android.support.v4.app.FragmentManager mFragmentManager;
-    private android.support.v4.app.Fragment mFragment;
+    private FragmentManager mFragmentManager;
+    private Fragment mFragment;
     private IFragment iFragment;
     private Unbinder mUnbinder;
 
 
-    public FragmentDelegateImpl(android.support.v4.app.FragmentManager fragmentManager, android
-            .support.v4.app.Fragment fragment) {
+    public FragmentDelegateImpl(FragmentManager fragmentManager, Fragment fragment) {
         this.mFragmentManager = fragmentManager;
         this.mFragment = fragment;
         this.iFragment = (IFragment) fragment;
@@ -39,7 +37,7 @@ public class FragmentDelegateImpl implements FragmentDelegate {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (iFragment.useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.getDefault().register(mFragment);//注册到事件主线
+            EventBus.register(mFragment);//注册到事件主线
         iFragment.setupFragmentComponent(((App) mFragment.getActivity().getApplication())
                 .getAppComponent());
     }
@@ -97,7 +95,7 @@ public class FragmentDelegateImpl implements FragmentDelegate {
     @Override
     public void onDestroy() {
         if (iFragment != null && iFragment.useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.getDefault().unregister(mFragment);//注册到事件主线
+            EventBus.unregister(mFragment);//注册到事件主线
         this.mUnbinder = null;
         this.mFragmentManager = null;
         this.mFragment = null;
