@@ -28,7 +28,12 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
 
-    implementation libsConfig.appcompat_v7
+    api libsConfig.core_v7
+    api libsConfig.appcompat_v7
+    api libsConfig.recyclerview_v7
+    api libsConfig.material_v7
+    api libsConfig.lifecycle_v7
+    api libsConfig.constraintlayout
 
     implementation project(':middleware:weyeeapi')
     implementation project(':middleware:weyeeevent')

@@ -14,8 +14,11 @@ ext {
 
 
     dependVersion = [
-            androidXSdkVersion        : "1.0.2",
+            androidXSdkVersion        : "1.0.0",
             constraintLayoutSdkVersion: "2.0.0-alpha2",
+            lifecycleSdkVersion       : "2.0.0",
+
+
             retrofitSdkVersion        : "2.3.0",
             okhttpSdkVersion          : "3.9.0",
             dagger2SdkVersion         : "2.12",
@@ -30,13 +33,14 @@ ext {
             androidUtilCodeVersion    : "1.13.13",
             butterknifeSdkVersion     : "8.8.1",
             canarySdkVersion          : "1.5.4",
-
-
-            lifecycleSdkVersion       : "1.1.0"
     ]
 
     libs = [
+            core_v7         : "androidx.core:core-ktx:$dependVersion.androidXSdkVersion",
             appcompat_v7    : "androidx.appcompat:appcompat:$dependVersion.androidXSdkVersion",
+            recyclerview_v7 : "androidx.recyclerview:recyclerview:$dependVersion.androidXSdkVersion",
+            material_v7     : "com.google.android.material:material:$dependVersion.androidXSdkVersion",
+            lifecycle_v7    : "androidx.lifecycle:lifecycle-extensions:$dependVersion.lifecycleSdkVersion",
             constraintlayout: "androidx.constraintlayout:constraintlayout:$dependVersion.constraintLayoutSdkVersion"
     ]
 }
