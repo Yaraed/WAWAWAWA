@@ -3,8 +3,8 @@ package com.weyee.poscore.base;
 import android.app.Application;
 import android.content.Context;
 
-import com.letion.geetionlib.base.delegate.AppDelegate;
-import com.letion.geetionlib.di.component.AppComponent;
+import com.weyee.poscore.base.delegate.AppDelegate;
+import com.weyee.poscore.di.component.AppComponent;
 
 /**
  * Created by liu-feng on 2017/6/5.

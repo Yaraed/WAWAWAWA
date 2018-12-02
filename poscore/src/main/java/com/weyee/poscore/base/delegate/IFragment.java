@@ -2,7 +2,7 @@ package com.weyee.poscore.base.delegate;
 
 import android.os.Bundle;
 
-import com.letion.geetionlib.di.component.AppComponent;
+import com.weyee.poscore.di.component.AppComponent;
 
 /**
  * Created by liu-feng on 2017/6/5.

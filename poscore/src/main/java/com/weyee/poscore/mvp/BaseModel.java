@@ -1,6 +1,6 @@
 package com.weyee.poscore.mvp;
 
-import com.letion.geetionlib.base.integration.IRepositoryManager;
+import com.weyee.poscore.base.integration.IRepositoryManager;
 
 /**
  * Created by liu-feng on 2017/6/5.

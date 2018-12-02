@@ -1,8 +1,7 @@
 package com.weyee.poscore.base.integration;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
-
-import com.letion.geetionlib.util.Preconditions;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -10,7 +9,7 @@ import java.util.Map;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import io.rx_cache2.internal.RxCache;
+import androidx.core.util.Preconditions;
 import retrofit2.Retrofit;
 
 /**
@@ -27,12 +26,12 @@ public class RepositoryManager implements IRepositoryManager {
 
     @Inject
     public RepositoryManager(Retrofit retrofit, RxCache rxCache) {
-        this.mRetrofit = retrofit;
-        this.mRxCache = rxCache;
+        this.mRetrofit = retrofit; this.mRxCache = rxCache;
     }
 
     /**
      * 注入RetrofitService,在{@link ConfigModule#registerComponents(Context, IRepositoryManager)}中进行注入
+     *
      * @param services
      */
     @Override
@@ -46,6 +45,7 @@ public class RepositoryManager implements IRepositoryManager {
 
     /**
      * 注入CacheService,在{@link ConfigModule#registerComponents(Context, IRepositoryManager)}中进行注入
+     *
      * @param services
      */
     @Override
@@ -63,10 +63,10 @@ public class RepositoryManager implements IRepositoryManager {
      * @param <T>
      * @return
      */
+    @SuppressLint("RestrictedApi")
     @Override
     public <T> T obtainRetrofitService(Class<T> service) {
-        Preconditions.checkState(mRetrofitServiceCache.containsKey(service.getName())
-                ,"Unable to find %s,first call injectRetrofitService(%s) in ConfigModule",service.getName(),service.getSimpleName());
+        Preconditions.checkState(mRetrofitServiceCache.containsKey(service.getName()), "Unable to find %s,first call injectRetrofitService(%s) in ConfigModule");
         return (T) mRetrofitServiceCache.get(service.getName());
     }
 
@@ -77,10 +77,10 @@ public class RepositoryManager implements IRepositoryManager {
      * @param <T>
      * @return
      */
+    @SuppressLint("RestrictedApi")
     @Override
     public <T> T obtainCacheService(Class<T> cache) {
-        Preconditions.checkState(mCacheServiceCache.containsKey(cache.getName())
-                ,"Unable to find %s,first call injectCacheService(%s) in ConfigModule",cache.getName(),cache.getSimpleName());
+        Preconditions.checkState(mCacheServiceCache.containsKey(cache.getName()), "Unable to find %s,first call injectCacheService(%s) in ConfigModule");
         return (T) mCacheServiceCache.get(cache.getName());
     }
 }

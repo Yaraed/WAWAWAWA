@@ -1,5 +1,6 @@
 package com.weyee.poscore.base.integration;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
@@ -7,12 +8,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Message;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 
-import org.simple.eventbus.EventBus;
-import org.simple.eventbus.Subscriber;
-import org.simple.eventbus.ThreadMode;
+import com.google.android.material.snackbar.Snackbar;
+import com.weyee.sdk.event.EventBus;
+
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -48,14 +50,14 @@ public class AppManager {
     @Inject
     public AppManager(Application application) {
         this.mApplication = application;
-        EventBus.getDefault().register(this);
+        EventBus.register(this);
     }
 
 
     /**
      * 通过eventbus post事件,远程遥控执行对应方法
      */
-    @Subscriber(tag = APPMANAGER_MESSAGE, mode = ThreadMode.MAIN)
+    @Subscribe(tag = APPMANAGER_MESSAGE, threadMode = ThreadMode.MAIN)
     public void onReceive(Message message) {
         switch (message.what) {
             case START_ACTIVITY:
@@ -97,8 +99,7 @@ public class AppManager {
         }
         View view = getCurrentActivity().getWindow().getDecorView().findViewById(android.R.id
                 .content);
-        Snackbar snackbar = Snackbar.make(view, message, isLong ? Snackbar.LENGTH_LONG : Snackbar
-                .LENGTH_SHORT);
+        Snackbar snackbar = Snackbar.make(view, message, isLong ? Snackbar.LENGTH_LONG : Snackbar.LENGTH_SHORT);
         snackbar.getView().setBackgroundColor(Color.parseColor("#1a000000"));
         snackbar.show();
     }
@@ -132,7 +133,7 @@ public class AppManager {
      * 释放资源
      */
     public void release() {
-        EventBus.getDefault().unregister(this);
+        EventBus.unregister(this);
         mActivityList.clear();
         mActivityList = null;
         mCurrentActivity = null;
@@ -288,13 +289,13 @@ public class AppManager {
     /**
      * 退出应用程序
      */
+    @SuppressLint("MissingPermission")
     public void AppExit() {
         try {
             killAll();
             if (mActivityList != null)
                 mActivityList = null;
-            ActivityManager activityMgr =
-                    (ActivityManager) mApplication.getSystemService(Context.ACTIVITY_SERVICE);
+            ActivityManager activityMgr = (ActivityManager) mApplication.getSystemService(Context.ACTIVITY_SERVICE);
             activityMgr.killBackgroundProcesses(mApplication.getPackageName());
             System.exit(0);
         } catch (Exception e) {

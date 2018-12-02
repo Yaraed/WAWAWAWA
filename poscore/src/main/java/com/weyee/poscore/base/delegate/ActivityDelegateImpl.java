@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcel;
 
-import com.letion.geetionlib.base.App;
-import com.letion.geetionlib.vender.log.L;
-
-import org.simple.eventbus.EventBus;
+import com.weyee.poscore.base.App;
+import com.weyee.sdk.event.EventBus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -28,7 +26,7 @@ public class ActivityDelegateImpl implements ActivityDelegate {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (iActivity.useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.getDefault().register(mActivity);//注册到事件主线
+            EventBus.register(mActivity);//注册到事件主线
         iActivity.setupActivityComponent(((App) mActivity.getApplication()).getAppComponent());
         //依赖注入
         try {
@@ -46,23 +44,18 @@ public class ActivityDelegateImpl implements ActivityDelegate {
 
     @Override
     public void onStart() {
-        L.d("params : " + " maybe [file part] , activity start");
-        L.e("params : " + " maybe [file part] , activity start");
     }
 
     @Override
     public void onResume() {
-        L.d("params : " + " maybe [file part] , activity resume");
     }
 
     @Override
     public void onPause() {
-        L.d("params : " + " maybe [file part] , activity pause");
     }
 
     @Override
     public void onStop() {
-        L.d("params : " + " maybe [file part] , activity stop");
     }
 
     @Override
@@ -74,7 +67,7 @@ public class ActivityDelegateImpl implements ActivityDelegate {
     public void onDestroy() {
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) mUnbinder.unbind();
         if (iActivity.useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.getDefault().unregister(mActivity);
+            EventBus.unregister(mActivity);
         this.mUnbinder = null;
         this.iActivity = null;
         this.mActivity = null;
