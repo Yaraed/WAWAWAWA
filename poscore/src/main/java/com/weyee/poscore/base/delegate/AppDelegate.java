@@ -6,10 +6,12 @@ import android.content.Context;
 
 import com.weyee.poscore.base.App;
 import com.weyee.poscore.base.integration.ActivityLifecycle;
-import com.weyee.poscore.base.integration.ConfigModule;
+import com.weyee.poscore.base.integration.IConfigModule;
 import com.weyee.poscore.base.integration.ManifestParser;
 import com.weyee.poscore.di.component.AppComponent;
+import com.weyee.poscore.di.component.DaggerAppComponent;
 import com.weyee.poscore.di.module.AppModule;
+import com.weyee.poscore.di.module.OtherModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +31,12 @@ public class AppDelegate implements App {
     private AppComponent mAppComponent;
     @Inject
     protected ActivityLifecycle mActivityLifecycle;
-    private final List<ConfigModule> mModules;
+    private final List<IConfigModule> mModules;
     private List<Lifecycle> mAppLifecycles = new ArrayList<>();
     private List<Application.ActivityLifecycleCallbacks> mActivityLifecycles = new ArrayList<>();
 
     public AppDelegate(Context context) {
-        this.mModules = new ManifestParser(context).parse();
-        for (ConfigModule module : mModules) {
+        this.mModules = new ManifestParser(context).parse(); for (IConfigModule module : mModules) {
             module.injectAppLifecycle(context, mAppLifecycles);
             module.injectActivityLifecycle(context, mActivityLifecycles);
         }
@@ -48,17 +49,14 @@ public class AppDelegate implements App {
     }
 
     public void onCreate(Application application) {
-        this.mApplication = application;
-        mAppComponent = DaggerAppComponent
-                .builder()
+        this.mApplication = application; mAppComponent = DaggerAppComponent.builder()
                 //提供application
                 .appModule(new AppModule(mApplication))
                 //全局配置
-                .globalConfigModule(getGlobalConfigModule(mApplication, mModules))
-                .build();
-        mAppComponent.inject(this);
+                .otherModule(otherModule(mApplication, mModules))
+                .build(); mAppComponent.inject(this);
 
-        mAppComponent.extras().put(ConfigModule.class.getName(), mModules);
+        mAppComponent.extras().put(IConfigModule.class.getName(), mModules);
 
         mApplication.registerActivityLifecycleCallbacks(mActivityLifecycle);
 
@@ -66,7 +64,7 @@ public class AppDelegate implements App {
             mApplication.registerActivityLifecycleCallbacks(lifecycle);
         }
 
-        for (ConfigModule module : mModules) {
+        for (IConfigModule module : mModules) {
             module.registerComponents(mApplication, mAppComponent.repositoryManager());
         }
 
@@ -80,38 +78,30 @@ public class AppDelegate implements App {
     public void onTerminate() {
         if (mActivityLifecycle != null) {
             mApplication.unregisterActivityLifecycleCallbacks(mActivityLifecycle);
-        }
-        if (mActivityLifecycles != null && mActivityLifecycles.size() > 0) {
+        } if (mActivityLifecycles != null && mActivityLifecycles.size() > 0) {
             for (Application.ActivityLifecycleCallbacks lifecycle : mActivityLifecycles) {
                 mApplication.unregisterActivityLifecycleCallbacks(lifecycle);
             }
-        }
-        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+        } if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
             for (Lifecycle lifecycle : mAppLifecycles) {
                 lifecycle.onTerminate(mApplication);
             }
-        }
-        this.mAppComponent = null;
-        this.mActivityLifecycle = null;
-        this.mActivityLifecycles = null;
-        this.mAppLifecycles = null;
-        this.mApplication = null;
+        } this.mAppComponent = null; this.mActivityLifecycle = null; this.mActivityLifecycles = null;
+        this.mAppLifecycles = null; this.mApplication = null;
     }
 
 
     /**
      * 将app的全局配置信息封装进module(使用Dagger注入到需要配置信息的地方)
-     * 需要在AndroidManifest中声明{@link ConfigModule}的实现类,和Glide的配置方式相似
+     * 需要在AndroidManifest中声明{@link IConfigModule}的实现类,和Glide的配置方式相似
      *
      * @return
      */
-    private GlobalConfigModule getGlobalConfigModule(Application context, List<ConfigModule>
-            modules) {
+    private OtherModule otherModule(Application context, List<IConfigModule> modules) {
 
-        GlobalConfigModule.Builder builder = GlobalConfigModule
-                .builder();
+        OtherModule.Builder builder = OtherModule.builder();
 
-        for (ConfigModule module : modules) {
+        for (IConfigModule module : modules) {
             module.applyOptions(context, builder);
         }
 

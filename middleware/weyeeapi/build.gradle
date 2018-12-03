@@ -32,4 +32,11 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation libsConfig.appcompat_v7
+    //  网络请求库
+    api libsConfig.retrofit
+    api libsConfig.retrofitConverterGson
+    api libsConfig.retrofitAdapterRxjava2
+    api libsConfig.okhttp3
+    api libsConfig.okhttp3LoggerInterceptor
+    api libsConfig.okhttp3Urlconnection
 }

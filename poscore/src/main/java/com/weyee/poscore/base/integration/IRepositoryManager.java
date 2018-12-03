@@ -7,14 +7,14 @@ import android.content.Context;
  */
 public interface IRepositoryManager {
     /**
-     * 注入RetrofitService,在{@link ConfigModule#registerComponents(Context, IRepositoryManager)} 中进行注入
+     * 注入RetrofitService,在{@link IConfigModule#registerComponents(Context, IRepositoryManager)} 中进行注入
      * @param services
      */
     void injectRetrofitService(Class<?>... services);
 
 
     /**
-     * 注入CacheService,在{@link ConfigModule#registerComponents(Context, IRepositoryManager)}中进行注入
+     * 注入CacheService,在{@link IConfigModule#registerComponents(Context, IRepositoryManager)}中进行注入
      * @param services
      */
     void injectCacheService(Class<?>... services);

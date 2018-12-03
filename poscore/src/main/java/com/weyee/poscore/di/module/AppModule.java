@@ -2,8 +2,14 @@ package com.weyee.poscore.di.module;
 
 import android.app.Application;
 
+import com.weyee.poscore.base.integration.IRepositoryManager;
+import com.weyee.poscore.base.integration.RepositoryManager;
+
+import java.util.Map;
+
 import javax.inject.Singleton;
 
+import androidx.collection.ArrayMap;
 import dagger.Module;
 import dagger.Provides;
 
@@ -22,5 +28,17 @@ public class AppModule {
     @Provides
     public Application provideApplication() {
         return mApplication;
+    }
+
+    @Singleton
+    @Provides
+    public IRepositoryManager provideRepositoryManager(RepositoryManager repositoryManager) {
+        return repositoryManager;
+    }
+
+    @Singleton
+    @Provides
+    public Map<String, Object> provideExtras(){
+        return new ArrayMap<>();
     }
 }

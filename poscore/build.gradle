@@ -31,6 +31,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    // Support库
     api libsConfig.core_v7
     api libsConfig.appcompat_v7
     api libsConfig.recyclerview_v7
@@ -38,6 +39,9 @@ dependencies {
     api libsConfig.lifecycle_v7
     api libsConfig.constraintlayout
 
+    // RxJava2
+    implementation libsConfig.rxJava
+    implementation libsConfig.rxAndroid
     // dagger2
     implementation libsConfig.dagger2
     annotationProcessor libsConfig.dagger2Compiler
@@ -50,16 +54,6 @@ dependencies {
     implementation project(':middleware:weyeelog')
     implementation project(':middleware:weyeestorage')
     implementation project(':posres')
-    //    // Support库
-    //    implementation rootProject.ext.supportLibs
-    //    // 网络请求库
-    //    implementation rootProject.ext.retrofitLibs
-    //    // RxJava2
-    //    implementation rootProject.ext.rxJavaLibs
-    //
-    //    // butterknife
-    //    implementation rootProject.ext.butterknife.butterknife
-    //    annotationProcessor rootProject.ext.butterknife.butterknifeCompiler
     //    // glide
     //    implementation rootProject.ext.glide.glide
     //    implementation(rootProject.ext.glide.glideOkhttp) {

@@ -4,25 +4,22 @@ import android.os.Handler;
 import android.os.Message;
 
 
+import com.weyee.sdk.event.EventBus;
+
 import java.lang.ref.WeakReference;
+
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Created by liu-feng on 2017/6/5.
  */
 public class BasePresenter<M extends IModel, V extends IView> implements IPresenter {
     protected CompositeDisposable mCompositeDisposable;
-    protected RxErrorHandler mRxErrorHandler;
     protected MHandler mHandler;
 
     protected M mModel;
     protected V mView;
-
-    public BasePresenter(M model, V rootView, RxErrorHandler rxErrorHandler) {
-        this.mModel = model;
-        this.mView = rootView;
-        this.mRxErrorHandler = rxErrorHandler;
-        onAttach();
-    }
 
     public BasePresenter(M model, V rootView) {
         this.mModel = model;
@@ -43,19 +40,18 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
     @Override
     public void onAttach() {
         if (useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.getDefault().register(this);//注册eventbus
+            EventBus.register(this);//注册eventbus
     }
 
     @Override
     public void onDestroy() {
         if (useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.getDefault().unregister(this);//解除注册eventbus
+            EventBus.unregister(this);//解除注册eventbus
         unDispose();//解除订阅
         if (mModel != null)
             mModel.onDestroy();
         this.mModel = null;
         this.mView = null;
-        this.mRxErrorHandler = null;
         this.mCompositeDisposable = null;
     }
 
