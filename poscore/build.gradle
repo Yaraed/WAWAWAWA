@@ -49,11 +49,11 @@ dependencies {
     implementation libsConfig.butterknife
     annotationProcessor libsConfig.butterknifeCompiler
 
-    implementation project(':middleware:weyeeapi')
-    implementation project(':middleware:weyeeevent')
-    implementation project(':middleware:weyeelog')
-    implementation project(':middleware:weyeestorage')
-    implementation project(':posres')
+    api project(':middleware:weyeeapi')
+    api project(':middleware:weyeeevent')
+    api project(':middleware:weyeelog')
+    api project(':middleware:weyeestorage')
+    api project(':posres')
     //    // glide
     //    implementation rootProject.ext.glide.glide
     //    implementation(rootProject.ext.glide.glideOkhttp) {
