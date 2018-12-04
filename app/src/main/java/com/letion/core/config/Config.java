@@ -18,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import com.weyee.sdk.log.Logger;
+import com.weyee.sdk.toast.ToastUtils;
 
 /**
  * <p>
@@ -66,7 +68,8 @@ public class Config implements IConfigModule {
 
             @Override
             public void onCreate(Application application) {
-
+                ToastUtils.init(application);
+                Logger.init();
             }
 
             @Override

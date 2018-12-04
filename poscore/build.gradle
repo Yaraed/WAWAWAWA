@@ -39,6 +39,8 @@ dependencies {
     api libsConfig.lifecycle_v7
     api libsConfig.constraintlayout
 
+    // util
+    api libsConfig.androidUtilCode
     // RxJava2
     implementation libsConfig.rxJava
     implementation libsConfig.rxAndroid
@@ -53,6 +55,7 @@ dependencies {
     api project(':middleware:weyeeevent')
     api project(':middleware:weyeelog')
     api project(':middleware:weyeestorage')
+    api project(':middleware:weyeetoast')
     api project(':posres')
     //    // glide
     //    implementation rootProject.ext.glide.glide
@@ -60,6 +63,4 @@ dependencies {
     //        exclude group: 'glide-parent'
     //    }
     //    annotationProcessor rootProject.ext.glide.glideCompiler
-    //    // util
-    //    implementation rootProject.ext.utilLibs
 }

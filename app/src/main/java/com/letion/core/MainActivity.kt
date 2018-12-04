@@ -1,7 +1,11 @@
 package com.letion.core
 
 import android.os.Bundle
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.weyee.sdk.log.Logger
+import com.weyee.sdk.toast.ToastUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
@@ -12,13 +16,27 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        tvContent.text = printJson(parseJson(readJson()))
+        //tvContent.text = printJson(parseJson(readJson()))
         Thread {
             while (true) {
                 ShortcutBadger.applyCount(applicationContext, (Math.random() * 1000).toInt())
                 Thread.sleep(2000)
             }
         }.start()
+
+        val array = arrayOfNulls<String>(10)
+        for (i in 0 until 10) {
+            array[i] = "这是第${i}个位置"
+        }
+        Logger.d(array)
+
+        listView.adapter = ArrayAdapter<String>(baseContext, android.R.layout.simple_list_item_1, array)
+
+        listView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+            run {
+                ToastUtils.show(array[i])
+            }
+        }
     }
 
     fun readJson(): String {
