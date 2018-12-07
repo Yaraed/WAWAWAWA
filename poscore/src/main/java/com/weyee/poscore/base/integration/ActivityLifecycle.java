@@ -164,7 +164,7 @@ public class ActivityLifecycle implements Application.ActivityLifecycleCallbacks
         public void onFragmentViewCreated(FragmentManager fm, Fragment f, View v, Bundle savedInstanceState) {
             super.onFragmentViewCreated(fm, f, v, savedInstanceState);
             FragmentDelegate fragmentDelegate = fetchFragmentDelegate(f); if (fragmentDelegate != null) {
-                fragmentDelegate.onCreateView(v, savedInstanceState);
+                fragmentDelegate.onViewCreated(v, savedInstanceState);
             }
         }
 

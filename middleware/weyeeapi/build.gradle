@@ -40,4 +40,7 @@ dependencies {
     api libsConfig.okhttp3
     api libsConfig.okhttp3LoggerInterceptor
     api libsConfig.okhttp3Urlconnection
+
+    implementation project(':middleware:weyeetoast')
+    implementation project(':middleware:weyeelog')
 }
