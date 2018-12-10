@@ -38,7 +38,6 @@ ext {
             rx2SdkErrorhandler        : "2.1.1",
 
 
-
     ]
 
     libs = [
@@ -54,6 +53,7 @@ ext {
             rxAndroid               : "io.reactivex.rxjava2:rxandroid:$dependVersion.rx2SdkAndroid",
             retrofit                : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",
             retrofitConverterGson   : "com.squareup.retrofit2:converter-gson:$dependVersion.retrofitSdkVersion",
+            retrofitConverterScalars: "com.squareup.retrofit2:converter-scalars:$dependVersion.retrofitSdkVersion",
             retrofitAdapterRxjava2  : "com.squareup.retrofit2:adapter-rxjava2:$dependVersion.retrofitSdkVersion",
             okhttp3                 : "com.squareup.okhttp3:okhttp:$dependVersion.okhttpSdkVersion",
             okhttp3LoggerInterceptor: "com.squareup.okhttp3:logging-interceptor:$dependVersion.okhttpSdkVersion",

@@ -1,6 +1,7 @@
 package com.weyee.sdk.api;
 
 import android.annotation.SuppressLint;
+import com.weyee.sdk.api.base.GlobalRxHttp;
 import com.weyee.sdk.api.dispose.DisposeManager;
 
 /**
@@ -24,6 +25,21 @@ public class RxHttpUtils {
 
         }
         return instance;
+    }
+
+    public GlobalRxHttp config() {
+        return GlobalRxHttp.getInstance();
+    }
+
+    /**
+     * 使用全局参数创建请求
+     *
+     * @param cls Class
+     * @param <K> K
+     * @return 返回
+     */
+    public static <K> K createApi(Class<K> cls) {
+        return GlobalRxHttp.createGApi(cls);
     }
 
     /**

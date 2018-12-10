@@ -34,12 +34,13 @@ dependencies {
     implementation libsConfig.appcompat_v7
     implementation libsConfig.androidUtilCode
     //  网络请求库
-    api libsConfig.retrofit
-    api libsConfig.retrofitConverterGson
-    api libsConfig.retrofitAdapterRxjava2
-    api libsConfig.okhttp3
-    api libsConfig.okhttp3LoggerInterceptor
-    api libsConfig.okhttp3Urlconnection
+    implementation libsConfig.retrofit
+    implementation libsConfig.retrofitConverterGson
+    implementation libsConfig.retrofitConverterScalars
+    implementation libsConfig.retrofitAdapterRxjava2
+    implementation libsConfig.okhttp3
+    implementation libsConfig.okhttp3LoggerInterceptor
+    implementation libsConfig.okhttp3Urlconnection
 
     implementation project(':middleware:weyeetoast')
     implementation project(':middleware:weyeelog')
