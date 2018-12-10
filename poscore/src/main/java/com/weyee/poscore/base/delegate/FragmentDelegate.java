@@ -15,7 +15,7 @@ public interface FragmentDelegate extends Parcelable {
 
     void onCreate(Bundle savedInstanceState);
 
-    void onCreateView(View view, Bundle savedInstanceState);
+    void onViewCreated(View view, Bundle savedInstanceState);
 
     void onActivityCreate(Bundle savedInstanceState);
 

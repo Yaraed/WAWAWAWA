@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.weyee.poscore.base.delegate.AppDelegate;
+import com.weyee.poscore.di.module.OtherModule;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ import androidx.fragment.app.FragmentManager;
  * 此接口可以给框架配置一些参数,需要实现类实现后,并在AndroidManifest中声明该实现类
  * Created by liu-feng on 2017/6/5.
  */
-public interface ConfigModule {
+public interface IConfigModule {
     /**
-     * 使用{@link GlobalConfigModule.Builder}给框架配置一些配置参数
+     * 使用{@link OtherModule.Builder}给框架配置一些配置参数
      * @param context
      * @param builder
      */
-    void applyOptions(Context context, GlobalConfigModule.Builder builder);
+    void applyOptions(Context context, OtherModule.Builder builder);
 
     /**
      * 使用{@link IRepositoryManager}给框架注入一些网络请求和数据缓存等服务

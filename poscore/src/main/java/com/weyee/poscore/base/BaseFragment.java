@@ -10,6 +10,7 @@ import com.weyee.poscore.mvp.IPresenter;
 
 import javax.inject.Inject;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -29,7 +30,8 @@ public abstract class BaseFragment<P extends IPresenter> extends Fragment implem
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
+            savedInstanceState) {
         return inflater.inflate(getResourceId(), container, false);
     }
 

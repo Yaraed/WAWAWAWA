@@ -18,6 +18,11 @@ ext {
             constraintLayoutSdkVersion: "2.0.0-alpha2",
             lifecycleSdkVersion       : "2.0.0",
 
+            androidUtilCodeVersion    : "1.22.0",
+            rx2SdkJava                : "2.1.5",
+            rx2SdkAndroid             : "2.0.1",
+            retrofitSdkVersion        : "2.3.0",
+            okhttpSdkVersion          : "3.9.0",
             dagger2SdkVersion         : "2.12",
             loggerVersion             : "2.2.0",
             eventbusVersion           : "3.1.1",
@@ -25,36 +30,43 @@ ext {
             canarySdkVersion          : "1.5.4",
 
 
-            retrofitSdkVersion        : "2.3.0",
-            okhttpSdkVersion          : "3.9.0",
+
             glideSdkVersion           : "4.2.0",
-            rx2SdkJava                : "2.1.5",
-            rx2SdkAndroid             : "2.0.1",
             rxlifecycle2SdkVersion    : "2.2.0",
             rx2SdkBus                 : "2.0.0",
             rx2SdkPermission          : "0.9.5@aar",
             rx2SdkErrorhandler        : "2.1.1",
-            androidUtilCodeVersion    : "1.13.13",
 
 
     ]
 
     libs = [
-            core_v7            : "androidx.core:core-ktx:$dependVersion.androidXSdkVersion",
-            appcompat_v7       : "androidx.appcompat:appcompat:$dependVersion.androidXSdkVersion",
-            recyclerview_v7    : "androidx.recyclerview:recyclerview:$dependVersion.androidXSdkVersion",
-            material_v7        : "com.google.android.material:material:$dependVersion.androidXSdkVersion",
-            lifecycle_v7       : "androidx.lifecycle:lifecycle-extensions:$dependVersion.lifecycleSdkVersion",
-            constraintlayout   : "androidx.constraintlayout:constraintlayout:$dependVersion.constraintLayoutSdkVersion",
+            core_v7                 : "androidx.core:core-ktx:$dependVersion.androidXSdkVersion",
+            appcompat_v7            : "androidx.appcompat:appcompat:$dependVersion.androidXSdkVersion",
+            recyclerview_v7         : "androidx.recyclerview:recyclerview:$dependVersion.androidXSdkVersion",
+            material_v7             : "com.google.android.material:material:$dependVersion.androidXSdkVersion",
+            lifecycle_v7            : "androidx.lifecycle:lifecycle-extensions:$dependVersion.lifecycleSdkVersion",
+            constraintlayout        : "androidx.constraintlayout:constraintlayout:$dependVersion.constraintLayoutSdkVersion",
 
-            dagger2            : "com.google.dagger:dagger:$dependVersion.dagger2SdkVersion",
-            dagger2Compiler    : "com.google.dagger:dagger-compiler:$dependVersion.dagger2SdkVersion",
+            androidUtilCode         : "com.blankj:utilcode:$dependVersion.androidUtilCodeVersion",
+            rxJava                  : "io.reactivex.rxjava2:rxjava:$dependVersion.rx2SdkJava",
+            rxAndroid               : "io.reactivex.rxjava2:rxandroid:$dependVersion.rx2SdkAndroid",
+            retrofit                : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",
+            retrofitConverterGson   : "com.squareup.retrofit2:converter-gson:$dependVersion.retrofitSdkVersion",
+            retrofitConverterScalars: "com.squareup.retrofit2:converter-scalars:$dependVersion.retrofitSdkVersion",
+            retrofitAdapterRxjava2  : "com.squareup.retrofit2:adapter-rxjava2:$dependVersion.retrofitSdkVersion",
+            okhttp3                 : "com.squareup.okhttp3:okhttp:$dependVersion.okhttpSdkVersion",
+            okhttp3LoggerInterceptor: "com.squareup.okhttp3:logging-interceptor:$dependVersion.okhttpSdkVersion",
+            okhttp3Urlconnection    : "com.squareup.okhttp3:okhttp-urlconnection:$dependVersion.okhttpSdkVersion",
 
-            eventbus           : "org.greenrobot:eventbus:$dependVersion.eventbusVersion",
-            logger             : "com.orhanobut:logger:$dependVersion.loggerVersion",
-            butterknife        : "com.jakewharton:butterknife:$dependVersion.butterknifeSdkVersion",
-            butterknifeCompiler: "com.jakewharton:butterknife-compiler:$dependVersion.butterknifeSdkVersion",
-            canaryDebug        : "com.squareup.leakcanary:leakcanary-android:$dependVersion.canarySdkVersion",
-            canaryRelease      : "com.squareup.leakcanary:leakcanary-android-no-op:$dependVersion.canarySdkVersion"
+            dagger2                 : "com.google.dagger:dagger:$dependVersion.dagger2SdkVersion",
+            dagger2Compiler         : "com.google.dagger:dagger-compiler:$dependVersion.dagger2SdkVersion",
+
+            eventbus                : "org.greenrobot:eventbus:$dependVersion.eventbusVersion",
+            logger                  : "com.orhanobut:logger:$dependVersion.loggerVersion",
+            butterknife             : "com.jakewharton:butterknife:$dependVersion.butterknifeSdkVersion",
+            butterknifeCompiler     : "com.jakewharton:butterknife-compiler:$dependVersion.butterknifeSdkVersion",
+            canaryDebug             : "com.squareup.leakcanary:leakcanary-android:$dependVersion.canarySdkVersion",
+            canaryRelease           : "com.squareup.leakcanary:leakcanary-android-no-op:$dependVersion.canarySdkVersion"
     ]
 }

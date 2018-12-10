@@ -11,7 +11,7 @@ import java.util.List;
  * Created by liu-feng on 2017/6/5.
  */
 public final class ManifestParser {
-    private static final String MODULE_VALUE = "ConfigModule";
+    private static final String MODULE_VALUE = "Config";
 
     private final Context context;
 
@@ -19,8 +19,8 @@ public final class ManifestParser {
         this.context = context;
     }
 
-    public List<ConfigModule> parse() {
-        List<ConfigModule> modules = new ArrayList<>();
+    public List<IConfigModule> parse() {
+        List<IConfigModule> modules = new ArrayList<>();
         try {
             ApplicationInfo appInfo = context.getPackageManager().getApplicationInfo(
                     context.getPackageName(), PackageManager.GET_META_DATA);
@@ -32,32 +32,32 @@ public final class ManifestParser {
                 }
             }
         } catch (PackageManager.NameNotFoundException e) {
-            throw new RuntimeException("Unable to find metadata to parse ConfigModule", e);
+            throw new RuntimeException("Unable to find metadata to parse IConfigModule", e);
         }
 
         return modules;
     }
 
-    private static ConfigModule parseModule(String className) {
+    private static IConfigModule parseModule(String className) {
         Class<?> clazz;
         try {
             clazz = Class.forName(className);
         } catch (ClassNotFoundException e) {
-            throw new IllegalArgumentException("Unable to find ConfigModule implementation", e);
+            throw new IllegalArgumentException("Unable to find IConfigModule implementation", e);
         }
 
         Object module;
         try {
             module = clazz.newInstance();
         } catch (InstantiationException e) {
-            throw new RuntimeException("Unable to instantiate ConfigModule implementation for " + clazz, e);
+            throw new RuntimeException("Unable to instantiate IConfigModule implementation for " + clazz, e);
         } catch (IllegalAccessException e) {
-            throw new RuntimeException("Unable to instantiate ConfigModule implementation for " + clazz, e);
+            throw new RuntimeException("Unable to instantiate IConfigModule implementation for " + clazz, e);
         }
 
-        if (!(module instanceof ConfigModule)) {
-            throw new RuntimeException("Expected instanceof ConfigModule, but found: " + module);
+        if (!(module instanceof IConfigModule)) {
+            throw new RuntimeException("Expected instanceof IConfigModule, but found: " + module);
         }
-        return (ConfigModule) module;
+        return (IConfigModule) module;
     }
 }

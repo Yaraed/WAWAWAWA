@@ -32,4 +32,16 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation libsConfig.appcompat_v7
+    implementation libsConfig.androidUtilCode
+    //  网络请求库
+    implementation libsConfig.retrofit
+    implementation libsConfig.retrofitConverterGson
+    implementation libsConfig.retrofitConverterScalars
+    implementation libsConfig.retrofitAdapterRxjava2
+    implementation libsConfig.okhttp3
+    implementation libsConfig.okhttp3LoggerInterceptor
+    implementation libsConfig.okhttp3Urlconnection
+
+    implementation project(':middleware:weyeetoast')
+    implementation project(':middleware:weyeelog')
 }
