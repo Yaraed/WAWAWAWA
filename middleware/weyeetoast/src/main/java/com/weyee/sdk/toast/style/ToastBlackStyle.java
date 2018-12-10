@@ -48,7 +48,7 @@ public class ToastBlackStyle implements IToastStyle {
 
     @Override
     public float getTextSize() {
-        return 14;
+        return 15;
     }
 
     @Override
