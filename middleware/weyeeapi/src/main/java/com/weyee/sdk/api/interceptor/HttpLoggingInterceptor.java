@@ -1,6 +1,6 @@
 package com.weyee.sdk.api.interceptor;
 
-import com.weyee.sdk.log.Logger;
+import com.weyee.sdk.log.LogUtils;
 
 /**
  * <p>日志打印格式化处理
@@ -32,7 +32,7 @@ public class HttpLoggingInterceptor implements okhttp3.logging.HttpLoggingInterc
         mMessage.append(message.concat("\n"));
         // 请求或者响应结束，打印整条日志
         if (message.startsWith("<-- END HTTP")) {
-            Logger.e("OkHttp", mMessage.toString());
+            LogUtils.d(String.format("%s", mMessage.toString()));
         }
     }
 

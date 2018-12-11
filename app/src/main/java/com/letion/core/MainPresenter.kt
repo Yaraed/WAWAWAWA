@@ -28,7 +28,7 @@ class MainPresenter(val view: com.letion.core.MainView) {
                  * @param t
                  */
                 override fun onSuccess(t: BookBean?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    ToastUtils.show(t?.summary)
                 }
 
             })

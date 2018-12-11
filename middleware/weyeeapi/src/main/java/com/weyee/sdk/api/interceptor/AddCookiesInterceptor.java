@@ -1,9 +1,8 @@
 package com.weyee.sdk.api.interceptor;
 
-import android.util.Log;
 import com.blankj.utilcode.util.SPUtils;
 import com.weyee.sdk.api.config.Config;
-import com.weyee.sdk.log.Logger;
+import com.weyee.sdk.log.LogUtils;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -28,7 +27,7 @@ public class AddCookiesInterceptor implements Interceptor {
             for (String cookie : preferences) {
                 builder.addHeader("Cookie", cookie);
                 // This is done so I know which headers are being added; this interceptor is used after the normal logging of OkHttp
-                Logger.d("Adding Header Cookie--->: " + cookie);
+                LogUtils.d("Adding Header Cookie--->: " + cookie);
             }
         }
         return chain.proceed(builder.build());

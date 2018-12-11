@@ -1,7 +1,8 @@
 package com.weyee.sdk.api.interceptor;
 
+import android.annotation.SuppressLint;
 import androidx.annotation.Nullable;
-import com.weyee.sdk.log.Logger;
+import com.weyee.sdk.log.LogUtils;
 import okhttp3.*;
 
 import java.io.IOException;
@@ -46,10 +47,11 @@ public class HttpEventListener extends EventListener {
 
     private StringBuilder sbLog;
 
+    @SuppressLint("DefaultLocale")
     public HttpEventListener(long callId, HttpUrl url, long callStartNanos) {
         this.callId = callId;
         this.callStartNanos = callStartNanos;
-        this.sbLog = new StringBuilder(url.toString()).append(" ").append(callId).append(":");
+        this.sbLog = new StringBuilder(url.toString()).append(" ").append(String.format("callId->%d", callId)).append("：");
     }
 
     private void recordEventLog(String name) {
@@ -57,7 +59,7 @@ public class HttpEventListener extends EventListener {
         sbLog.append(String.format(Locale.CHINA, "%.3f-%s", elapseNanos / 1000000000d, name)).append(";");
         if ("callEnd".equalsIgnoreCase(name) || "callFailed".equalsIgnoreCase(name)) {
             //打印出每个步骤的时间点
-            Logger.i("Network-Time", sbLog.toString());
+            LogUtils.e(String.format("Network-Time：%s", sbLog.toString()));
         }
     }
 

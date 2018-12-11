@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.weyee.sdk.log.LogUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
@@ -33,6 +34,7 @@ class MainActivity : AppCompatActivity(), MainView {
         for (i in 0 until 10) {
             array[i] = "这是第${i}个位置"
         }
+        LogUtils.d(array)
 
         listView.adapter = ArrayAdapter<String>(baseContext, android.R.layout.simple_list_item_1, array)
 

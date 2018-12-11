@@ -25,6 +25,7 @@ ext {
             okhttpSdkVersion          : "3.9.0",
             dagger2SdkVersion         : "2.12",
             loggerVersion             : "2.2.0",
+            timberVersion             : "4.7.1",
             eventbusVersion           : "3.1.1",
             butterknifeSdkVersion     : "8.8.1",
             canarySdkVersion          : "1.5.4",
@@ -64,6 +65,7 @@ ext {
 
             eventbus                : "org.greenrobot:eventbus:$dependVersion.eventbusVersion",
             logger                  : "com.orhanobut:logger:$dependVersion.loggerVersion",
+            timber                  : "com.jakewharton.timber:timber:$dependVersion.timberVersion",
             butterknife             : "com.jakewharton:butterknife:$dependVersion.butterknifeSdkVersion",
             butterknifeCompiler     : "com.jakewharton:butterknife-compiler:$dependVersion.butterknifeSdkVersion",
             canaryDebug             : "com.squareup.leakcanary:leakcanary-android:$dependVersion.canarySdkVersion",

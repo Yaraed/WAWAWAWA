@@ -61,7 +61,7 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
      * @return
      */
     protected boolean useEventBus() {
-        return true;
+        return false;
     }
 
 
