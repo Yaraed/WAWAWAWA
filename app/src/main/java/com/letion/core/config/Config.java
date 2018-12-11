@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import com.weyee.sdk.api.RxHttpUtils;
 import com.weyee.sdk.log.Logger;
 import com.weyee.sdk.toast.ToastUtils;
 
@@ -70,6 +71,7 @@ public class Config implements IConfigModule {
             public void onCreate(Application application) {
                 ToastUtils.init(application);
                 Logger.init();
+                RxHttpUtils.getInstance().config().setBaseUrl("https://api.douban.com/");
             }
 
             @Override

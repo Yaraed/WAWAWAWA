@@ -1,17 +1,20 @@
 package com.letion.core
 
+import android.app.AlertDialog
+import android.app.Dialog
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import com.weyee.sdk.log.Logger
-import com.weyee.sdk.toast.ToastUtils
 import kotlinx.android.synthetic.main.activity_main.*
 import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
 import java.nio.charset.Charset
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), MainView {
+
+    private lateinit var presenter: MainPresenter
+    private var dialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -24,17 +27,26 @@ class MainActivity : AppCompatActivity() {
             }
         }.start()
 
+        presenter = MainPresenter(this)
+
         val array = arrayOfNulls<String>(10)
         for (i in 0 until 10) {
             array[i] = "这是第${i}个位置"
         }
-        Logger.d(array)
 
         listView.adapter = ArrayAdapter<String>(baseContext, android.R.layout.simple_list_item_1, array)
 
-        listView.onItemClickListener = AdapterView.OnItemClickListener { adapterView, view, i, l ->
+        listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             run {
-                ToastUtils.show(array[i])
+                if (i == 1) {
+                    presenter.getBook()
+                } else if (i == 2) {
+                    presenter.cancelBook()
+                } else if (i == 3) {
+                    presenter.getBook(true)
+                } else if (i == 4) {
+                    presenter.cancelBook(true)
+                }
             }
         }
     }
@@ -71,5 +83,12 @@ class MainActivity : AppCompatActivity() {
     data class Emoji(var name: String?, var unicode: Int) {
         val unicodeTemp: String?
             get() = String(Character.toChars(unicode))
+    }
+
+    override fun dialog(): Dialog? {
+        if (dialog == null) {
+            dialog = AlertDialog.Builder(this).setMessage("loading...").create()
+        }
+        return dialog
     }
 }
