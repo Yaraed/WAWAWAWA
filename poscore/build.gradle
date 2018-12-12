@@ -58,6 +58,7 @@ dependencies {
     api project(':middleware:weyeelog')
     api project(':middleware:weyeestorage')
     api project(':middleware:weyeetoast')
+    api project(':middleware:weyeeimageloader')
     api project(':posres')
     //    // glide
     //    implementation rootProject.ext.glide.glide

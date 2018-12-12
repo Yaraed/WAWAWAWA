@@ -1,6 +1,7 @@
 package com.letion.core
 
 import android.app.Dialog
+import android.content.Context
 
 /**
  * <p>
@@ -11,4 +12,8 @@ import android.app.Dialog
  */
 interface MainView {
     fun dialog(): Dialog?
+
+    fun context(): Context
+
+    fun showProgress(progress: Int)
 }

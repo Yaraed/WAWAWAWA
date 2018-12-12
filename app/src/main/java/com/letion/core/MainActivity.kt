@@ -1,18 +1,28 @@
 package com.letion.core
 
-import android.app.AlertDialog
+import android.annotation.SuppressLint
+import android.app.Activity
 import android.app.Dialog
+import android.app.ProgressDialog
+import android.content.Context
+import android.content.Intent
+import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
+import com.letion.core.glide.Glide4Engine
+import com.zhihu.matisse.Matisse
+import com.zhihu.matisse.MimeType
 import kotlinx.android.synthetic.main.activity_main.*
 import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
 import java.nio.charset.Charset
 
+
 class MainActivity : AppCompatActivity(), MainView {
 
+    private val CHOOSE = 1
     private lateinit var presenter: MainPresenter
     private var dialog: Dialog? = null
 
@@ -38,17 +48,41 @@ class MainActivity : AppCompatActivity(), MainView {
 
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             run {
-                if (i == 1) {
-                    presenter.getBook()
-                } else if (i == 2) {
-                    presenter.cancelBook()
-                } else if (i == 3) {
-                    presenter.getBook(true)
-                } else if (i == 4) {
-                    presenter.cancelBook(true)
+                when (i) {
+                    1 -> presenter.getBook()
+                    2 -> presenter.cancelBook()
+                    3 -> presenter.getBook(true)
+                    4 -> presenter.cancelBook(true)
+                    5 -> presenter.downloadApk()
+                    6 -> presenter.cancelApk()
+                    7 -> toPhoto(9)
                 }
             }
         }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (CHOOSE === requestCode && resultCode === Activity.RESULT_OK) {
+            val selectedList = Matisse.obtainResult(data)
+            val paths = listOf<String>()
+            for (i in 0 until selectedList.size) {
+                paths.plus(selectedList[i].path)
+                presenter.uploadImages(paths)
+            }
+        }
+    }
+
+    @SuppressLint("CheckResult")
+    private fun toPhoto(maxSelectable: Int) {
+        Matisse.from(this@MainActivity)
+            .choose(MimeType.allOf())
+            .countable(true)
+            .maxSelectable(maxSelectable)
+            .restrictOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+            .thumbnailScale(0.85f)
+            .imageEngine(Glide4Engine())
+            .forResult(CHOOSE)
     }
 
     fun readJson(): String {
@@ -87,8 +121,23 @@ class MainActivity : AppCompatActivity(), MainView {
 
     override fun dialog(): Dialog? {
         if (dialog == null) {
-            dialog = AlertDialog.Builder(this).setMessage("loading...").create()
+            dialog = ProgressDialog(this)
+            (dialog as ProgressDialog).setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
+            (dialog as ProgressDialog).max = 100
+            (dialog as ProgressDialog).isIndeterminate = false
         }
         return dialog
+    }
+
+    override fun context(): Context {
+        return baseContext
+    }
+
+    override fun showProgress(progress: Int) {
+        runOnUiThread {
+            if (dialog is ProgressDialog) {
+                (dialog as ProgressDialog).progress = progress
+            }
+        }
     }
 }
