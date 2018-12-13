@@ -22,7 +22,8 @@ public class UploadTransformer {
     }
 
     public static List<MultipartBody.Part> transformerFormParams(String fileName, Map<String, String> paramsMap, List<String> filePaths) {
-        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM);
+        // 源码传null 会抛出异常,所以我们传空字符串就可以...
+        MultipartBody.Builder builder = new MultipartBody.Builder().setType(MultipartBody.FORM).addFormDataPart("", "");
 
         if (null != paramsMap) {
             for (String key : paramsMap.keySet()) {

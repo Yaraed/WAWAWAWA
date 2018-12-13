@@ -65,11 +65,11 @@ class MainActivity : AppCompatActivity(), MainView {
         super.onActivityResult(requestCode, resultCode, data)
         if (CHOOSE === requestCode && resultCode === Activity.RESULT_OK) {
             val selectedList = Matisse.obtainResult(data)
-            val paths = listOf<String>()
+            val paths = mutableListOf<String>()
             for (i in 0 until selectedList.size) {
-                paths.plus(selectedList[i].path)
-                presenter.uploadImages(paths)
+                paths.add(Glide4Engine.getRealPathFromURI(this, selectedList[i]))
             }
+            presenter.uploadImages(paths)
         }
     }
 

@@ -1,6 +1,5 @@
 package com.letion.core
 
-import android.os.Environment
 import com.letion.core.pojo.BookBean
 import com.weyee.sdk.api.RxHttpUtils
 import com.weyee.sdk.api.observer.ProgressSubscriber
