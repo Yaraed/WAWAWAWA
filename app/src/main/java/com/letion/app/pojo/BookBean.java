@@ -1,4 +1,4 @@
-package com.letion.core.pojo;
+package com.letion.app.pojo;
 
 import java.util.List;
 

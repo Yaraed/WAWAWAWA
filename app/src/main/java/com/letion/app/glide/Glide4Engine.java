@@ -1,4 +1,4 @@
-package com.letion.core.glide;
+package com.letion.app.glide;
 
 /**
  * <p>

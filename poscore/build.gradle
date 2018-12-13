@@ -54,6 +54,7 @@ dependencies {
     annotationProcessor libsConfig.butterknifeCompiler
 
     api project(':middleware:weyeeapi')
+    api project(':middleware:weyeedialog')
     api project(':middleware:weyeeevent')
     api project(':middleware:weyeelog')
     api project(':middleware:weyeestorage')

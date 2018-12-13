@@ -1,7 +1,7 @@
-package com.letion.core;
+package com.letion.app;
 
-import com.letion.core.pojo.BookBean;
-import com.letion.core.pojo.Top250Bean;
+import com.letion.app.pojo.Top250Bean;
+import com.letion.app.pojo.BookBean;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.ResponseBody;

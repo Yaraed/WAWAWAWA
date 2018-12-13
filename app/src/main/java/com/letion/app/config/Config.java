@@ -1,4 +1,4 @@
-package com.letion.core.config;
+package com.letion.app.config;
 
 import android.app.Activity;
 import android.app.Application;

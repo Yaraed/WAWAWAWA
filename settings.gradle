@@ -1,1 +1,1 @@
-include ':app', ':poscore', ':posres', ':middleware:weyeeapi', ':middleware:weyeestorage', ':middleware:weyeeevent', ':middleware:weyeelog', ':middleware:weyeetoast', ':middleware:weyeeimageloader'
+include ':app', ':poscore', ':posres', ':middleware:weyeeapi', ':middleware:weyeestorage', ':middleware:weyeeevent', ':middleware:weyeelog', ':middleware:weyeetoast', ':middleware:weyeeimageloader', ':middleware:weyeedialog'

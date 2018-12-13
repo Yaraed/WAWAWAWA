@@ -20,6 +20,7 @@ import io.reactivex.schedulers.Schedulers;
  */
 public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<GlideImageConfig> {
 
+    @SuppressLint("CheckResult")
     @Override
     public void loadImage(Context ctx, GlideImageConfig config) {
         if (ctx == null) throw new IllegalStateException("Context is required");

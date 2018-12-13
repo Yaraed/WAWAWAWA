@@ -1,4 +1,4 @@
-package com.letion.core
+package com.letion.app
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -11,7 +11,10 @@ import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.appcompat.app.AppCompatActivity
-import com.letion.core.glide.Glide4Engine
+import com.afollestad.materialdialogs.DialogCallback
+import com.afollestad.materialdialogs.MaterialDialog
+import com.letion.app.glide.Glide4Engine
+import com.weyee.sdk.toast.ToastUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +30,7 @@ class MainActivity : AppCompatActivity(), MainView {
     private var dialog: Dialog? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        setTheme(R.style.AppTheme)
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //tvContent.text = printJson(parseJson(readJson()))
@@ -56,6 +60,9 @@ class MainActivity : AppCompatActivity(), MainView {
                     5 -> presenter.downloadApk()
                     6 -> presenter.cancelApk()
                     7 -> toPhoto(9)
+                    8 -> toBasic(array[i])
+                    else -> {
+                    }
                 }
             }
         }
@@ -83,6 +90,18 @@ class MainActivity : AppCompatActivity(), MainView {
             .thumbnailScale(0.85f)
             .imageEngine(Glide4Engine())
             .forResult(CHOOSE)
+    }
+
+    private fun toBasic(msg: String?) {
+        MaterialDialog(this@MainActivity).show {
+            message(text = msg)
+            positiveButton(text = "确定", click = object : DialogCallback {
+                override fun invoke(p1: MaterialDialog) {
+                    ToastUtils.show("确定")
+                }
+            })
+            negativeButton { ToastUtils.show("取消") }
+        }
     }
 
     fun readJson(): String {

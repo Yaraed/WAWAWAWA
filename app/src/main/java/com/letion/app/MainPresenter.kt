@@ -1,6 +1,6 @@
-package com.letion.core
+package com.letion.app
 
-import com.letion.core.pojo.BookBean
+import com.letion.app.pojo.BookBean
 import com.weyee.sdk.api.RxHttpUtils
 import com.weyee.sdk.api.observer.ProgressSubscriber
 import com.weyee.sdk.api.observer.transformer.Transformer
@@ -15,7 +15,7 @@ import com.weyee.sdk.toast.ToastUtils
  * @author wuqi
  * @date 2018/12/11 0011
  */
-class MainPresenter(val view: com.letion.core.MainView) {
+class MainPresenter(val view: MainView) {
     fun getBook() {
         val map: Map<String, Any> = mapOf("page" to 1, "name" to "刘枫")
         RxHttpUtils.createApi(ApiService::class.java).getBook(map).compose(Transformer.switchSchedulers(view.dialog()))
