@@ -1,6 +1,9 @@
 package com.letion.app
 
 import com.letion.app.pojo.BookBean
+import com.weyee.poscore.mvp.BaseModel
+import com.weyee.poscore.mvp.BasePresenter
+import com.weyee.poscore.mvp.IView
 import com.weyee.sdk.api.RxHttpUtils
 import com.weyee.sdk.api.observer.ProgressSubscriber
 import com.weyee.sdk.api.observer.transformer.Transformer
@@ -15,7 +18,7 @@ import com.weyee.sdk.toast.ToastUtils
  * @author wuqi
  * @date 2018/12/11 0011
  */
-class MainPresenter(val view: MainView) {
+class MainPresenter(val view: MainView) : BasePresenter<BaseModel, IView>() {
     fun getBook() {
         val map: Map<String, Any> = mapOf("page" to 1, "name" to "刘枫")
         RxHttpUtils.createApi(ApiService::class.java).getBook(map).compose(Transformer.switchSchedulers(view.dialog()))

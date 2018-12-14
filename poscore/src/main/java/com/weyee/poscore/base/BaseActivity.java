@@ -1,17 +1,16 @@
 package com.weyee.poscore.base;
 
+import androidx.fragment.app.FragmentManager;
 import com.weyee.poscore.base.delegate.IActivity;
 import com.weyee.poscore.mvp.IPresenter;
+import com.weyee.posres.arch.MActivity;
 
 import javax.inject.Inject;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentManager;
 
 /**
  * Created by liu-feng on 2017/6/5.
  */
-public abstract class BaseActivity<P extends IPresenter> extends AppCompatActivity implements IActivity {
+public abstract class BaseActivity<P extends IPresenter> extends MActivity implements IActivity {
     protected final String TAG = this.getClass().getSimpleName();
     @Inject
     protected P mPresenter;

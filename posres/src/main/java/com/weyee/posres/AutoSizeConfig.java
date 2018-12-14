@@ -1,7 +1,9 @@
 package com.weyee.posres;
 
 import android.app.Activity;
+import android.app.Application;
 import android.util.DisplayMetrics;
+import com.weyee.posres.weight.QMUISwipeBackActivityManager;
 import me.jessyan.autosize.onAdaptListener;
 import me.jessyan.autosize.unit.UnitsManager;
 import me.jessyan.autosize.utils.LogUtils;
@@ -38,7 +40,7 @@ public class AutoSizeConfig {
      * 然后在 layout 文件中只使用这个副单位进行布局, 这样就可以完全规避修改 {@link DisplayMetrics#density} 所造成的不良影响
      * 因为 dp、sp 这两个单位在其他系统控件或三方库控件中都非常常见, 但三个冷门单位却非常少见
      */
-    public static void init() {
+    public static void init(Application application) {
         //AndroidAutoSize 默认开启对 dp 的支持, 调用 UnitsManager.setSupportDP(false); 可以关闭对 dp 的支持
         //主单位 dp 和 副单位可以同时开启的原因是, 对于旧项目中已经使用了 dp 进行布局的页面的兼容
         //让开发者的旧项目可以渐进式的从 dp 切换到副单位, 即新页面用副单位进行布局, 然后抽时间逐渐的将旧页面的布局单位从 dp 改为副单位
@@ -104,5 +106,7 @@ public class AutoSizeConfig {
         //如果大家生活中没有妹妹, 那我们就让项目中最不缺的就是妹妹!
         //.setSupportSubunits(Subunits.MM)
         ;
+
+        QMUISwipeBackActivityManager.init(application);
     }
 }

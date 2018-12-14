@@ -10,10 +10,11 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import androidx.appcompat.app.AppCompatActivity
 import com.afollestad.materialdialogs.DialogCallback
 import com.afollestad.materialdialogs.MaterialDialog
 import com.letion.app.glide.Glide4Engine
+import com.weyee.poscore.base.BaseActivity
+import com.weyee.poscore.di.component.AppComponent
 import com.weyee.sdk.toast.ToastUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
@@ -23,16 +24,22 @@ import org.json.JSONObject
 import java.nio.charset.Charset
 
 
-class MainActivity : AppCompatActivity(), MainView {
+class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
     private val CHOOSE = 1
     private lateinit var presenter: MainPresenter
     private var dialog: Dialog? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        setTheme(R.style.AppTheme)
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+    /**
+     * 如果initView返回0,框架则不会调用[android.app.Activity.setContentView]
+     *
+     * @return
+     */
+    override fun getResourceId(): Int {
+        return R.layout.activity_main
+    }
+
+    override fun initView(savedInstanceState: Bundle?) {
         //tvContent.text = printJson(parseJson(readJson()))
         Thread {
             while (true) {
@@ -61,11 +68,24 @@ class MainActivity : AppCompatActivity(), MainView {
                     6 -> presenter.cancelApk()
                     7 -> toPhoto(9)
                     8 -> toBasic(array[i])
+                    9 -> startActivity(Intent(this@MainActivity, TranslucentActivity::class.java))
                     else -> {
                     }
                 }
             }
         }
+    }
+
+    override fun initData(savedInstanceState: Bundle?) {
+    }
+
+    /**
+     * 提供AppComponent(提供所有的单例对象)给实现类，进行Component依赖
+     *
+     * @param appComponent
+     */
+    override fun setupActivityComponent(appComponent: AppComponent?) {
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -93,15 +113,16 @@ class MainActivity : AppCompatActivity(), MainView {
     }
 
     private fun toBasic(msg: String?) {
-        MaterialDialog(this@MainActivity).show {
-            message(text = msg)
-            positiveButton(text = "确定", click = object : DialogCallback {
-                override fun invoke(p1: MaterialDialog) {
-                    ToastUtils.show("确定")
-                }
-            })
-            negativeButton { ToastUtils.show("取消") }
-        }
+        MaterialDialog(this@MainActivity)
+            .show {
+                message(text = msg)
+                positiveButton(text = "确定", click = object : DialogCallback {
+                    override fun invoke(p1: MaterialDialog) {
+                        ToastUtils.show("确定")
+                    }
+                })
+                negativeButton { ToastUtils.show("取消") }
+            }
     }
 
     fun readJson(): String {
