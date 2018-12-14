@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="qmui_config_color_separator">#DEE0E2</color>
+    <color name="colorPrimary">#34A48E</color>
+    <color name="colorPrimaryDark">#245C50</color>
+    <color name="colorAccent">#FF73A3</color>
 </resources>

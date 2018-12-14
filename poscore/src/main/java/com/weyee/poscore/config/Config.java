@@ -16,7 +16,7 @@ import com.weyee.sdk.toast.ToastUtils;
  */
 public class Config {
     public static void init(Application application) {
-        AutoSizeConfig.init(application);
+        AutoSizeConfig.init();
         ToastUtils.init(application);
         LogUtils.init();
         RxHttpUtils.getInstance().config().setBaseUrl("https://api.douban.com/")

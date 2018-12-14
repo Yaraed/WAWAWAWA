@@ -21,7 +21,6 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
-import com.weyee.posres.weight.Utils;
 
 
 //Fix the bug: Only fullscreen activities can request orientation in Android version 26, 27
@@ -31,7 +30,7 @@ public class InnerBaseActivity extends AppCompatActivity {
     private int mPendingRequestedOrientation = NO_REQUESTED_ORIENTATION_SET;
 
     public void convertToTranslucentCauseOrientationChanged() {
-        Utils.convertActivityToTranslucent(this);
+        //Utils.convertActivityToTranslucent(this);
         mConvertToTranslucentCauseOrientationChanged = true;
     }
 
@@ -53,7 +52,7 @@ public class InnerBaseActivity extends AppCompatActivity {
         super.onConfigurationChanged(newConfig);
         if (mConvertToTranslucentCauseOrientationChanged) {
             mConvertToTranslucentCauseOrientationChanged = false;
-            Utils.convertActivityFromTranslucent(this);
+            //Utils.convertActivityFromTranslucent(this);
             if (mPendingRequestedOrientation != NO_REQUESTED_ORIENTATION_SET) {
                 super.setRequestedOrientation(mPendingRequestedOrientation);
                 mPendingRequestedOrientation = NO_REQUESTED_ORIENTATION_SET;

@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.weyee.posres.weight;
+package com.weyee.posres.arch;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;

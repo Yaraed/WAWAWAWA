@@ -1,177 +1,76 @@
-/*
- * Tencent is pleased to support the open source community by making QMUI_Android available.
- *
- * Copyright (C) 2017-2018 THL A29 Limited, a Tencent company. All rights reserved.
- *
- * Licensed under the MIT License (the "License"); you may not use this file except in
- * compliance with the License. You may obtain a copy of the License at
- *
- * http://opensource.org/licenses/MIT
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the License is
- * distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND,
- * either express or implied. See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.weyee.posres.arch;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.util.Log;
+import android.annotation.SuppressLint;
+import android.graphics.Color;
+import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import androidx.core.content.ContextCompat;
+import com.blankj.utilcode.util.BarUtils;
+import com.google.android.material.appbar.AppBarLayout;
+import com.r0adkll.slidr.Slidr;
+import com.r0adkll.slidr.model.SlidrConfig;
+import com.r0adkll.slidr.model.SlidrPosition;
 import com.weyee.posres.R;
-import com.weyee.posres.qmui.QMUIStatusBarHelper;
-import com.weyee.posres.weight.QMUISwipeBackActivityManager;
-import com.weyee.posres.weight.SwipeBackLayout;
-import com.weyee.posres.weight.SwipeBackgroundView;
-
-import static com.weyee.posres.weight.SwipeBackLayout.EDGE_LEFT;
 
 public class MActivity extends InnerBaseActivity {
-    private static final String TAG = "MActivity";
-    private SwipeBackLayout.ListenerRemover mListenerRemover;
-    private SwipeBackgroundView mSwipeBackgroundView;
-    private boolean mIsInSwipeBack = false;
 
-    private SwipeBackLayout.SwipeListener mSwipeListener = new SwipeBackLayout.SwipeListener() {
+    protected View mContentView;
+    protected CoordinatorLayout rootContainer;
+    protected Toolbar mToolbar;
+    protected AppBarLayout abl;
+    protected FrameLayout flActivityContainer;
 
-        @Override
-        public void onScrollStateChange(int state, float scrollPercent) {
-            Log.i(TAG, "SwipeListener:onScrollStateChange: state = " + state + " ;scrollPercent = " + scrollPercent);
-            mIsInSwipeBack = state != SwipeBackLayout.STATE_IDLE;
-            if (state == SwipeBackLayout.STATE_IDLE) {
-                if (mSwipeBackgroundView != null) {
-                    if (scrollPercent <= 0.0F) {
-                        mSwipeBackgroundView.unBind();
-                        mSwipeBackgroundView = null;
-                    } else if (scrollPercent >= 1.0F) {
-                        // unBind mSwipeBackgroundView until onDestroy
-                        finish();
-                        int exitAnim = mSwipeBackgroundView.hasChildWindow() ?R.anim.swipe_back_exit_still : R.anim.swipe_back_exit;
-                        overridePendingTransition(R.anim.swipe_back_enter, exitAnim);
-                    }
-                }
-            }
-        }
-
-        @Override
-        public void onScroll(int edgeFlag, float scrollPercent) {
-            if (mSwipeBackgroundView != null) {
-                scrollPercent = Math.max(0f, Math.min(1f, scrollPercent));
-                int targetOffset = (int) (Math.abs(backViewInitOffset()) * (1 - scrollPercent));
-                SwipeBackLayout.offsetInScroll(mSwipeBackgroundView, edgeFlag, targetOffset);
-            }
-        }
-
-        @Override
-        public void onEdgeTouch(int edgeFlag) {
-            Log.i(TAG, "SwipeListener:onEdgeTouch: edgeFlag = " + edgeFlag);
-            ViewGroup decorView = (ViewGroup) getWindow().getDecorView();
-            if (decorView != null) {
-                Activity prevActivity = QMUISwipeBackActivityManager.getInstance()
-                        .getPenultimateActivity(MActivity.this);
-                if (decorView.getChildAt(0) instanceof SwipeBackgroundView) {
-                    mSwipeBackgroundView = (SwipeBackgroundView) decorView.getChildAt(0);
-                } else {
-                    mSwipeBackgroundView = new SwipeBackgroundView(MActivity.this);
-                    decorView.addView(mSwipeBackgroundView, 0, new FrameLayout.LayoutParams(
-                            ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
-                }
-                mSwipeBackgroundView.bind(prevActivity, MActivity.this, restoreSubWindowWhenDragBack());
-                SwipeBackLayout.offsetInEdgeTouch(mSwipeBackgroundView, edgeFlag,
-                        Math.abs(backViewInitOffset()));
-            }
-        }
-
-        @Override
-        public void onScrollOverThreshold() {
-            Log.i(TAG, "SwipeListener:onEdgeTouch:onScrollOverThreshold");
-        }
-    };
-    private SwipeBackLayout.Callback mSwipeCallback = new SwipeBackLayout.Callback() {
-        @Override
-        public boolean canSwipeBack() {
-            return QMUISwipeBackActivityManager.getInstance().canSwipeBack() && canDragBack();
-        }
-
-        @Override
-        public boolean needFixFragmentManagerEndAnimatingAwayError() {
-            return false;
-        }
-    };
-
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        QMUIStatusBarHelper.translucent(this);
-    }
-
-    @Override
-    public void setContentView(View view) {
-        super.setContentView(newSwipeBackLayout(view));
-    }
-
+    @SuppressLint("ResourceType")
     @Override
     public void setContentView(int layoutResID) {
-        SwipeBackLayout swipeBackLayout = SwipeBackLayout.wrap(this,
-                layoutResID, dragBackEdge(), mSwipeCallback);
-        if (translucentFull()) {
-            swipeBackLayout.getContentView().setFitsSystemWindows(false);
-        } else {
-            swipeBackLayout.getContentView().setFitsSystemWindows(true);
+        if (canSwipeBack()) {
+            SlidrConfig config = new SlidrConfig.Builder()
+                    .position(SlidrPosition.LEFT)
+                    .sensitivity(1f)
+                    .scrimColor(Color.BLACK)
+                    .scrimStartAlpha(0.8f)
+                    .scrimEndAlpha(0f)
+                    .velocityThreshold(2400)
+                    .distanceThreshold(0.25f)
+                    .edge(true)
+                    .edgeSize(0.18f) // The % of the screen that counts as the edge, default 18%
+                    .build();
+            Slidr.attach(this, config);
         }
-        mListenerRemover = swipeBackLayout.addSwipeListener(mSwipeListener);
-        super.setContentView(swipeBackLayout);
+        mContentView = LayoutInflater.from(this).inflate(R.layout.activity_back_base, null);
+        super.setContentView(mContentView);
+        rootContainer = findViewById(R.id.root_container);
+        abl = findViewById(R.id.abl);
+        mToolbar = findViewById(R.id.toolbar);
+        flActivityContainer = findViewById(R.id.activity_container);
+        System.out.println("layoutResID:" + layoutResID);
+        if (layoutResID > 0) {
+            flActivityContainer.addView(LayoutInflater.from(this).inflate(layoutResID, flActivityContainer, false), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
+        }
+
+        setSupportActionBar(mToolbar);
+        getToolBar().setDisplayHomeAsUpEnabled(true);
+
+        BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary), 112);
+        BarUtils.addMarginTopEqualStatusBarHeight(rootContainer);
     }
 
     @Override
-    public void setContentView(View view, ViewGroup.LayoutParams params) {
-        super.setContentView(newSwipeBackLayout(view), params);
-    }
-
-    private View newSwipeBackLayout(View view) {
-        if (translucentFull()) {
-            view.setFitsSystemWindows(false);
-        } else {
-            view.setFitsSystemWindows(true);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
         }
-        final SwipeBackLayout swipeBackLayout = SwipeBackLayout.wrap(view, dragBackEdge(), mSwipeCallback);
-        mListenerRemover = swipeBackLayout.addSwipeListener(mSwipeListener);
-        return swipeBackLayout;
+        return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        if (mListenerRemover != null) {
-            mListenerRemover.remove();
-        }
-        if (mSwipeBackgroundView != null) {
-            mSwipeBackgroundView.unBind();
-            mSwipeBackgroundView = null;
-        }
-    }
-
-    /**
-     * final this method, if need override this method, use doOnBackPressed as an alternative
-     */
-    @Override
-    public final void onBackPressed() {
-        if (!mIsInSwipeBack) {
-            doOnBackPressed();
-        }
-    }
-
-    protected void doOnBackPressed() {
-        super.onBackPressed();
-    }
-
-    public boolean isInSwipeBack() {
-        return mIsInSwipeBack;
+    protected ActionBar getToolBar() {
+        return getSupportActionBar();
     }
 
     /**
@@ -179,38 +78,8 @@ public class MActivity extends InnerBaseActivity {
      *
      * @return
      */
-    protected boolean canDragBack() {
+    protected boolean canSwipeBack() {
         return true;
     }
 
-    /**
-     * if enable drag back,
-     *
-     * @return
-     */
-    protected int backViewInitOffset() {
-        return 0;
-    }
-
-
-    protected int dragBackEdge() {
-        return EDGE_LEFT;
-    }
-
-    /**
-     * Immersive processing
-     *
-     * @return if true, the area under status bar belongs to content; otherwise it belongs to padding
-     */
-    protected boolean translucentFull() {
-        return false;
-    }
-
-    /**
-     * restore sub window(e.g dialog) when drag back to previous activity
-     * @return
-     */
-    protected boolean restoreSubWindowWhenDragBack(){
-        return true;
-    }
 }

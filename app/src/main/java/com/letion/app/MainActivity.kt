@@ -60,6 +60,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             run {
                 when (i) {
+                    0 -> startActivity(Intent(this@MainActivity, TranslucentActivity::class.java))
                     1 -> presenter.getBook()
                     2 -> presenter.cancelBook()
                     3 -> presenter.getBook(true)
@@ -77,6 +78,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+    }
+
+    override fun canSwipeBack(): Boolean {
+        return !super.canSwipeBack()
     }
 
     /**
