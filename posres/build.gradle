@@ -24,6 +24,8 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
+    //resourcePrefix "res_"
 }
 
 dependencies {
@@ -32,5 +34,11 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation libsConfig.appcompat_v7
+    implementation libsConfig.material_v7
+    annotationProcessor libsConfig.annotation_v7
+    implementation libsConfig.androidUtilCode
     implementation 'me.jessyan:autosize:1.1.0'
+    implementation 'com.r0adkll:slidableactivity:2.0.6'
+
+    implementation project(':middleware:weyeelog')
 }

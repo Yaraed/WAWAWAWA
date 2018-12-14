@@ -41,21 +41,25 @@ dependencies {
 
     // util
     api libsConfig.androidUtilCode
+    // retrofit
+    api libsConfig.retrofit
     // RxJava2
-    implementation libsConfig.rxJava
-    implementation libsConfig.rxAndroid
+    api libsConfig.rxJava
+    api libsConfig.rxAndroid
     // dagger2
-    implementation libsConfig.dagger2
+    api libsConfig.dagger2
     annotationProcessor libsConfig.dagger2Compiler
     // butterknife
-    implementation libsConfig.butterknife
+    api libsConfig.butterknife
     annotationProcessor libsConfig.butterknifeCompiler
 
     api project(':middleware:weyeeapi')
+    api project(':middleware:weyeedialog')
     api project(':middleware:weyeeevent')
     api project(':middleware:weyeelog')
     api project(':middleware:weyeestorage')
     api project(':middleware:weyeetoast')
+    api project(':middleware:weyeeimageloader')
     api project(':posres')
     //    // glide
     //    implementation rootProject.ext.glide.glide

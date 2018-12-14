@@ -38,6 +38,8 @@ dependencies {
     implementation libsConfig.retrofitConverterGson
     implementation libsConfig.retrofitConverterScalars
     implementation libsConfig.retrofitAdapterRxjava2
+    implementation libsConfig.rxJava
+    implementation libsConfig.rxAndroid
     implementation libsConfig.okhttp3
     implementation libsConfig.okhttp3LoggerInterceptor
     implementation libsConfig.okhttp3Urlconnection

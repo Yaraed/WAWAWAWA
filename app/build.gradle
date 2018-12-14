@@ -38,8 +38,12 @@ dependencies {
     implementation libsConfig.appcompat_v7
     implementation libsConfig.constraintlayout
     implementation 'me.leolin:ShortcutBadger:1.1.22@aar'
+    implementation 'com.zhihu.android:matisse:0.4.3'
     // leakCanary
     debugImplementation libsConfig.canaryDebug
     releaseImplementation libsConfig.canaryRelease
+    implementation libsConfig.dagger2
+    annotationProcessor libsConfig.dagger2Compiler
+
     implementation project(':poscore')
 }

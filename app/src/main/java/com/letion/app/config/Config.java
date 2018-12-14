@@ -1,4 +1,4 @@
-package com.letion.core.config;
+package com.letion.app.config;
 
 import android.app.Activity;
 import android.app.Application;
@@ -6,20 +6,18 @@ import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
-
+import android.view.ViewGroup;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import com.squareup.leakcanary.LeakCanary;
 import com.weyee.poscore.base.delegate.AppDelegate;
 import com.weyee.poscore.base.integration.IConfigModule;
 import com.weyee.poscore.base.integration.IRepositoryManager;
 import com.weyee.poscore.di.module.OtherModule;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import com.weyee.sdk.log.Logger;
-import com.weyee.sdk.toast.ToastUtils;
 
 /**
  * <p>
@@ -68,8 +66,14 @@ public class Config implements IConfigModule {
 
             @Override
             public void onCreate(Application application) {
-                ToastUtils.init(application);
-                Logger.init();
+                if (LeakCanary.isInAnalyzerProcess(application)) {
+                    // This process is dedicated to LeakCanary for heap analysis.
+                    // You should not init your app in this process.
+                    return;
+                }
+                LeakCanary.install(application);
+                com.weyee.poscore.config.Config.init(application);
+
             }
 
             @Override

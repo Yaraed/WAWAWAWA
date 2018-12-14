@@ -1,6 +1,7 @@
 package com.weyee.posres;
 
 import android.app.Activity;
+import android.app.Application;
 import android.util.DisplayMetrics;
 import me.jessyan.autosize.onAdaptListener;
 import me.jessyan.autosize.unit.UnitsManager;
@@ -39,7 +40,7 @@ public class AutoSizeConfig {
      * 因为 dp、sp 这两个单位在其他系统控件或三方库控件中都非常常见, 但三个冷门单位却非常少见
      */
     public static void init() {
-//AndroidAutoSize 默认开启对 dp 的支持, 调用 UnitsManager.setSupportDP(false); 可以关闭对 dp 的支持
+        //AndroidAutoSize 默认开启对 dp 的支持, 调用 UnitsManager.setSupportDP(false); 可以关闭对 dp 的支持
         //主单位 dp 和 副单位可以同时开启的原因是, 对于旧项目中已经使用了 dp 进行布局的页面的兼容
         //让开发者的旧项目可以渐进式的从 dp 切换到副单位, 即新页面用副单位进行布局, 然后抽时间逐渐的将旧页面的布局单位从 dp 改为副单位
         //最后将 dp 全部改为副单位后, 再使用 UnitsManager.setSupportDP(false); 将 dp 的支持关闭, 彻底隔离修改 density 所造成的不良影响
@@ -48,7 +49,7 @@ public class AutoSizeConfig {
 
                 //是否让框架支持自定义 Fragment 的适配参数, 由于这个需求是比较少见的, 所以须要使用者手动开启
                 //如果没有这个需求建议不开启
-                .setCustomFragment(true)
+                .setCustomFragment(false)
 
                 //屏幕适配监听器
                 .setOnAdaptListener(new onAdaptListener() {

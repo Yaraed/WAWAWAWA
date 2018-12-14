@@ -1,13 +1,8 @@
 package com.weyee.sdk.log;
 
-import com.orhanobut.logger.AndroidLogAdapter;
-import com.orhanobut.logger.FormatStrategy;
-import com.orhanobut.logger.LogAdapter;
-import com.orhanobut.logger.PrettyFormatStrategy;
-import com.orhanobut.logger.Printer;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.orhanobut.logger.*;
 
 /**
  * <p> 日志打印类
@@ -16,24 +11,24 @@ import androidx.annotation.Nullable;
  * @describe ...
  * @date 2018/11/30 0030
  */
-public final class Logger implements ILogger {
-    private Logger() {
+public final class LogUtils {
+    private LogUtils() {
 
     }
 
     public static void init() {
-        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
-                // (Optional) Whether to show thread info or not. Default true
-                .showThreadInfo(false)
-                // (Optional) How many method line to show. Default 2
-                .methodCount(0)
-                // (Optional) Hides internal method calls up to offset. Default 5
-                .methodOffset(7)
-                // (Optional) Changes the log strategy to print out. Default LogCat
-                //.logStrategy(customLog)
-                // (Optional) Global tag for every log. Default PRETTY_LOGGER
-                .tag("Letion").build();
-        com.orhanobut.logger.Logger.addLogAdapter(new AndroidLogAdapter(formatStrategy) {
+//        FormatStrategy formatStrategy = PrettyFormatStrategy.newBuilder()
+//                // (Optional) Whether to show thread info or not. Default true
+//                .showThreadInfo(true)
+//                // (Optional) How many method line to show. Default 2
+//                .methodCount(2)
+//                // (Optional) Hides internal method calls up to offset. Default 5
+//                .methodOffset(0)
+//                // (Optional) Changes the log strategy to print out. Default LogCat
+//                //.logStrategy(customLog)
+//                // (Optional) Global tag for every log. Default PRETTY_LOGGER
+//                .tag("Letion").build();
+        com.orhanobut.logger.Logger.addLogAdapter(new AndroidLogAdapter() {
             @Override
             public boolean isLoggable(int priority, @Nullable String tag) {
                 return Environment.isDebug();

@@ -38,7 +38,7 @@ abstract class RxSubscriber<T> extends BaseObserver<T> {
 
     @Override
     public void doOnError(String errorMsg) {
-        if (!showToast() && !TextUtils.isEmpty(errorMsg)) {
+        if (showToast() && !TextUtils.isEmpty(errorMsg)) {
             ToastUtils.show(errorMsg);
         }
         onError(errorMsg);

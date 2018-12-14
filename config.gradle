@@ -2,8 +2,8 @@ ext {
     // 安卓常规配置
     android = [
             compileSdkVersion: 28,
-            applicationId    : "com.letion.core",
-            minSdkVersion    : 14,
+            applicationId    : "com.letion.app",
+            minSdkVersion    : 16,
             targetSdkVersion : 28,
             versionCode      : 1,  //修改版本号需要+1
             versionName      : "1.0",
@@ -17,21 +17,24 @@ ext {
             androidXSdkVersion        : "1.0.0",
             constraintLayoutSdkVersion: "2.0.0-alpha2",
             lifecycleSdkVersion       : "2.0.0",
+            multidexSdkVersion        : "2.0.0",
 
             androidUtilCodeVersion    : "1.22.0",
+            glideSdkVersion           : "4.8.0",
             rx2SdkJava                : "2.1.5",
             rx2SdkAndroid             : "2.0.1",
             retrofitSdkVersion        : "2.3.0",
             okhttpSdkVersion          : "3.9.0",
             dagger2SdkVersion         : "2.12",
             loggerVersion             : "2.2.0",
+            timberVersion             : "4.7.1",
             eventbusVersion           : "3.1.1",
             butterknifeSdkVersion     : "8.8.1",
             canarySdkVersion          : "1.5.4",
 
 
 
-            glideSdkVersion           : "4.2.0",
+
             rxlifecycle2SdkVersion    : "2.2.0",
             rx2SdkBus                 : "2.0.0",
             rx2SdkPermission          : "0.9.5@aar",
@@ -41,14 +44,19 @@ ext {
     ]
 
     libs = [
-            core_v7                 : "androidx.core:core-ktx:$dependVersion.androidXSdkVersion",
+            annotation_v7           : "androidx.annotation:annotation:$dependVersion.androidXSdkVersion",
+            core_v7                 : "androidx.core:core:$dependVersion.androidXSdkVersion",
+            fragment_v7             : "androidx.fragment:fragment:$dependVersion.androidXSdkVersion",
             appcompat_v7            : "androidx.appcompat:appcompat:$dependVersion.androidXSdkVersion",
             recyclerview_v7         : "androidx.recyclerview:recyclerview:$dependVersion.androidXSdkVersion",
             material_v7             : "com.google.android.material:material:$dependVersion.androidXSdkVersion",
             lifecycle_v7            : "androidx.lifecycle:lifecycle-extensions:$dependVersion.lifecycleSdkVersion",
             constraintlayout        : "androidx.constraintlayout:constraintlayout:$dependVersion.constraintLayoutSdkVersion",
+            multidex                : "androidx.multidex:multidex:$dependVersion.multidexSdkVersion",
 
             androidUtilCode         : "com.blankj:utilcode:$dependVersion.androidUtilCodeVersion",
+            glide                   : "com.github.bumptech.glide:glide:$dependVersion.glideSdkVersion",
+            glideCompiler           : "com.github.bumptech.glide:compiler:$dependVersion.glideSdkVersion",
             rxJava                  : "io.reactivex.rxjava2:rxjava:$dependVersion.rx2SdkJava",
             rxAndroid               : "io.reactivex.rxjava2:rxandroid:$dependVersion.rx2SdkAndroid",
             retrofit                : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",
@@ -64,6 +72,7 @@ ext {
 
             eventbus                : "org.greenrobot:eventbus:$dependVersion.eventbusVersion",
             logger                  : "com.orhanobut:logger:$dependVersion.loggerVersion",
+            timber                  : "com.jakewharton.timber:timber:$dependVersion.timberVersion",
             butterknife             : "com.jakewharton:butterknife:$dependVersion.butterknifeSdkVersion",
             butterknifeCompiler     : "com.jakewharton:butterknife-compiler:$dependVersion.butterknifeSdkVersion",
             canaryDebug             : "com.squareup.leakcanary:leakcanary-android:$dependVersion.canarySdkVersion",

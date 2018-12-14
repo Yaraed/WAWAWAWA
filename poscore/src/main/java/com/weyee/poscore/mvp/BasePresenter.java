@@ -2,14 +2,11 @@ package com.weyee.poscore.mvp;
 
 import android.os.Handler;
 import android.os.Message;
-
-
 import com.weyee.sdk.event.EventBus;
-
-import java.lang.ref.WeakReference;
-
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+
+import java.lang.ref.WeakReference;
 
 /**
  * Created by liu-feng on 2017/6/5.
@@ -61,7 +58,7 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
      * @return
      */
     protected boolean useEventBus() {
-        return true;
+        return false;
     }
 
 

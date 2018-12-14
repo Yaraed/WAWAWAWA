@@ -24,7 +24,31 @@ public class RetrofitClient {
     private Retrofit.Builder mRetrofitBuilder;
 
     private RetrofitClient() {
-        OkHttpClient.Builder builder = HttpClient.getInstance().getBuilder();
+        mRetrofitBuilder = new Retrofit.Builder()
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .addConverterFactory(ScalarsConverterFactory.create())
+                .addConverterFactory(GsonConverterFactory.create(GsonAdapter.buildGson()));
+    }
+
+
+    public static RetrofitClient getInstance() {
+        if (instance == null) {
+            synchronized (RetrofitClient.class) {
+                if (instance == null) {
+                    instance = new RetrofitClient();
+                }
+            }
+        }
+        return instance;
+    }
+
+    /**
+     * 当没有配置默认的okhttp client，使用默认的
+     *
+     * @return
+     */
+    private OkHttpClient getDefaultOkHttpClient() {
+        OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.readTimeout(10, TimeUnit.SECONDS);
         builder.writeTimeout(10, TimeUnit.SECONDS);
         builder.connectTimeout(10, TimeUnit.SECONDS);
@@ -41,27 +65,13 @@ public class RetrofitClient {
         builder.addInterceptor(new HttpCacheInterceptor()); // 网络缓存
         builder.addInterceptor(new LocalCacheInterceptor()); // 本地缓存
         builder.eventListenerFactory(HttpEventListener.FACTORY); // 监听网络请求的时间
-
-        mRetrofitBuilder = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(GsonAdapter.buildGson()))
-                .client(builder.build());
-    }
-
-
-    public static RetrofitClient getInstance() {
-        if (instance == null) {
-            synchronized (RetrofitClient.class) {
-                if (instance == null) {
-                    instance = new RetrofitClient();
-                }
-            }
-        }
-        return instance;
+        return builder.build();
     }
 
     public Retrofit getRetrofit() {
+        if (!HttpClient.getInstance().isInitCustomClient()) {
+            return mRetrofitBuilder.client(getDefaultOkHttpClient()).build();
+        }
         return mRetrofitBuilder.build();
     }
 

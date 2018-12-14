@@ -1,4 +1,4 @@
-package com.letion.core;
+package com.letion.app;
 
 import com.weyee.poscore.base.BaseApplication;
 

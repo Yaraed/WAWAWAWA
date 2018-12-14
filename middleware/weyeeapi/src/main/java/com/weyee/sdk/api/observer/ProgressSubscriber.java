@@ -31,6 +31,14 @@ public abstract class ProgressSubscriber<T> extends RxSubscriber<T> {
 
     }
 
+    /**
+     * 完成后的回调
+     */
+    @Override
+    protected void onCompleted() {
+
+    }
+
     @Override
     public void doOnSubscribe(Disposable d) {
         super.doOnSubscribe(d);
