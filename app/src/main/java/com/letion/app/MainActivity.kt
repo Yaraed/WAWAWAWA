@@ -12,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.afollestad.materialdialogs.DialogCallback
 import com.afollestad.materialdialogs.MaterialDialog
+import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
@@ -27,7 +28,7 @@ import java.nio.charset.Charset
 class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
     private val CHOOSE = 1
-    private lateinit var presenter: MainPresenter
+    //private lateinit var presenter: MainPresenter
     private var dialog: Dialog? = null
 
     /**
@@ -48,7 +49,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
             }
         }.start()
 
-        presenter = MainPresenter(this)
+        //presenter = MainPresenter(this)
 
         val array = arrayOfNulls<String>(10)
         for (i in 0 until 10) {
@@ -61,12 +62,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
             run {
                 when (i) {
                     0 -> startActivity(Intent(this@MainActivity, TranslucentActivity::class.java))
-                    1 -> presenter.getBook()
-                    2 -> presenter.cancelBook()
-                    3 -> presenter.getBook(true)
-                    4 -> presenter.cancelBook(true)
-                    5 -> presenter.downloadApk()
-                    6 -> presenter.cancelApk()
+                    1 -> mPresenter.getBook()
+                    2 -> mPresenter.cancelBook()
+                    3 -> mPresenter.getBook(true)
+                    4 -> mPresenter.cancelBook(true)
+                    5 -> mPresenter.downloadApk()
+                    6 -> mPresenter.cancelApk()
                     7 -> toPhoto(9)
                     8 -> toBasic(array[i])
                     9 -> startActivity(Intent(this@MainActivity, TranslucentActivity::class.java))
@@ -90,7 +91,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
      * @param appComponent
      */
     override fun setupActivityComponent(appComponent: AppComponent?) {
-
+        DaggerMainComponent
+            .builder()
+            .appComponent(appComponent)
+            .mainModule(MainModule(this))
+            .build()
+            .inject(this@MainActivity)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -101,7 +107,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
             for (i in 0 until selectedList.size) {
                 paths.add(Glide4Engine.getRealPathFromURI(this, selectedList[i]))
             }
-            presenter.uploadImages(paths)
+            mPresenter.uploadImages(paths)
         }
     }
 

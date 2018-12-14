@@ -1,15 +1,16 @@
 package com.letion.app
 
 import com.letion.app.pojo.BookBean
+import com.weyee.poscore.di.scope.ActivityScope
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
-import com.weyee.poscore.mvp.IView
 import com.weyee.sdk.api.RxHttpUtils
 import com.weyee.sdk.api.observer.ProgressSubscriber
 import com.weyee.sdk.api.observer.transformer.Transformer
 import com.weyee.sdk.api.observer.transmission.DownloadTransformer
 import com.weyee.sdk.api.observer.transmission.UploadTransformer
 import com.weyee.sdk.toast.ToastUtils
+import javax.inject.Inject
 
 /**
  * <p>
@@ -18,10 +19,12 @@ import com.weyee.sdk.toast.ToastUtils
  * @author wuqi
  * @date 2018/12/11 0011
  */
-class MainPresenter(val view: MainView) : BasePresenter<BaseModel, IView>() {
+@ActivityScope
+class MainPresenter @Inject constructor(view: MainView) : BasePresenter<BaseModel, MainView>(view) {
+
     fun getBook() {
         val map: Map<String, Any> = mapOf("page" to 1, "name" to "刘枫")
-        RxHttpUtils.createApi(ApiService::class.java).getBook(map).compose(Transformer.switchSchedulers(view.dialog()))
+        RxHttpUtils.createApi(ApiService::class.java).getBook(map).compose(Transformer.switchSchedulers(mView.dialog()))
             .subscribe(object : ProgressSubscriber<BookBean>() {
 
                 override fun setTag(): String {
@@ -41,7 +44,7 @@ class MainPresenter(val view: MainView) : BasePresenter<BaseModel, IView>() {
     }
 
     fun getBook(b: Boolean) {
-        RxHttpUtils.createApi(ApiService::class.java).bookString.compose(Transformer.switchSchedulers(view.dialog()))
+        RxHttpUtils.createApi(ApiService::class.java).bookString.compose(Transformer.switchSchedulers(mView.dialog()))
             .subscribe(object : ProgressSubscriber<String>() {
 
                 override fun setTag(): String {
@@ -65,14 +68,14 @@ class MainPresenter(val view: MainView) : BasePresenter<BaseModel, IView>() {
         val fileName = "alipay.apk"
         RxHttpUtils.createApi(ApiService::class.java).downloadFile(url)
             .compose(DownloadTransformer.transformerFormParams(
-                view.context().getExternalFilesDir(null),
+                mView.context().getExternalFilesDir(null),
                 fileName
             ) { _, _, progress, _, _ ->
                 run {
-                    view.showProgress(progress)
+                    mView.showProgress(progress)
                 }
             })
-            .compose(Transformer.switchSchedulers(view.dialog()))
+            .compose(Transformer.switchSchedulers(mView.dialog()))
             .subscribe(object : ProgressSubscriber<String>() {
                 override fun setTag(): String {
                     return "download-apk"
@@ -94,7 +97,7 @@ class MainPresenter(val view: MainView) : BasePresenter<BaseModel, IView>() {
         val url = "http://t.xinhuo.com/index.php/Api/Pic/uploadPic"
         RxHttpUtils.createApi(ApiService::class.java)
             .uploadFiles(url, UploadTransformer.transformerFormParams(null, list))
-            .compose(Transformer.switchSchedulers(view.dialog()))
+            .compose(Transformer.switchSchedulers(mView.dialog()))
             .subscribe(object : ProgressSubscriber<String>() {
                 /**
                  * 成功回调

@@ -42,5 +42,8 @@ dependencies {
     // leakCanary
     debugImplementation libsConfig.canaryDebug
     releaseImplementation libsConfig.canaryRelease
+    implementation libsConfig.dagger2
+    annotationProcessor libsConfig.dagger2Compiler
+
     implementation project(':poscore')
 }
