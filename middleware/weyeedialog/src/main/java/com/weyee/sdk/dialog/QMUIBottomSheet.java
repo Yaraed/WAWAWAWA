@@ -20,6 +20,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.SparseArray;
 import android.view.*;
 import android.view.animation.*;
@@ -30,6 +31,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
 import com.blankj.utilcode.util.ScreenUtils;
+import com.blankj.utilcode.util.SizeUtils;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -366,7 +368,7 @@ public class QMUIBottomSheet extends Dialog {
         }
 
         private boolean needToScroll() {
-            int itemHeight = QMUIResHelper.getAttrDimen(mContext, R.attr.qmui_bottom_sheet_list_item_height);
+            int itemHeight = SizeUtils.dp2px(56);
             int totalHeight = mItems.size() * itemHeight;
             if (mHeaderViews.size() > 0) {
                 for (View view : mHeaderViews) {
@@ -376,8 +378,8 @@ public class QMUIBottomSheet extends Dialog {
                     totalHeight += view.getMeasuredHeight();
                 }
             }
-            if (mTitleTv != null && !QMUILangHelper.isNullOrEmpty(mTitle)) {
-                totalHeight += QMUIResHelper.getAttrDimen(mContext, R.attr.qmui_bottom_sheet_title_height);
+            if (mTitleTv != null && !TextUtils.isEmpty(mTitle)) {
+                totalHeight += SizeUtils.dp2px(56);
             }
             return totalHeight > getListMaxHeight();
         }
@@ -517,20 +519,17 @@ public class QMUIBottomSheet extends Dialog {
                     holder.markView.setVisibility(View.GONE);
                 }
 
-                convertView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (data.hasRedPoint) {
-                            data.hasRedPoint = false;
-                            holder.redPoint.setVisibility(View.GONE);
-                        }
-                        if (mNeedRightMark) {
-                            setCheckedIndex(position);
-                            notifyDataSetChanged();
-                        }
-                        if (mOnSheetItemClickListener != null) {
-                            mOnSheetItemClickListener.onClick(mDialog, v, position, data.tag);
-                        }
+                convertView.setOnClickListener(v -> {
+                    if (data.hasRedPoint) {
+                        data.hasRedPoint = false;
+                        holder.redPoint.setVisibility(View.GONE);
+                    }
+                    if (mNeedRightMark) {
+                        setCheckedIndex(position);
+                        notifyDataSetChanged();
+                    }
+                    if (mOnSheetItemClickListener != null) {
+                        mOnSheetItemClickListener.onClick(mDialog, v, position, data.tag);
                     }
                 });
                 return convertView;
@@ -737,13 +736,7 @@ public class QMUIBottomSheet extends Dialog {
                 if (mButtonClickListener != null) {
                     mBottomButton.setOnClickListener(mButtonClickListener);
                 } else {
-                    mBottomButton.setOnClickListener(new View.OnClickListener() {
-
-                        @Override
-                        public void onClick(View v) {
-                            mDialog.dismiss();
-                        }
-                    });
+                    mBottomButton.setOnClickListener(v -> mDialog.dismiss());
                 }
             }
 
@@ -765,7 +758,7 @@ public class QMUIBottomSheet extends Dialog {
          */
         private int calculateItemWidth(int width, int maxItemCountInEachLine, int paddingLeft, int paddingRight) {
             if (mMiniItemWidth == -1) {
-                mMiniItemWidth = QMUIResHelper.getAttrDimen(mContext, R.attr.qmui_bottom_sheet_grid_item_mini_width);
+                mMiniItemWidth = SizeUtils.dp2px(84);
             }
 
             final int parentSpacing = width - paddingLeft - paddingRight;

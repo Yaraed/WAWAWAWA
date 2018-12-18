@@ -17,7 +17,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:layout_width="match_parent"
               android:layout_height="56dp"
-              android:background="?attr/qmui_bottom_sheet_list_item_bg"
+              android:background="@drawable/qmui_list_item_bg_with_border_bottom"
               android:gravity="center"
               android:orientation="horizontal"
               android:paddingLeft="16dp"
@@ -37,7 +37,8 @@
         android:layout_height="wrap_content"
         android:ellipsize="middle"
         android:singleLine="true"
-        android:textAppearance="?attr/qmui_bottom_sheet_list_item_text_appearance"/>
+        android:textSize="14sp"
+        android:textColor="@color/qmui_s_list_item_text_color"/>
 
     <ImageView
         android:id="@+id/bottom_dialog_list_item_point"

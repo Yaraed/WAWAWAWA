@@ -15,6 +15,7 @@ import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
+import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.toast.ToastUtils
 import com.zhihu.matisse.Matisse
@@ -50,8 +51,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(10)
-        for (i in 0 until 10) {
+        val array = arrayOfNulls<String>(11)
+        for (i in 0 until 11) {
             array[i] = "这是第${i}个"
         }
 
@@ -69,7 +70,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
                     6 -> mPresenter.cancelApk()
                     7 -> toPhoto(9)
                     8 -> toBasic(array[i])
-                    9 -> MainNavigation(this@MainActivity).toTranslucentActivity(1)
+                    9 -> toGrid(array[i])
+                    10 -> MainNavigation(this@MainActivity).toTranslucentActivity(1)
                     else -> {
                     }
                 }
@@ -123,7 +125,76 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
     }
 
     private fun toBasic(msg: String?) {
-        ToastUtils.show(msg)
+        QMUIBottomSheet.BottomListSheetBuilder(this@MainActivity, true)
+            .setCheckedIndex(2)
+            .setTitle(msg)
+            .addItem("Item 1")
+            .addItem("Item 2")
+            .addItem("Item 3")
+            .setOnSheetItemClickListener { dialog, _, _, tag ->
+                run {
+                    dialog.dismiss()
+                    ToastUtils.show(tag)
+                }
+            }
+            .build().show()
+    }
+
+    private fun toGrid(msg: String?) {
+        QMUIBottomSheet.BottomGridSheetBuilder(this@MainActivity)
+            .addItem(
+                R.mipmap.icon_more_operation_share_friend,
+                "分享到微信",
+                0,
+                QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.mipmap.icon_more_operation_share_moment,
+                "分享到朋友圈",
+                1,
+                QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.mipmap.icon_more_operation_share_chat,
+                "分享到QQ",
+                2,
+                QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.mipmap.icon_more_operation_share_chat,
+                "分享到空间",
+                3,
+                QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.mipmap.icon_more_operation_share_weibo,
+                "分享到微博",
+                4,
+                QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(
+                R.mipmap.icon_more_operation_share_chat,
+                "分享到私信",
+                5,
+                QMUIBottomSheet.BottomGridSheetBuilder.FIRST_LINE
+            )
+            .addItem(R.mipmap.icon_more_operation_save, "保存到本地", 6, QMUIBottomSheet.BottomGridSheetBuilder.SECOND_LINE)
+            .setOnSheetItemClickListener { dialog, itemView ->
+                run {
+                    dialog.dismiss()
+                    val tag = itemView.tag
+                    when (tag) {
+                        0 -> ToastUtils.show("分享到微信")
+                        1 -> ToastUtils.show("分享到朋友圈")
+                        2 -> ToastUtils.show("分享到QQ")
+                        3 -> ToastUtils.show("分享到空间")
+                        4 -> ToastUtils.show("分享到微博")
+                        5 -> ToastUtils.show("分享到私信")
+                        6 -> ToastUtils.show("保存到本地")
+                    }
+                }
+            }
+            .build().show()
     }
 
     fun readJson(): String {

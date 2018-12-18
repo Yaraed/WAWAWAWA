@@ -63,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="12dp"
-        android:background="?attr/qmui_bottom_sheet_button_background"
+        android:background="@drawable/qmui_divider_top_bitmap"
         android:orientation="horizontal">
 
         <TextView
