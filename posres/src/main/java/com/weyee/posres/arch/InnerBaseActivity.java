@@ -58,24 +58,20 @@ public class InnerBaseActivity extends AppCompatActivity {
 
     @Override
     public void finish() {
-        int enterAnim = R.anim.slide_in_left;
-        int exitAnim = R.anim.slide_out_right;
+        int enterAnim = 0;
+        int exitAnim = 0;
         int activityAnimStyle = Utils.getActivityAnimStyle(getIntent());
         if (activityAnimStyle == ANIM_STYLE_SLID_IN_RIGHT) {
             enterAnim = R.anim.slide_in_left;
             exitAnim = R.anim.slide_out_right;
-
         } else if (activityAnimStyle == ANIM_STYLE_SLID_IN_BOTTOM) {
             enterAnim = R.anim.slide_in_bottom;
             exitAnim = R.anim.slide_out_bottom;
-
         } else if (activityAnimStyle == ANIM_STYLE_SLID_IN_RIGHT_OUT_LEFT) {
             enterAnim = R.anim.slide_in_right;
             exitAnim = R.anim.slide_out_left;
-
         } else if (activityAnimStyle == ANIM_STYLE_NONE) {
-            enterAnim = 0;
-            exitAnim = 0;
+
         }
 
         super.finish();
