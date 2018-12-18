@@ -17,6 +17,7 @@ import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
+import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.toast.ToastUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
@@ -61,7 +62,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             run {
                 when (i) {
-                    0 -> startActivity(Intent(this@MainActivity, TranslucentActivity::class.java))
+                    0 -> MainNavigation(this@MainActivity).toTranslucentActivity(2)
                     1 -> mPresenter.getBook()
                     2 -> mPresenter.cancelBook()
                     3 -> mPresenter.getBook(true)
@@ -70,7 +71,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
                     6 -> mPresenter.cancelApk()
                     7 -> toPhoto(9)
                     8 -> toBasic(array[i])
-                    9 -> startActivity(Intent(this@MainActivity, TranslucentActivity::class.java))
+                    9 -> MainNavigation(this@MainActivity).toTranslucentActivity(1)
                     else -> {
                     }
                 }

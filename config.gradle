@@ -26,6 +26,7 @@ ext {
             retrofitSdkVersion        : "2.3.0",
             okhttpSdkVersion          : "3.9.0",
             dagger2SdkVersion         : "2.12",
+            arouterSdkVersion         : "1.2.2",
             loggerVersion             : "2.2.0",
             timberVersion             : "4.7.1",
             eventbusVersion           : "3.1.1",
@@ -69,6 +70,8 @@ ext {
 
             dagger2                 : "com.google.dagger:dagger:$dependVersion.dagger2SdkVersion",
             dagger2Compiler         : "com.google.dagger:dagger-compiler:$dependVersion.dagger2SdkVersion",
+            arouter                 : "com.alibaba:arouter-api:$dependVersion.arouterSdkVersion",
+            arouterCompiler         : "com.alibaba:arouter-compiler:$dependVersion.arouterSdkVersion",
 
             eventbus                : "org.greenrobot:eventbus:$dependVersion.eventbusVersion",
             logger                  : "com.orhanobut:logger:$dependVersion.loggerVersion",
