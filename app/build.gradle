@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 
 def androidConfig = rootProject.ext.android
@@ -42,8 +43,7 @@ dependencies {
     // leakCanary
     debugImplementation libsConfig.canaryDebug
     releaseImplementation libsConfig.canaryRelease
-    implementation libsConfig.dagger2
-    annotationProcessor libsConfig.dagger2Compiler
+    kapt  libsConfig.dagger2Compiler
 
     implementation project(':poscore')
 }

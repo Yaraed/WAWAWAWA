@@ -12,6 +12,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.afollestad.materialdialogs.DialogCallback
 import com.afollestad.materialdialogs.MaterialDialog
+import com.letion.app.di.component.DaggerMainComponent
 import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.weyee.poscore.base.BaseActivity
@@ -23,7 +24,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
 import java.nio.charset.Charset
-
 
 class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
@@ -53,7 +53,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
 
         val array = arrayOfNulls<String>(10)
         for (i in 0 until 10) {
-            array[i] = "这是第${i}个位置"
+            array[i] = "这是第${i}个"
         }
 
         listView.adapter = ArrayAdapter<String>(baseContext, android.R.layout.simple_list_item_1, array)
