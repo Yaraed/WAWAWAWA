@@ -10,8 +10,6 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.afollestad.materialdialogs.DialogCallback
-import com.afollestad.materialdialogs.MaterialDialog
 import com.letion.app.di.component.DaggerMainComponent
 import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
@@ -125,16 +123,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainView {
     }
 
     private fun toBasic(msg: String?) {
-        MaterialDialog(this@MainActivity)
-            .show {
-                message(text = msg)
-                positiveButton(text = "确定", click = object : DialogCallback {
-                    override fun invoke(p1: MaterialDialog) {
-                        ToastUtils.show("确定")
-                    }
-                })
-                negativeButton { ToastUtils.show("取消") }
-            }
+        ToastUtils.show(msg)
     }
 
     fun readJson(): String {
