@@ -22,7 +22,7 @@ public class GlideImageConfig extends ImageConfig {
     private int fallback; //请求 url 为空,则使用此图片作为占位符
 
     private GlideImageConfig(Builder builder) {
-        this.url = builder.url;
+        this.resource = builder.resource;
         this.imageView = builder.imageView;
         this.placeholder = builder.placeholder;
         this.errorPic = builder.errorPic;
@@ -69,7 +69,7 @@ public class GlideImageConfig extends ImageConfig {
 
 
     public static final class Builder {
-        private String url;
+        private Object resource;
         private ImageView imageView;
         private int placeholder;
         private int errorPic;
@@ -84,8 +84,8 @@ public class GlideImageConfig extends ImageConfig {
         private Builder() {
         }
 
-        public Builder url(String url) {
-            this.url = url;
+        public Builder resource(Object resource) {
+            this.resource = resource;
             return this;
         }
 

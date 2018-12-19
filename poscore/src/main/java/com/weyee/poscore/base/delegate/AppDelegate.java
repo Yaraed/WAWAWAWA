@@ -11,7 +11,7 @@ import com.weyee.poscore.base.integration.ManifestParser;
 import com.weyee.poscore.di.component.AppComponent;
 import com.weyee.poscore.di.component.DaggerAppComponent;
 import com.weyee.poscore.di.module.AppModule;
-import com.weyee.poscore.di.module.OtherModule;
+import com.weyee.poscore.di.module.CustomModule;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,7 +53,7 @@ public class AppDelegate implements App {
                 //提供application
                 .appModule(new AppModule(mApplication))
                 //全局配置
-                .otherModule(otherModule(mApplication, mModules))
+                .customModule(customModule(mApplication, mModules))
                 .build(); mAppComponent.inject(this);
 
         mAppComponent.extras().put(IConfigModule.class.getName(), mModules);
@@ -97,9 +97,9 @@ public class AppDelegate implements App {
      *
      * @return
      */
-    private OtherModule otherModule(Application context, List<IConfigModule> modules) {
+    private CustomModule customModule(Application context, List<IConfigModule> modules) {
 
-        OtherModule.Builder builder = OtherModule.builder();
+        CustomModule.Builder builder = CustomModule.builder();
 
         for (IConfigModule module : modules) {
             module.applyOptions(context, builder);

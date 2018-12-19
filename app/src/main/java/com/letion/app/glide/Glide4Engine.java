@@ -14,7 +14,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.widget.ImageView;
-import com.weyee.sdk.imageloader.ImageLoader;
+import com.letion.app.App;
 import com.weyee.sdk.imageloader.glide.GlideImageConfig;
 import com.zhihu.matisse.engine.ImageEngine;
 
@@ -41,7 +41,7 @@ public class Glide4Engine implements ImageEngine {
 
     @Override
     public void loadThumbnail(Context context, int resize, Drawable placeholder, ImageView imageView, Uri uri) {
-        ImageLoader.getInstance().loadImage(context, GlideImageConfig.builder().url(getRealPathFromURI(context,uri))
+        ((App) context.getApplicationContext()).getAppComponent().imageLoader().loadImage(context, GlideImageConfig.builder().resource(uri)
                 .imageView(imageView)
                 .build());
     }
@@ -49,21 +49,21 @@ public class Glide4Engine implements ImageEngine {
     @Override
     public void loadAnimatedGifThumbnail(Context context, int resize, Drawable placeholder, ImageView imageView, Uri
             uri) {
-        ImageLoader.getInstance().loadImage(context, GlideImageConfig.builder().url(getRealPathFromURI(context,uri))
+        ((App) context.getApplicationContext()).getAppComponent().imageLoader().loadImage(context, GlideImageConfig.builder().resource(uri)
                 .imageView(imageView)
                 .build());
     }
 
     @Override
     public void loadImage(Context context, int resizeX, int resizeY, ImageView imageView, Uri uri) {
-        ImageLoader.getInstance().loadImage(context, GlideImageConfig.builder().url(getRealPathFromURI(context,uri))
+        ((App) context.getApplicationContext()).getAppComponent().imageLoader().loadImage(context, GlideImageConfig.builder().resource(uri)
                 .imageView(imageView)
                 .build());
     }
 
     @Override
     public void loadAnimatedGifImage(Context context, int resizeX, int resizeY, ImageView imageView, Uri uri) {
-        ImageLoader.getInstance().loadImage(context, GlideImageConfig.builder().url(getRealPathFromURI(context,uri))
+        ((App) context.getApplicationContext()).getAppComponent().imageLoader().loadImage(context, GlideImageConfig.builder().resource(uri)
                 .imageView(imageView)
                 .build());
     }

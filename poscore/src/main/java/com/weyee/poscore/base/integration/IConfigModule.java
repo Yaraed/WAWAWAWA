@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.weyee.poscore.base.delegate.AppDelegate;
-import com.weyee.poscore.di.module.OtherModule;
+import com.weyee.poscore.di.module.CustomModule;
 
 import java.util.List;
 
@@ -16,11 +16,11 @@ import androidx.fragment.app.FragmentManager;
  */
 public interface IConfigModule {
     /**
-     * 使用{@link OtherModule.Builder}给框架配置一些配置参数
+     * 使用{@link CustomModule.Builder}给框架配置一些配置参数
      * @param context
      * @param builder
      */
-    void applyOptions(Context context, OtherModule.Builder builder);
+    void applyOptions(Context context, CustomModule.Builder builder);
 
     /**
      * 使用{@link IRepositoryManager}给框架注入一些网络请求和数据缓存等服务

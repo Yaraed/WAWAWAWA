@@ -15,7 +15,7 @@ import com.squareup.leakcanary.LeakCanary;
 import com.weyee.poscore.base.delegate.AppDelegate;
 import com.weyee.poscore.base.integration.IConfigModule;
 import com.weyee.poscore.base.integration.IRepositoryManager;
-import com.weyee.poscore.di.module.OtherModule;
+import com.weyee.poscore.di.module.CustomModule;
 
 import java.util.List;
 
@@ -28,13 +28,13 @@ import java.util.List;
  */
 public class Config implements IConfigModule {
     /**
-     * 使用{@link OtherModule.Builder}给框架配置一些配置参数
+     * 使用{@link CustomModule.Builder}给框架配置一些配置参数
      *
      * @param context
      * @param builder
      */
     @Override
-    public void applyOptions(Context context, OtherModule.Builder builder) {
+    public void applyOptions(Context context, CustomModule.Builder builder) {
 
     }
 

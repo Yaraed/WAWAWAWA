@@ -9,8 +9,8 @@ import dagger.Module;
  * Created by liu-feng on 2017/6/5.
  */
 @Module
-public class OtherModule {
-    private OtherModule(Builder builder) {
+public class CustomModule {
+    private CustomModule(Builder builder) {
     }
 
     public static Builder builder() {
@@ -21,8 +21,8 @@ public class OtherModule {
         private Builder() {
         }
 
-        public OtherModule build() {
-            return new OtherModule(this);
+        public CustomModule build() {
+            return new CustomModule(this);
         }
 
 

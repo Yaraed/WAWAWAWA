@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.inject.Singleton;
 
 import androidx.collection.ArrayMap;
+import com.weyee.sdk.imageloader.BaseImageLoaderStrategy;
+import com.weyee.sdk.imageloader.glide.GlideImageLoaderStrategy;
 import dagger.Module;
 import dagger.Provides;
 
@@ -32,13 +34,19 @@ public class AppModule {
 
     @Singleton
     @Provides
+    public BaseImageLoaderStrategy provideImageLoaderStrategy() {
+        return new GlideImageLoaderStrategy();
+    }
+
+    @Singleton
+    @Provides
     public IRepositoryManager provideRepositoryManager(RepositoryManager repositoryManager) {
         return repositoryManager;
     }
 
     @Singleton
     @Provides
-    public Map<String, Object> provideExtras(){
+    public Map<String, Object> provideExtras() {
         return new ArrayMap<>();
     }
 }

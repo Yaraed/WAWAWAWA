@@ -25,7 +25,7 @@ import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
 import java.nio.charset.Charset
 
-class MainActivity : BaseActivity<MainPresenter>(), MainView {
+class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
     private val CHOOSE = 1
     //private lateinit var presenter: MainPresenter

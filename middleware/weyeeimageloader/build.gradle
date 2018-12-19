@@ -44,4 +44,6 @@ dependencies {
     annotationProcessor libsConfig.annotation_v7
     implementation libsConfig.rxJava
     implementation libsConfig.rxAndroid
+
+    api libsConfig.dagger2
 }
