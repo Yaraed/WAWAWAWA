@@ -34,8 +34,11 @@ dependencies {
     implementation libsConfig.fragment_v7
     implementation libsConfig.appcompat_v7
     implementation libsConfig.androidUtilCode
-    implementation (libsConfig.glide){
+    implementation(libsConfig.glide) {
         exclude group: "com.android.support"
+    }
+    implementation(libsConfig.glideOkhttp3Integration) {
+        exclude group: "com.squareup.okhttp3"
     }
     annotationProcessor libsConfig.glideCompiler
     annotationProcessor libsConfig.annotation_v7
