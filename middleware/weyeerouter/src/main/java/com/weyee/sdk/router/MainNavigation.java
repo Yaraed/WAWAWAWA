@@ -1,6 +1,7 @@
 package com.weyee.sdk.router;
 
 import android.content.Context;
+import android.os.Bundle;
 
 /**
  * main模块跳转导航管理类。
@@ -23,5 +24,10 @@ public class MainNavigation extends Navigation {
 
     public void toTranslucentActivity(int activityAnimStyle){
         startActivity(activityAnimStyle,"Translucent");
+    }
+    public void toPhotoViewActivity(String[] urls){
+        Bundle bundle = new Bundle();
+        bundle.putStringArray("urls", urls);
+        startActivity("PhotoView",bundle);
     }
 }

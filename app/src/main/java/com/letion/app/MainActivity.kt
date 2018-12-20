@@ -10,10 +10,12 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import butterknife.internal.Utils.listOf
 import com.letion.app.di.component.DaggerMainComponent
 import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.weyee.poscore.base.BaseActivity
+import com.weyee.poscore.base.ThreadPool.run
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.router.MainNavigation
@@ -24,6 +26,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import me.leolin.shortcutbadger.ShortcutBadger
 import org.json.JSONObject
 import java.nio.charset.Charset
+import java.util.*
 
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
@@ -56,12 +59,16 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
             array[i] = "这是第${i}个"
         }
 
+        val urls = arrayOf("http://img.weyee.com/weyee_score_2016_20180425151306753282",
+            "http://img.weyee.com/weyee_score_2016_20180425151307495086",
+            "http://img.weyee.com/weyee_score_2016_20180906104526564400")
+
         listView.adapter = ArrayAdapter<String>(baseContext, android.R.layout.simple_list_item_1, array)
 
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             run {
                 when (i) {
-                    0 -> MainNavigation(this@MainActivity).toTranslucentActivity(2)
+                    0 -> MainNavigation(this@MainActivity).toPhotoViewActivity(urls)
                     1 -> mPresenter.getBook()
                     2 -> mPresenter.cancelBook()
                     3 -> mPresenter.getBook(true)

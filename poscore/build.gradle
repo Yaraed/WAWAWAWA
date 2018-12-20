@@ -46,6 +46,14 @@ dependencies {
     // RxJava2
     api libsConfig.rxJava
     api libsConfig.rxAndroid
+    // RxLifecycle
+    api(libsConfig.rxLifecycle) {
+        exclude group: "io.reactivex.rxjava2"
+    }
+    api(libsConfig.rxLifecycleComponents) {
+        exclude group: "io.reactivex.rxjava2"
+        exclude module: "androidx.appcompat:appcompat"
+    }
     // dagger2
     api libsConfig.dagger2
     annotationProcessor libsConfig.dagger2Compiler

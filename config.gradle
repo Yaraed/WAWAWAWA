@@ -23,6 +23,7 @@ ext {
             glideSdkVersion           : "4.8.0",
             rx2SdkJava                : "2.1.5",
             rx2SdkAndroid             : "2.0.1",
+            rxlifecycle3SdkVersion    : "3.0.0",
             retrofitSdkVersion        : "2.3.0",
             okhttpSdkVersion          : "3.9.0",
             dagger2SdkVersion         : "2.12",
@@ -36,7 +37,7 @@ ext {
 
 
 
-            rxlifecycle2SdkVersion    : "2.2.0",
+
             rx2SdkBus                 : "2.0.0",
             rx2SdkPermission          : "0.9.5@aar",
             rx2SdkErrorhandler        : "2.1.1",
@@ -61,6 +62,8 @@ ext {
             glideOkhttp3Integration : "com.github.bumptech.glide:okhttp3-integration:$dependVersion.glideSdkVersion",
             rxJava                  : "io.reactivex.rxjava2:rxjava:$dependVersion.rx2SdkJava",
             rxAndroid               : "io.reactivex.rxjava2:rxandroid:$dependVersion.rx2SdkAndroid",
+            rxLifecycle             : "com.trello.rxlifecycle3:rxlifecycle:$dependVersion.rxlifecycle3SdkVersion",
+            rxLifecycleComponents   : "com.trello.rxlifecycle3:rxlifecycle-components:$dependVersion.rxlifecycle3SdkVersion",
             retrofit                : "com.squareup.retrofit2:retrofit:$dependVersion.retrofitSdkVersion",
             retrofitConverterGson   : "com.squareup.retrofit2:converter-gson:$dependVersion.retrofitSdkVersion",
             retrofitConverterScalars: "com.squareup.retrofit2:converter-scalars:$dependVersion.retrofitSdkVersion",

@@ -36,6 +36,8 @@
 
         <activity android:name=".TranslucentActivity">
         </activity>
+        <activity android:name=".photo.MImageViewActivity"
+                  android:theme="@style/AppTheme.Photo"/>
     </application>
 
 </manifest>

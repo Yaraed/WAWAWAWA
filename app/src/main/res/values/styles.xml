@@ -21,4 +21,9 @@
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
     </style>
 
+    <!--查看大图页面，全屏显示-->
+    <style name="AppTheme.Photo" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
 </resources>

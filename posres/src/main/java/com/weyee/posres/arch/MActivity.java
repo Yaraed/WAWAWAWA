@@ -49,7 +49,6 @@ public class MActivity extends InnerBaseActivity {
         abl = findViewById(R.id.abl);
         mToolbar = findViewById(R.id.toolbar);
         flActivityContainer = findViewById(R.id.activity_container);
-        System.out.println("layoutResID:" + layoutResID);
         if (layoutResID > 0) {
             flActivityContainer.addView(LayoutInflater.from(this).inflate(layoutResID, flActivityContainer, false), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
@@ -57,8 +56,14 @@ public class MActivity extends InnerBaseActivity {
         setSupportActionBar(mToolbar);
         getToolBar().setDisplayHomeAsUpEnabled(true);
 
-        BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary), 112);
-        BarUtils.addMarginTopEqualStatusBarHeight(rootContainer);
+        if (hasToolbar()) {
+            abl.setVisibility(View.VISIBLE);
+        }
+
+        if (hasStatusBar()) {
+            BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary), 112);
+            BarUtils.addMarginTopEqualStatusBarHeight(rootContainer);
+        }
     }
 
     @Override
@@ -79,6 +84,14 @@ public class MActivity extends InnerBaseActivity {
      * @return
      */
     protected boolean canSwipeBack() {
+        return true;
+    }
+
+    protected boolean hasToolbar() {
+        return true;
+    }
+
+    protected boolean hasStatusBar() {
         return true;
     }
 
