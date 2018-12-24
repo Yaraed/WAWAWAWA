@@ -1,5 +1,8 @@
 package com.weyee.poscore.mvp;
 
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
 import com.weyee.poscore.base.integration.IRepositoryManager;
 
 /**
@@ -15,5 +18,10 @@ public class BaseModel implements IModel {
     @Override
     public void onDestroy() {
         mRepositoryManager = null;
+    }
+
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy(LifecycleOwner owner) {
+        owner.getLifecycle().removeObserver(this);
     }
 }

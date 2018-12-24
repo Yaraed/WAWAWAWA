@@ -3,9 +3,10 @@ package com.letion.app
 import android.content.Intent
 import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.letion.app.di.module.MainModule
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
+import com.weyee.posres.arch.RxLiftUtils
+import com.weyee.sdk.api.rxutil.RxBindingUtils
 import com.weyee.sdk.router.MainNavigation
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,14 +28,15 @@ class TranslucentActivity : BaseActivity<TranslucentPresenter>() {
     override fun getResourceId(): Int = R.layout.activity_translucent
 
     override fun initView(savedInstanceState: Bundle?) {
-        tvContent.setOnClickListener {
-            startActivity(
-                Intent(
-                    this@TranslucentActivity,
-                    TranslucentActivity::class.java
+        RxBindingUtils.setViewClicks(tvContent).`as`(RxLiftUtils.bindLifecycle(this@TranslucentActivity))
+            .subscribe {
+                startActivity(
+                    Intent(
+                        this@TranslucentActivity,
+                        TranslucentActivity::class.java
+                    )
                 )
-            )
-        }
+            }
     }
 
     override fun initData(savedInstanceState: Bundle?) {

@@ -1,6 +1,5 @@
 package com.weyee.sdk.api.base;
 
-import com.weyee.sdk.api.bean.MModel;
 import io.reactivex.Flowable;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -9,7 +8,7 @@ import retrofit2.http.*;
 import java.util.Map;
 
 /**
- * <p>
+ * <p>示例
  *
  * @author wuqi
  * @describe ...
@@ -17,7 +16,7 @@ import java.util.Map;
  */
 public interface BaseApiService {
     @GET()
-    Flowable<MModel<Object>> get(@Url String url, @QueryMap Map<String, String> maps);
+    Flowable<ResponseBody> get(@Url String url, @QueryMap Map<String, String> maps);
 
     @FormUrlEncoded
     @POST()

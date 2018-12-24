@@ -1,6 +1,6 @@
 package com.weyee.sdk.api.observer;
 
-import com.weyee.sdk.api.bean.MModel;
+import com.weyee.sdk.api.bean.HttpResponse;
 import com.weyee.sdk.api.dispose.DisposeManager;
 import com.weyee.sdk.api.exception.ApiException;
 import io.reactivex.Observer;
@@ -13,7 +13,7 @@ import io.reactivex.disposables.Disposable;
  * @describe ...
  * @date 2018/12/7 0007
  */
-abstract class BaseModelObserver<T> implements Observer<MModel<T>>, IModelSubscriber<T> {
+abstract class BaseModelObserver<T> implements Observer<HttpResponse<T>>, IModelSubscriber<T> {
 
     /**
      * 是否隐藏toast
@@ -42,7 +42,7 @@ abstract class BaseModelObserver<T> implements Observer<MModel<T>>, IModelSubscr
     }
 
     @Override
-    public void onNext(MModel<T> baseData) {
+    public void onNext(HttpResponse<T> baseData) {
         doOnNext(baseData.getData());
     }
 

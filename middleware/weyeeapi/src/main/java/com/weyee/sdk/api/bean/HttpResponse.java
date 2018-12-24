@@ -8,7 +8,7 @@ package com.weyee.sdk.api.bean;
  * @describe ...
  * @date 2018/12/7 0007
  */
-public class MModel<T> {
+public class HttpResponse<T> {
 
     private int status;
     /**

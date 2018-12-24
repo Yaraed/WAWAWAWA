@@ -18,6 +18,8 @@ import io.reactivex.subjects.BehaviorSubject;
  * <p>Rx生命周期管理activity
  * <p>
  * {@link com.trello.rxlifecycle3.components.support.RxAppCompatActivity}
+ * <p>
+ * 替代方式 ：使用 {@linkplain <a href="https://github.com/uber/AutoDispose">AutoDispose</a>}
  *
  * @author wuqi
  * @describe ...

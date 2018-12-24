@@ -10,13 +10,14 @@ import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import butterknife.internal.Utils.listOf
 import com.letion.app.di.component.DaggerMainComponent
 import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.base.ThreadPool.run
 import com.weyee.poscore.di.component.AppComponent
+import com.weyee.posres.arch.RxLiftUtils
+import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.toast.ToastUtils
@@ -45,12 +46,16 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
     override fun initView(savedInstanceState: Bundle?) {
         //tvContent.text = printJson(parseJson(readJson()))
-        Thread {
-            while (true) {
-                ShortcutBadger.applyCount(applicationContext, (Math.random() * 1000).toInt())
-                Thread.sleep(2000)
-            }
-        }.start()
+//        Thread {
+//            while (true) {
+//                ShortcutBadger.applyCount(applicationContext, (Math.random() * 1000).toInt())
+//                Thread.sleep(2000)
+//            }
+//        }.start()
+
+        RxJavaUtils.polling(2).`as`(RxLiftUtils.bindLifecycle(this@MainActivity)).subscribe {
+            ShortcutBadger.applyCount(applicationContext, (Math.random() * 1000).toInt())
+        }
 
         //presenter = MainPresenter(this)
 
@@ -59,9 +64,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
             array[i] = "这是第${i}个"
         }
 
-        val urls = arrayOf("http://img.weyee.com/weyee_score_2016_20180425151306753282",
+        val urls = arrayOf(
+            "http://img.weyee.com/weyee_score_2016_20180425151306753282",
             "http://img.weyee.com/weyee_score_2016_20180425151307495086",
-            "http://img.weyee.com/weyee_score_2016_20180906104526564400")
+            "http://img.weyee.com/weyee_score_2016_20180906104526564400"
+        )
 
         listView.adapter = ArrayAdapter<String>(baseContext, android.R.layout.simple_list_item_1, array)
 

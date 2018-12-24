@@ -20,13 +20,12 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
-import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 import com.weyee.posres.R;
 
 import static com.weyee.posres.arch.Utils.*;
 
 //Fix the bug: Only fullscreen activities can request orientation in Android version 26, 27
-public class InnerBaseActivity extends RxAppCompatActivity {
+public class InnerBaseActivity extends AppCompatActivity {
     private static int NO_REQUESTED_ORIENTATION_SET = -100;
     private boolean mConvertToTranslucentCauseOrientationChanged = false;
     private int mPendingRequestedOrientation = NO_REQUESTED_ORIENTATION_SET;

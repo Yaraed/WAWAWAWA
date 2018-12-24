@@ -18,7 +18,9 @@ abstract class RxModelSubscriber<T> extends BaseModelObserver<T> {
      *
      * @param errorMsg
      */
-    protected abstract void onError(String errorMsg);
+    protected void onError(String errorMsg){
+
+    }
 
     /**
      * 成功回调
@@ -30,7 +32,9 @@ abstract class RxModelSubscriber<T> extends BaseModelObserver<T> {
     /**
      * 完成后的回调
      */
-    protected abstract void onCompleted();
+    protected void onCompleted(){
+
+    }
 
     @Override
     public void doOnSubscribe(Disposable d) {

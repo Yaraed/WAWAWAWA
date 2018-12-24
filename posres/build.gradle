@@ -38,8 +38,17 @@ dependencies {
     annotationProcessor libsConfig.annotation_v7
     implementation libsConfig.androidUtilCode
 
-    implementation libsConfig.rxLifecycle
+    implementation(libsConfig.rxLifecycle) {
+        exclude group: "io.reactivex.rxjava2"
+    }
     implementation(libsConfig.rxLifecycleComponents) {
+        exclude module: "androidx.appcompat:appcompat"
+    }
+
+    implementation(libsConfig.autodispose) {
+        exclude group: "io.reactivex.rxjava2"
+    }
+    implementation(libsConfig.autodisposeComponents) {
         exclude group: "io.reactivex.rxjava2"
         exclude module: "androidx.appcompat:appcompat"
     }

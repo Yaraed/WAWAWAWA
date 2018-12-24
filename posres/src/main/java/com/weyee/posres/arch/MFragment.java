@@ -1,6 +1,6 @@
 package com.weyee.posres.arch;
 
-import com.trello.rxlifecycle3.components.support.RxFragment;
+import androidx.fragment.app.Fragment;
 
 /**
  * <p>x生命周期管理Fragment
@@ -9,5 +9,5 @@ import com.trello.rxlifecycle3.components.support.RxFragment;
  * @describe ...
  * @date 2018/12/20 0020
  */
-public class MFragment extends RxFragment {
+public class MFragment extends Fragment {
 }
