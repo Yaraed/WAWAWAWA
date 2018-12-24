@@ -16,5 +16,21 @@
 -->
 
 <resources>
+    <declare-styleable name="MHeaderView">
+        <attr name="header_title_color" format="color"/>
+        <attr name="header_line" format="color"/>
 
+        <attr name="header_menu_left_close_icon" format="reference"/>
+
+        <attr name="header_menu_left_one_icon" format="reference"/>
+        <attr name="header_menu_left_one_text_color" format="color"/>
+
+        <attr name="header_menu_right_one_icon" format="reference"/>
+        <attr name="header_menu_right_two_icon" format="reference"/>
+        <attr name="header_menu_right_three_icon" format="reference"/>
+
+        <attr name="header_menu_right_one_text_color" format="color"/>
+        <attr name="header_menu_right_two_text_color" format="color"/>
+        <attr name="header_menu_right_three_text_color" format="color"/>
+    </declare-styleable>
 </resources>

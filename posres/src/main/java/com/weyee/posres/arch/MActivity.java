@@ -3,12 +3,10 @@ package com.weyee.posres.arch;
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.Toolbar;
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import com.blankj.utilcode.util.BarUtils;
@@ -17,12 +15,15 @@ import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrPosition;
 import com.weyee.posres.R;
+import com.weyee.posres.headerview.MHeaderView;
+import com.weyee.posres.headerview.MHeaderViewAble;
 
 public class MActivity extends InnerBaseActivity {
 
     protected View mContentView;
     protected CoordinatorLayout rootContainer;
-    protected Toolbar mToolbar;
+    protected FrameLayout toolbarContainer;
+    protected MHeaderViewAble mHeaderViewAble;
     protected AppBarLayout abl;
     protected FrameLayout flActivityContainer;
 
@@ -47,35 +48,33 @@ public class MActivity extends InnerBaseActivity {
         super.setContentView(mContentView);
         rootContainer = findViewById(R.id.root_container);
         abl = findViewById(R.id.abl);
-        mToolbar = findViewById(R.id.toolbar);
+        toolbarContainer = findViewById(R.id.toolbar_container);
         flActivityContainer = findViewById(R.id.activity_container);
         if (layoutResID > 0) {
             flActivityContainer.addView(LayoutInflater.from(this).inflate(layoutResID, flActivityContainer, false), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         }
 
-        setSupportActionBar(mToolbar);
-        getToolBar().setDisplayHomeAsUpEnabled(true);
-
         if (hasToolbar()) {
             abl.setVisibility(View.VISIBLE);
-        }
-
-        if (hasStatusBar()) {
+            initHeaderView();
+            toolbarContainer.addView((View) getHeaderView());
             BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary), 112);
             BarUtils.addMarginTopEqualStatusBarHeight(rootContainer);
         }
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return super.onOptionsItemSelected(item);
+    /**
+     * 初始化头布局
+     */
+    protected void initHeaderView() {
+        mHeaderViewAble = new MHeaderView(this);
+        mHeaderViewAble.setTitle((String) getTitle());
+        mHeaderViewAble.setMenuLeftBackIcon(android.R.drawable.ic_menu_revert);
     }
 
-    protected ActionBar getToolBar() {
-        return getSupportActionBar();
+    @NonNull
+    protected MHeaderViewAble getHeaderView() {
+        return mHeaderViewAble;
     }
 
     /**
@@ -88,10 +87,6 @@ public class MActivity extends InnerBaseActivity {
     }
 
     protected boolean hasToolbar() {
-        return true;
-    }
-
-    protected boolean hasStatusBar() {
         return true;
     }
 

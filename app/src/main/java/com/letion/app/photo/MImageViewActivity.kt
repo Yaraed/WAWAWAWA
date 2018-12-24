@@ -59,12 +59,7 @@ class MImageViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), Phot
     override fun initView(savedInstanceState: Bundle?) {
         BarUtils.setStatusBarAlpha(this@MImageViewActivity, 112, true)
         BarUtils.addMarginTopEqualStatusBarHeight(toolbar)
-        setSupportActionBar(toolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        //toolbar去除默认title显示
-        supportActionBar?.setDisplayShowTitleEnabled(false)
-        toolbar.setNavigationOnClickListener { _ -> finish() }
-        toolbar.setBackgroundColor(resources.getColor(android.R.color.transparent))
+
 
         val args = intent.extras
         var currIndex = 0
@@ -87,10 +82,6 @@ class MImageViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), Phot
 
     override fun hasToolbar(): Boolean {
         return !super.hasToolbar()
-    }
-
-    override fun hasStatusBar(): Boolean {
-        return !super.hasStatusBar()
     }
 
     /**
