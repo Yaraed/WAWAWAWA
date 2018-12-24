@@ -7,13 +7,13 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * <p>
+ * <p>基于后台json数据给出的实体类
  *
  * @author wuqi
  * @describe ...
  * @date 2018/12/7 0007
  */
-abstract class BaseModelObserver<T> implements Observer<HttpResponse<T>>, IModelSubscriber<T> {
+abstract class BaseModelObserver<T> implements Observer<HttpResponse<T>>, ISubscriber<T> {
 
     /**
      * 是否隐藏toast
