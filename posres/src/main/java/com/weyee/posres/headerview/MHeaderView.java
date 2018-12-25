@@ -16,7 +16,6 @@
 package com.weyee.posres.headerview;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
@@ -25,26 +24,25 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.ColorInt;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.Toolbar;
 import com.blankj.utilcode.util.SizeUtils;
 import com.weyee.posres.R;
 
 /**
  * 头部标题
  */
-public class MHeaderView extends FrameLayout implements MHeaderViewAble {
+public class MHeaderView extends Toolbar implements MHeaderViewAble {
 
     private TextView tvMenuLeft;
+    private TextView tvLeftClose;
     private TextView tvTitle;
     private TextView tvMenuRightThree;
     private TextView tvMenuRightTwo;
     private TextView tvMenuRightOne;
-    private ImageView ivLeftClose;
     private View bottomLine;
     private View newMsgView;
 
@@ -117,7 +115,7 @@ public class MHeaderView extends FrameLayout implements MHeaderViewAble {
 
         tvTitle = findViewById(R.id.tvTitle);
 
-        ivLeftClose = findViewById(R.id.ivLeftClose);
+        tvLeftClose = findViewById(R.id.tvLeftClose);
         tvMenuLeft = findViewById(R.id.tvMenuLeft);
         tvMenuRightOne = findViewById(R.id.tvMenuRightOne);
         tvMenuRightTwo = findViewById(R.id.tvMenuRightTwo);
@@ -142,9 +140,6 @@ public class MHeaderView extends FrameLayout implements MHeaderViewAble {
 
         setMenuRightTwoIcon(menuRightThreeIcon);
         setMenuRightTwoTextColor(menuRightThreeTextColor);
-
-
-        tvMenuLeft.setOnClickListener(v -> ((Activity) getContext()).finish());
     }
 
     @Override
@@ -169,7 +164,7 @@ public class MHeaderView extends FrameLayout implements MHeaderViewAble {
 
     @Override
     public void setOnClickLeftMenuCloseListener(OnClickListener onClickListener) {
-        ivLeftClose.setOnClickListener(onClickListener);
+        tvLeftClose.setOnClickListener(onClickListener);
     }
 
     @Override
@@ -179,7 +174,7 @@ public class MHeaderView extends FrameLayout implements MHeaderViewAble {
 
     @Override
     public void isShowMenuLeftCloseView(boolean isShow) {
-        isShowView(ivLeftClose, isShow);
+        isShowView(tvLeftClose, isShow);
     }
 
     @Override
@@ -212,8 +207,8 @@ public class MHeaderView extends FrameLayout implements MHeaderViewAble {
     }
 
     @Override
-    public ImageView getMenuLeftCloseView() {
-        return ivLeftClose;
+    public TextView getMenuLeftCloseView() {
+        return tvLeftClose;
     }
 
     @Override
@@ -250,7 +245,7 @@ public class MHeaderView extends FrameLayout implements MHeaderViewAble {
     @Override
     public void setMenuLeftBackIcon(@DrawableRes int id) {
         if (id > 0) {
-            tvMenuLeft.setCompoundDrawables(getDrawable(getContext(), id), null, null, null);
+            tvMenuLeft.setCompoundDrawables(null, null, getDrawable(getContext(), id), null);
         } else {
             tvMenuLeft.setCompoundDrawables(null, null, null, null);
         }
@@ -260,7 +255,9 @@ public class MHeaderView extends FrameLayout implements MHeaderViewAble {
     @Override
     public void setMenuLeftCloseIcon(@DrawableRes int id) {
         if (id > 0) {
-            ivLeftClose.setImageResource(id);
+            tvLeftClose.setCompoundDrawables(null, null, getDrawable(getContext(), id), null);
+        } else {
+            tvLeftClose.setCompoundDrawables(null, null, null, null);
         }
     }
 

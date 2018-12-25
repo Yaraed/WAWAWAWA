@@ -9,6 +9,7 @@ def libsConfig = rootProject.ext.libs
 
 android {
     compileSdkVersion androidConfig.compileSdkVersion
+    buildToolsVersion androidConfig.buildSdkVersion
     defaultConfig {
         applicationId androidConfig.applicationId
         minSdkVersion androidConfig.minSdkVersion

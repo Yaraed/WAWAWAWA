@@ -37,6 +37,10 @@ class TranslucentActivity : BaseActivity<TranslucentPresenter>() {
                     )
                 )
             }
+        headerView.setMenuLeftCloseIcon(android.R.drawable.ic_delete)
+        headerView.setMenuRightOneIcon(android.R.drawable.ic_menu_more)
+        headerView.setMenuRightTwoIcon(android.R.drawable.ic_menu_call)
+        headerView.setMenuRightThreeIcon(android.R.drawable.ic_menu_camera)
     }
 
     override fun initData(savedInstanceState: Bundle?) {

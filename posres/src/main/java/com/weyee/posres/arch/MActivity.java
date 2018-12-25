@@ -15,14 +15,12 @@ import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrPosition;
 import com.weyee.posres.R;
-import com.weyee.posres.headerview.MHeaderView;
 import com.weyee.posres.headerview.MHeaderViewAble;
 
 public class MActivity extends InnerBaseActivity {
 
     protected View mContentView;
     protected CoordinatorLayout rootContainer;
-    protected FrameLayout toolbarContainer;
     protected MHeaderViewAble mHeaderViewAble;
     protected AppBarLayout abl;
     protected FrameLayout flActivityContainer;
@@ -48,7 +46,7 @@ public class MActivity extends InnerBaseActivity {
         super.setContentView(mContentView);
         rootContainer = findViewById(R.id.root_container);
         abl = findViewById(R.id.abl);
-        toolbarContainer = findViewById(R.id.toolbar_container);
+        mHeaderViewAble = findViewById(R.id.toolbar);
         flActivityContainer = findViewById(R.id.activity_container);
         if (layoutResID > 0) {
             flActivityContainer.addView(LayoutInflater.from(this).inflate(layoutResID, flActivityContainer, false), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
@@ -57,7 +55,6 @@ public class MActivity extends InnerBaseActivity {
         if (hasToolbar()) {
             abl.setVisibility(View.VISIBLE);
             initHeaderView();
-            toolbarContainer.addView((View) getHeaderView());
             BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary), 112);
             BarUtils.addMarginTopEqualStatusBarHeight(rootContainer);
         }
@@ -67,9 +64,9 @@ public class MActivity extends InnerBaseActivity {
      * 初始化头布局
      */
     protected void initHeaderView() {
-        mHeaderViewAble = new MHeaderView(this);
         mHeaderViewAble.setTitle((String) getTitle());
         mHeaderViewAble.setMenuLeftBackIcon(android.R.drawable.ic_menu_revert);
+        mHeaderViewAble.setOnClickLeftMenuBackListener(v -> finish());
     }
 
     @NonNull

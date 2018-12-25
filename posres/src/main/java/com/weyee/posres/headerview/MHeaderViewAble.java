@@ -46,7 +46,7 @@ public interface MHeaderViewAble {
     void isShowLine(boolean isShow);
 
     TextView getMenuLeftBackView();
-    ImageView getMenuLeftCloseView();
+    TextView getMenuLeftCloseView();
     TextView getMenuRightOneView();
     TextView getMenuRightTwoView();
     TextView getMenuRightThreeView();

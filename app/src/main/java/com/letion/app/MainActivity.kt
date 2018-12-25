@@ -53,6 +53,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 //            }
 //        }.start()
 
+        headerView.isShowMenuLeftBackView(false)
+
         RxJavaUtils.polling(2).`as`(RxLiftUtils.bindLifecycle(this@MainActivity)).subscribe {
             ShortcutBadger.applyCount(applicationContext, (Math.random() * 1000).toInt())
         }

@@ -37,12 +37,11 @@
     <TextView
             android:id="@+id/tvMenuRightThree"
             android:layout_gravity="center_vertical|right"
-            android:visibility="gone"
             android:textSize="13sp"
             android:textColor="#fff"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:paddingRight="19dp"
-            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical|right"
             android:drawablePadding="5dp"
@@ -52,12 +51,11 @@
     <TextView
             android:id="@+id/tvMenuRightTwo"
             android:layout_gravity="center_vertical|right"
-            android:visibility="gone"
             android:textSize="13sp"
             android:textColor="#fff"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:paddingRight="19dp"
-            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical|right"
             android:drawablePadding="5dp"
@@ -66,10 +64,9 @@
     <TextView
             android:id="@+id/tvMenuRightOne"
             android:layout_gravity="center_vertical|right"
-            android:visibility="gone"
             android:textSize="13sp"
             android:textColor="#fff"
-            android:layout_width="wrap_content"
+            android:layout_width="40dp"
             android:paddingRight="19dp"
             android:layout_height="match_parent"
             android:gravity="center_vertical|right"
@@ -96,20 +93,22 @@
     <TextView
             android:id="@+id/tvMenuLeft"
             android:layout_width="40dp"
-            android:paddingLeft="19dp"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical|left"
-            android:gravity="center_vertical|left"
+            android:gravity="center_vertical|right"
             android:textSize="13sp"
             android:textColor="#fff"
             android:drawablePadding="5dp"/>
 
-    <ImageView
-            android:id="@+id/ivLeftClose"
-            android:paddingLeft="19dp"
+    <TextView
+            android:id="@+id/tvLeftClose"
             android:layout_width="40dp"
             android:layout_marginLeft="40dp"
-            android:layout_height="match_parent"
-            android:visibility="visible"/>
+            android:textSize="13sp"
+            android:textColor="#fff"
+            android:drawablePadding="5dp"
+            android:layout_gravity="center_vertical|left"
+            android:gravity="center_vertical|right"
+            android:layout_height="match_parent"/>
 
 </FrameLayout>

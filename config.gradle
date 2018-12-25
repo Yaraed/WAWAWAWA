@@ -2,6 +2,7 @@ ext {
     // 安卓常规配置
     android = [
             compileSdkVersion: 28,
+            buildSdkVersion  : "28.0.3",
             applicationId    : "com.letion.app",
             minSdkVersion    : 16,
             targetSdkVersion : 28,
