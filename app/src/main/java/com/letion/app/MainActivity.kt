@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -14,7 +16,6 @@ import com.letion.app.di.component.DaggerMainComponent
 import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.weyee.poscore.base.BaseActivity
-import com.weyee.poscore.base.ThreadPool.run
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.posres.arch.RxLiftUtils
 import com.weyee.sdk.api.rxutil.RxJavaUtils
@@ -96,6 +97,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setAlias1()
     }
 
     override fun canSwipeBack(): Boolean {
@@ -267,5 +273,22 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                 (dialog as ProgressDialog).progress = progress
             }
         }
+    }
+
+    @SuppressLint("WrongConstant")
+            /**
+             * 设置别名和图标
+             */
+    fun setAlias1() {
+        packageManager.setComponentEnabledSetting(
+            ComponentName(this, "$packageName.MainActivity1"),
+            PackageManager.COMPONENT_ENABLED_STATE_ENABLED,
+            PackageManager.DONT_KILL_APP
+        )
+        packageManager.setComponentEnabledSetting(
+            ComponentName(this, "$packageName.MainActivity"),
+            PackageManager.COMPONENT_ENABLED_STATE_DISABLED,
+            PackageManager.DONT_KILL_APP
+        )
     }
 }

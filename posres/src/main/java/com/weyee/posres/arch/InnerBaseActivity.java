@@ -77,4 +77,11 @@ public class InnerBaseActivity extends AppCompatActivity {
         super.finish();
         overridePendingTransition(enterAnim, exitAnim);
     }
+
+    /**
+     * 默认动画关闭页面
+     */
+    public void finishActivity() {
+        super.finish();
+    }
 }
