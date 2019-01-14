@@ -76,6 +76,7 @@ public class ApiException extends Exception {
             ex.message = e.getMessage();
         } else {
             ex = new ApiException(e, ERROR.UNKNOWN);
+            ex.message = "网络出了点小差错~";
         }
         return ex;
     }

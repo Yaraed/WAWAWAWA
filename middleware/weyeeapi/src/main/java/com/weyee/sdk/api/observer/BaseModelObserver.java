@@ -49,6 +49,10 @@ abstract class BaseModelObserver<T> implements Observer<HttpResponse<T>>, ISubsc
     @Override
     public void onError(Throwable e) {
         doOnError(ApiException.handleException(e).getMessage());
+        /**
+         * onError和onComplete是互斥的
+         */
+        onComplete();
     }
 
     @Override

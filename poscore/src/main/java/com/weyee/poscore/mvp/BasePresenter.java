@@ -1,11 +1,16 @@
 package com.weyee.poscore.mvp;
 
+import android.app.Activity;
 import android.app.Service;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.Lifecycle;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
+import com.weyee.poscore.base.BaseFragment;
+import com.weyee.sdk.api.observer.listener.ProgressAble;
 import com.weyee.sdk.event.EventBus;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
@@ -103,6 +108,51 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();//保证activity结束时取消所有正在执行的订阅
         }
+    }
+
+    /**
+     * getter
+     *
+     * @return
+     */
+    public V getView() {
+        return mView;
+    }
+
+    /**
+     * 获取加载弹窗的实例
+     *
+     * @return
+     */
+    @Nullable
+    protected ProgressAble getProgressAble() {
+        if (mView instanceof ProgressAble) {
+            return (ProgressAble) mView;
+        } else if (mView instanceof BaseFragment) {
+            Activity activity = ((BaseFragment) mView).getActivity();
+            if (activity instanceof ProgressAble) {
+                return (ProgressAble) activity;
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    protected Context getContext() {
+        if (mView instanceof Activity) {
+            return (Context) mView;
+        } else if (mView instanceof BaseFragment) {
+            return ((BaseFragment) mView).getContext();
+        }
+        return null;
+    }
+
+    @Nullable
+    protected LifecycleOwner getLifecycleOwner(){
+        if (mView instanceof LifecycleOwner){
+            return (LifecycleOwner) mView;
+        }
+        return null;
     }
 
     protected void handleMessage(Message msg) {

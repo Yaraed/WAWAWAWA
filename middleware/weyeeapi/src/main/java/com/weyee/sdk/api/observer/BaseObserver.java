@@ -49,6 +49,7 @@ abstract class BaseObserver<T> implements Observer<T>, ISubscriber<T> {
     public void onError(@NonNull Throwable e) {
         e.printStackTrace();
         doOnError(ApiException.handleException(e).getMessage());
+        onComplete();
     }
 
 
