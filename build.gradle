@@ -24,6 +24,31 @@ allprojects {
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
+
+    subprojects {
+        project.configurations.all {
+            resolutionStrategy.eachDependency { details ->
+                if (details.requested.group == 'com.android.support'
+                        && !details.requested.name.contains('multidex')) {
+                    details.useVersion "28.0.0"
+                } else if (details.requested.name.contains('multidex')) {
+                    details.useVersion "2.0.2"
+                } else if (details.requested.group == 'com.orhanobut') {
+                    details.useVersion "2.2.0"
+                } else if (details.requested.group == 'com.google.dagger') {
+                    details.useVersion "2.12"
+                } else if (details.requested.group == 'com.github.bumptech.glide') {
+                    details.useVersion "4.8.0"
+                } else if (details.requested.group == 'android.arch.core') {
+                    details.useVersion "1.1.1"
+                } else if (details.requested.group == 'android.arch.lifecycle') {
+                    details.useVersion "1.1.1"
+                } else if (details.requested.group == 'com.google.code.gson') {
+                    details.useVersion "2.8.0"
+                }
+            }
+        }
+    }
 }
 
 task clean(type: Delete) {

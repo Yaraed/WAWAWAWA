@@ -53,6 +53,7 @@ dependencies {
     kapt libsConfig.dagger2Compiler
     kapt libsConfig.arouterCompiler
 
+    implementation project(':a_ble')
     implementation project(':poscore')
 
     // test

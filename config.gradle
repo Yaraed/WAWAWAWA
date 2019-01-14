@@ -4,7 +4,7 @@ ext {
             compileSdkVersion: 28,
             buildSdkVersion  : "28.0.3",
             applicationId    : "com.letion.app",
-            minSdkVersion    : 16,
+            minSdkVersion    : 18,
             targetSdkVersion : 28,
             versionCode      : 1,  //修改版本号需要+1
             versionName      : "1.0",

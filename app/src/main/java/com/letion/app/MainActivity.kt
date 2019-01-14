@@ -12,6 +12,7 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.letion.a_ble.BleActivity
 import com.letion.app.di.component.DaggerMainComponent
 import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
@@ -300,5 +301,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
 
         callback.call(1, packageManager, context(), null, "any")
+
+
+        startActivity(Intent(this, BleActivity::class.java))
     }
 }
