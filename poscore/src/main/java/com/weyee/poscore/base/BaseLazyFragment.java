@@ -9,13 +9,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import com.weyee.poscore.base.delegate.IFragment;
 import com.weyee.poscore.mvp.IPresenter;
+import com.weyee.posres.arch.MFragment;
 
 import javax.inject.Inject;
 
 /**
  * Created by liu-feng on 2017/6/5.
  */
-public abstract class BaseLazyFragment<P extends IPresenter> extends Fragment implements IFragment {
+public abstract class BaseLazyFragment<P extends IPresenter> extends MFragment implements IFragment {
     protected final String TAG = this.getClass().getSimpleName();
     @Inject
     protected P mPresenter;

@@ -1,9 +1,11 @@
 package com.letion.app
 
+import androidx.lifecycle.LifecycleOwner
 import com.letion.app.pojo.BookBean
+import com.weyee.poscore.base.ThreadPool.run
 import com.weyee.poscore.di.scope.ActivityScope
-import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
+import com.weyee.posres.arch.RxLiftUtils
 import com.weyee.sdk.api.RxHttpUtils
 import com.weyee.sdk.api.observer.ProgressSubscriber
 import com.weyee.sdk.api.observer.transformer.Transformer
@@ -20,11 +22,12 @@ import javax.inject.Inject
  * @date 2018/12/11 0011
  */
 @ActivityScope
-class MainPresenter @Inject constructor(view: MainView) : BasePresenter<BaseModel, MainView>(view) {
+class MainPresenter @Inject constructor(view: MainContract.MainView,model: MainModel) : BasePresenter<MainModel, MainContract.MainView>(model,view) {
 
     fun getBook() {
         val map: Map<String, Any> = mapOf("page" to 1, "name" to "刘枫")
-        RxHttpUtils.createApi(ApiService::class.java).getBook(map).compose(Transformer.switchSchedulers(mView.dialog()))
+        mModel.getBook(map).compose(Transformer.switchSchedulers(mView.dialog()))
+            .`as`(RxLiftUtils.bindLifecycle(mView as LifecycleOwner))
             .subscribe(object : ProgressSubscriber<BookBean>() {
 
                 override fun setTag(): String {
@@ -44,7 +47,7 @@ class MainPresenter @Inject constructor(view: MainView) : BasePresenter<BaseMode
     }
 
     fun getBook(b: Boolean) {
-        RxHttpUtils.createApi(ApiService::class.java).bookString.compose(Transformer.switchSchedulers(mView.dialog()))
+        mModel.getBookString().compose(Transformer.switchSchedulers(mView.dialog()))
             .subscribe(object : ProgressSubscriber<String>() {
 
                 override fun setTag(): String {

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#000000">
+
+    <com.letion.app.photo.MutipleTouchViewPager
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+
+    <TextView
+            android:id="@+id/tv_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:textColor="#fff"
+            android:textSize="14sp"
+            tools:text="1/20"/>
+
+    <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+                                       xmlns:app="http://schemas.android.com/apk/res-auto"
+                                       xmlns:tools="http://schemas.android.com/tools"
+                                       android:id="@+id/toolbar"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="?android:attr/actionBarSize"
+                                       android:background="@android:color/transparent"
+                                       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                                       app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:ellipsize="middle"
+                android:gravity="center"
+                android:singleLine="true"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                tools:text="MVPArt"/>
+
+    </androidx.appcompat.widget.Toolbar>
+
+</RelativeLayout>

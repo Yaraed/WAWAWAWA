@@ -3,26 +3,19 @@ package com.weyee.sdk.imageloader;
 import android.content.Context;
 import com.weyee.sdk.imageloader.glide.GlideImageLoaderStrategy;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 /**
  * Created by liu-feng on 16/4/15.
  */
+@Singleton
 public final class ImageLoader {
-    private static ImageLoader instance;
     private BaseImageLoaderStrategy mStrategy;
 
-    private ImageLoader() {
-        this.mStrategy = new GlideImageLoaderStrategy();
-    }
-
-    public static ImageLoader getInstance() {
-        if (instance == null) {
-            synchronized (ImageLoader.class) {
-                if (instance == null) {
-                    instance = new ImageLoader();
-                }
-            }
-        }
-        return instance;
+    @Inject
+    public ImageLoader(BaseImageLoaderStrategy strategy) {
+        setLoadImgStrategy(strategy);
     }
 
 

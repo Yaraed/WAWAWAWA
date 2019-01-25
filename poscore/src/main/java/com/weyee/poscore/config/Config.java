@@ -4,7 +4,9 @@ import android.app.Application;
 import com.weyee.posres.AutoSizeConfig;
 import com.weyee.sdk.api.RxHttpUtils;
 import com.weyee.sdk.api.base.HttpClient;
+import com.weyee.sdk.log.Environment;
 import com.weyee.sdk.log.LogUtils;
+import com.weyee.sdk.router.RouterManager;
 import com.weyee.sdk.toast.ToastUtils;
 
 /**
@@ -19,6 +21,7 @@ public class Config {
         AutoSizeConfig.init();
         ToastUtils.init(application);
         LogUtils.init();
+        RouterManager.init(application, Environment.isDebug());
         RxHttpUtils.getInstance().config().setBaseUrl("https://api.douban.com/")
                 .setOkClient(new HttpClient
                         .Builder(application)

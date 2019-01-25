@@ -1,10 +1,20 @@
 package com.weyee.poscore.mvp;
 
+import android.app.Activity;
+import android.app.Service;
+import android.content.Context;
 import android.os.Handler;
 import android.os.Message;
+import androidx.annotation.Nullable;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.OnLifecycleEvent;
+import com.weyee.poscore.base.BaseFragment;
+import com.weyee.sdk.api.observer.listener.ProgressAble;
 import com.weyee.sdk.event.EventBus;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Action;
 
 import java.lang.ref.WeakReference;
 
@@ -36,6 +46,13 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
 
     @Override
     public void onAttach() {
+        //将 LifecycleObserver 注册给 LifecycleOwner 后 @OnLifecycleEvent 才可以正常使用
+        if (mView instanceof LifecycleOwner) {
+            ((LifecycleOwner) mView).getLifecycle().addObserver(this);
+            if (mModel != null) {
+                ((LifecycleOwner) mView).getLifecycle().addObserver(mModel);
+            }
+        }
         if (useEventBus())//如果要使用eventbus请将此方法返回true
             EventBus.register(this);//注册eventbus
     }
@@ -50,6 +67,24 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
         this.mModel = null;
         this.mView = null;
         this.mCompositeDisposable = null;
+    }
+
+    /**
+     * 只有当 {@code mView} 不为 null, 并且 {@code mView} 实现了 {@link LifecycleOwner} 时, 此方法才会被调用
+     * 所以当您想在 {@link Service} 以及一些自定义 {@link android.view.View} 或自定义类中使用 {@code Presenter} 时
+     * 您也将不能继续使用 {@link OnLifecycleEvent} 绑定生命周期
+     *
+     * @param owner link {@link androidx.core.app.ComponentActivity} and {@link androidx.fragment.app.Fragment}
+     */
+    @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+    public void onDestroy(LifecycleOwner owner) {
+        /**
+         * 注意, 如果在这里调用了 {@link #onDestroy()} 方法, 会出现某些地方引用 {@code mModel} 或 {@code mView} 为 null 的情况
+         * 比如在 {@link RxLifecycle} 终止 {@link Observable} 时, 在 {@link io.reactivex.Observable#doFinally(Action)} 中却引用了 {@code mView} 做一些释放资源的操作, 此时会空指针
+         * 或者如果你声明了多个 @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY) 时在其他 @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)
+         * 中引用了 {@code mModel} 或 {@code mView} 也可能会出现此情况
+         */
+        owner.getLifecycle().removeObserver(this);
     }
 
     /**
@@ -73,6 +108,51 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
         if (mCompositeDisposable != null) {
             mCompositeDisposable.clear();//保证activity结束时取消所有正在执行的订阅
         }
+    }
+
+    /**
+     * getter
+     *
+     * @return
+     */
+    public V getView() {
+        return mView;
+    }
+
+    /**
+     * 获取加载弹窗的实例
+     *
+     * @return
+     */
+    @Nullable
+    protected ProgressAble getProgressAble() {
+        if (mView instanceof ProgressAble) {
+            return (ProgressAble) mView;
+        } else if (mView instanceof BaseFragment) {
+            Activity activity = ((BaseFragment) mView).getActivity();
+            if (activity instanceof ProgressAble) {
+                return (ProgressAble) activity;
+            }
+        }
+        return null;
+    }
+
+    @Nullable
+    protected Context getContext() {
+        if (mView instanceof Activity) {
+            return (Context) mView;
+        } else if (mView instanceof BaseFragment) {
+            return ((BaseFragment) mView).getContext();
+        }
+        return null;
+    }
+
+    @Nullable
+    protected LifecycleOwner getLifecycleOwner(){
+        if (mView instanceof LifecycleOwner){
+            return (LifecycleOwner) mView;
+        }
+        return null;
     }
 
     protected void handleMessage(Message msg) {

@@ -21,16 +21,6 @@ public abstract class ProgressModelSubscriber<T> extends RxModelSubscriber<T> {
         this.progressAble = progressAble;
     }
 
-    /**
-     * 失败回调
-     *
-     * @param errorMsg
-     */
-    @Override
-    protected void onError(String errorMsg) {
-
-    }
-
     @Override
     public void doOnSubscribe(Disposable d) {
         super.doOnSubscribe(d);

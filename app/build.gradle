@@ -9,6 +9,7 @@ def libsConfig = rootProject.ext.libs
 
 android {
     compileSdkVersion androidConfig.compileSdkVersion
+    buildToolsVersion androidConfig.buildSdkVersion
     defaultConfig {
         applicationId androidConfig.applicationId
         minSdkVersion androidConfig.minSdkVersion
@@ -16,6 +17,12 @@ android {
         versionCode androidConfig.versionCode
         versionName androidConfig.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
     }
     buildTypes {
         release {
@@ -43,7 +50,14 @@ dependencies {
     // leakCanary
     debugImplementation libsConfig.canaryDebug
     releaseImplementation libsConfig.canaryRelease
-    kapt  libsConfig.dagger2Compiler
+    kapt libsConfig.dagger2Compiler
+    kapt libsConfig.arouterCompiler
 
+    implementation project(':a_ble')
     implementation project(':poscore')
+
+    // test
+    implementation(libsConfig.glide) {
+        exclude group: "com.android.support"
+    }
 }

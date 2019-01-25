@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import androidx.core.util.Preconditions;
+import com.weyee.sdk.api.RxHttpUtils;
 
 /**
  * 用来管理网络请求层,以及数据缓存层,以后可能添加数据库请求层
@@ -24,20 +25,30 @@ public class RepositoryManager implements IRepositoryManager {
 
     @Inject
     public RepositoryManager() {
+        /**
+         * @see RxHttpUtils#createApi(Class)
+         * 不自动注入Retrofit，使用全局单例的RxHttpUtils createApi
+         */
         //this.mRetrofit = retrofit;
     }
 
     /**
      * 注入RetrofitService,在{@link IConfigModule#registerComponents(Context, IRepositoryManager)}中进行注入
+     * <p>
+     * 现在不自动注入，使用的是本地注入的方式，手动去调用该方法创建Retrofit Service
+     * 原因： ①自动注入生命周期不可控
+     * ②自动注入所有的Service都被注入，按需注入
+     * ③自动注入代码可读性很差
      *
      * @param services
+     * @see #obtainRetrofitService(Class)
      */
     @Override
     public void injectRetrofitService(Class<?>... services) {
-//        for (Class<?> service : services) {
-//            if (mRetrofitServiceCache.containsKey(service.getName())) continue;
-//            mRetrofitServiceCache.put(service.getName(), mRetrofit.create(service));
-//        }
+        for (Class<?> service : services) {
+            if (mRetrofitServiceCache.containsKey(service.getName())) continue;
+            mRetrofitServiceCache.put(service.getName(), RxHttpUtils.createApi(service));
+        }
 
     }
 
@@ -61,6 +72,9 @@ public class RepositoryManager implements IRepositoryManager {
     @SuppressLint("RestrictedApi")
     @Override
     public <T> T obtainRetrofitService(Class<T> service) {
+        if (!mRetrofitServiceCache.containsKey(service.getName())) {
+            injectRetrofitService(service);
+        }
         Preconditions.checkState(mRetrofitServiceCache.containsKey(service.getName()), "Unable to find %s,first call injectRetrofitService(%s) in IConfigModule");
         return (T) mRetrofitServiceCache.get(service.getName());
     }

@@ -12,12 +12,12 @@ import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
+import com.weyee.posres.arch.MFragment;
 
 /**
  * Created by liu-feng on 2017/6/5.
  */
-public abstract class BaseFragment<P extends IPresenter> extends Fragment implements IFragment {
+public abstract class BaseFragment<P extends IPresenter> extends MFragment implements IFragment {
     protected final String TAG = this.getClass().getSimpleName();
     @Inject
     protected P mPresenter;

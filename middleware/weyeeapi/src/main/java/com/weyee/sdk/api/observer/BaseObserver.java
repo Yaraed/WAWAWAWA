@@ -7,7 +7,7 @@ import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * <p>
+ * <p>定义请求结果处理接口
  *
  * @author wuqi
  * @describe ...
@@ -49,6 +49,7 @@ abstract class BaseObserver<T> implements Observer<T>, ISubscriber<T> {
     public void onError(@NonNull Throwable e) {
         e.printStackTrace();
         doOnError(ApiException.handleException(e).getMessage());
+        onComplete();
     }
 
 

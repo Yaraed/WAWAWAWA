@@ -19,12 +19,12 @@
     android:interpolator="@anim/decelerate_low_factor_interpolator">
 
     <translate
-        android:duration="@integer/qmui_anim_duration"
+        android:duration="@integer/anim_duration"
         android:fromXDelta="0%p"
         android:toXDelta="-100%p" />
 
     <alpha
-        android:duration="@integer/qmui_anim_duration"
+        android:duration="@integer/anim_duration"
         android:fromAlpha="1"
         android:toAlpha="0.85" />
     

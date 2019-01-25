@@ -1,7 +1,6 @@
 package com.weyee.posres;
 
 import android.app.Activity;
-import android.app.Application;
 import android.util.DisplayMetrics;
 import me.jessyan.autosize.onAdaptListener;
 import me.jessyan.autosize.unit.UnitsManager;

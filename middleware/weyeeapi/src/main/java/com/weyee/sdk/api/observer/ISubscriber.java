@@ -4,7 +4,6 @@ import io.reactivex.disposables.Disposable;
 
 /**
  * <p>
- * 定义请求结果处理接口
  *
  * @author wuqi
  * @describe ...

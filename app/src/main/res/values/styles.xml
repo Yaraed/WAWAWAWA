@@ -12,8 +12,6 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <!--<item name="android:windowAnimationStyle">@style/AnimationActivity</item>-->
-
-        <item name="md_corner_radius">6dp</item>
     </style>
 
     <style name="AnimationActivity" parent="@android:style/Animation.Translucent">
@@ -21,6 +19,11 @@
         <item name="android:activityOpenExitAnimation">@anim/slide_out_left</item>
         <item name="android:activityCloseEnterAnimation">@anim/slide_in_right</item>
         <item name="android:activityCloseExitAnimation">@anim/slide_out_right</item>
+    </style>
+
+    <!--查看大图页面，全屏显示-->
+    <style name="AppTheme.Photo" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
     </style>
 
 </resources>

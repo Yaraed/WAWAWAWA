@@ -37,8 +37,25 @@ dependencies {
     implementation libsConfig.material_v7
     annotationProcessor libsConfig.annotation_v7
     implementation libsConfig.androidUtilCode
+
+    implementation(libsConfig.rxLifecycle) {
+        exclude group: "io.reactivex.rxjava2"
+    }
+    implementation(libsConfig.rxLifecycleComponents) {
+        exclude module: "androidx.appcompat:appcompat"
+    }
+
+    implementation(libsConfig.autodispose) {
+        exclude group: "io.reactivex.rxjava2"
+    }
+    implementation(libsConfig.autodisposeComponents) {
+        exclude group: "io.reactivex.rxjava2"
+        exclude module: "androidx.appcompat:appcompat"
+    }
+
     implementation 'me.jessyan:autosize:1.1.0'
     implementation 'com.r0adkll:slidableactivity:2.0.6'
 
     implementation project(':middleware:weyeelog')
+
 }

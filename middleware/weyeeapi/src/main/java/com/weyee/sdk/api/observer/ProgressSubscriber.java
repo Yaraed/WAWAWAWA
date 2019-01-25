@@ -1,5 +1,6 @@
 package com.weyee.sdk.api.observer;
 
+import android.content.Context;
 import com.weyee.sdk.api.observer.listener.ProgressAble;
 import io.reactivex.disposables.Disposable;
 
@@ -21,22 +22,10 @@ public abstract class ProgressSubscriber<T> extends RxSubscriber<T> {
         this.progressAble = progressAble;
     }
 
-    /**
-     * 失败回调
-     *
-     * @param errorMsg
-     */
-    @Override
-    protected void onError(String errorMsg) {
-
-    }
-
-    /**
-     * 完成后的回调
-     */
-    @Override
-    protected void onCompleted() {
-
+    public ProgressSubscriber(Context progressAble) {
+        if (progressAble instanceof ProgressAble) {
+            this.progressAble = (ProgressAble) progressAble;
+        }
     }
 
     @Override

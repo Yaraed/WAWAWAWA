@@ -2,6 +2,7 @@ package com.weyee.poscore.base.delegate;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import com.weyee.poscore.base.BaseFragment;
 import com.weyee.poscore.di.component.AppComponent;
 
@@ -16,7 +17,7 @@ public interface IActivity {
      *
      * @param appComponent
      */
-    void setupActivityComponent(AppComponent appComponent);
+    void setupActivityComponent(@Nullable AppComponent appComponent);
 
     boolean useEventBus();
 
@@ -27,9 +28,9 @@ public interface IActivity {
      */
     int getResourceId();
 
-    void initView(Bundle savedInstanceState);
+    void initView(@Nullable Bundle savedInstanceState);
 
-    void initData(Bundle savedInstanceState);
+    void initData(@Nullable Bundle savedInstanceState);
 
     /**
      * 这个Activity是否会使用Fragment,框架会根据这个属性判断是否注册{@link FragmentManager.FragmentLifecycleCallbacks}

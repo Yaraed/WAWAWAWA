@@ -46,6 +46,22 @@ dependencies {
     // RxJava2
     api libsConfig.rxJava
     api libsConfig.rxAndroid
+    // RxLifecycle
+    api(libsConfig.rxLifecycle) {
+        exclude group: "io.reactivex.rxjava2"
+    }
+    api(libsConfig.rxLifecycleComponents) {
+        exclude group: "io.reactivex.rxjava2"
+        exclude module: "androidx.appcompat:appcompat"
+    }
+    // AutoDispose
+    api(libsConfig.autodispose) {
+        exclude group: "io.reactivex.rxjava2"
+    }
+    api(libsConfig.autodisposeComponents) {
+        exclude group: "io.reactivex.rxjava2"
+        exclude module: "androidx.appcompat:appcompat"
+    }
     // dagger2
     api libsConfig.dagger2
     annotationProcessor libsConfig.dagger2Compiler
@@ -60,6 +76,7 @@ dependencies {
     api project(':middleware:weyeestorage')
     api project(':middleware:weyeetoast')
     api project(':middleware:weyeeimageloader')
+    api project(':middleware:weyeerouter')
     api project(':posres')
     //    // glide
     //    implementation rootProject.ext.glide.glide

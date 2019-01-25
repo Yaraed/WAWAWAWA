@@ -1,19 +1,19 @@
 package com.weyee.sdk.api.observer;
 
-import com.weyee.sdk.api.bean.MModel;
+import com.weyee.sdk.api.bean.HttpResponse;
 import com.weyee.sdk.api.dispose.DisposeManager;
 import com.weyee.sdk.api.exception.ApiException;
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
 /**
- * <p>
+ * <p>基于后台json数据给出的实体类
  *
  * @author wuqi
  * @describe ...
  * @date 2018/12/7 0007
  */
-abstract class BaseModelObserver<T> implements Observer<MModel<T>>, IModelSubscriber<T> {
+abstract class BaseModelObserver<T> implements Observer<HttpResponse<T>>, ISubscriber<T> {
 
     /**
      * 是否隐藏toast
@@ -42,13 +42,17 @@ abstract class BaseModelObserver<T> implements Observer<MModel<T>>, IModelSubscr
     }
 
     @Override
-    public void onNext(MModel<T> baseData) {
+    public void onNext(HttpResponse<T> baseData) {
         doOnNext(baseData.getData());
     }
 
     @Override
     public void onError(Throwable e) {
         doOnError(ApiException.handleException(e).getMessage());
+        /**
+         * onError和onComplete是互斥的
+         */
+        onComplete();
     }
 
     @Override
