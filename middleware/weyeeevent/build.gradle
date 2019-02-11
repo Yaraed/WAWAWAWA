@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 def androidConfig = rootProject.ext.android
 def libsConfig = rootProject.ext.libs
@@ -29,9 +31,13 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation libsConfig.appcompat_v7
     implementation libsConfig.androidUtilCode
-    api libsConfig.eventbus
+    // 当需要使用event bus时，才需要使用api依赖
+    //api libsConfig.eventbus
+    implementation libsConfig.eventbus
+    implementation libsConfig.rxJava
 }

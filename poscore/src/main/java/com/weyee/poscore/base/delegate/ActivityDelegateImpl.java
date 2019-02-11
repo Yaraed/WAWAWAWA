@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.os.Parcel;
 
 import com.weyee.poscore.base.App;
-import com.weyee.sdk.event.EventBus;
+import com.weyee.sdk.event.Bus;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -26,7 +26,7 @@ public class ActivityDelegateImpl implements ActivityDelegate {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (iActivity.useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.register(mActivity);//注册到事件主线
+            Bus.getDefault().register(mActivity);//注册到事件主线
         iActivity.setupActivityComponent(((App) mActivity.getApplication()).getAppComponent());
         //依赖注入
         try {
@@ -67,7 +67,7 @@ public class ActivityDelegateImpl implements ActivityDelegate {
     public void onDestroy() {
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) mUnbinder.unbind();
         if (iActivity.useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.unregister(mActivity);
+            Bus.getDefault().unregister(mActivity);
         this.mUnbinder = null;
         this.iActivity = null;
         this.mActivity = null;

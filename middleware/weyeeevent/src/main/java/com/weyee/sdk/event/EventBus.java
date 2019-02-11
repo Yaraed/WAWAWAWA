@@ -1,5 +1,7 @@
 package com.weyee.sdk.event;
 
+import androidx.annotation.NonNull;
+
 /**
  * <p> 事件处理
  *
@@ -7,7 +9,7 @@ package com.weyee.sdk.event;
  * @describe ...
  * @date 2018/11/30 0030
  */
-public class EventBus implements IEventBus {
+final class EventBus implements IEventBus{
     private EventBus() {
 
     }
@@ -17,7 +19,8 @@ public class EventBus implements IEventBus {
      *
      * @param subscriber
      */
-    public static void register(Object subscriber) {
+    @Override
+    public void register(Object subscriber) {
         if (!isRegistered(subscriber)) {
             org.greenrobot.eventbus.EventBus.getDefault().register(subscriber);
         }
@@ -29,7 +32,8 @@ public class EventBus implements IEventBus {
      * @param subscriber
      * @return
      */
-    private static boolean isRegistered(Object subscriber) {
+    @Override
+    public boolean isRegistered(Object subscriber) {
         return org.greenrobot.eventbus.EventBus.getDefault().isRegistered(subscriber);
     }
 
@@ -38,7 +42,8 @@ public class EventBus implements IEventBus {
      *
      * @param subscriber
      */
-    public static void unregister(Object subscriber) {
+    @Override
+    public void unregister(Object subscriber) {
         org.greenrobot.eventbus.EventBus.getDefault().unregister(subscriber);
     }
 
@@ -47,7 +52,8 @@ public class EventBus implements IEventBus {
      *
      * @param event
      */
-    public static void post(IEvent event) {
+    @Override
+    public void post(@NonNull IEvent event) {
         org.greenrobot.eventbus.EventBus.getDefault().post(event);
     }
 
@@ -56,7 +62,22 @@ public class EventBus implements IEventBus {
      *
      * @param event
      */
-    public static void postSticky(IEvent event) {
+    @Override
+    public void postSticky(@NonNull IEvent event) {
         org.greenrobot.eventbus.EventBus.getDefault().postSticky(event);
+    }
+
+    @Override
+    public void post(@NonNull IEvent event, String tag) {
+        post(event);
+    }
+
+    @Override
+    public void postSticky(@NonNull IEvent event, String tag) {
+        postSticky(event);
+    }
+
+    static class Holder {
+        static final EventBus BUS = new EventBus();
     }
 }

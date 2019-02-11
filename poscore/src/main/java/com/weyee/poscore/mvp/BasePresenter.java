@@ -11,7 +11,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.OnLifecycleEvent;
 import com.weyee.poscore.base.BaseFragment;
 import com.weyee.sdk.api.observer.listener.ProgressAble;
-import com.weyee.sdk.event.EventBus;
+import com.weyee.sdk.event.Bus;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
@@ -54,13 +54,13 @@ public class BasePresenter<M extends IModel, V extends IView> implements IPresen
             }
         }
         if (useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.register(this);//注册eventbus
+            Bus.getDefault().register(this);//注册eventbus
     }
 
     @Override
     public void onDestroy() {
         if (useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.unregister(this);//解除注册eventbus
+            Bus.getDefault().unregister(this);//解除注册eventbus
         unDispose();//解除订阅
         if (mModel != null)
             mModel.onDestroy();
