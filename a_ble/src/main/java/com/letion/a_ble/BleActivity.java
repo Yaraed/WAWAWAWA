@@ -13,6 +13,9 @@ import com.weyee.poscore.base.BaseActivity;
 import com.weyee.poscore.di.component.AppComponent;
 import com.weyee.posres.arch.RxLiftUtils;
 import com.weyee.sdk.api.observer.transformer.Transformer;
+import com.weyee.sdk.event.Bus;
+import com.weyee.sdk.event.Callback;
+import com.weyee.sdk.event.NormalEvent;
 import com.weyee.sdk.toast.ToastUtils;
 
 public class BleActivity extends BaseActivity {
@@ -49,7 +52,12 @@ public class BleActivity extends BaseActivity {
 
     @Override
     public void initData(@Nullable Bundle savedInstanceState) {
-
+        Bus.getDefault().subscribeSticky(this, "RxBus", null, new Callback<NormalEvent>() {
+            @Override
+            public void onEvent(NormalEvent normalEvent) {
+                ToastUtils.show("延时收取消息");
+            }
+        });
     }
 
     @Override

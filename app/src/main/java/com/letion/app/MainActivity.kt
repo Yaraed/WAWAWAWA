@@ -22,6 +22,8 @@ import com.weyee.posres.arch.RxLiftUtils
 import com.weyee.posres.callback.Callback
 import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.dialog.QMUIBottomSheet
+import com.weyee.sdk.event.Bus
+import com.weyee.sdk.event.NormalEvent
 import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.toast.ToastUtils
 import com.zhihu.matisse.Matisse
@@ -64,8 +66,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(11)
-        for (i in 0 until 11) {
+        val array = arrayOfNulls<String>(12)
+        for (i in 0 until 12) {
             array[i] = "这是第${i}个"
         }
 
@@ -92,22 +94,27 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     9 -> toGrid(array[i])
                     10 -> MainNavigation(this@MainActivity).toTranslucentActivity(1)
                     else -> {
+                        Bus.getDefault().post(NormalEvent())
                     }
                 }
             }
         }
+
+        Bus.getDefault().subscribe(this,"RxBus",null,com.weyee.sdk.event.Callback<NormalEvent> {
+            println("RxBus")
+            setAlias1()
+        })
     }
 
     override fun initData(savedInstanceState: Bundle?) {
     }
 
-    override fun onResume() {
-        super.onResume()
-        setAlias1()
-    }
-
     override fun canSwipeBack(): Boolean {
         return !super.canSwipeBack()
+    }
+
+    override fun useEventBus(): Boolean {
+        return !super.useEventBus()
     }
 
     /**

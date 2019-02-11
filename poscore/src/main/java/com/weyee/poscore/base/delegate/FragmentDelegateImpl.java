@@ -6,8 +6,7 @@ import android.os.Parcel;
 import android.view.View;
 
 import com.weyee.poscore.base.App;
-import com.weyee.sdk.event.EventBus;
-
+import com.weyee.sdk.event.Bus;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import butterknife.ButterKnife;
@@ -37,7 +36,7 @@ public class FragmentDelegateImpl implements FragmentDelegate {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         if (iFragment.useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.register(mFragment);//注册到事件主线
+            Bus.getDefault().register(mFragment);//注册到事件主线
         iFragment.setupFragmentComponent(((App) mFragment.getActivity().getApplication())
                 .getAppComponent());
     }
@@ -95,7 +94,7 @@ public class FragmentDelegateImpl implements FragmentDelegate {
     @Override
     public void onDestroy() {
         if (iFragment != null && iFragment.useEventBus())//如果要使用eventbus请将此方法返回true
-            EventBus.unregister(mFragment);//注册到事件主线
+            Bus.getDefault().unregister(mFragment);//注册到事件主线
         this.mUnbinder = null;
         this.mFragmentManager = null;
         this.mFragment = null;
