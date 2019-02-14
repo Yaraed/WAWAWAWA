@@ -38,6 +38,7 @@ dependencies {
     api libsConfig.material_v7
     api libsConfig.lifecycle_v7
     api libsConfig.constraintlayout
+    api libsConfig.multidex
 
     // util
     api libsConfig.androidUtilCode
@@ -77,6 +78,8 @@ dependencies {
     api project(':middleware:weyeetoast')
     api project(':middleware:weyeeimageloader')
     api project(':middleware:weyeerouter')
+    api project(':middleware:weyeepermission')
+    api project(':middleware:weyeemultitype')
     api project(':posres')
     //    // glide
     //    implementation rootProject.ext.glide.glide

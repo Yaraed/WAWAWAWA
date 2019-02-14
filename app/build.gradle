@@ -23,6 +23,9 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
             }
         }
+
+        // 设置支持multidex
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -54,6 +57,7 @@ dependencies {
     kapt libsConfig.arouterCompiler
 
     implementation project(':a_ble')
+    implementation project(':a_intent')
     implementation project(':poscore')
 
     // test

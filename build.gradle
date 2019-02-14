@@ -33,7 +33,7 @@ allprojects {
                         && !details.requested.name.contains('multidex')) {
                     details.useVersion "28.0.0"
                 } else if (details.requested.name.contains('multidex')) {
-                    details.useVersion "2.0.2"
+                    details.useVersion "2.0.0"
                 } else if (details.requested.group == 'com.orhanobut') {
                     details.useVersion "2.2.0"
                 } else if (details.requested.group == 'com.google.dagger') {

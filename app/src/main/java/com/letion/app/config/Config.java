@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.multidex.MultiDex;
 import com.squareup.leakcanary.LeakCanary;
 import com.weyee.poscore.base.delegate.AppDelegate;
 import com.weyee.poscore.base.integration.IConfigModule;
@@ -61,7 +62,7 @@ public class Config implements IConfigModule {
         lifecycles.add(new AppDelegate.Lifecycle() {
             @Override
             public void attachBaseContext(Application application) {
-
+                MultiDex.install(application);
             }
 
             @Override
