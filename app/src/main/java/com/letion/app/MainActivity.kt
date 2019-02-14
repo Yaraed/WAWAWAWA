@@ -24,6 +24,7 @@ import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.event.Bus
 import com.weyee.sdk.event.NormalEvent
+import com.weyee.sdk.router.HttpNavigation
 import com.weyee.sdk.router.IntentNavigation
 import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.toast.ToastUtils
@@ -67,8 +68,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(14)
-        for (i in 0 until 14) {
+        val array = arrayOfNulls<String>(15)
+        for (i in 0 until 15) {
             array[i] = "这是第${i}个"
         }
 
@@ -97,6 +98,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     11 -> IntentNavigation(this@MainActivity).toIntentActivity()
                     12 -> IntentNavigation(this@MainActivity).toOtherActivity()
                     13 -> IntentNavigation(this@MainActivity).toPermissionActivity()
+                    14 -> HttpNavigation(this@MainActivity).toWebSocketActivity()
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }

@@ -58,6 +58,7 @@ dependencies {
 
     implementation project(':a_ble')
     implementation project(':a_intent')
+    implementation project(':a_http')
     implementation project(':poscore')
 
     // test
