@@ -68,8 +68,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(15)
-        for (i in 0 until 15) {
+        val array = arrayOfNulls<String>(16)
+        for (i in 0 until 16) {
             array[i] = "这是第${i}个"
         }
 
@@ -99,6 +99,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     12 -> IntentNavigation(this@MainActivity).toOtherActivity()
                     13 -> IntentNavigation(this@MainActivity).toPermissionActivity()
                     14 -> HttpNavigation(this@MainActivity).toWebSocketActivity()
+                    15 -> BulrDialog(this@MainActivity).show()
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }

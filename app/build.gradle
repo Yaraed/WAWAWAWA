@@ -26,6 +26,9 @@ android {
 
         // 设置支持multidex
         multiDexEnabled true
+
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -50,6 +53,8 @@ dependencies {
     implementation libsConfig.constraintlayout
     implementation 'me.leolin:ShortcutBadger:1.1.22@aar'
     implementation 'com.zhihu.android:matisse:0.4.3'
+    // 测试blur
+    implementation 'com.fivehundredpx:blurringview:1.0.0'
     // leakCanary
     debugImplementation libsConfig.canaryDebug
     releaseImplementation libsConfig.canaryRelease
@@ -65,4 +70,8 @@ dependencies {
     implementation(libsConfig.glide) {
         exclude group: "com.android.support"
     }
+}
+
+repositories {
+    maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }
 }
