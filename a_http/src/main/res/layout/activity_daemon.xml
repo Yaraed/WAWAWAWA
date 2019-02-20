@@ -15,17 +15,17 @@
   ~  See the License for the specific language governing permissions and
   ~  imitations under the License.
   ~
--->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.wuqi.a_http">
+  -->
 
-    <application>
-        <activity
-                android:name=".WebSocketActivity"
-                android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity android:name=".DaemonActivity">
-        </activity>
-    </application>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".DaemonActivity">
 
-</manifest>
+    <Button android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:text="开启守护进程"
+            android:onClick="openDaemon"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

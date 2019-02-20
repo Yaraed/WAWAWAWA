@@ -16,31 +16,21 @@
  *
  */
 
-package com.weyee.sdk.multitype;
+package com.wuqi.a_http.test;
 
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.lang.annotation.*;
 
 /**
- * @author wuqi by 2019/2/14.
+ * @author wuqi by 2019/2/19.
  */
-public class Test {
-    public static void main(String[] args) {
-        System.out.println("null");
-    }
+@Documented
+@Retention(RetentionPolicy.RUNTIME)
+@Inherited
+@Target(ElementType.FIELD)
+public @interface Name {
+    long value() default 1L;
 
-    List<? extends TextView> list;
-    List<? super TextView> list2;
+    String name() default "Normal";
 
-    /**
-     *
-     */
-    public Test() {
-
-        List<String> list3 = new ArrayList<>();
-        List<Object> list4 = new ArrayList<>();
-        list4.addAll(list3);
-    }
+    String desc() default "";
 }

@@ -16,31 +16,27 @@
  *
  */
 
-package com.weyee.sdk.multitype;
+package com.wuqi.a_http.test;
 
-import android.widget.TextView;
+import androidx.annotation.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.io.Serializable;
 
 /**
- * @author wuqi by 2019/2/14.
+ * @author wuqi by 2019/2/19.
  */
-public class Test {
-    public static void main(String[] args) {
-        System.out.println("null");
+public class Test implements Serializable {
+    @Name(name = "Google", desc = "HAHAHAHA")
+    private String name;
+
+
+    public String getName() {
+        return name == null ? "" : "MicroSoft";
     }
 
-    List<? extends TextView> list;
-    List<? super TextView> list2;
-
-    /**
-     *
-     */
-    public Test() {
-
-        List<String> list3 = new ArrayList<>();
-        List<Object> list4 = new ArrayList<>();
-        list4.addAll(list3);
+    @NonNull
+    @Override
+    public String toString() {
+        return getName();
     }
 }

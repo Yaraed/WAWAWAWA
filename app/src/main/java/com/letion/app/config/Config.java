@@ -81,6 +81,16 @@ public class Config implements IConfigModule {
             public void onTerminate(Application application) {
 
             }
+
+            @Override
+            public void onLowMemory(Application application) {
+
+            }
+
+            @Override
+            public void onTrimMemory(int level, Application application) {
+
+            }
         });
     }
 

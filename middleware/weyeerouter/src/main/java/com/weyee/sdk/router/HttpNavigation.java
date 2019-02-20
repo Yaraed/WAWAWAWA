@@ -43,4 +43,7 @@ public class HttpNavigation extends Navigation {
     public void toWebSocketActivity(){
         startActivity("WebSocket");
     }
+    public void toDaemonActivity(){
+        startActivity("Daemon");
+    }
 }

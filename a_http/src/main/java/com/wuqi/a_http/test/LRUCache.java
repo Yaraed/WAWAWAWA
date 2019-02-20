@@ -16,31 +16,22 @@
  *
  */
 
-package com.weyee.sdk.multitype;
+package com.wuqi.a_http.test;
 
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
 
 /**
- * @author wuqi by 2019/2/14.
+ * @author wuqi by 2019/2/20.
  */
-public class Test {
-    public static void main(String[] args) {
-        System.out.println("null");
+public class LRUCache extends LinkedHashMap<Long, String> {
+    private static final int MAX_ENTRIES = 3;
+
+    public LRUCache() {
+        super(MAX_ENTRIES, 0.75f, true);
     }
 
-    List<? extends TextView> list;
-    List<? super TextView> list2;
-
-    /**
-     *
-     */
-    public Test() {
-
-        List<String> list3 = new ArrayList<>();
-        List<Object> list4 = new ArrayList<>();
-        list4.addAll(list3);
+    @Override
+    protected boolean removeEldestEntry(Entry<Long, String> eldest) {
+        return size() > MAX_ENTRIES;
     }
 }
