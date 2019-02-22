@@ -47,6 +47,7 @@ class MainPresenter @Inject constructor(view: MainContract.MainView,model: MainM
 
     fun getBook(b: Boolean) {
         mModel.getBookString().compose(Transformer.switchSchedulers(mView.dialog()))
+            .`as`(RxLiftUtils.bindLifecycle(lifecycleOwner))
             .subscribe(object : ProgressSubscriber<String>() {
 
                 override fun setTag(): String {
@@ -78,6 +79,7 @@ class MainPresenter @Inject constructor(view: MainContract.MainView,model: MainM
                 }
             })
             .compose(Transformer.switchSchedulers(mView.dialog()))
+            .`as`(RxLiftUtils.bindLifecycle(lifecycleOwner))
             .subscribe(object : ProgressSubscriber<String>() {
                 override fun setTag(): String {
                     return "download-apk"
@@ -100,6 +102,7 @@ class MainPresenter @Inject constructor(view: MainContract.MainView,model: MainM
         RxHttpUtils.createApi(ApiService::class.java)
             .uploadFiles(url, UploadTransformer.transformerFormParams(null, list))
             .compose(Transformer.switchSchedulers(mView.dialog()))
+            .`as`(RxLiftUtils.bindLifecycle(lifecycleOwner))
             .subscribe(object : ProgressSubscriber<String>() {
                 /**
                  * 成功回调
