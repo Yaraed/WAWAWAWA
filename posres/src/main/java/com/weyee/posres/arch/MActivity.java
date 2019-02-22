@@ -1,21 +1,27 @@
 package com.weyee.posres.arch;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.content.ContextCompat;
 import com.blankj.utilcode.util.BarUtils;
+import com.blankj.utilcode.util.ReflectUtils;
 import com.google.android.material.appbar.AppBarLayout;
 import com.r0adkll.slidr.Slidr;
 import com.r0adkll.slidr.model.SlidrConfig;
 import com.r0adkll.slidr.model.SlidrPosition;
 import com.weyee.posres.R;
 import com.weyee.posres.headerview.MHeaderViewAble;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 public class MActivity extends InnerBaseActivity {
 
@@ -70,6 +76,11 @@ public class MActivity extends InnerBaseActivity {
     }
 
     @NonNull
+    public Context getContext() {
+        return this;
+    }
+
+    @NonNull
     protected MHeaderViewAble getHeaderView() {
         return mHeaderViewAble;
     }
@@ -87,4 +98,29 @@ public class MActivity extends InnerBaseActivity {
         return true;
     }
 
+    /**
+     * 另外一种获取Presenter的方法
+     * 弃用它，why？：因为每次调用都需要重新实例化对象，待优化
+     * @param object
+     * @param <T>
+     * @return
+     */
+    @Nullable
+    @Deprecated
+    public static <T> T getPresenter(Object object) {
+        Type type = object.getClass().getGenericSuperclass();
+        if (type == null) {
+            return null;
+        } else if (!(type instanceof ParameterizedType)) {
+            return null;
+        } else {
+            ParameterizedType parameterizedType = (ParameterizedType)type;
+            Class clazz = (Class)parameterizedType.getActualTypeArguments()[0];
+            if (clazz == null) {
+                return null;
+            } else {
+                return ReflectUtils.reflect(clazz).newInstance().get();
+            }
+        }
+    }
 }

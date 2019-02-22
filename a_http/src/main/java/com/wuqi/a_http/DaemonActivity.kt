@@ -58,7 +58,6 @@ class DaemonActivity : BaseActivity<BasePresenter<BaseModel,IView>>() {
         thread.start()
 
         finish()
-
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent?): Boolean {

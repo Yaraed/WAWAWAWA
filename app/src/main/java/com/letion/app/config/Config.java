@@ -12,13 +12,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.multidex.MultiDex;
+import com.blankj.utilcode.util.ProcessUtils;
+import com.bumptech.glide.Glide;
+import com.didichuxing.doraemonkit.DoraemonKit;
 import com.squareup.leakcanary.LeakCanary;
 import com.weyee.poscore.base.delegate.AppDelegate;
 import com.weyee.poscore.base.integration.IConfigModule;
 import com.weyee.poscore.base.integration.IRepositoryManager;
 import com.weyee.poscore.di.module.CustomModule;
+import com.weyee.sdk.imageloader.glide.GlideApp;
 
 import java.util.List;
+
+import static android.content.ComponentCallbacks2.TRIM_MEMORY_UI_HIDDEN;
 
 /**
  * <p>
@@ -73,8 +79,11 @@ public class Config implements IConfigModule {
                     return;
                 }
                 LeakCanary.install(application);
-                com.weyee.poscore.config.Config.init(application);
+                if (ProcessUtils.isMainProcess()) {
+                    com.weyee.poscore.config.Config.init(application);
 
+                    DoraemonKit.install(application);
+                }
             }
 
             @Override
@@ -84,12 +93,23 @@ public class Config implements IConfigModule {
 
             @Override
             public void onLowMemory(Application application) {
+                // 当内存不足时，清空Glide中的内存缓存
+                GlideApp.get(application).clearMemory();
+                // TODO 类似不是很重要的内存数据，都可以在此去做清理
+                // 例如文件缓存，大数据，资源
 
+                // 还会在四大组件和Fragment中回调，除了广播
             }
 
             @Override
             public void onTrimMemory(int level, Application application) {
+                // 用户点击了Home键或者Back键退出应用
+                if (level == TRIM_MEMORY_UI_HIDDEN){
+                    Glide.get(application).clearMemory();
+                }
+                GlideApp.get(application).trimMemory(level);
 
+                // 还会在四大组件和Fragment中回调，除了广播
             }
         });
     }

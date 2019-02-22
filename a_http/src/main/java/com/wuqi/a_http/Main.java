@@ -29,9 +29,10 @@ import com.wuqi.a_http.test.Name;
 
 import java.io.*;
 import java.lang.reflect.Field;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.FutureTask;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.*;
 
 /**
  * @author wuqi by 2019/2/18.
@@ -106,22 +107,75 @@ public class Main {
         System.out.println(lruCache);
 
 
-        LooperThread thread = new LooperThread();
-        thread.start();
+        //LooperThread thread = new LooperThread();
+        //thread.start();
 
-        new Thread(()->{
-            while (true){
-                if (thread.mHandler != null){
-                    thread.mHandler.sendEmptyMessage(1);
-                }
-                try {
-                    Thread.sleep(500);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
+//        new Thread(()->{
+//            while (true){
+//                if (thread.mHandler != null){
+//                    thread.mHandler.sendEmptyMessage(1);
+//                }
+//                try {
+//                    Thread.sleep(500);
+//                } catch (InterruptedException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }).start();
         //thread.mHandler.sendEmptyMessage(1);
+
+        List<String> list4 = new ArrayList<>();
+        list4.add("Apple");
+        list4.add("Google");
+        list4.add("MicroSoft");
+        list4.add("Amazon");
+
+        for (Iterator<String> it = list4.iterator();it.hasNext();) {
+            if (it.next().equals("Amazon")){
+                it.remove();
+            }
+        }
+
+        System.out.println(list4);
+
+        com.wuqi.a_http.test.Test test = new com.wuqi.a_http.test.Test();
+
+        FutureTask<String> futureTask1 = new FutureTask<>(new Callable<String>() {
+            @Override
+            public String call() throws Exception {
+                System.out.println(System.currentTimeMillis());
+                synchronized (test){
+                    test.wait();
+                }
+                System.out.println(System.currentTimeMillis());
+                return test.toString();
+            }
+        });
+
+        new Thread(futureTask1).start();
+
+
+
+        int i = 0;
+
+        do {
+            Thread.sleep(100);
+            i++;
+        } while (i <= 10);
+        synchronized (test){
+            test.notifyAll();
+        }
+
+        //futureTask1.cancel(true);
+
+        try {
+            System.out.println(futureTask1.get());
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
 
     }
 

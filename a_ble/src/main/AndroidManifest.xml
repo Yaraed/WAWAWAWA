@@ -10,6 +10,8 @@
     <application>
         <activity android:name=".BleActivity">
         </activity>
+        <activity android:name=".BleHelperActivity">
+        </activity>
     </application>
 
 </manifest>
