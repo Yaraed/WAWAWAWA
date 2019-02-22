@@ -41,7 +41,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
     private val CHOOSE = 1
     //private lateinit var presenter: MainPresenter
-    private var dialog: Dialog? = null
+    private var dialog: LoadingDialog? = null
 
     /**
      * 如果initView返回0,框架则不会调用[android.app.Activity.setContentView]
@@ -275,10 +275,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
     override fun dialog(): Dialog? {
         if (dialog == null) {
-            dialog = ProgressDialog(this)
-            (dialog as ProgressDialog).setProgressStyle(ProgressDialog.STYLE_HORIZONTAL)
-            (dialog as ProgressDialog).max = 100
-            (dialog as ProgressDialog).isIndeterminate = false
+            dialog = LoadingDialog(this,"加载中...")
         }
         return dialog
     }
