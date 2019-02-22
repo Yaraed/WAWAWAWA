@@ -18,8 +18,8 @@ import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
-import com.weyee.posres.arch.RxLiftUtils
-import com.weyee.posres.callback.Callback
+import com.weyee.possupport.arch.RxLiftUtils
+import com.weyee.possupport.callback.Callback
 import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.event.Bus

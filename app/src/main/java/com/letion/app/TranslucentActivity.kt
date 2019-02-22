@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
-import com.weyee.posres.arch.RxLiftUtils
+import com.weyee.possupport.arch.RxLiftUtils
 import com.weyee.sdk.api.rxutil.RxBindingUtils
 import com.weyee.sdk.router.MainNavigation
 import kotlinx.android.synthetic.main.activity_main.*

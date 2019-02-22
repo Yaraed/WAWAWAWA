@@ -22,7 +22,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.weyee.posres.callback.Callback1
+import com.weyee.possupport.callback.Callback1
 
 /**
  *

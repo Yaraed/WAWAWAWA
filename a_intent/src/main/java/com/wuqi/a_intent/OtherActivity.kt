@@ -28,7 +28,7 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.posres.callback.Callback1
+import com.weyee.possupport.callback.Callback1
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.permission.*
 import com.weyee.sdk.router.IntentNavigation

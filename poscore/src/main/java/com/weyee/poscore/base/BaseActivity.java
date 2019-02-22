@@ -3,7 +3,7 @@ package com.weyee.poscore.base;
 import androidx.fragment.app.FragmentManager;
 import com.weyee.poscore.base.delegate.IActivity;
 import com.weyee.poscore.mvp.IPresenter;
-import com.weyee.posres.arch.MActivity;
+import com.weyee.possupport.arch.MActivity;
 
 import javax.inject.Inject;
 

@@ -12,7 +12,7 @@ import javax.inject.Inject;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import com.weyee.posres.arch.MFragment;
+import com.weyee.possupport.arch.MFragment;
 
 /**
  * Created by liu-feng on 2017/6/5.

@@ -1,7 +1,7 @@
 package com.weyee.poscore.config;
 
 import android.app.Application;
-import com.weyee.posres.AutoSizeConfig;
+import com.weyee.possupport.AutoSizeConfig;
 import com.weyee.sdk.api.RxHttpUtils;
 import com.weyee.sdk.api.base.HttpClient;
 import com.weyee.sdk.log.Environment;
