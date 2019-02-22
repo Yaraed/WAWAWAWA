@@ -18,29 +18,22 @@
 
 package com.weyee.sdk.multitype;
 
-import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.List;
+import android.view.View;
+import androidx.annotation.NonNull;
 
 /**
- * @author wuqi by 2019/2/14.
+ * item 的点击事件
+ *
+ * @author wuqi by 2019/2/22.
  */
-public class Test {
-    public static void main(String[] args) {
-        System.out.println("null");
-    }
-
-    List<? extends TextView> list;
-    List<? super TextView> list2;
-
+public interface OnRecyclerViewItemClickListener<T> {
     /**
+     * item 被点击
      *
+     * @param view     被点击的 {@link View}
+     * @param viewType 布局类型
+     * @param data     数据
+     * @param position 在 RecyclerView 中的位置
      */
-    public Test() {
-
-        List<String> list3 = new ArrayList<>();
-        List<Object> list4 = new ArrayList<>();
-        list4.addAll(list3);
-    }
+    void onItemClick(@NonNull View view, int viewType, @NonNull T data, int position);
 }

@@ -1,7 +1,6 @@
 package com.weyee.sdk.imageloader;
 
 import android.content.Context;
-import com.weyee.sdk.imageloader.glide.GlideImageLoaderStrategy;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -11,7 +10,7 @@ import javax.inject.Singleton;
  */
 @Singleton
 public final class ImageLoader {
-    private BaseImageLoaderStrategy mStrategy;
+    private BaseImageLoaderStrategy<? super ImageConfig> mStrategy;
 
     @Inject
     public ImageLoader(BaseImageLoaderStrategy strategy) {
@@ -27,8 +26,12 @@ public final class ImageLoader {
         this.mStrategy.clearImage(context, config);
     }
 
-
-    public void setLoadImgStrategy(BaseImageLoaderStrategy strategy) {
+    /**
+     * 可动态修改ImageLoader的实现方式，例如使用Picasso代替Glide
+     *
+     * @param strategy
+     */
+    public void setLoadImgStrategy(BaseImageLoaderStrategy<? super ImageConfig> strategy) {
         this.mStrategy = strategy;
     }
 

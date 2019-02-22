@@ -1,86 +1,74 @@
 package com.weyee.poscore.base;
 
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import com.weyee.poscore.base.delegate.IFragment;
+import androidx.fragment.app.FragmentManager;
 import com.weyee.poscore.mvp.IPresenter;
-import com.weyee.posres.arch.MFragment;
 
-import javax.inject.Inject;
+import java.util.List;
 
 /**
+ * 快速实现Fragment懒加载
  * Created by liu-feng on 2017/6/5.
  */
-public abstract class BaseLazyFragment<P extends IPresenter> extends MFragment implements IFragment {
-    protected final String TAG = this.getClass().getSimpleName();
-    @Inject
-    protected P mPresenter;
+public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragment<P>{
 
-    protected View mRootView;
+    private boolean isViewCreated; // 界面是否已创建完成
+    private boolean isVisibleToUser; // 是否对用户可见
+    private boolean isDataLoaded; // 数据是否已请求
+
+
     /**
-     * 当前是否进行过懒加载
+     * 此处实现具体的数据请求逻辑
      */
-    private boolean isLazyLoad;
-    /**
-     * 当前 Fragment 是否可见
-     */
-    private boolean isFragmentVisible;
+    protected abstract void lazyLoadData();
 
-
-    public BaseLazyFragment() {
-        //必须确保在Fragment实例化时setArguments()
-        setArguments(new Bundle());
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        this.isVisibleToUser = isVisibleToUser;
+        tryLoadData();
     }
 
-    @Nullable
+    /**
+     * 保证在initData后触发
+     */
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle
-            savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        if (mRootView == null && getResourceId() > 0) {
-            mRootView = inflater.inflate(getResourceId(), null);
+    public void onResume() {
+        super.onResume();
+        isViewCreated = true;
+        tryLoadData();
+    }
+
+    /**
+     * ViewPager场景下，判断父fragment是否可见
+     */
+    private boolean isParentVisible() {
+        Fragment fragment = getParentFragment();
+        return fragment == null || (fragment instanceof BaseLazyFragment && ((BaseLazyFragment) fragment).isVisibleToUser);
+    }
+
+    /**
+     * ViewPager场景下，当前fragment可见时，如果其子fragment也可见，则让子fragment请求数据
+     */
+    private void dispatchParentVisibleState() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        List<Fragment> fragments = fragmentManager.getFragments();
+        if (fragments.isEmpty()) {
+            return;
         }
-        ViewGroup parent = (ViewGroup) mRootView.getParent();
-        if (parent != null) {
-            parent.removeView(mRootView);
+        for (Fragment child : fragments) {
+            if (child instanceof BaseLazyFragment && ((BaseLazyFragment) child).isVisibleToUser) {
+                ((BaseLazyFragment) child).tryLoadData();
+            }
         }
-        return mRootView;
     }
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-    }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-        //释放资源
-        if (mPresenter != null) mPresenter.onDestroy();
-        this.mPresenter = null;
-    }
-
-
-    /**
-     * 是否使用eventBus,默认为使用(false)，
-     *
-     * @return
-     */
-    @Override
-    public boolean useEventBus() {
-        return false;
-    }
-
-    /**
-     * 是否已经加载布局并初始化
-     * @return
-     */
-    protected boolean isLazyLoad() {
-        return isLazyLoad;
+    public void tryLoadData() {
+        if (isViewCreated && isVisibleToUser && isParentVisible() && !isDataLoaded) {
+            lazyLoadData();
+            isDataLoaded = true;
+            //通知子Fragment请求数据
+            dispatchParentVisibleState();
+        }
     }
 }

@@ -69,8 +69,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(18)
-        for (i in 0 until 18) {
+        val array = arrayOfNulls<String>(19)
+        for (i in 0 until 19) {
             array[i] = "这是第${i}个"
         }
 
@@ -103,6 +103,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     15 -> BulrDialog(this@MainActivity).show()
                     16 -> HttpNavigation(this@MainActivity).toDaemonActivity()
                     17 -> BleNavigation(this@MainActivity).toBleHelperActivity()
+                    18 -> MainNavigation(this@MainActivity).toImageViewActivity()
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }

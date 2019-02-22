@@ -22,12 +22,17 @@ public class MainNavigation extends Navigation {
         return MODULE_NAME;
     }
 
-    public void toTranslucentActivity(int activityAnimStyle){
-        startActivity(activityAnimStyle,"Translucent");
+    public void toTranslucentActivity(int activityAnimStyle) {
+        startActivity(activityAnimStyle, "Translucent");
     }
-    public void toPhotoViewActivity(String[] urls){
+
+    public void toPhotoViewActivity(String[] urls) {
         Bundle bundle = new Bundle();
         bundle.putStringArray("urls", urls);
-        startActivity("PhotoView",bundle);
+        startActivity("PhotoView", bundle);
+    }
+
+    public void toImageViewActivity() {
+        startActivity("PImageView");
     }
 }

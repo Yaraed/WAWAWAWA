@@ -4,12 +4,11 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.widget.ImageView;
-
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.target.Target;
-
 import com.weyee.sdk.imageloader.BaseImageLoaderStrategy;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -55,6 +54,31 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<GlideIm
                 glideRequest.diskCacheStrategy(DiskCacheStrategy.AUTOMATIC);
                 break;
         }
+
+        // 淡入淡出的动画
+        if (config.isCrossFade()) {
+            glideRequest.transition(DrawableTransitionOptions.withCrossFade());
+        }
+
+        /**
+         * 以下突变变换一次都会将之前的变换重置，所以只有按这里的顺序调用的变换最后一个才有效，具体看源码
+         */
+        if (config.isCenterCrop()) {
+            glideRequest.centerCrop();
+        }
+
+        if (config.isCircle()) {
+            glideRequest.circleCrop();
+        }
+
+        if (config.isImageRadius()) {
+            glideRequest.transform(new RoundedCorners(config.getImageRadius()));
+        }
+
+        if (config.isBlurImage()) {
+            glideRequest.transform(new BlurTransformation(config.getBlurValue()));
+        }
+
         if (config.getTransformation() != null) {//glide用它来改变图形的形状
             glideRequest.transform(config.getTransformation());
         }

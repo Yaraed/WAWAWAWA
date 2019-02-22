@@ -23,7 +23,6 @@ import android.content.ActivityNotFoundException;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
-import com.weyee.sdk.multitype.Test;
 import com.wuqi.a_http.test.LRUCache;
 import com.wuqi.a_http.test.Name;
 
@@ -32,7 +31,10 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.*;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.FutureTask;
 
 /**
  * @author wuqi by 2019/2/18.
@@ -58,7 +60,6 @@ public class Main {
         Integer d = Integer.valueOf(127);
         System.out.println(c == d);
 
-        Test.main(null);
 
         try {
             int x = 10 / 0;

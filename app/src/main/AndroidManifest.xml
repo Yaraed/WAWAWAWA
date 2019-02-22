@@ -21,7 +21,8 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
-            tools:replace="android:icon,android:label, android:theme" tools:ignore="GoogleAppIndexingWarning">
+            tools:ignore="GoogleAppIndexingWarning"
+            tools:replace="android:icon,android:label, android:theme">
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -29,9 +30,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity-alias android:name="MainActivity1" android:targetActivity=".MainActivity"
-                        android:enabled="false" android:label="@string/app_name"
-                        android:icon="@mipmap/icon_more_operation_save">
+
+        <activity-alias
+                android:name=".MainActivity1"
+                android:enabled="false"
+                android:icon="@mipmap/icon_more_operation_save"
+                android:label="@string/app_name"
+                android:targetActivity=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -45,8 +50,11 @@
 
         <activity android:name=".TranslucentActivity">
         </activity>
-        <activity android:name=".photo.MImageViewActivity"
-                  android:theme="@style/AppTheme.Photo"/>
+        <activity
+                android:name=".photo.MImageViewActivity"
+                android:theme="@style/AppTheme.Photo"/>
+        <activity android:name=".photo.PhotoViewActivity">
+        </activity>
     </application>
 
 </manifest>
