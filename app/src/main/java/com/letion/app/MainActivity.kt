@@ -24,6 +24,9 @@ import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.event.Bus
 import com.weyee.sdk.event.NormalEvent
+import com.weyee.sdk.router.BleNavigation
+import com.weyee.sdk.router.HttpNavigation
+import com.weyee.sdk.router.IntentNavigation
 import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.toast.ToastUtils
 import com.zhihu.matisse.Matisse
@@ -66,8 +69,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(12)
-        for (i in 0 until 12) {
+        val array = arrayOfNulls<String>(19)
+        for (i in 0 until 19) {
             array[i] = "这是第${i}个"
         }
 
@@ -93,6 +96,14 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     8 -> toBasic(array[i])
                     9 -> toGrid(array[i])
                     10 -> MainNavigation(this@MainActivity).toTranslucentActivity(1)
+                    11 -> IntentNavigation(this@MainActivity).toIntentActivity()
+                    12 -> IntentNavigation(this@MainActivity).toOtherActivity()
+                    13 -> IntentNavigation(this@MainActivity).toPermissionActivity()
+                    14 -> HttpNavigation(this@MainActivity).toWebSocketActivity()
+                    15 -> BulrDialog(this@MainActivity).show()
+                    16 -> HttpNavigation(this@MainActivity).toDaemonActivity()
+                    17 -> BleNavigation(this@MainActivity).toBleHelperActivity()
+                    18 -> MainNavigation(this@MainActivity).toImageViewActivity()
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }

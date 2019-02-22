@@ -23,6 +23,12 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
             }
         }
+
+        // 设置支持multidex
+        multiDexEnabled true
+
+        renderscriptTargetApi 21
+        renderscriptSupportModeEnabled true
     }
     buildTypes {
         release {
@@ -39,6 +45,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
@@ -47,6 +55,8 @@ dependencies {
     implementation libsConfig.constraintlayout
     implementation 'me.leolin:ShortcutBadger:1.1.22@aar'
     implementation 'com.zhihu.android:matisse:0.4.3'
+    // 测试blur
+    implementation 'com.fivehundredpx:blurringview:1.0.0'
     // leakCanary
     debugImplementation libsConfig.canaryDebug
     releaseImplementation libsConfig.canaryRelease
@@ -54,10 +64,20 @@ dependencies {
     kapt libsConfig.arouterCompiler
 
     implementation project(':a_ble')
+    implementation project(':a_intent')
+    implementation project(':a_http')
     implementation project(':poscore')
 
     // test
     implementation(libsConfig.glide) {
         exclude group: "com.android.support"
     }
+
+    // test
+    debugImplementation 'com.didichuxing.doraemonkit:doraemonkit:1.1.0'
+    releaseImplementation 'com.didichuxing.doraemonkit:doraemonkit-no-op:1.1.0'
+}
+
+repositories {
+    maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }
 }

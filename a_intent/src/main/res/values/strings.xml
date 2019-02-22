@@ -1,0 +1,131 @@
+<!--
+  ~
+  ~  Copyright 2017 liu-feng
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  imitations under the License.
+  ~
+  -->
+
+<resources>
+    <string name="app_name">a_intent</string>
+
+    <string name="dialer">Start dialer</string>
+    <string name="call_number">Call number 123456789</string>
+    <string name="dial_number">Dial number 123456789</string>
+    <string name="send_sms_to">Send SMS to 123456789</string>
+    <string name="send_sms">Send SMS</string>
+    <string name="pick_contact">Pick a contact</string>
+    <string name="pick_contact_with_phone">Pick a contact with phone</string>
+
+    <string name="map_of">Map of Le Louvre, Paris</string>
+    <string name="map_at">Map at 43.481055, -1.561959</string>
+    <string name="navigate_to_address">Navigate to Le Louvre, Paris</string>
+    <string name="navigate_to_location">Navigate to 43.481055, -1.561959</string>
+    <string name="streetview_at_location">Street view at 43.481055, -1.561959</string>
+
+    <string name="play_image">Show an image from URL</string>
+    <string name="play_audio">Play a sound from URL</string>
+    <string name="play_video">Play a video from URL</string>
+    <string name="play_video_youtube">Play YouTube video #b_yiWIXBI7o</string>
+    <string name="browse_web">Browse http://vincentprat.info</string>
+    <string name="take_pic">Take a photo</string>
+    <string name="select_pic">Select a picture</string>
+
+    <string name="email_to">Send email</string>
+
+    <string name="share">Share</string>
+    <string name="share_dialog_title">Share this!</string>
+
+    <string name="app_store">Open app store</string>
+
+
+    <string name="setting">Setting</string>
+    <string name="resume">Resume</string>
+    <string name="cancel">Cancel</string>
+
+    <string name="successfully">Successful</string>
+    <string name="failure">Failure</string>
+
+    <string name="permission_camera">Camera</string>
+    <string name="permission_contact">Contact</string>
+    <string name="permission_location">Location</string>
+
+    <string name="permission_calendar">Calendar</string>
+    <string name="permission_microphone">Microphone</string>
+    <string name="permission_storage">Storage</string>
+
+    <string name="permission_phone">Phone</string>
+    <string name="permission_sensors">Sensors</string>
+    <string name="permission_sms">SMS</string>
+
+    <string name="permission_setting">Permission Setting</string>
+    <string name="permission_install">Install Apk</string>
+    <string name="permission_overlay">AlertWindow</string>
+
+    <string name="title_dialog">Tips</string>
+    <string name="message_permission_rationale">Grant the following permissions to continue the program:\n\n%1$s</string>
+    <string name="message_permission_always_failed">Please give us permission in the settings:\n\n%1$s</string>
+    <string name="message_setting_comeback">The user comes back from the settings page.</string>
+
+    <string name="message_install_failed">Your phone is not allowed us to install apps.</string>
+
+    <string name="message_overlay_failed">Your phone is not allowed us to draw on other applications.</string>
+
+    <string name="message_error_storage">Please check the external storage device.</string>
+
+
+    <string-array name="calendar">
+        <item>Read_Calendar</item>
+        <item>Write_Calendar</item>
+        <item>All</item>
+    </string-array>
+
+    <string-array name="contacts">
+        <item>Read_Contacts</item>
+        <item>Write_Contacts</item>
+        <item>Get_Accounts</item>
+        <item>All</item>
+    </string-array>
+
+    <string-array name="location">
+        <item>Fine Location</item>
+        <item>Coarse Location</item>
+        <item>All</item>
+    </string-array>
+
+    <string-array name="phone">
+        <item>Read_Phone_State</item>
+        <item>Call_Phone</item>
+        <item>Read_Call_Log</item>
+        <item>Write_Call_Log</item>
+        <item>Add_Voicemail</item>
+        <item>Use_Sip</item>
+        <item>Process_Outgoing_Calls</item>
+        <item>All</item>
+    </string-array>
+
+    <string-array name="sms">
+        <item>Send_SMS</item>
+        <item>Receive_SMS</item>
+        <item>Read_SMS</item>
+        <item>Receive_Wap_Push</item>
+        <item>Receive_MMS</item>
+        <item>All</item>
+    </string-array>
+
+    <string-array name="storage">
+        <item>Read_External_Storage</item>
+        <item>Write_External_Storage</item>
+        <item>All</item>
+    </string-array>
+</resources>

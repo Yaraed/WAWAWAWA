@@ -2,8 +2,6 @@ package com.weyee.poscore.base.delegate;
 
 import android.app.Application;
 import android.content.Context;
-
-
 import com.weyee.poscore.base.App;
 import com.weyee.poscore.base.integration.ActivityLifecycle;
 import com.weyee.poscore.base.integration.IConfigModule;
@@ -13,10 +11,9 @@ import com.weyee.poscore.di.component.DaggerAppComponent;
 import com.weyee.poscore.di.module.AppModule;
 import com.weyee.poscore.di.module.CustomModule;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.inject.Inject;
 
 /**
  * AppDelegate可以代理Application的生命周期,在对应的生命周期,执行对应的逻辑,因为Java只能单继承
@@ -36,7 +33,8 @@ public class AppDelegate implements App {
     private List<Application.ActivityLifecycleCallbacks> mActivityLifecycles = new ArrayList<>();
 
     public AppDelegate(Context context) {
-        this.mModules = new ManifestParser(context).parse(); for (IConfigModule module : mModules) {
+        this.mModules = new ManifestParser(context).parse();
+        for (IConfigModule module : mModules) {
             module.injectAppLifecycle(context, mAppLifecycles);
             module.injectActivityLifecycle(context, mActivityLifecycles);
         }
@@ -49,12 +47,14 @@ public class AppDelegate implements App {
     }
 
     public void onCreate(Application application) {
-        this.mApplication = application; mAppComponent = DaggerAppComponent.builder()
+        this.mApplication = application;
+        mAppComponent = DaggerAppComponent.builder()
                 //提供application
                 .appModule(new AppModule(mApplication))
                 //全局配置
                 .customModule(customModule(mApplication, mModules))
-                .build(); mAppComponent.inject(this);
+                .build();
+        mAppComponent.inject(this);
 
         mAppComponent.extras().put(IConfigModule.class.getName(), mModules);
 
@@ -78,16 +78,40 @@ public class AppDelegate implements App {
     public void onTerminate() {
         if (mActivityLifecycle != null) {
             mApplication.unregisterActivityLifecycleCallbacks(mActivityLifecycle);
-        } if (mActivityLifecycles != null && mActivityLifecycles.size() > 0) {
+        }
+        if (mActivityLifecycles != null && mActivityLifecycles.size() > 0) {
             for (Application.ActivityLifecycleCallbacks lifecycle : mActivityLifecycles) {
                 mApplication.unregisterActivityLifecycleCallbacks(lifecycle);
             }
-        } if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+        }
+        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
             for (Lifecycle lifecycle : mAppLifecycles) {
                 lifecycle.onTerminate(mApplication);
             }
-        } this.mAppComponent = null; this.mActivityLifecycle = null; this.mActivityLifecycles = null;
-        this.mAppLifecycles = null; this.mApplication = null;
+        }
+        this.mAppComponent = null;
+        this.mActivityLifecycle = null;
+        this.mActivityLifecycles = null;
+        this.mAppLifecycles = null;
+        this.mApplication = null;
+    }
+
+
+    public void onLowMemory() {
+        // TODO 释放当前应用的非必须的内存资源
+        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+            for (Lifecycle lifecycle : mAppLifecycles) {
+                lifecycle.onLowMemory(mApplication);
+            }
+        }
+    }
+
+    public void onTrimMemory(int level) {
+        if (mAppLifecycles != null && mAppLifecycles.size() > 0) {
+            for (Lifecycle lifecycle : mAppLifecycles) {
+                lifecycle.onTrimMemory(level,mApplication);
+            }
+        }
     }
 
 
@@ -126,6 +150,10 @@ public class AppDelegate implements App {
         void onCreate(Application application);
 
         void onTerminate(Application application);
+
+        void onLowMemory(Application application);
+
+        void onTrimMemory(int level, Application application);
     }
 
 }
