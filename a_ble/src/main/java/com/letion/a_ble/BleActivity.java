@@ -11,7 +11,7 @@ import com.polidea.rxandroidble2.scan.ScanFilter;
 import com.polidea.rxandroidble2.scan.ScanSettings;
 import com.weyee.poscore.base.BaseActivity;
 import com.weyee.poscore.di.component.AppComponent;
-import com.weyee.posres.arch.RxLiftUtils;
+import com.weyee.possupport.arch.RxLiftUtils;
 import com.weyee.sdk.api.observer.transformer.Transformer;
 import com.weyee.sdk.event.Bus;
 import com.weyee.sdk.event.Callback;

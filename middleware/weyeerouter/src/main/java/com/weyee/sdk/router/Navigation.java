@@ -8,7 +8,7 @@ import androidx.fragment.app.Fragment;
 import com.alibaba.android.arouter.facade.Postcard;
 import com.alibaba.android.arouter.launcher.ARouter;
 
-import static com.weyee.posres.arch.Utils.*;
+import static com.weyee.possupport.arch.Utils.*;
 
 /**
  * <p>跳转导航管理基类

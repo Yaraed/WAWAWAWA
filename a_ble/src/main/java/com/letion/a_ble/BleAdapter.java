@@ -8,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.polidea.rxandroidble2.RxBleDevice;
 import com.polidea.rxandroidble2.scan.ScanResult;
-import com.weyee.posres.callback.Callback1;
+import com.weyee.possupport.callback.Callback1;
 
 import java.util.*;
 
