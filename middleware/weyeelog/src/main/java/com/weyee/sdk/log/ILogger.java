@@ -12,8 +12,8 @@ import com.orhanobut.logger.Printer;
  * @describe ...
  * @date 2018/11/30 0030
  */
-public interface ILogger {
-    void addAdapter(@NonNull LogAdapter adapter);
+interface ILogger {
+    void addAdapter(@Nullable LogAdapter adapter);
 
     Printer t(@Nullable String tag);
 
