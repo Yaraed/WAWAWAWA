@@ -55,6 +55,8 @@
                 android:theme="@style/AppTheme.Photo"/>
         <activity android:name=".photo.PhotoViewActivity">
         </activity>
+        <activity android:name=".SpinnerActivity">
+        </activity>
     </application>
 
 </manifest>

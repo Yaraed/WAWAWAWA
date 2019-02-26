@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~  Copyright 2017 liu-feng
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  imitations under the License.
+  ~
+  -->
+
+<resources>
+    <!--===============================Spinner======================================-->
+    <!--MaterialSpinner-->
+    <declare-styleable name="MaterialSpinner">
+        <!--下拉框选择的内容-->
+        <attr name="ms_entries" format="reference" />
+        <!--下拉框箭头的颜色， 默认和字体的颜色一样-->
+        <attr name="ms_arrow_tint" format="color" />
+        <!--下拉框是否有箭头， 默认是true-->
+        <attr name="ms_hide_arrow" format="boolean" />
+        <!--下拉框背景的颜色-->
+        <attr name="ms_background_color" format="color" />
+        <!--下拉框背景点击的效果-->
+        <attr name="ms_background_selector" format="integer" />
+        <!--下拉框字体的颜色-->
+        <attr name="ms_text_color" format="color" />
+
+        <!--下拉框 下拉条目最大的高度-->
+        <attr name="ms_dropdown_max_height" format="dimension" />
+        <!--下拉框 下拉条目的样式，默认wrap_content-->
+        <attr name="ms_dropdown_height" format="dimension">
+            <enum name="fill_parent" value="-1" />
+            <enum name="match_parent" value="-1" />
+            <enum name="wrap_content" value="-2" />
+        </attr>
+        <!--下拉框 下拉条目的背景-->
+        <attr name="ms_dropdown_bg" format="reference" />
+        <!--是否在dialog中, 默认false-->
+        <attr name="ms_in_dialog" format="boolean" />
+    </declare-styleable>
+
+    <!--EditSpinner-->
+    <declare-styleable name="EditSpinner">
+        <!--输入提示-->
+        <attr name="es_hint" format="string" />
+        <!--输入框的高度-->
+        <attr name="es_height" format="dimension" />
+        <!--输入框的字体大小-->
+        <attr name="es_textSize" format="dimension" />
+        <!--输入框的字体颜色-->
+        <attr name="es_textColor" format="color" />
+        <!--箭头图标的margin-->
+        <attr name="es_arrowMargin" format="dimension" />
+        <!--箭头图标的资源-->
+        <attr name="es_arrowImage" format="reference" />
+        <!--输入框的背景-->
+        <attr name="es_background" format="reference" />
+        <attr name="es_maxLine" format="integer" />
+        <!--默认可选性内容-->
+        <attr name="es_entries" format="reference" />
+        <!--下拉框 下拉条目的背景-->
+        <attr name="es_dropdown_bg" format="reference" />
+        <!--输入下拉框是否可编辑, 默认true-->
+        <attr name="es_enable" format="boolean" />
+        <!--输入下拉框可输入的最大字符长度-->
+        <attr name="es_maxLength" format="integer" />
+        <!--输入下拉框可输入的最大字符宽度-->
+        <attr name="es_maxEms" format="integer" />
+        <!--输入下拉框在输入时是否显示筛选到的信息，默认true-->
+        <attr name="es_isShowFilterData" format="boolean" />
+        <!--输入下拉框显示筛选信息时，是否显示key为醒目的颜色，默认false-->
+        <attr name="es_isFilterKey" format="boolean" />
+
+    </declare-styleable>
+
+    <!--LabelView-->
+    <declare-styleable name="LabelView">
+        <!--距离对角的距离-->
+        <attr name="label_distance" format="dimension" />
+        <!--标签的宽度-->
+        <attr name="label_height" format="dimension" />
+        <!--标签的背景颜色-->
+        <attr name="label_backgroundColor" format="color" />
+        <!--标签的边框宽度-->
+        <attr name="label_strokeWidth" format="dimension" />
+        <!--标签的边框颜色-->
+        <attr name="label_strokeColor" format="color" />
+        <!--标签的文字-->
+        <attr name="label_text" format="string" />
+        <!--标签的文字大小-->
+        <attr name="label_textSize" format="dimension" />
+        <!--标签的文字样式-->
+        <attr name="label_textStyle" format="enum">
+            <enum name="NORMAL" value="0" />
+            <enum name="BOLD" value="1" />
+            <enum name="ITALIC" value="2" />
+            <enum name="BOLD_ITALIC" value="3" />
+        </attr>
+        <!--标签的字体样式-->
+        <attr name="label_textFont" format="string" />
+        <!--标签的文字颜色-->
+        <attr name="label_textColor" format="color" />
+        <!--标签是否可见-->
+        <attr name="label_visual" format="boolean" />
+        <!--标签的对齐方式-->
+        <attr name="label_orientation" format="enum">
+            <enum name="LEFT_TOP" value="1" />
+            <enum name="RIGHT_TOP" value="2" />
+            <enum name="LEFT_BOTTOM" value="3" />
+            <enum name="RIGHT_BOTTOM" value="4" />
+        </attr>
+    </declare-styleable>
+
+    <!--ExpandableTextView-->
+    <declare-styleable name="ExpandableTextView">
+        <!--最大收缩展示的行数，默认8行-->
+        <attr name="etv_maxCollapsedLines" format="integer" />
+        <!--动画持续的间隔，默认300ms-->
+        <attr name="etv_animDuration" format="integer" />
+        <!--动画开始时的透明度，默认0.7f-->
+        <attr name="etv_animAlphaStart" format="float" />
+        <!--伸展箭头的资源-->
+        <attr name="etv_expandDrawable" format="reference" />
+        <!--收缩箭头的资源-->
+        <attr name="etv_collapseDrawable" format="reference" />
+    </declare-styleable>
+</resources>

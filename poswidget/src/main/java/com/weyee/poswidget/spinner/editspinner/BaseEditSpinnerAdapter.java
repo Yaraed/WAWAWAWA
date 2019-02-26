@@ -16,37 +16,29 @@
  *
  */
 
-package com.weyee.sdk.router;
+package com.weyee.poswidget.spinner.editspinner;
 
-import android.content.Context;
-
+import android.widget.BaseAdapter;
 
 /**
- * main模块跳转导航管理类。
+ * 基础可输入下拉框
+ *
+ * @author xuexiang
+ * @since 2018/11/26 下午2:16
  */
-public class HttpNavigation extends Navigation {
-
-    public static final String MODULE_NAME = "/http/";
-
-    public HttpNavigation(Context context) {
-        super(context);
-    }
+public abstract class BaseEditSpinnerAdapter extends BaseAdapter {
+    /**
+     * editText输入监听
+     *
+     * @return
+     */
+    public abstract EditSpinnerFilter getEditSpinnerFilter();
 
     /**
-     * 配置Module
+     * 获取需要填入editText的字符串
+     * @param position
+     * @return
      */
-    @Override
-    protected String getModuleName() {
-        return MODULE_NAME;
-    }
+    public abstract String getItemString(int position);
 
-    public void toWebSocketActivity(){
-        startActivity("WebSocket");
-    }
-    public void toDaemonActivity(){
-        startActivity("Daemon");
-    }
-    public void toTestActivity(){
-        startActivity("Test");
-    }
 }

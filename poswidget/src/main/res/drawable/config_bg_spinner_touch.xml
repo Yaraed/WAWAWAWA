@@ -15,19 +15,27 @@
   ~  See the License for the specific language governing permissions and
   ~  imitations under the License.
   ~
--->
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="com.wuqi.a_http">
+  -->
 
-    <application>
-        <activity
-                android:name=".WebSocketActivity"
-                android:windowSoftInputMode="adjustResize">
-        </activity>
-        <activity android:name=".DaemonActivity">
-        </activity>
-        <activity android:name=".TestActivity">
-        </activity>
-    </application>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="rectangle">
+            <stroke
+                android:width="2dp"
+                android:color="@color/config_color_light_blue" />
+            <corners
+                android:radius="?attr/config_size_edittext_radius" />
 
-</manifest>
+            <solid android:color="@color/config_color_white"/>
+
+        </shape>
+    </item>
+    <item>
+        <bitmap
+            android:gravity="right"
+            android:src="@drawable/ic_arrow_down_black"
+            android:tint="@color/config_color_black" />
+
+    </item>
+
+</layer-list>

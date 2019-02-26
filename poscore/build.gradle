@@ -81,6 +81,7 @@ dependencies {
     api project(':middleware:weyeepermission')
     api project(':middleware:weyeemultitype')
     api project(':possupport')
+    api project(':poswidget')
     //    // glide
     //    implementation rootProject.ext.glide.glide
     //    implementation(rootProject.ext.glide.glideOkhttp) {

@@ -16,37 +16,19 @@
  *
  */
 
-package com.weyee.sdk.router;
-
-import android.content.Context;
-
+package com.weyee.poswidget.spinner.editspinner;
 
 /**
- * main模块跳转导航管理类。
+ * 监听输入并过滤
+ *
+ * @author xuexiang
+ * @since 2019/1/14 下午10:14
  */
-public class HttpNavigation extends Navigation {
-
-    public static final String MODULE_NAME = "/http/";
-
-    public HttpNavigation(Context context) {
-        super(context);
-    }
-
+public interface EditSpinnerFilter {
     /**
-     * 配置Module
+     * editText输入监听
+     * @param keyword
+     * @return
      */
-    @Override
-    protected String getModuleName() {
-        return MODULE_NAME;
-    }
-
-    public void toWebSocketActivity(){
-        startActivity("WebSocket");
-    }
-    public void toDaemonActivity(){
-        startActivity("Daemon");
-    }
-    public void toTestActivity(){
-        startActivity("Test");
-    }
+    boolean onFilter(String keyword);
 }

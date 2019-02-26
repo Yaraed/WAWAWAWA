@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <!--
   ~
   ~  Copyright 2017 liu-feng
@@ -17,10 +18,12 @@
   -->
 
 <resources>
-    <string name="app_name">a_http</string>
-    <string name="more_text">Unless required by applicable law or agreed to in writing, software
-        ~  distributed under the License is distributed on an "AS IS" BASIS,
-        ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-        ~  See the License for the specific language governing permissions and
-        ~  imitations under the License.</string>
+    <style name="WidgetBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="config_size_edittext_radius">4dp</item>
+        <item name="ms_item_height_size">30dp</item>
+        <item name="config_size_spinner_text">13sp</item>
+        <item name="ms_padding_left_size">8dp</item>
+        <item name="ms_padding_top_size">6.5dp</item>
+        <item name="ms_dropdown_offset">1dp</item>
+    </style>
 </resources>
