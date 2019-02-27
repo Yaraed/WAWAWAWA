@@ -71,7 +71,7 @@ public class MActivity extends InnerBaseActivity {
      */
     protected void initHeaderView() {
         mHeaderViewAble.setTitle((String) getTitle());
-        mHeaderViewAble.setMenuLeftBackIcon(android.R.drawable.ic_menu_revert);
+        mHeaderViewAble.setMenuLeftBackIcon(R.mipmap.ic_back);
         mHeaderViewAble.setOnClickLeftMenuBackListener(v -> finish());
     }
 

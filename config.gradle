@@ -34,7 +34,7 @@ ext {
             loggerVersion             : "2.2.0",
             timberVersion             : "4.7.1",
             eventbusVersion           : "3.1.1",
-            butterknifeSdkVersion     : "8.8.1",
+            butterknifeSdkVersion     : "10.1.0",
             canarySdkVersion          : "1.5.4",
 
 

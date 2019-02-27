@@ -82,7 +82,7 @@ public class MHeaderView extends Toolbar implements MHeaderViewAble {
                     .MHeaderView_header_menu_left_close_icon, 0);
 
             menuLeftOneIcon = typedArray.getResourceId(R.styleable
-                    .MHeaderView_header_menu_left_one_icon, android.R.drawable.ic_menu_revert);
+                    .MHeaderView_header_menu_left_one_icon, R.mipmap.ic_back);
             menuLeftOneTextColor = typedArray.getColor(R.styleable
                     .MHeaderView_header_menu_left_one_text_color, Color.WHITE);
 
