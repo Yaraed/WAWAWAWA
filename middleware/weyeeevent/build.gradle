@@ -41,3 +41,5 @@ dependencies {
     implementation libsConfig.eventbus
     implementation libsConfig.rxJava
 }
+
+apply from : '../../maven.gradle'

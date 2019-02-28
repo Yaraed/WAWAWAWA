@@ -67,6 +67,10 @@ afterEvaluate { project ->
             encoding("utf-8")
             links "http://docs.oracle.com/javase/7/docs/api"
         }
+        // 暂时没有找到javadoc怎么编译kotlin的代码，只能移除 处理
+        exclude(
+                "**/**.kt"
+        )
         exclude '**/README.md'
         source = android.sourceSets.main.java.srcDirs
         classpath += project.files(android.getBootClasspath().join(File.pathSeparator))

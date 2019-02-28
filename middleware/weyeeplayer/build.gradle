@@ -35,3 +35,5 @@ dependencies {
     implementation libsConfig.androidUtilCode
 
 }
+
+apply from : '../../maven.gradle'

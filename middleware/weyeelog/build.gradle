@@ -36,3 +36,5 @@ dependencies {
     implementation libsConfig.logger
     implementation libsConfig.timber
 }
+
+apply from : '../../maven.gradle'

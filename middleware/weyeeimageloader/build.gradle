@@ -48,3 +48,5 @@ dependencies {
     api libsConfig.dagger2
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
 }
+
+apply from : '../../maven.gradle'

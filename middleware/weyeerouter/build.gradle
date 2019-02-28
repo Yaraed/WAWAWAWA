@@ -41,3 +41,5 @@ dependencies {
     annotationProcessor libsConfig.arouterCompiler
     implementation project(':possupport')
 }
+
+apply from : '../../maven.gradle'
