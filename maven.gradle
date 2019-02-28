@@ -1,0 +1,87 @@
+/*
+ *
+ *  Copyright 2017 liu-feng
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *       http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  imitations under the License.
+ *
+ */
+
+// Maven 上传插件 maven 上传到 maven平台
+apply plugin: 'maven'
+
+// load properties
+Properties properties = new Properties()
+File localPropertiesFile = project.rootProject.file("local.properties")
+if (localPropertiesFile.exists()) {
+    properties.load(localPropertiesFile.newDataInputStream())
+}
+File projectPropertiesFile = project.file("project.properties")
+if (projectPropertiesFile.exists()) {
+    properties.load(projectPropertiesFile.newDataInputStream())
+}
+
+// local.properties
+def RELEASE_REPOSITORY_URL = properties.getProperty("RELEASE_REPOSITORY_URL")
+def SNAPSHOT_REPOSITORY_URL = properties.getProperty("SNAPSHOT_REPOSITORY_URL")
+def NEXUS_USERNAME = properties.getProperty("NEXUS_USERNAME")
+def NEXUS_PASSWORD = properties.getProperty("NEXUS_PASSWORD")
+def groupId = properties.getProperty("project.groupId")  // 统一包名
+def packaging = properties.getProperty("project.packaging") // 统一打包成AAR
+
+def versionName = android.defaultConfig.versionName  // 统一版本号
+
+def name = properties.hasProperty("project.name") ? properties.getProperty("project.name") : project.name
+def artifactId = properties.hasProperty("project.artifactId") ? properties.getProperty("project.artifactId") : project.name
+
+
+afterEvaluate { project ->
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                pom.name = name
+                pom.groupId = groupId
+                pom.artifactId = artifactId
+                pom.version = versionName
+                pom.packaging = packaging
+                repository(url: RELEASE_REPOSITORY_URL) {
+                    authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+                }
+                snapshotRepository(url: SNAPSHOT_REPOSITORY_URL) {
+                    authentication(userName: NEXUS_USERNAME, password: NEXUS_PASSWORD)
+                }
+            }
+        }
+    }
+    task androidJavadocs(type: Javadoc) {
+        options {
+            encoding("utf-8")
+            links "http://docs.oracle.com/javase/7/docs/api"
+        }
+        exclude '**/README.md'
+        source = android.sourceSets.main.java.srcDirs
+        classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    }
+    task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
+        classifier = 'javadoc'
+        from androidJavadocs.destinationDir
+    }
+    task androidSourcesJar(type: Jar) {
+        classifier = 'sources'
+        from android.sourceSets.main.java.sourceFiles
+    }
+
+    artifacts {
+        archives androidSourcesJar
+        archives androidJavadocsJar
+    }
+}

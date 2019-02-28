@@ -92,7 +92,7 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
 
     private fun initPlay() {
         if (!hasStart) {
-            val dataSource = DataSource("http://jiajunhui.cn/video/big_buck_bunny.mp4")
+            val dataSource = DataSource("http://jiajunhui.cn/video/edwin_rolling_in_the_deep.flv")
             dataSource.title = "音乐和艺术如何改变世界"
             videoView.setDataSource(dataSource)
             videoView.start()

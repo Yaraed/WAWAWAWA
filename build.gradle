@@ -23,6 +23,14 @@ buildscript {
 
 allprojects {
     repositories {
+//        maven{
+//            url 'http://192.168.3.142:8081/repository/maven-public/'
+//            credentials {
+//                username = "liufeng"
+//                password = "android"
+//            }
+//
+//        }
         google()
         jcenter()
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
@@ -53,6 +61,11 @@ allprojects {
                 }
             }
         }
+    }
+    //忽略javadoc的检查
+    tasks.withType(Javadoc) {
+        options.addStringOption('Xdoclint:none', '-quiet')
+        options.addStringOption('encoding', 'UTF-8')
     }
 }
 

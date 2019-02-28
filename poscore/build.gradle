@@ -81,6 +81,7 @@ dependencies {
     api project(':middleware:weyeepermission')
     api project(':middleware:weyeemultitype')
     api project(':middleware:weyeeplayer')
+    api project(':middleware:weyeeaudio')
     api project(':possupport')
     api project(':poswidget')
     //    // glide

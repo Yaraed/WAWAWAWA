@@ -66,8 +66,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(23)
-        for (i in 0 until 23) {
+        val array = arrayOfNulls<String>(24)
+        for (i in 0 until 24) {
             array[i] = "这是第${i}个"
         }
 
@@ -105,6 +105,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     20 -> HttpNavigation(this@MainActivity).toTestActivity()
                     21 -> GPUNavigation(this@MainActivity).toGPUActivity()
                     22 -> GPUNavigation(this@MainActivity).toVideoActivity()
+                    23 -> GPUNavigation(this@MainActivity).toAudioActivity()
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }

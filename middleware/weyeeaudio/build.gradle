@@ -34,4 +34,9 @@ dependencies {
     implementation libsConfig.appcompat_v7
     implementation libsConfig.androidUtilCode
 
+
+    implementation libsConfig.rxJava
+    implementation libsConfig.rxAndroid
 }
+
+apply from : '../../maven.gradle'

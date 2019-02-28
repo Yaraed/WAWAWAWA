@@ -16,37 +16,20 @@
  *
  */
 
-package com.weyee.sdk.router;
+package com.weyee.sdk.audio;
 
-import android.content.Context;
+import org.junit.Test;
 
+import static org.junit.Assert.*;
 
 /**
- * main模块跳转导航管理类。
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class GPUNavigation extends Navigation {
-
-    public static final String MODULE_NAME = "/gpu/";
-
-    public GPUNavigation(Context context) {
-        super(context);
-    }
-
-    /**
-     * 配置Module
-     */
-    @Override
-    protected String getModuleName() {
-        return MODULE_NAME;
-    }
-
-    public void toGPUActivity(){
-        startActivity("GPU");
-    }
-    public void toVideoActivity(){
-        startActivity("Video");
-    }
-    public void toAudioActivity(){
-        startActivity("Audio");
+public class ExampleUnitTest {
+    @Test
+    public void addition_isCorrect() {
+        assertEquals(4, 2 + 2);
     }
 }
