@@ -35,4 +35,7 @@ public class MainNavigation extends Navigation {
     public void toImageViewActivity() {
         startActivity("PImageView");
     }
+    public void toSpinnerActivity() {
+        startActivity("Spinner");
+    }
 }

@@ -46,4 +46,7 @@ public class HttpNavigation extends Navigation {
     public void toDaemonActivity(){
         startActivity("Daemon");
     }
+    public void toTestActivity(){
+        startActivity("Test");
+    }
 }

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~  Copyright 2017 liu-feng
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  imitations under the License.
+  ~
+  -->
+
+<resources>
+    <!--Spinner自定义样式-->
+    <style name="SpinnerStyle" parent="@style/Widget.AppCompat.Spinner">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">?attr/ms_item_height_size</item>
+        <item name="android:textSize">?attr/config_size_spinner_text</item>
+        <item name="android:spinnerMode">dropdown</item>
+        <item name="android:background">@drawable/ms_background_spinner</item>
+        <item name="android:popupBackground">@drawable/ms_drop_down_bg_radius</item>
+        <item name="android:paddingRight">@dimen/default_spinner_icon_padding_size</item>
+    </style>
+    <style name="Material.SpinnerStyle" parent="@style/Widget.AppCompat.Spinner">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">?attr/ms_item_height_size</item>
+        <item name="android:textSize">?attr/config_size_spinner_text</item>
+        <item name="android:textColor">@color/config_color_edittext_textcolor</item>
+        <item name="ms_dropdown_height">wrap_content</item>
+        <item name="ms_text_color">@color/ms_dropdown_item_textcolor</item>
+        <item name="ms_background_selector">@drawable/ms_background_edittext</item>
+        <item name="ms_dropdown_bg">@drawable/ms_drop_down_bg_radius</item>
+    </style>
+</resources>

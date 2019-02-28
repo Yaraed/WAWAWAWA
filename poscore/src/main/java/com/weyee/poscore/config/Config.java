@@ -6,6 +6,7 @@ import com.weyee.sdk.api.RxHttpUtils;
 import com.weyee.sdk.api.base.HttpClient;
 import com.weyee.sdk.log.Environment;
 import com.weyee.sdk.log.LogUtils;
+import com.weyee.sdk.player.PlayerUtils;
 import com.weyee.sdk.router.RouterManager;
 import com.weyee.sdk.toast.ToastUtils;
 
@@ -52,5 +53,7 @@ public class Config {
                         //全局是否打开请求log日志
                         .setDebug(true)
                         .build());
+
+        PlayerUtils.init(application);
     }
 }

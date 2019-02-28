@@ -24,10 +24,7 @@ import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.event.Bus
 import com.weyee.sdk.event.NormalEvent
-import com.weyee.sdk.router.BleNavigation
-import com.weyee.sdk.router.HttpNavigation
-import com.weyee.sdk.router.IntentNavigation
-import com.weyee.sdk.router.MainNavigation
+import com.weyee.sdk.router.*
 import com.weyee.sdk.toast.ToastUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
@@ -69,8 +66,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(19)
-        for (i in 0 until 19) {
+        val array = arrayOfNulls<String>(24)
+        for (i in 0 until 24) {
             array[i] = "这是第${i}个"
         }
 
@@ -104,6 +101,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     16 -> HttpNavigation(this@MainActivity).toDaemonActivity()
                     17 -> BleNavigation(this@MainActivity).toBleHelperActivity()
                     18 -> MainNavigation(this@MainActivity).toImageViewActivity()
+                    19 -> MainNavigation(this@MainActivity).toSpinnerActivity()
+                    20 -> HttpNavigation(this@MainActivity).toTestActivity()
+                    21 -> GPUNavigation(this@MainActivity).toGPUActivity()
+                    22 -> GPUNavigation(this@MainActivity).toVideoActivity()
+                    23 -> GPUNavigation(this@MainActivity).toAudioActivity()
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }

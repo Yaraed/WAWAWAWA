@@ -46,3 +46,5 @@ dependencies {
     // 需要更多的header view可供选择，否则可以不添加
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-3'
 }
+
+apply from : '../../maven.gradle'

@@ -37,3 +37,5 @@ dependencies {
     // 动态申请权限，能兼容国产手机
     api 'com.yanzhenjie:permission:2.0.0-rc12'
 }
+
+apply from : '../../maven.gradle'

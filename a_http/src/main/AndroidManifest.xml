@@ -26,6 +26,8 @@
         </activity>
         <activity android:name=".DaemonActivity">
         </activity>
+        <activity android:name=".TestActivity">
+        </activity>
     </application>
 
 </manifest>

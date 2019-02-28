@@ -48,3 +48,5 @@ dependencies {
     implementation project(':middleware:weyeetoast')
     implementation project(':middleware:weyeelog')
 }
+
+apply from : '../../maven.gradle'

@@ -7,7 +7,7 @@ ext {
             minSdkVersion    : 18,
             targetSdkVersion : 28,
             versionCode      : 1,  //修改版本号需要+1
-            versionName      : "1.0",
+            versionName      : "1.0.3",
 
 
             supportVersion   : '1.0.2'
@@ -34,7 +34,7 @@ ext {
             loggerVersion             : "2.2.0",
             timberVersion             : "4.7.1",
             eventbusVersion           : "3.1.1",
-            butterknifeSdkVersion     : "8.8.1",
+            butterknifeSdkVersion     : "10.1.0",
             canarySdkVersion          : "1.5.4",
 
 

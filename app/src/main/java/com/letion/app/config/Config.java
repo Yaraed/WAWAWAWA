@@ -21,6 +21,9 @@ import com.weyee.poscore.base.integration.IConfigModule;
 import com.weyee.poscore.base.integration.IRepositoryManager;
 import com.weyee.poscore.di.module.CustomModule;
 import com.weyee.sdk.imageloader.glide.GlideApp;
+import com.weyee.sdk.player.config.PlayerConfig;
+import com.weyee.sdk.player.config.PlayerLibrary;
+import com.weyee.sdk.player.record.PlayRecordManager;
 
 import java.util.List;
 
@@ -83,6 +86,8 @@ public class Config implements IConfigModule {
                     com.weyee.poscore.config.Config.init(application);
 
                     DoraemonKit.install(application);
+
+
                 }
             }
 
