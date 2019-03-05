@@ -66,6 +66,7 @@ dependencies {
     implementation project(':a_intent')
     implementation project(':a_http')
     implementation project(':a_gpuimage')
+    implementation project(':a_pdf')
     implementation project(':poscore')
 
     // test
