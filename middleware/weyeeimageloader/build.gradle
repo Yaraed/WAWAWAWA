@@ -37,6 +37,7 @@ dependencies {
     implementation(libsConfig.glide) {
         exclude group: "com.android.support"
     }
+    implementation libsConfig.okhttp3
     implementation(libsConfig.glideOkhttp3Integration) {
         exclude group: "com.squareup.okhttp3"
     }

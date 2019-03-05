@@ -24,8 +24,17 @@
               android:padding="10dp"
               android:layout_height="wrap_content">
 
-    <ImageView android:layout_width="100dp" android:layout_height="100dp"
-               android:id="@+id/imageView"/>
+    <FrameLayout android:layout_width="100dp" android:layout_height="100dp">
+        <ImageView android:layout_width="match_parent" android:layout_height="match_parent"
+                   android:id="@+id/imageView"/>
+
+        <ProgressBar android:layout_width="80dp" android:layout_height="2dp"
+                     android:id="@+id/progressBar"
+                     style="@android:style/Widget.ProgressBar.Horizontal"
+                     android:max="100"
+                     tools:progress="80"
+                     android:layout_gravity="center"/>
+    </FrameLayout>
 
     <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
               tools:text="这个是一张图片" android:singleLine="true"

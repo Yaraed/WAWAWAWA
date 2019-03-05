@@ -58,6 +58,13 @@
         </activity>
         <activity android:name=".SpinnerActivity">
         </activity>
+
+        <service
+                android:name=".BindService"
+                android:process=":remote"/>
+
+        <activity android:name=".photo.PreViewActivity">
+        </activity>
     </application>
 
 </manifest>

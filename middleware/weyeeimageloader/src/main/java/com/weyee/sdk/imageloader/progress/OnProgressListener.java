@@ -16,34 +16,11 @@
  *
  */
 
-package com.weyee.sdk.router;
-
-import android.content.Context;
-
+package com.weyee.sdk.imageloader.progress;
 
 /**
- * main模块跳转导航管理类。
+ * @author wuqi by 2019/3/5.
  */
-public class BleNavigation extends Navigation {
-
-    public static final String MODULE_NAME = "/ble/";
-
-    public BleNavigation(Context context) {
-        super(context);
-    }
-
-    /**
-     * 配置Module
-     */
-    @Override
-    protected String getModuleName() {
-        return MODULE_NAME;
-    }
-
-    public void toBleHelperActivity(){
-        startActivity("BleHelper");
-    }
-    public void toFastBleActivity(){
-        startActivity("FastBle");
-    }
+public interface OnProgressListener {
+    void onProgress(boolean isComplete, int percentage, long bytesRead, long totalBytes);
 }

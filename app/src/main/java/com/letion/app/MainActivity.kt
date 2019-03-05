@@ -4,18 +4,21 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Dialog
 import android.app.ProgressDialog
-import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
+import android.content.*
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.os.IBinder
+import android.provider.Settings
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.blankj.utilcode.util.ServiceUtils
 import com.letion.a_ble.BleActivity
 import com.letion.app.di.component.DaggerMainComponent
 import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
+import com.letion.app.receiver.OnePixelReceiver
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.possupport.arch.RxLiftUtils
@@ -39,6 +42,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
     private val CHOOSE = 1
     //private lateinit var presenter: MainPresenter
     private var dialog: LoadingDialog? = null
+    private var onePixelReceiver: BroadcastReceiver? = null
+    private lateinit var connection: ServiceConnection
+    private var isBindService: Boolean = false
 
     /**
      * 如果initView返回0,框架则不会调用[android.app.Activity.setContentView]
@@ -66,8 +72,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(24)
-        for (i in 0 until 24) {
+        val array = arrayOfNulls<String>(25)
+        for (i in 0 until 25) {
             array[i] = "这是第${i}个"
         }
 
@@ -97,15 +103,16 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     12 -> IntentNavigation(this@MainActivity).toOtherActivity()
                     13 -> IntentNavigation(this@MainActivity).toPermissionActivity()
                     14 -> HttpNavigation(this@MainActivity).toWebSocketActivity()
-                    15 -> BulrDialog(this@MainActivity).show()
+                    15 -> BlurDialog(this@MainActivity).show()
                     16 -> HttpNavigation(this@MainActivity).toDaemonActivity()
-                    17 -> BleNavigation(this@MainActivity).toBleHelperActivity()
+                    17 -> BleNavigation(this@MainActivity).toFastBleActivity()
                     18 -> MainNavigation(this@MainActivity).toImageViewActivity()
                     19 -> MainNavigation(this@MainActivity).toSpinnerActivity()
                     20 -> HttpNavigation(this@MainActivity).toTestActivity()
                     21 -> GPUNavigation(this@MainActivity).toGPUActivity()
                     22 -> GPUNavigation(this@MainActivity).toVideoActivity()
                     23 -> GPUNavigation(this@MainActivity).toAudioActivity()
+                    24 -> MainNavigation(this@MainActivity).toPreViewActivity()
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }
@@ -113,13 +120,50 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
             }
         }
 
-        Bus.getDefault().subscribe(this,"RxBus",null,com.weyee.sdk.event.Callback<NormalEvent> {
+        Bus.getDefault().subscribe(this, "RxBus", null, com.weyee.sdk.event.Callback<NormalEvent> {
             println("RxBus")
             setAlias1()
         })
+
+        connection = object : ServiceConnection {
+            override fun onServiceDisconnected(name: ComponentName?) {
+
+            }
+
+            override fun onServiceConnected(name: ComponentName?, service: IBinder?) {
+                if (service is BindService.DefaultBinder) {
+                    service.start()
+                } else if (service != null) {
+                    val inter = IMyAidlInterface.Stub.asInterface(service)
+                    println(inter.plus(100, 200))
+                    inter.start()
+                }
+            }
+
+        }
+
+        ServiceUtils.startService(BindService::class.java)
+        ServiceUtils.bindService(BindService::class.java, connection, Context.BIND_AUTO_CREATE)
+
+        if (Build.VERSION.SDK_INT > 23) {
+            ToastUtils.show(if (Settings.canDrawOverlays(this)) "已获得悬浮窗权限" else "暂无悬浮窗权限")
+        }
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        onePixelReceiver = OnePixelReceiver()
+        val intentFilter = IntentFilter()
+        intentFilter.addAction("android.intent.action.SCREEN_OFF")
+        intentFilter.addAction("android.intent.action.SCREEN_ON")
+        intentFilter.addAction("android.intent.action.USER_PRESENT")
+        registerReceiver(onePixelReceiver, intentFilter)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(onePixelReceiver)
+        ServiceUtils.stopService(BindService::class.java)
+        ServiceUtils.unbindService(connection)
     }
 
     override fun canSwipeBack(): Boolean {
@@ -277,7 +321,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
     override fun dialog(): Dialog? {
         if (dialog == null) {
-            dialog = LoadingDialog(this,"加载中...")
+            dialog = LoadingDialog(this, "加载中...")
         }
         return dialog
     }

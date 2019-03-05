@@ -55,4 +55,7 @@ dependencies {
 
     // 另一个蓝牙库
     implementation 'com.github.a-voyager:BluetoothHelper:f71d40a98b'
+
+    // 另一个蓝牙库
+    implementation 'com.clj.fastble:FastBleLib:2.3.4'
 }

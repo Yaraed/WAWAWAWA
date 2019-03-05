@@ -38,4 +38,7 @@ public class MainNavigation extends Navigation {
     public void toSpinnerActivity() {
         startActivity("Spinner");
     }
+    public void toPreViewActivity() {
+        startActivity("PreView");
+    }
 }

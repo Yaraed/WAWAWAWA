@@ -21,6 +21,7 @@ package com.letion.app.photo
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -60,6 +61,7 @@ class PhotoViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
                     override fun setData(data: String, position: Int) {
                         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
                         val textView = itemView.findViewById<TextView>(R.id.textView)
+                        val progressBar = itemView.findViewById<ProgressBar>(R.id.progressBar)
 
                         App.obtainAppComponentFromContext(itemView.context)
                             .imageLoader().loadImage(
@@ -70,6 +72,12 @@ class PhotoViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
                                     //.blurValue(15)
                                     .isCircle(true)
                                     .resource(data)
+                                    .listener { isComplete, percentage, _, _ ->
+                                        if (isComplete) {
+                                            progressBar.visibility = View.GONE
+                                        }
+                                        progressBar.progress = percentage
+                                    }
                                     .build()
                             )
 

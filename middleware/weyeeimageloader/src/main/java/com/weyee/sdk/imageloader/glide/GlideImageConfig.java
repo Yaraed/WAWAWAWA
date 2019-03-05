@@ -6,6 +6,7 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.target.Target;
 import com.weyee.sdk.imageloader.BaseImageLoaderStrategy;
 import com.weyee.sdk.imageloader.ImageConfig;
+import com.weyee.sdk.imageloader.progress.OnProgressListener;
 
 /**
  * Created by liu-feng on 16/4/15.
@@ -40,6 +41,10 @@ public class GlideImageConfig extends ImageConfig {
     private int imageRadius;//图片每个圆角的大小
     private int blurValue;//高斯模糊值, 值越大模糊效果越大
 
+    // 2019.3更新功能  进度监听
+    private OnProgressListener listener;
+
+
     private GlideImageConfig(Builder builder) {
         this.resource = builder.resource;
         this.imageView = builder.imageView;
@@ -58,6 +63,8 @@ public class GlideImageConfig extends ImageConfig {
         this.isCircle = builder.isCircle;
         this.imageRadius = builder.imageRadius;
         this.blurValue = builder.blurValue;
+
+        this.listener = builder.listener;
     }
 
     public int getCacheStrategy() {
@@ -116,6 +123,10 @@ public class GlideImageConfig extends ImageConfig {
         return isCircle;
     }
 
+    public OnProgressListener getListener() {
+        return listener;
+    }
+
     public static Builder builder() {
         return new Builder();
     }
@@ -140,6 +151,9 @@ public class GlideImageConfig extends ImageConfig {
         private boolean isCrossFade;//是否使用淡入淡出过渡动画
         private boolean isCenterCrop;//是否将图片剪切为 CenterCrop
         private boolean isCircle;//是否将图片剪切为圆形
+
+        // 2019.3进度监听
+        private OnProgressListener listener;
 
         private Builder() {
         }
@@ -221,6 +235,11 @@ public class GlideImageConfig extends ImageConfig {
 
         public Builder isCircle(boolean isCircle) {
             this.isCircle = isCircle;
+            return this;
+        }
+
+        public Builder listener(OnProgressListener listener) {
+            this.listener = listener;
             return this;
         }
 

@@ -55,7 +55,7 @@ dependencies {
     implementation 'me.leolin:ShortcutBadger:1.1.22@aar'
     implementation 'com.zhihu.android:matisse:0.4.3'
     // 测试blur
-    implementation 'com.fivehundredpx:blurringview:1.0.0'
+    //implementation 'com.fivehundredpx:blurringview:1.0.0'
     // leakCanary
     debugImplementation libsConfig.canaryDebug
     releaseImplementation libsConfig.canaryRelease
