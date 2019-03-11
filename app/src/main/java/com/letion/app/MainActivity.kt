@@ -72,8 +72,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(26)
-        for (i in 0 until 26) {
+        val array = arrayOfNulls<String>(29)
+        for (i in 0 until 29) {
             array[i] = "这是第${i}个"
         }
 
@@ -88,7 +88,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             run {
                 when (i) {
-                    0 -> MainNavigation(this@MainActivity).toPhotoViewActivity(urls)
+                    0 -> App.obtainAppComponentFromContext(this@MainActivity).navigation().obtainNavigation(MainNavigation::class.java).toPhotoViewActivity(urls)
                     1 -> mPresenter.getBook()
                     2 -> mPresenter.cancelBook()
                     3 -> mPresenter.getBook(true)
@@ -114,6 +114,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     23 -> GPUNavigation(this@MainActivity).toAudioActivity()
                     24 -> MainNavigation(this@MainActivity).toPreViewActivity()
                     25 -> PdfNavigation(this@MainActivity).toPdfActivity()
+                    26 -> PdfNavigation(this@MainActivity).toCanvasActivity()
+                    27 -> PdfNavigation(this@MainActivity).toZoomActivity()
+                    28 -> PdfNavigation(this@MainActivity).toClickableActivity()
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }
@@ -149,6 +152,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         if (Build.VERSION.SDK_INT > 23) {
             ToastUtils.show(if (Settings.canDrawOverlays(this)) "已获得悬浮窗权限" else "暂无悬浮窗权限")
         }
+        ServiceUtils.startService(SuspensionService::class.java)
     }
 
     override fun initData(savedInstanceState: Bundle?) {
@@ -165,6 +169,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         unregisterReceiver(onePixelReceiver)
         ServiceUtils.stopService(BindService::class.java)
         ServiceUtils.unbindService(connection)
+        ServiceUtils.stopService(SuspensionService::class.java)
     }
 
     override fun canSwipeBack(): Boolean {

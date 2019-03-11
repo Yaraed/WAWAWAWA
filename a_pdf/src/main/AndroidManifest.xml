@@ -19,8 +19,16 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.wuqi.a_pdf">
 
-    <application>
+    <application android:hardwareAccelerated="false">
         <activity android:name=".PdfActivity">
+        </activity>
+        <activity
+                android:name=".CanvasActivity"
+                android:hardwareAccelerated="false">
+        </activity>
+        <activity android:name=".ZoomImageViewActivity">
+        </activity>
+        <activity android:name=".ClickableActivity">
         </activity>
     </application>
 

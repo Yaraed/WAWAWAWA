@@ -8,7 +8,7 @@ import android.os.Bundle;
  */
 public class MainNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/main/";
+    private static final String MODULE_NAME = Path.MAIN;
 
     public MainNavigation(Context context) {
         super(context);
@@ -35,9 +35,11 @@ public class MainNavigation extends Navigation {
     public void toImageViewActivity() {
         startActivity("PImageView");
     }
+
     public void toSpinnerActivity() {
         startActivity("Spinner");
     }
+
     public void toPreViewActivity() {
         startActivity("PreView");
     }

@@ -25,9 +25,9 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.sdk.router.HttpNavigation
+import com.weyee.sdk.router.Path
 
-@Route(path = HttpNavigation.MODULE_NAME + "Test")
+@Route(path = Path.Http + "Test")
 class TestActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     override fun setupActivityComponent(appComponent: AppComponent?) {
     }

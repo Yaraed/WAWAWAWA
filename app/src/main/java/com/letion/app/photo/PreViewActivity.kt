@@ -29,10 +29,10 @@ import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
-import com.weyee.sdk.router.MainNavigation
+import com.weyee.sdk.router.Path
 import kotlinx.android.synthetic.main.activity_pre_view.*
 
-@Route(path = MainNavigation.MODULE_NAME + "PreView")
+@Route(path = Path.MAIN + "PreView")
 class PreViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     override fun setupActivityComponent(appComponent: AppComponent?) {
     }

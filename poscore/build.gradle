@@ -77,7 +77,9 @@ dependencies {
     api project(':middleware:weyeestorage')
     api project(':middleware:weyeetoast')
     api project(':middleware:weyeeimageloader')
-    api project(':middleware:weyeerouter')
+    api(project(':middleware:weyeerouter')) {
+        exclude group: "javax.inject"
+    }
     api project(':middleware:weyeepermission')
     api project(':middleware:weyeemultitype')
     api project(':middleware:weyeeplayer')

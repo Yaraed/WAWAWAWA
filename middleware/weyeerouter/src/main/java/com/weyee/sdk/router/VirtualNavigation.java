@@ -27,7 +27,7 @@ import android.content.Intent;
  */
 public class VirtualNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/virtual/";
+    private static final String MODULE_NAME = Path.Virtual;
 
     public VirtualNavigation(Context context) {
         super(context);
@@ -41,7 +41,7 @@ public class VirtualNavigation extends Navigation {
         return MODULE_NAME;
     }
 
-    public void toVirtualActivity(Context context){
+    public void toVirtualActivity(Context context) {
         Intent intent = new Intent();
         intent.setClassName(context.getPackageName() + ".virtual", "com.wuqi.app_virtualapk.VirtualActivity");
         context.startActivity(intent);

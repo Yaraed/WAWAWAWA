@@ -32,14 +32,14 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.sdk.router.IntentNavigation
+import com.weyee.sdk.router.Path
 import com.weyee.sdk.toast.ToastUtils
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.Permission
 import kotlinx.android.synthetic.main.activity_permission.*
 import java.io.File
 
-@Route(path = IntentNavigation.MODULE_NAME + "Permission")
+@Route(path = Path.Intent + "Permission")
 class PermissionActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), View.OnClickListener {
 
     override fun setupActivityComponent(appComponent: AppComponent?) {

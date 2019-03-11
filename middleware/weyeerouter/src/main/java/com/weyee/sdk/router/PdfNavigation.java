@@ -26,7 +26,7 @@ import android.content.Context;
  */
 public class PdfNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/pdf/";
+    private static final String MODULE_NAME = Path.PDF;
 
     public PdfNavigation(Context context) {
         super(context);
@@ -42,5 +42,17 @@ public class PdfNavigation extends Navigation {
 
     public void toPdfActivity() {
         startActivity("Pdf");
+    }
+
+    public void toCanvasActivity() {
+        startActivity("Canvas");
+    }
+
+    public void toZoomActivity() {
+        startActivity("Zoom");
+    }
+
+    public void toClickableActivity() {
+        startActivity("Clickable");
     }
 }

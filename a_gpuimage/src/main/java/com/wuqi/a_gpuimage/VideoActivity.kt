@@ -34,11 +34,11 @@ import com.weyee.sdk.player.entity.DataSource
 import com.weyee.sdk.player.event.OnPlayerEventListener
 import com.weyee.sdk.player.player.IPlayer
 import com.weyee.sdk.player.widget.BaseVideoView
-import com.weyee.sdk.router.GPUNavigation
+import com.weyee.sdk.router.Path
 import com.wuqi.a_gpuimage.play.ReceiverGroupManager
 import kotlinx.android.synthetic.main.activity_video.*
 
-@Route(path = GPUNavigation.MODULE_NAME + "Video")
+@Route(path = Path.GPU + "Video")
 class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerEventListener {
     private var hasStart: Boolean = false
 

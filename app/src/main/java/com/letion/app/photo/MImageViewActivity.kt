@@ -24,7 +24,7 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.sdk.router.MainNavigation
+import com.weyee.sdk.router.Path
 import kotlinx.android.synthetic.main.activity_photo.*
 import javax.sql.DataSource
 
@@ -32,7 +32,7 @@ import javax.sql.DataSource
 /**
  * 图片查看器
  */
-@Route(path = MainNavigation.MODULE_NAME + "PhotoView")
+@Route(path = Path.MAIN + "PhotoView")
 class MImageViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), PhotoViewAttacher
 .OnPhotoTapListener, ViewPager.OnPageChangeListener {
 

@@ -25,9 +25,9 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.sdk.router.MainNavigation
+import com.weyee.sdk.router.Path
 
-@Route(path = MainNavigation.MODULE_NAME + "Spinner")
+@Route(path = Path.MAIN + "Spinner")
 class SpinnerActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     override fun setupActivityComponent(appComponent: AppComponent?) {
     }

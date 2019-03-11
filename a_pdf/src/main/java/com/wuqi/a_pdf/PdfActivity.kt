@@ -30,12 +30,12 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.sdk.router.PdfNavigation
+import com.weyee.sdk.router.Path
 import com.weyee.sdk.toast.ToastUtils
 import kotlinx.android.synthetic.main.activity_pdf.*
 
 
-@Route(path = PdfNavigation.MODULE_NAME + "Pdf")
+@Route(path = Path.PDF + "Pdf")
 class PdfActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     override fun setupActivityComponent(appComponent: AppComponent?) {
 
@@ -44,7 +44,8 @@ class PdfActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     override fun getResourceId(): Int = R.layout.activity_pdf
 
     override fun initView(savedInstanceState: Bundle?) {
-        pdfView.fromAsset("Java面试突击第一版.pdf")
+        // 经过测试10M以内的PDF加载没有问题，内存大概增长100M左右
+        pdfView.fromAsset("notepad.pdf")
             //.pages(0, 2, 1, 3, 3, 3) // all pages are displayed by default
             .enableSwipe(true) // allows to block changing pages using swipe
             .swipeHorizontal(false)

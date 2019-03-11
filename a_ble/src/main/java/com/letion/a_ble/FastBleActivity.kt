@@ -46,14 +46,14 @@ import com.weyee.sdk.multitype.DefaultAdapter
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 import com.weyee.sdk.permission.PermissionIntents
-import com.weyee.sdk.router.BleNavigation
+import com.weyee.sdk.router.Path
 import com.weyee.sdk.toast.ToastUtils
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.Permission
 import io.reactivex.functions.Consumer
 import kotlinx.android.synthetic.main.activity_fast_ble.*
 
-@Route(path = BleNavigation.MODULE_NAME + "FastBle")
+@Route(path = Path.BLE + "FastBle")
 class FastBleActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     private var messageDialog: MessageDialog? = null
     private var progressDialog: ProgressDialog? = null

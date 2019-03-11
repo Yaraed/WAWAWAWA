@@ -37,9 +37,14 @@ dependencies {
     androidTestImplementation 'androidx.test:runner:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
     implementation libsConfig.appcompat_v7
+    implementation libsConfig.androidUtilCode
     api libsConfig.arouter
     annotationProcessor libsConfig.arouterCompiler
     implementation project(':possupport')
+
+    // https://mvnrepository.com/artifact/javax.inject/javax.inject
+    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+
 }
 
 apply from : '../../maven.gradle'

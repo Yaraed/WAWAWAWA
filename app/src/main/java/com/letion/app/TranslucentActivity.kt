@@ -7,10 +7,10 @@ import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.possupport.arch.RxLiftUtils
 import com.weyee.sdk.api.rxutil.RxBindingUtils
-import com.weyee.sdk.router.MainNavigation
+import com.weyee.sdk.router.Path
 import kotlinx.android.synthetic.main.activity_main.*
 
-@Route(path = MainNavigation.MODULE_NAME + "Translucent")
+@Route(path = Path.MAIN + "Translucent")
 class TranslucentActivity : BaseActivity<TranslucentPresenter>() {
     /**
      * 提供AppComponent(提供所有的单例对象)给实现类，进行Component依赖

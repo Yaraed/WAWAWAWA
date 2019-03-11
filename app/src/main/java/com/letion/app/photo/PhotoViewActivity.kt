@@ -36,10 +36,10 @@ import com.weyee.sdk.imageloader.glide.GlideImageConfig
 import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.DefaultAdapter
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
-import com.weyee.sdk.router.MainNavigation
+import com.weyee.sdk.router.Path
 import kotlinx.android.synthetic.main.activity_photo_view.*
 
-@Route(path = MainNavigation.MODULE_NAME + "PImageView")
+@Route(path = Path.MAIN + "PImageView")
 class PhotoViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     override fun setupActivityComponent(appComponent: AppComponent?) {
     }

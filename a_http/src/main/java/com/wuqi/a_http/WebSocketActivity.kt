@@ -36,11 +36,11 @@ import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
 import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.api.rxutil.task.RxUITask
-import com.weyee.sdk.router.HttpNavigation
+import com.weyee.sdk.router.Path
 import com.weyee.sdk.toast.ToastUtils
 import kotlinx.android.synthetic.main.activity_web_socket.*
 
-@Route(path = HttpNavigation.MODULE_NAME + "WebSocket")
+@Route(path = Path.Http + "WebSocket")
 class WebSocketActivity : BaseActivity<BasePresenter<BaseModel,IView>>() {
     private lateinit var list : MutableList<CharSequence>
     private var webSocket: WebSocket? = null

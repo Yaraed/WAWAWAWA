@@ -26,7 +26,7 @@ import android.content.Context;
  */
 public class GPUNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/gpu/";
+    private static final String MODULE_NAME = Path.GPU;
 
     public GPUNavigation(Context context) {
         super(context);

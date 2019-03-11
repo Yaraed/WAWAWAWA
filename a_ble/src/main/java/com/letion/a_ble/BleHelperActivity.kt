@@ -33,7 +33,7 @@ import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.DefaultAdapter
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
-import com.weyee.sdk.router.BleNavigation
+import com.weyee.sdk.router.Path
 import com.weyee.sdk.toast.ToastUtils
 import kotlinx.android.synthetic.main.activity_ble_helper.*
 import top.wuhaojie.bthelper.BtHelperClient
@@ -41,7 +41,7 @@ import top.wuhaojie.bthelper.MessageItem
 import top.wuhaojie.bthelper.OnSearchDeviceListener
 import top.wuhaojie.bthelper.OnSendMessageListener
 
-@Route(path = BleNavigation.MODULE_NAME + "BleHelper")
+@Route(path = Path.BLE + "BleHelper")
 class BleHelperActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     private lateinit var btHelper: BtHelperClient
 
