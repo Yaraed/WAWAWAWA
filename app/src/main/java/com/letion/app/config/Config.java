@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.multidex.MultiDex;
 import com.blankj.utilcode.util.ProcessUtils;
 import com.bumptech.glide.Glide;
+import com.didichuxing.doraemonkit.DoraemonKit;
 import com.squareup.leakcanary.LeakCanary;
 import com.weyee.poscore.base.delegate.AppDelegate;
 import com.weyee.poscore.base.integration.IConfigModule;
@@ -81,7 +82,7 @@ public class Config implements IConfigModule {
                 if (ProcessUtils.isMainProcess()) {
                     com.weyee.poscore.config.Config.init(application);
 
-                    //DoraemonKit.install(application);
+                    DoraemonKit.install(application);
 
 
                 }

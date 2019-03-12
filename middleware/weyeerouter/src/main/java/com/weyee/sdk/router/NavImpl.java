@@ -19,7 +19,7 @@
 package com.weyee.sdk.router;
 
 import android.content.Context;
-import com.blankj.utilcode.util.Utils;
+import com.weyee.sdk.util.Tools;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -45,8 +45,13 @@ public class NavImpl implements Nav {
             if (cacheMap.containsKey(service.getName())) continue;
             try {
                 Constructor c = service.getDeclaredConstructor(Context.class);
-                // 调用有参的构造函数，参数暂时使用的Application Context，可能导致转场动画有误
-                cacheMap.put(service.getName(), (Navigation) c.newInstance(Utils.getApp()));
+                /**
+                 * 调用有参的构造函数，参数使用的Application Context，可能导致转场动画有误
+                 * 为什么不采用{@link Utils#getTopActivityOrApp()}呢？
+                 * @see cacheMap 会持续引用context，导致页面无法销毁，引起内存泄露
+                 */
+
+                cacheMap.put(service.getName(), (Navigation) c.newInstance(Tools.getApp()));
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InstantiationException e) {
@@ -59,6 +64,13 @@ public class NavImpl implements Nav {
         }
     }
 
+    /**
+     * 在不需要Context去做回调时，或者本深难以获取Activity的Context时，可以采用当前方法跳转
+     * 否则推荐使用实例化{@link Navigation}的子类去做跳转
+     * @param service
+     * @param <T>
+     * @return
+     */
     @Override
     public <T extends Navigation> T obtainNavigation(Class<T> service) {
         if (!cacheMap.containsKey(service.getName())) {

@@ -2,7 +2,6 @@ package com.weyee.sdk.imageloader.glide;
 
 import android.content.Context;
 import androidx.annotation.NonNull;
-import com.blankj.utilcode.util.FileUtils;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
@@ -15,6 +14,7 @@ import com.bumptech.glide.load.engine.cache.MemorySizeCalculator;
 import com.bumptech.glide.load.model.GlideUrl;
 import com.bumptech.glide.module.AppGlideModule;
 import com.weyee.sdk.imageloader.progress.ProgressManager;
+import com.weyee.sdk.util.Tools;
 
 import java.io.File;
 import java.io.InputStream;
@@ -31,7 +31,7 @@ public class GlideConfiguration extends AppGlideModule {
         builder.setDiskCache(() -> {
             // Careful: the external cache directory doesn't enforce permissions
             File file = new File(context.getExternalCacheDir(), "glide");
-            FileUtils.createOrExistsDir(file);
+            Tools.createOrExistsDir(file);
             return DiskLruCacheWrapper.get(file, IMAGE_DISK_CACHE_MAX_SIZE);
         });
 

@@ -29,7 +29,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.provider.Settings;
 import android.util.Log;
-import com.blankj.utilcode.util.LogUtils;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -78,7 +77,6 @@ final class Utils {
 
     public static void goXiaoMiMainager(Context context) {
         String rom = getMiuiVersion();
-        LogUtils.e("goMiaoMiMainager --- rom : "+rom);
         Intent intent=new Intent();
         if ("V6".equals(rom) || "V7".equals(rom)) {
             intent.setAction("miui.intent.action.APP_PERM_EDITOR");

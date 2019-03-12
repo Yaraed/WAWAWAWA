@@ -7,7 +7,7 @@ import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
 import androidx.annotation.NonNull;
-import com.blankj.utilcode.util.ScreenUtils;
+import com.weyee.sdk.util.Tools;
 
 /**
  * <p>dialog 基类
@@ -38,7 +38,7 @@ public class BaseDialog extends Dialog {
         Window window = this.getWindow();
         window.setGravity(Gravity.CENTER);
         WindowManager.LayoutParams params = window.getAttributes();
-        params.width = (int) (ScreenUtils.getScreenWidth() * 0.8);
+        params.width = (int) (Tools.getScreenWidth() * 0.8);
         window.setAttributes(params);
     }
 }

@@ -19,7 +19,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.wuqi.a_pdf">
 
-    <application android:hardwareAccelerated="false">
+    <application>
         <activity android:name=".PdfActivity">
         </activity>
         <activity

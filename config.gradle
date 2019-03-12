@@ -89,6 +89,9 @@ ext {
             butterknife             : "com.jakewharton:butterknife:$dependVersion.butterknifeSdkVersion",
             butterknifeCompiler     : "com.jakewharton:butterknife-compiler:$dependVersion.butterknifeSdkVersion",
             canaryDebug             : "com.squareup.leakcanary:leakcanary-android:$dependVersion.canarySdkVersion",
-            canaryRelease           : "com.squareup.leakcanary:leakcanary-android-no-op:$dependVersion.canarySdkVersion"
+            canaryRelease           : "com.squareup.leakcanary:leakcanary-android-no-op:$dependVersion.canarySdkVersion",
+
+            testRunner              : "androidx.test:runner:1.1.0",
+            testEspresso            : "androidx.test.espresso:espresso-core:3.1.0",
     ]
 }

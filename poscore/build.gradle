@@ -29,8 +29,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation libsConfig.testRunner
+    androidTestImplementation libsConfig.testEspresso
     // Support库
     api libsConfig.core_v7
     api libsConfig.appcompat_v7
@@ -84,6 +84,7 @@ dependencies {
     api project(':middleware:weyeemultitype')
     api project(':middleware:weyeeplayer')
     api project(':middleware:weyeeaudio')
+    api project(':middleware:weyeeutil')
     api project(':possupport')
     api project(':poswidget')
     //    // glide

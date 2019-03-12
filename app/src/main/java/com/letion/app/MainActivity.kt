@@ -29,6 +29,7 @@ import com.weyee.sdk.event.Bus
 import com.weyee.sdk.event.NormalEvent
 import com.weyee.sdk.router.*
 import com.weyee.sdk.toast.ToastUtils
+import com.weyee.sdk.util.sp.SpUtils
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import kotlinx.android.synthetic.main.activity_main.*
@@ -72,8 +73,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(29)
-        for (i in 0 until 29) {
+        val array = arrayOfNulls<String>(30)
+        for (i in 0 until 30) {
             array[i] = "这是第${i}个"
         }
 
@@ -88,7 +89,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         listView.onItemClickListener = AdapterView.OnItemClickListener { _, _, i, _ ->
             run {
                 when (i) {
-                    0 -> App.obtainAppComponentFromContext(this@MainActivity).navigation().obtainNavigation(MainNavigation::class.java).toPhotoViewActivity(urls)
+                    0 -> App.obtainAppComponentFromContext(this@MainActivity).navigation().obtainNavigation(
+                        MainNavigation::class.java
+                    ).toPhotoViewActivity(urls)
                     1 -> mPresenter.getBook()
                     2 -> mPresenter.cancelBook()
                     3 -> mPresenter.getBook(true)
@@ -117,6 +120,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     26 -> PdfNavigation(this@MainActivity).toCanvasActivity()
                     27 -> PdfNavigation(this@MainActivity).toZoomActivity()
                     28 -> PdfNavigation(this@MainActivity).toClickableActivity()
+                    29 -> {
+                        SpUtils.getDefault().put("10086", "zhangsan")
+                        ToastUtils.show(SpUtils.getDefault().getString("10086"))
+
+                        SpUtils.getDefault().clear()
+                    }
                     else -> {
                         Bus.getDefault().post(NormalEvent())
                     }

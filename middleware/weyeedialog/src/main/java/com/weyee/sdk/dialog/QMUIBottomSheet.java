@@ -30,8 +30,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.core.content.ContextCompat;
-import com.blankj.utilcode.util.ScreenUtils;
-import com.blankj.utilcode.util.SizeUtils;
+import com.weyee.sdk.util.Tools;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -79,8 +78,8 @@ public class QMUIBottomSheet extends Dialog {
         params.height = ViewGroup.LayoutParams.WRAP_CONTENT;
         params.gravity = Gravity.BOTTOM | Gravity.CENTER;
 
-        int screenWidth = ScreenUtils.getScreenWidth();
-        int screenHeight = ScreenUtils.getScreenHeight();
+        int screenWidth = Tools.getScreenWidth();
+        int screenHeight = Tools.getScreenHeight();
         params.width = screenWidth < screenHeight ? screenWidth : screenHeight;
         getWindow().setAttributes(params);
         setCanceledOnTouchOutside(true);
@@ -368,7 +367,7 @@ public class QMUIBottomSheet extends Dialog {
         }
 
         private boolean needToScroll() {
-            int itemHeight = SizeUtils.dp2px(56);
+            int itemHeight = Tools.dp2px(56);
             int totalHeight = mItems.size() * itemHeight;
             if (mHeaderViews.size() > 0) {
                 for (View view : mHeaderViews) {
@@ -379,7 +378,7 @@ public class QMUIBottomSheet extends Dialog {
                 }
             }
             if (mTitleTv != null && !TextUtils.isEmpty(mTitle)) {
-                totalHeight += SizeUtils.dp2px(56);
+                totalHeight += Tools.dp2px(56);
             }
             return totalHeight > getListMaxHeight();
         }
@@ -388,7 +387,7 @@ public class QMUIBottomSheet extends Dialog {
          * 注意:这里只考虑List的高度,如果有title或者headerView,不计入考虑中
          */
         protected int getListMaxHeight() {
-            return (int) (ScreenUtils.getScreenHeight() * 0.5);
+            return (int) (Tools.getScreenHeight() * 0.5);
         }
 
         public void notifyDataSetChanged() {
@@ -691,8 +690,8 @@ public class QMUIBottomSheet extends Dialog {
             mBottomButton = baseLinearLayout.findViewById(R.id.bottom_sheet_close_button);
 
             int maxItemCountEachLine = Math.max(mFirstLineViews.size(), mSecondLineViews.size());
-            int screenWidth = ScreenUtils.getScreenWidth();
-            int screenHeight = ScreenUtils.getScreenHeight();
+            int screenWidth = Tools.getScreenWidth();
+            int screenHeight = Tools.getScreenHeight();
             int width = screenWidth < screenHeight ? screenWidth : screenHeight;
             int itemWidth = calculateItemWidth(width, maxItemCountEachLine, firstLine.getPaddingLeft(), firstLine.getPaddingRight());
 
@@ -758,7 +757,7 @@ public class QMUIBottomSheet extends Dialog {
          */
         private int calculateItemWidth(int width, int maxItemCountInEachLine, int paddingLeft, int paddingRight) {
             if (mMiniItemWidth == -1) {
-                mMiniItemWidth = SizeUtils.dp2px(84);
+                mMiniItemWidth = Tools.dp2px(84);
             }
 
             final int parentSpacing = width - paddingLeft - paddingRight;

@@ -21,6 +21,7 @@ package com.wuqi.a_gpuimage
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
 import android.os.Bundle
+import android.view.ViewGroup
 import android.view.WindowManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.weyee.poscore.base.BaseActivity
@@ -35,8 +36,10 @@ import com.weyee.sdk.player.event.OnPlayerEventListener
 import com.weyee.sdk.player.player.IPlayer
 import com.weyee.sdk.player.widget.BaseVideoView
 import com.weyee.sdk.router.Path
+import com.weyee.sdk.util.Tools
 import com.wuqi.a_gpuimage.play.ReceiverGroupManager
 import kotlinx.android.synthetic.main.activity_video.*
+
 
 @Route(path = Path.GPU + "Video")
 class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerEventListener {
@@ -55,7 +58,7 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
         window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
         window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
         videoView.setOnPlayerEventListener(this)
-        val receiverGroup = ReceiverGroupManager.get().getReceiverGroup(context);
+        val receiverGroup = ReceiverGroupManager.get().getReceiverGroup(context)
         receiverGroup.groupValue.putBoolean(DataInter.Key.KEY_CONTROLLER_TOP_ENABLE, true)
         videoView.setReceiverGroup(receiverGroup)
         videoView.setEventHandler(object : OnVideoViewEventHandler() {
@@ -87,6 +90,7 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
     }
 
     override fun initData(savedInstanceState: Bundle?) {
+        updateVideo(isLandscape)
     }
 
 
@@ -113,6 +117,8 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
     override fun onConfigurationChanged(newConfig: Configuration?) {
         super.onConfigurationChanged(newConfig)
         isLandscape = newConfig?.orientation == Configuration.ORIENTATION_LANDSCAPE
+
+        updateVideo(isLandscape)
     }
 
     override fun onBackPressed() {
@@ -157,5 +163,17 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
     override fun onDestroy() {
         super.onDestroy()
         videoView.stopPlayback()
+    }
+
+    private fun updateVideo(landscape: Boolean) {
+        val layoutParams = videoView.layoutParams as ViewGroup.LayoutParams
+        if (landscape) {
+            layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT
+            layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT
+        } else {
+            layoutParams.width = Tools.getScreenWidth()
+            layoutParams.height = layoutParams.width * 3 / 4
+        }
+        videoView.layoutParams = layoutParams
     }
 }

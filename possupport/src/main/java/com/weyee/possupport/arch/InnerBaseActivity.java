@@ -18,7 +18,6 @@ package com.weyee.possupport.arch;
 import android.annotation.SuppressLint;
 import android.content.res.Configuration;
 import android.os.Build;
-import android.util.Log;
 import androidx.appcompat.app.AppCompatActivity;
 import com.weyee.possupport.R;
 
@@ -34,7 +33,6 @@ public class InnerBaseActivity extends AppCompatActivity {
     public void setRequestedOrientation(int requestedOrientation) {
         if (mConvertToTranslucentCauseOrientationChanged && (Build.VERSION.SDK_INT == Build.VERSION_CODES.O
                 || Build.VERSION.SDK_INT == Build.VERSION_CODES.O_MR1)) {
-            Log.i("InnerBaseActivity", "setRequestedOrientation when activity is translucent");
             mPendingRequestedOrientation = requestedOrientation;
         } else {
             super.setRequestedOrientation(requestedOrientation);

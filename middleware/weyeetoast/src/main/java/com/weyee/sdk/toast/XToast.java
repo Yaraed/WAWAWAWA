@@ -30,7 +30,7 @@ class XToast extends Toast {
             mMessageView = (TextView) view;
             return;
         } else if (view.findViewById(android.R.id.message) instanceof TextView) {
-            mMessageView = ((TextView) view.findViewById(android.R.id.message));
+            mMessageView = view.findViewById(android.R.id.message);
             return;
         } else if (view instanceof ViewGroup) {
             if ((mMessageView = findTextView((ViewGroup) view)) != null) return;

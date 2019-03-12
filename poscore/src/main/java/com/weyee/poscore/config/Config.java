@@ -9,6 +9,7 @@ import com.weyee.sdk.log.LogUtils;
 import com.weyee.sdk.player.PlayerUtils;
 import com.weyee.sdk.router.RouterManager;
 import com.weyee.sdk.toast.ToastUtils;
+import com.weyee.sdk.util.sp.SpUtils;
 
 /**
  * <p>全局配置，默认配置
@@ -22,6 +23,7 @@ public class Config {
         AutoSizeConfig.init();
         ToastUtils.init(application);
         LogUtils.init();
+        SpUtils.getDefault().init(null, 0);
         RouterManager.init(application, Environment.isDebug());
         RxHttpUtils.getInstance().config().setBaseUrl("https://api.douban.com/")
                 .setOkClient(new HttpClient
