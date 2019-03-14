@@ -21,7 +21,6 @@ package com.wuqi.a_gpuimage
 import android.annotation.SuppressLint
 import android.content.pm.ActivityInfo
 import android.content.res.Configuration
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -36,10 +35,8 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.sdk.api.rxutil.RxJavaUtils
-import com.weyee.sdk.api.rxutil.task.RxAsyncTask
-import com.weyee.sdk.mediaretriever.MediaRetrieverUtils
 import com.weyee.sdk.mediaretriever.Metadata
+import com.weyee.sdk.player.OrientationSensor
 import com.weyee.sdk.player.assist.InterEvent
 import com.weyee.sdk.player.assist.OnVideoViewEventHandler
 import com.weyee.sdk.player.entity.DataSource
@@ -58,6 +55,8 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
 
     private var userPause: Boolean = false
     private var isLandscape: Boolean = false
+
+    private var orientationSensor: OrientationSensor? = null
 
     private var metadatas: MutableList<Metadata>? = null
 
@@ -105,22 +104,22 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
     override fun initData(savedInstanceState: Bundle?) {
 
 
-        RxJavaUtils.executeAsyncTask(object :
-            RxAsyncTask<String, MutableMap<String, Any>>("http://jiajunhui.cn/video/edwin_rolling_in_the_deep.flv") {
-            override fun doInUIThread(t: MutableMap<String, Any>?) {
-                imageView.setImageBitmap(t?.get("IMAGE") as Bitmap?)
-                metadatas = mutableListOf()
-                t?.asIterable()?.forEach {
-                    metadatas?.add(com.weyee.sdk.mediaretriever.Metadata(it.key, it.value))
-                }
-                (listView.adapter as BaseAdapter).notifyDataSetChanged()
-            }
-
-            override fun doInIOThread(t: String?): MutableMap<String, Any> {
-                return MediaRetrieverUtils.loadResource(t, null)
-            }
-
-        })
+//        RxJavaUtils.executeAsyncTask(object :
+//            RxAsyncTask<String, MutableMap<String, Any>>("http://jiajunhui.cn/video/edwin_rolling_in_the_deep.flv") {
+//            override fun doInUIThread(t: MutableMap<String, Any>?) {
+//                imageView.setImageBitmap(t?.get("IMAGE") as Bitmap?)
+//                metadatas = mutableListOf()
+//                t?.asIterable()?.forEach {
+//                    metadatas?.add(com.weyee.sdk.mediaretriever.Metadata(it.key, it.value))
+//                }
+//                (listView.adapter as BaseAdapter).notifyDataSetChanged()
+//            }
+//
+//            override fun doInIOThread(t: String?): MutableMap<String, Any> {
+//                return MediaRetrieverUtils.loadResource(t, null)
+//            }
+//
+//        })
 
         listView.adapter = object : BaseAdapter() {
 
@@ -149,6 +148,22 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
             }
 
         }
+
+        orientationSensor = OrientationSensor(this, object : OrientationSensor.OnOrientationListener {
+            override fun onPortrait(orientation: Int) {
+                if (videoView.isInPlaybackState) {
+                    requestedOrientation = orientation
+                }
+            }
+
+            override fun onLandScape(orientation: Int) {
+                if (videoView.isInPlaybackState) {
+                    requestedOrientation = orientation
+                }
+            }
+
+        })
+        orientationSensor?.enable();
     }
 
 
@@ -217,6 +232,16 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
             videoView.rePlay(0)
         }
         initPlay()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        orientationSensor?.enable()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        orientationSensor?.disable()
     }
 
     override fun onDestroy() {
