@@ -16,24 +16,27 @@
  *
  */
 
-package com.weyee.sdk.util.sp;
+package com.wuqi.a_gpuimage.play;
+
+import com.weyee.sdk.player.entity.DataSource;
+import com.weyee.sdk.player.provider.BaseDataProvider;
 
 /**
- * SharedPreferences 默认工具类
- *
- * @author wuqi by 2019/3/12.
+ * @author wuqi by 2019/3/14.
  */
-public class SpUtils {
-
-    private SpUtils() {
+public class MonitorDataProvider extends BaseDataProvider {
+    @Override
+    public void handleSourceData(DataSource sourceData) {
 
     }
 
-    /**
-     * 默认的日志记录为Logcat
-     */
-    public static ISharedPreferences getDefault() {
-        return SpImpl.Holder.BUS;
-        //return SpImpl.Holder.BUS;
+    @Override
+    public void cancel() {
+
+    }
+
+    @Override
+    public void destroy() {
+
     }
 }

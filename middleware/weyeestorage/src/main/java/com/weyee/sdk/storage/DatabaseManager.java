@@ -16,24 +16,11 @@
  *
  */
 
-package com.weyee.sdk.util.sp;
+package com.weyee.sdk.storage;
 
 /**
- * SharedPreferences 默认工具类
- *
- * @author wuqi by 2019/3/12.
+ * 数据管理类
+ * @author wuqi by 2019/3/13.
  */
-public class SpUtils {
-
-    private SpUtils() {
-
-    }
-
-    /**
-     * 默认的日志记录为Logcat
-     */
-    public static ISharedPreferences getDefault() {
-        return SpImpl.Holder.BUS;
-        //return SpImpl.Holder.BUS;
-    }
+public class DatabaseManager {
 }

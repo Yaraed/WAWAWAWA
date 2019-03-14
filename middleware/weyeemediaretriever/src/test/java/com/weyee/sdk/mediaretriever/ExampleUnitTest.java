@@ -16,24 +16,20 @@
  *
  */
 
-package com.weyee.sdk.util.sp;
+package com.weyee.sdk.mediaretriever;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
- * SharedPreferences 默认工具类
+ * Example local unit test, which will execute on the development machine (host).
  *
- * @author wuqi by 2019/3/12.
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class SpUtils {
-
-    private SpUtils() {
-
-    }
-
-    /**
-     * 默认的日志记录为Logcat
-     */
-    public static ISharedPreferences getDefault() {
-        return SpImpl.Holder.BUS;
-        //return SpImpl.Holder.BUS;
+public class ExampleUnitTest {
+    @Test
+    public void addition_isCorrect() {
+        assertEquals(4, 2 + 2);
     }
 }

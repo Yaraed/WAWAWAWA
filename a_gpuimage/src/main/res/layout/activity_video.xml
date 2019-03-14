@@ -29,4 +29,13 @@
                                                android:background="@android:color/black"
                                                android:layout_height="250dp"/>
 
+    <ImageView android:layout_width="match_parent" android:layout_height="250dp"
+               android:id="@+id/imageView"/>
+
+    <ListView android:layout_width="match_parent" android:layout_height="match_parent"
+              android:id="@+id/listView"
+              android:layout_marginTop="250dp">
+
+    </ListView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

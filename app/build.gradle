@@ -45,7 +45,7 @@ android {
     }
 
     /**
-     * 防止多个视频库，重复依赖libc++_shared.so包
+     * 防止mmkv和DoraemonKit，重复依赖libc++_shared.so包
      */
     packagingOptions {//加上这些代码
         pickFirst 'lib/armeabi-v7a/libc++_shared.so'

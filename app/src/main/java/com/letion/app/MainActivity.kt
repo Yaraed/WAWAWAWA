@@ -121,10 +121,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     27 -> PdfNavigation(this@MainActivity).toZoomActivity()
                     28 -> PdfNavigation(this@MainActivity).toClickableActivity()
                     29 -> {
-                        SpUtils.getDefault().put("10086", "zhangsan")
-                        ToastUtils.show(SpUtils.getDefault().getString("10086"))
+                        SpUtils.getDefault().put("10086", "10086")
+                        ToastUtils.show(SpUtils.getDefault().getInt("10086"))
 
-                        SpUtils.getDefault().clear()
+                        //SpUtils.getDefault().clear()
                     }
                     else -> {
                         Bus.getDefault().post(NormalEvent())
