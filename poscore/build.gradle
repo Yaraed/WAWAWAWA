@@ -85,6 +85,7 @@ dependencies {
     api project(':middleware:weyeeplayer')
     api project(':middleware:weyeeaudio')
     api project(':middleware:weyeemediaretriever')
+    api project(':middleware:weyeemedialoader')
     api project(':middleware:weyeeutil')
     api project(':possupport')
     api project(':poswidget')

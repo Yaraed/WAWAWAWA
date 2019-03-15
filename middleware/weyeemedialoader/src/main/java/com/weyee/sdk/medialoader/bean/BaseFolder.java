@@ -16,40 +16,38 @@
  *
  */
 
-package com.weyee.sdk.router;
+package com.weyee.sdk.medialoader.bean;
 
-import android.content.Context;
-
+import java.io.Serializable;
 
 /**
- * main模块跳转导航管理类。
+ * Created by Taurus on 2016/8/29.
  */
-public class GPUNavigation extends Navigation {
+public class BaseFolder implements Serializable {
+    private String id;
+    private String name;
 
-    private static final String MODULE_NAME = Path.GPU;
-
-    public GPUNavigation(Context context) {
-        super(context);
-    }
-
-    /**
-     * 配置Module
-     */
-    @Override
-    protected String getModuleName() {
-        return MODULE_NAME;
+    public BaseFolder() {
     }
 
-    public void toGPUActivity(){
-        startActivity("GPU");
+    public BaseFolder(String id, String name) {
+        this.id = id;
+        this.name = name;
     }
-    public void toVideoActivity(){
-        startActivity("Video");
+
+    public String getId() {
+        return id;
     }
-    public void toAudioActivity(){
-        startActivity("Audio");
+
+    public void setId(String id) {
+        this.id = id;
     }
-    public void toMediaActivity(){
-        startActivity("Media");
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

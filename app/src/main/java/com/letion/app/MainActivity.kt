@@ -73,8 +73,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(30)
-        for (i in 0 until 30) {
+        val array = arrayOfNulls<String>(31)
+        for (i in 0 until 31) {
             array[i] = "这是第${i}个"
         }
 
@@ -125,6 +125,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                         ToastUtils.show(SpUtils.getDefault().getInt("10086"))
 
                         //SpUtils.getDefault().clear()
+                    }
+                    30 -> {
+                        GPUNavigation(this@MainActivity).toMediaActivity()
                     }
                     else -> {
                         Bus.getDefault().post(NormalEvent())

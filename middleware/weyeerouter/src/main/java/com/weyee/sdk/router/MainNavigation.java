@@ -27,7 +27,12 @@ public class MainNavigation extends Navigation {
     }
 
     public void toPhotoViewActivity(String[] urls) {
+        toPhotoViewActivity(0,urls);
+    }
+
+    public void toPhotoViewActivity(int index, String[] urls) {
         Bundle bundle = new Bundle();
+        bundle.putInt("index", index);
         bundle.putStringArray("urls", urls);
         startActivity("PhotoView", bundle);
     }

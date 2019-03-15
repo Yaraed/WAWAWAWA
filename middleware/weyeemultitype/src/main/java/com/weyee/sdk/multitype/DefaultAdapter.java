@@ -35,7 +35,6 @@ import java.util.List;
  */
 public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>> {
     private List<T> mInfos;
-    private BaseHolder<T> mHolder;
     private OnRecyclerViewItemClickListener<T> mOnItemClickListener = null;
 
     public DefaultAdapter(@Nullable List<T> infos) {
@@ -74,10 +73,11 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
      * @param viewType 布局类型
      * @return {@link BaseHolder}
      */
+    @NonNull
     @Override
-    public BaseHolder<T> onCreateViewHolder(ViewGroup parent, final int viewType) {
+    public BaseHolder<T> onCreateViewHolder(@NonNull ViewGroup parent, final int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(getLayoutId(viewType), parent, false);
-        mHolder = getHolder(view, viewType);
+        final BaseHolder<T> mHolder = getHolder(view, viewType);
         //设置Item点击事件
         mHolder.itemView.setOnClickListener(v -> {
             if (mOnItemClickListener != null && mInfos.size() > 0) {
@@ -116,6 +116,15 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
      */
     public List<T> getData() {
         return mInfos;
+    }
+
+    public void setData(@Nullable List<T> data) {
+        if (mInfos != null) {
+            mInfos.clear();
+            if (data != null) {
+                mInfos.addAll(data);
+            }
+        }
     }
 
     public void addData(@Nullable T data) {

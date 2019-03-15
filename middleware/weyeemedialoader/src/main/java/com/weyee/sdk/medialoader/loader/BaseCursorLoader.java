@@ -16,40 +16,23 @@
  *
  */
 
-package com.weyee.sdk.router;
+package com.weyee.sdk.medialoader.loader;
 
 import android.content.Context;
-
+import androidx.loader.content.CursorLoader;
+import com.weyee.sdk.medialoader.inter.ILoader;
 
 /**
- * main模块跳转导航管理类。
+ * Created by Taurus on 16/8/28.
  */
-public class GPUNavigation extends Navigation {
+public class BaseCursorLoader extends CursorLoader {
 
-    private static final String MODULE_NAME = Path.GPU;
-
-    public GPUNavigation(Context context) {
+    public BaseCursorLoader(Context context, ILoader iLoader) {
         super(context);
-    }
-
-    /**
-     * 配置Module
-     */
-    @Override
-    protected String getModuleName() {
-        return MODULE_NAME;
-    }
-
-    public void toGPUActivity(){
-        startActivity("GPU");
-    }
-    public void toVideoActivity(){
-        startActivity("Video");
-    }
-    public void toAudioActivity(){
-        startActivity("Audio");
-    }
-    public void toMediaActivity(){
-        startActivity("Media");
+        setProjection(iLoader.getSelectProjection());
+        setUri(iLoader.getQueryUri());
+        setSelection(iLoader.getSelections());
+        setSelectionArgs(iLoader.getSelectionsArgs());
+        setSortOrder(iLoader.getSortOrderSql());
     }
 }
