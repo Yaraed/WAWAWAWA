@@ -27,7 +27,7 @@ public class MainNavigation extends Navigation {
     }
 
     public void toPhotoViewActivity(String[] urls) {
-        toPhotoViewActivity(0,urls);
+        toPhotoViewActivity(0, urls);
     }
 
     public void toPhotoViewActivity(int index, String[] urls) {
@@ -47,5 +47,9 @@ public class MainNavigation extends Navigation {
 
     public void toPreViewActivity() {
         startActivity("PreView");
+    }
+
+    public void toStateActivity() {
+        startActivity("State");
     }
 }

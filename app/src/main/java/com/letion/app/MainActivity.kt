@@ -73,8 +73,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(31)
-        for (i in 0 until 31) {
+        val array = arrayOfNulls<String>(32)
+        for (i in 0 until 32) {
             array[i] = "这是第${i}个"
         }
 
@@ -128,6 +128,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     }
                     30 -> {
                         GPUNavigation(this@MainActivity).toMediaActivity()
+                    }
+                    31 -> {
+                        MainNavigation(this@MainActivity).toStateActivity()
                     }
                     else -> {
                         Bus.getDefault().post(NormalEvent())
