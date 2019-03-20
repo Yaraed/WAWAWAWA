@@ -87,6 +87,7 @@ dependencies {
     api project(':middleware:weyeemediaretriever')
     api project(':middleware:weyeemedialoader')
     api project(':middleware:weyeeutil')
+    api project(':middleware:weyeeaspectj')
     api project(':possupport')
     api project(':poswidget')
     //    // glide

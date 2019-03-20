@@ -33,7 +33,9 @@ import com.weyee.poswidget.stateview.StateLayout
 import com.weyee.poswidget.stateview.state.ContentState
 import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.DefaultAdapter
+import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 import com.weyee.sdk.router.Path
+import com.weyee.sdk.toast.ToastUtils
 import kotlinx.android.synthetic.main.activity_state.*
 
 /**
@@ -57,7 +59,11 @@ class StateActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
             recyclerView.layoutManager = LinearLayoutManager(this@StateActivity)
 
             recyclerView.adapter = object :
-                DefaultAdapter<String>(mutableListOf("liufegn", "zhangsan", "lisi", "wangwu", "zhaoliu", "sunqi")) {
+                DefaultAdapter<String>(mutableListOf("liufegn", "zhangsan", "hello, 你好我真的是一个很无语的人吗", "wangwu", "zhaoliu", "sunqi")
+                ,
+                    OnRecyclerViewItemClickListener<String> { _, _, data, _ ->
+                        ToastUtils.show(data)
+                    }) {
                 override fun getHolder(v: View, viewType: Int): BaseHolder<String> {
                     return object : BaseHolder<String>(v) {
                         override fun setData(data: String, position: Int) {
