@@ -17,3 +17,5 @@
 支持局部或者全局显示各种状态
 支持Activity、Fragment、Layout及帮助类的方式
 支持在RecyclerView中单个Item变换各种状态
+
+5. Ticket(小票View)

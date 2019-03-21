@@ -33,18 +33,18 @@ import java.util.List;
  *
  * @author wuqi by 2019/2/22.
  */
-public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>> {
-    private List<T> mInfos;
+public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>> implements AdapterHelper<T> {
+    private List<T> mList;
     private OnRecyclerViewItemClickListener<T> mOnItemClickListener = null;
 
-    public DefaultAdapter(@Nullable List<T> infos) {
+    public BaseAdapter(@Nullable List<T> infos) {
         super();
-        this.mInfos = infos == null ? new ArrayList<>() : infos;
+        this.mList = infos == null ? new ArrayList<>() : infos;
     }
 
-    public DefaultAdapter(@Nullable List<T> infos, @Nullable OnRecyclerViewItemClickListener<T> listener) {
+    public BaseAdapter(@Nullable List<T> infos, @Nullable OnRecyclerViewItemClickListener<T> listener) {
         super();
-        this.mInfos = infos == null ? new ArrayList<>() : infos;
+        this.mList = infos == null ? new ArrayList<>() : infos;
         this.mOnItemClickListener = listener;
     }
 
@@ -80,7 +80,7 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
         final BaseHolder<T> mHolder = getHolder(view, viewType);
         //设置Item点击事件
         mHolder.itemView.setOnClickListener(v -> {
-            if (mOnItemClickListener != null && mInfos.size() > 0) {
+            if (mOnItemClickListener != null && mList.size() > 0) {
                 int position = mHolder.getAdapterPosition();
                 mOnItemClickListener.onItemClick(view, viewType, getItem(position), position);
             }
@@ -95,8 +95,8 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
      * @param position 在 RecyclerView 中的位置
      */
     @Override
-    public void onBindViewHolder(BaseHolder<T> holder, int position) {
-        holder.setData(mInfos.get(position), position);
+    public void onBindViewHolder(@NonNull BaseHolder<T> holder, int position) {
+        holder.setData(mList.get(position), position);
     }
 
     /**
@@ -106,32 +106,7 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
      */
     @Override
     public int getItemCount() {
-        return mInfos == null ? 0 : mInfos.size();
-    }
-
-    /**
-     * 返回数据集合
-     *
-     * @return 数据集合
-     */
-    public List<T> getData() {
-        return mInfos;
-    }
-
-    public void setData(@Nullable List<T> data) {
-        if (mInfos != null) {
-            mInfos.clear();
-            if (data != null) {
-                mInfos.addAll(data);
-            }
-        }
-    }
-
-    public void addData(@Nullable T data) {
-        if (mInfos != null) {
-            mInfos.add(data);
-            notifyDataSetChanged();
-        }
+        return mList == null ? 0 : mList.size();
     }
 
     /**
@@ -141,7 +116,7 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
      * @return 数据
      */
     public T getItem(int position) {
-        return mInfos == null ? null : mInfos.get(position);
+        return mList == null ? null : mList.get(position);
     }
 
     /**
@@ -158,5 +133,91 @@ public abstract class DefaultAdapter<T> extends RecyclerView.Adapter<BaseHolder<
                 ((BaseHolder) viewHolder).onRelease();
             }
         }
+    }
+
+    @Override
+    public boolean addAll(@Nullable List<T> list) {
+        if (list == null) return false;
+        boolean result = mList.addAll(list);
+        notifyDataSetChanged();
+        return result;
+    }
+
+    @Override
+    public boolean addAll(int position, @Nullable List<T> list) {
+        if (list == null) return false;
+        if (position < 0 || position >= mList.size()) return false;
+        boolean result = mList.addAll(position, list);
+        notifyDataSetChanged();
+        return result;
+    }
+
+    @Override
+    public void add(@Nullable T data) {
+        if (data == null) return;
+        mList.add(data);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void add(int position, @Nullable T data) {
+        if (data == null) return;
+        if (position < 0 || position >= mList.size()) return;
+        mList.add(position, data);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public void clear() {
+        mList.clear();
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean contains(T data) {
+        return mList.contains(data);
+    }
+
+    @Override
+    public T getData(int index) {
+        if (index < 0 || index >= mList.size()) return null;
+        return mList.get(index);
+    }
+
+    /**
+     * 返回数据集合
+     *
+     * @return 数据集合
+     */
+    @Override
+    public List<T> getAll() {
+        return mList;
+    }
+
+    @Override
+    public void modify(@Nullable T oldData, @Nullable T newData) {
+        modify(mList.indexOf(oldData), newData);
+    }
+
+    @Override
+    public void modify(int index, @Nullable T newData) {
+        if (index < 0 || index >= mList.size()) return;
+        mList.set(index, newData);
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean remove(@Nullable T data) {
+        if (data == null) return false;
+        boolean result = mList.remove(data);
+        notifyDataSetChanged();
+        return result;
+    }
+
+    @Override
+    public void remove(int index) {
+        if (index < 0 || index >= mList.size()) return;
+        mList.remove(index);
+        notifyDataSetChanged();
     }
 }

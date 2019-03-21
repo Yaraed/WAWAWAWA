@@ -79,7 +79,7 @@ class MediaActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
         )
 
         recyclerView.adapter =
-            object : DefaultAdapter<AudioItem>(list,
+            object : BaseAdapter<AudioItem>(list,
                 OnRecyclerViewItemClickListener<AudioItem> { _, _, data, _ ->
                     MainNavigation(this@MediaActivity).toPhotoViewActivity(path.indexOf(data.path), path.toTypedArray())
                 }) {
@@ -115,7 +115,7 @@ class MediaActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
             .onGranted {
                 MediaLoader.getLoader().loadAudios(this@MediaActivity, object : OnAudioLoaderCallBack() {
                     override fun onResult(result: AudioResult?) {
-                        (recyclerView.adapter as DefaultAdapter<*>).data = result?.items
+                        (recyclerView.adapter as BaseAdapter<AudioItem>).addAll(result?.items)
                         result?.items?.forEach {
                             path.add(it.path)
                         }

@@ -42,7 +42,7 @@ import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.dialog.MessageDialog
 import com.weyee.sdk.log.Environment
 import com.weyee.sdk.multitype.BaseHolder
-import com.weyee.sdk.multitype.DefaultAdapter
+import com.weyee.sdk.multitype.BaseAdapter
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 import com.weyee.sdk.permission.PermissionIntents
@@ -72,7 +72,7 @@ class FastBleActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(context).build())
-        recyclerView.adapter = object : DefaultAdapter<BleDevice>(list,
+        recyclerView.adapter = object : BaseAdapter<BleDevice>(list,
             OnRecyclerViewItemClickListener<BleDevice> { _, _, data, _ ->
                 if(BleManager.getInstance().isConnected(data)){
                     BleManager.getInstance().disconnect(data)
@@ -170,7 +170,7 @@ class FastBleActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
                     }
 
                     override fun onScanning(bleDevice: BleDevice?) {
-                        (recyclerView.adapter as DefaultAdapter<BleDevice>).addData(bleDevice)
+                        (recyclerView.adapter as BaseAdapter<BleDevice>).add(bleDevice)
                     }
 
                 })

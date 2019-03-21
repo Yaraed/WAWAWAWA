@@ -29,8 +29,8 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
+import com.weyee.sdk.multitype.BaseAdapter
 import com.weyee.sdk.multitype.BaseHolder
-import com.weyee.sdk.multitype.DefaultAdapter
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 import com.weyee.sdk.router.Path
@@ -72,7 +72,7 @@ class BleHelperActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
 //
 //            })
 //        })
-        recyclerView.adapter = object : DefaultAdapter<BluetoothDevice>(null,
+        recyclerView.adapter = object : BaseAdapter<BluetoothDevice>(null,
             OnRecyclerViewItemClickListener<BluetoothDevice> { _, _, data, _ ->
                 btHelper.sendMessage(data.address, MessageItem(data.name), true, object : OnSendMessageListener {
 
@@ -109,7 +109,7 @@ class BleHelperActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
         btHelper.searchDevices(object : OnSearchDeviceListener {
             override fun onNewDeviceFounded(p0: BluetoothDevice?) {
                 if (p0 != null)
-                    (recyclerView.adapter as DefaultAdapter<BluetoothDevice>).addData(p0)
+                    (recyclerView.adapter as BaseAdapter<BluetoothDevice>).add(p0)
             }
 
             override fun onStartDiscovery() {

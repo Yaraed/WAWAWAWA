@@ -34,7 +34,7 @@ import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
 import com.weyee.sdk.multitype.BaseHolder
-import com.weyee.sdk.multitype.DefaultAdapter
+import com.weyee.sdk.multitype.BaseAdapter
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.router.Path
 import kotlinx.android.synthetic.main.activity_photo_view.*
@@ -55,7 +55,7 @@ class PhotoViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(context).size(1).build())
-        recyclerView.adapter = object : DefaultAdapter<String>(urls.asList()) {
+        recyclerView.adapter = object : BaseAdapter<String>(urls.asList()) {
             override fun getHolder(v: View, viewType: Int): BaseHolder<String> {
                 return object : BaseHolder<String>(v) {
                     override fun setData(data: String, position: Int) {

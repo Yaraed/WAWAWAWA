@@ -32,7 +32,7 @@ import com.weyee.poscore.mvp.IView
 import com.weyee.poswidget.stateview.StateLayout
 import com.weyee.poswidget.stateview.state.ContentState
 import com.weyee.sdk.multitype.BaseHolder
-import com.weyee.sdk.multitype.DefaultAdapter
+import com.weyee.sdk.multitype.BaseAdapter
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 import com.weyee.sdk.router.Path
 import com.weyee.sdk.toast.ToastUtils
@@ -59,7 +59,7 @@ class StateActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
             recyclerView.layoutManager = LinearLayoutManager(this@StateActivity)
 
             recyclerView.adapter = object :
-                DefaultAdapter<String>(mutableListOf("liufegn", "zhangsan", "hello, 你好我真的是一个很无语的人吗", "wangwu", "zhaoliu", "sunqi")
+                BaseAdapter<String>(mutableListOf("liufegn", "zhangsan", "hello, 你好我真的是一个很无语的人吗", "wangwu", "zhaoliu", "sunqi")
                 ,
                     OnRecyclerViewItemClickListener<String> { _, _, data, _ ->
                         ToastUtils.show(data)

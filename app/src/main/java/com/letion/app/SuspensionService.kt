@@ -35,7 +35,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.weyee.sdk.multitype.BaseHolder
-import com.weyee.sdk.multitype.DefaultAdapter
+import com.weyee.sdk.multitype.BaseAdapter
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 
 /**
@@ -118,7 +118,7 @@ class SuspensionService : Service() {
 
         recyclerView.layoutManager = LinearLayoutManager(applicationContext)
         recyclerView.adapter = object :
-            DefaultAdapter<String>(list, OnRecyclerViewItemClickListener<String> { _: View, _: Int, s: String, _: Int ->
+            BaseAdapter<String>(list, OnRecyclerViewItemClickListener<String> { _: View, _: Int, s: String, _: Int ->
                 if ("stopSelf" == s) {
                     stopSelf()
                 }

@@ -19,26 +19,29 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              xmlns:app="http://schemas.android.com/apk/res-auto"
              android:layout_width="match_parent"
-             android:layout_height="120dp">
+             android:layout_height="wrap_content">
     <com.weyee.poswidget.stateview.StateLayout
             android:orientation="vertical"
             android:id="@+id/stateLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatTextView android:layout_width="match_parent"
-                                                     android:layout_height="wrap_content"
-                                                     android:maxLines="1"
-                                                     android:textAppearance="?android:attr/textAppearanceListItemSmall"
-                                                     android:gravity="center_vertical"
-                                                     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
-                                                     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
-                                                     android:minHeight="?android:attr/listPreferredItemHeightSmall"
-                                                     app:autoSizeTextType="uniform"
-                                                     app:autoSizeStepGranularity="1sp"
-                                                     app:autoSizeMinTextSize="8sp"
-                                                     app:autoSizeMaxTextSize="16sp"
-                                                     android:id="@+id/textView"/>
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="vertical">
+            <androidx.appcompat.widget.AppCompatTextView android:layout_width="match_parent"
+                                                         android:layout_height="wrap_content"
+                                                         android:maxLines="1"
+                                                         android:textAppearance="?android:attr/textAppearanceListItemSmall"
+                                                         android:gravity="center_vertical"
+                                                         android:paddingStart="?android:attr/listPreferredItemPaddingStart"
+                                                         android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
+                                                         android:minHeight="?android:attr/listPreferredItemHeightSmall"
+                                                         app:autoSizeTextType="uniform"
+                                                         app:autoSizeStepGranularity="1sp"
+                                                         app:autoSizeMinTextSize="8sp"
+                                                         app:autoSizeMaxTextSize="16sp"
+                                                         android:id="@+id/textView"/>
+        </LinearLayout>
 
     </com.weyee.poswidget.stateview.StateLayout>
 </FrameLayout>
