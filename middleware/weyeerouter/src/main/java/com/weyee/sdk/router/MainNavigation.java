@@ -52,4 +52,12 @@ public class MainNavigation extends Navigation {
     public void toStateActivity() {
         startActivity("State");
     }
+
+    public void toNotifyActivity() {
+        startActivity("Notify");
+    }
+
+    public void toNotifyFit8Activity() {
+        startActivity("NotifyFit8");
+    }
 }

@@ -71,6 +71,10 @@
         </activity>
         <activity android:name=".StateActivity">
         </activity>
+        <activity android:name=".notify.NotifyActivity">
+        </activity>
+        <activity android:name=".notify.NotifyFit8Activity">
+        </activity>
     </application>
 
 </manifest>

@@ -73,8 +73,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(32)
-        for (i in 0 until 32) {
+        val array = arrayOfNulls<String>(34)
+        for (i in 0 until 34) {
             array[i] = "这是第${i}个"
         }
 
@@ -131,6 +131,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     }
                     31 -> {
                         MainNavigation(this@MainActivity).toStateActivity()
+                    }
+                    32 -> {
+                        MainNavigation(this@MainActivity).toNotifyActivity()
+                    }
+                    33 -> {
+                        MainNavigation(this@MainActivity).toNotifyFit8Activity()
                     }
                     else -> {
                         Bus.getDefault().post(NormalEvent())
