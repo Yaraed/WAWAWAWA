@@ -2,6 +2,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 
+apply plugin: 'kotlin-kapt'
+
 def androidConfig = rootProject.ext.android
 def libsConfig = rootProject.ext.libs
 
@@ -13,6 +15,12 @@ android {
         versionCode androidConfig.versionCode
         versionName androidConfig.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
     }
 
     buildTypes {
@@ -26,20 +34,25 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.2'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0-alpha1'
     testImplementation 'junit:junit:4.12'
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
-    androidTestImplementation libsConfig.testRunner
-    androidTestImplementation libsConfig.testEspresso
-    implementation libsConfig.appcompat_v7
-    implementation libsConfig.viewmodel_v7
-    // 当需要使用event bus时，才需要使用api依赖
-    //api libsConfig.eventbus
-    implementation libsConfig.eventbus
-    implementation libsConfig.rxJava
-}
 
-apply from : '../../maven.gradle'
+    implementation project(':poscore')
+
+    compileOnly libsConfig.retrofitConverterGson
+    compileOnly libsConfig.retrofitConverterScalars
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_core"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_core"
+
+    kapt libsConfig.arouterCompiler
+
+}

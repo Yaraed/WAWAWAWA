@@ -26,6 +26,7 @@ import com.weyee.possupport.callback.Callback
 import com.weyee.sdk.api.rxutil.RxJavaUtils
 import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.event.Bus
+import com.weyee.sdk.event.IEvent
 import com.weyee.sdk.event.NormalEvent
 import com.weyee.sdk.router.*
 import com.weyee.sdk.toast.ToastUtils
@@ -73,8 +74,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(34)
-        for (i in 0 until 34) {
+        val array = arrayOfNulls<String>(36)
+        for (i in 0 until 36) {
             array[i] = "这是第${i}个"
         }
 
@@ -138,7 +139,11 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     33 -> {
                         MainNavigation(this@MainActivity).toNotifyFit8Activity()
                     }
+                    34 -> {
+                        JetpackNavigation(this@MainActivity).toJetpackActivity()
+                    }
                     else -> {
+                        Bus.getDefault().get<IEvent>(1)?.value = NormalEvent()
                         Bus.getDefault().post(NormalEvent())
                     }
                 }
@@ -148,6 +153,10 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         Bus.getDefault().subscribe(this, "RxBus", null, com.weyee.sdk.event.Callback<NormalEvent> {
             println("RxBus")
             setAlias1()
+        })
+
+        Bus.getDefault().get<IEvent>(1)?.observe(this,androidx.lifecycle.Observer {
+            ToastUtils.show(it.javaClass.simpleName)
         })
 
         connection = object : ServiceConnection {

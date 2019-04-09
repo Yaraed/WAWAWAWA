@@ -9,14 +9,14 @@ buildscript {
         mavenCentral()
         google()
         jcenter()
-        maven {
-            url 'http://192.168.3.217:8081/repository/maven-public/'
-            credentials {
-                username = "liufeng"
-                password = "android"
-            }
-
-        }
+//        maven {
+//            url 'http://192.168.3.217:8081/repository/maven-public/'
+//            credentials {
+//                username = "liufeng"
+//                password = "android"
+//            }
+//
+//        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
@@ -38,14 +38,14 @@ allprojects {
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://jitpack.io" }
-        maven {
-            url 'http://192.168.3.217:8081/repository/maven-public/'
-            credentials {
-                username = "liufeng"
-                password = "android"
-            }
-
-        }
+//        maven {
+//            url 'http://192.168.3.217:8081/repository/maven-public/'
+//            credentials {
+//                username = "liufeng"
+//                password = "android"
+//            }
+//
+//        }
     }
 
     subprojects {
