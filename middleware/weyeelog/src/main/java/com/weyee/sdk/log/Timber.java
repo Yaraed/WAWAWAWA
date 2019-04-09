@@ -39,7 +39,12 @@ class Timber implements ILogger {
     }
 
     @Override
-    public void e(Throwable throwable, @NonNull String message, Object... args) {
+    public void e(@NonNull Throwable throwable) {
+        timber.log.Timber.e(throwable);
+    }
+
+    @Override
+    public void e(@NonNull Throwable throwable,@NonNull String message, Object... args) {
         timber.log.Timber.e(throwable, message, args);
     }
 

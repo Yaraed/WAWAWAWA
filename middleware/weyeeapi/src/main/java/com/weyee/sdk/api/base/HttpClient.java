@@ -160,8 +160,13 @@ public class HttpClient {
             setTimeout();
             setHttpLoggingConfig();
             eventListener();
+            dns();
             HttpClient.getInstance().initCustomClient = true;
             return HttpClient.getInstance().getBuilder().build();
+        }
+
+        private void dns() {
+            HttpClient.getInstance().getBuilder().dns(new HTTPDNSInterceptor());
         }
 
         private void eventListener() {

@@ -28,6 +28,7 @@ import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.event.Bus
 import com.weyee.sdk.event.IEvent
 import com.weyee.sdk.event.NormalEvent
+import com.weyee.sdk.log.LogUtils
 import com.weyee.sdk.router.*
 import com.weyee.sdk.toast.ToastUtils
 import com.weyee.sdk.util.sp.SpUtils
@@ -122,8 +123,12 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     27 -> PdfNavigation(this@MainActivity).toZoomActivity()
                     28 -> PdfNavigation(this@MainActivity).toClickableActivity()
                     29 -> {
-                        SpUtils.getDefault().put("10086", "10086")
-                        ToastUtils.show(SpUtils.getDefault().getInt("10086"))
+                        try {
+                            SpUtils.getDefault().put("10086", "10086")
+                            ToastUtils.show(SpUtils.getDefault().getInt("10086"))
+                        } catch (e: Exception) {
+                            LogUtils.e(e)
+                        }
 
                         //SpUtils.getDefault().clear()
                     }
@@ -155,7 +160,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
             setAlias1()
         })
 
-        Bus.getDefault().get<IEvent>(1)?.observe(this,androidx.lifecycle.Observer {
+        Bus.getDefault().get<IEvent>(1)?.observe(this, androidx.lifecycle.Observer {
             ToastUtils.show(it.javaClass.simpleName)
         })
 

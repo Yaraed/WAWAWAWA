@@ -70,7 +70,12 @@ class Logger implements ILogger {
     }
 
     @Override
-    public void e(@Nullable Throwable throwable, @NonNull String message, @Nullable Object... args) {
+    public void e(@NonNull Throwable throwable) {
+        com.orhanobut.logger.Logger.e(throwable,"ERROR");
+    }
+
+    @Override
+    public void e(@NonNull Throwable throwable,@NonNull String message, @Nullable Object... args) {
         com.orhanobut.logger.Logger.e(throwable, message, args);
     }
 
