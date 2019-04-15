@@ -16,7 +16,7 @@
  *
  */
 
-package com.letion.app;
+package com.weyee.sdk.dialog;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -24,7 +24,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
-import com.weyee.sdk.dialog.BaseDialog;
 
 /**
  * 很友好的加载弹窗
@@ -45,9 +44,9 @@ public class LoadingDialog extends BaseDialog {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.dialog_loading, null);
+        View inflate = LayoutInflater.from(getContext()).inflate(R.layout.mrmo_loading_dialog, null);
         setContentView(inflate);
-        tvTips = inflate.findViewById(R.id.tv_tips);
+        tvTips = inflate.findViewById(R.id.tvTips);
         tvTips.setText(tips);
     }
 

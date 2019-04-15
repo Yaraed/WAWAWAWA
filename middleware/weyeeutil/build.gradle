@@ -35,6 +35,10 @@ dependencies {
     implementation libsConfig.androidUtilCode
 
     implementation 'com.tencent:mmkv-static:1.0.17'
+
+    // https://mvnrepository.com/artifact/cn.hutool/hutool-core
+    api group: 'cn.hutool', name: 'hutool-core', version: '4.5.4'
+
 }
 
 apply from : '../../maven.gradle'

@@ -18,21 +18,32 @@
 
 package com.wuqi.v_layout;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 import butterknife.BindView;
+import butterknife.OnClick;
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
 import com.weyee.poscore.base.BaseActivity;
 import com.weyee.poscore.di.component.AppComponent;
+import com.weyee.possupport.arch.RxLiftUtils;
+import com.weyee.sdk.api.rxutil.RxJavaUtils;
+import com.weyee.sdk.router.Path;
+import com.weyee.sdk.toast.ToastUtils;
 
 import java.util.LinkedList;
 import java.util.List;
 
+@Route(path = Path.Virtual + "vlayout")
 public class VLayoutActivity extends BaseActivity {
     @BindView(R2.id.recyclerView)
     RecyclerView recyclerView;
+    @BindView(R2.id.tvCLick)
+    TextView tvCLick;
 
     @Override
     public void setupActivityComponent(@Nullable AppComponent appComponent) {
@@ -50,9 +61,9 @@ public class VLayoutActivity extends BaseActivity {
         recyclerView.setLayoutManager(layoutManager);
         RecyclerView.RecycledViewPool recycledViewPool = new RecyclerView.RecycledViewPool();
         recyclerView.setRecycledViewPool(recycledViewPool);
-        recycledViewPool.setMaxRecycledViews(0,20);
+        recycledViewPool.setMaxRecycledViews(0, 20);
         layoutManager.setRecycleOffset(300);
-        DelegateAdapter delegateAdapter = new DelegateAdapter(layoutManager,true);
+        DelegateAdapter delegateAdapter = new DelegateAdapter(layoutManager, true);
         recyclerView.setAdapter(delegateAdapter);
         List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
 
@@ -63,4 +74,11 @@ public class VLayoutActivity extends BaseActivity {
 
     }
 
+    @SuppressLint({"AutoDispose", "DefaultLocale"})
+    @OnClick(R2.id.tvCLick)
+    public void onViewClicked() {
+        RxJavaUtils.countDown(1)
+                .as(RxLiftUtils.bindLifecycle(this))
+                .subscribe(aLong -> ToastUtils.show(String.format("这个是第%d次点击了", aLong)));
+    }
 }

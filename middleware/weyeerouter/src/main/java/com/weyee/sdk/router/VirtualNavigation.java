@@ -47,4 +47,8 @@ public class VirtualNavigation extends Navigation {
         context.startActivity(intent);
         //startActivity("Virtual");
     }
+
+    public void toVLayoutActivity() {
+        startActivity("vlayout");
+    }
 }

@@ -1,6 +1,5 @@
 package com.letion.app
 
-import androidx.lifecycle.LifecycleOwner
 import com.letion.app.pojo.BookBean
 import com.weyee.poscore.di.scope.ActivityScope
 import com.weyee.poscore.mvp.BasePresenter
@@ -26,7 +25,7 @@ class MainPresenter @Inject constructor(view: MainContract.MainView,model: MainM
     fun getBook() {
         val map: Map<String, Any> = mapOf("page" to 1, "name" to "刘枫")
         mModel.getBook(map).compose(Transformer.switchSchedulers(mView.dialog()))
-            .`as`(RxLiftUtils.bindLifecycle(mView as LifecycleOwner))
+            .`as`(RxLiftUtils.bindLifecycle(lifecycleOwner))
             .subscribe(object : ProgressSubscriber<BookBean>() {
 
                 override fun setTag(): String {
@@ -71,7 +70,7 @@ class MainPresenter @Inject constructor(view: MainContract.MainView,model: MainM
         val fileName = "alipay.apk"
         RxHttpUtils.createApi(ApiService::class.java).downloadFile(url)
             .compose(DownloadTransformer.transformerFormParams(
-                mView.context().getExternalFilesDir(null),
+                context?.filesDir!!,
                 fileName
             ) { _, _, progress, _, _ ->
                 run {

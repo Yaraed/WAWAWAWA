@@ -30,6 +30,12 @@ android {
         versionCode androidConfig.versionCode
         versionName androidConfig.versionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName(), AROUTER_GENERATE_DOC: "enable"]
+            }
+        }
     }
 
     buildTypes {
@@ -51,5 +57,8 @@ dependencies {
     testImplementation 'junit:junit:4.12'
 
     implementation project(':poscore')
+
+    annotationProcessor libsConfig.butterknifeCompiler
+    annotationProcessor libsConfig.arouterCompiler
 
 }

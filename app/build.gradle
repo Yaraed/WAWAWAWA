@@ -85,6 +85,7 @@ dependencies {
     implementation project(':a_gpuimage')
     implementation project(':a_pdf')
     implementation project(':a_jetpack')
+    implementation project(':a_vlayout')
     implementation project(':poscore')
 
     // test

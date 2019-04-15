@@ -3,12 +3,10 @@ package com.weyee.poscore.base.delegate;
 import android.app.Activity;
 import android.os.Bundle;
 import android.os.Parcel;
-
-import com.weyee.poscore.base.App;
-import com.weyee.sdk.event.Bus;
-
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import com.weyee.poscore.base.App;
+import com.weyee.sdk.event.Bus;
 
 /**
  * Created by liu-feng on 2017/6/5.
@@ -27,6 +25,9 @@ public class ActivityDelegateImpl implements ActivityDelegate {
     public void onCreate(Bundle savedInstanceState) {
         if (iActivity.useEventBus())//如果要使用eventbus请将此方法返回true
             Bus.getDefault().register(mActivity);//注册到事件主线
+        if (iActivity.useProgressAble()) {
+            iActivity.initProgressAble();
+        }
         iActivity.setupActivityComponent(((App) mActivity.getApplication()).getAppComponent());
         //依赖注入
         try {
@@ -68,6 +69,9 @@ public class ActivityDelegateImpl implements ActivityDelegate {
         if (mUnbinder != null && mUnbinder != Unbinder.EMPTY) mUnbinder.unbind();
         if (iActivity.useEventBus())//如果要使用eventbus请将此方法返回true
             Bus.getDefault().unregister(mActivity);
+        if (iActivity.useProgressAble()) { // fix bug解决Activity销毁Dialog未关闭的情况
+            iActivity.hideProgress();
+        }
         this.mUnbinder = null;
         this.iActivity = null;
         this.mActivity = null;

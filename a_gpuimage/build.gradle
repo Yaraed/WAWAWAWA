@@ -53,6 +53,7 @@ dependencies {
 
     kapt libsConfig.arouterCompiler
     kapt libsConfig.butterknifeCompiler
+    kapt libsConfig.dagger2Compiler
 
     implementation 'jp.co.cyberagent.android:gpuimage:2.0.3'
 }

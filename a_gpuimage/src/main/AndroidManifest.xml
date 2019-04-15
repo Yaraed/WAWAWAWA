@@ -31,6 +31,8 @@
         </activity>
         <activity android:name=".MediaActivity">
         </activity>
+        <activity android:name=".ImageActivity">
+        </activity>
     </application>
 
 </manifest>

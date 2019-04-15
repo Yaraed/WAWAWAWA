@@ -40,16 +40,23 @@ public class GPUNavigation extends Navigation {
         return MODULE_NAME;
     }
 
-    public void toGPUActivity(){
+    public void toGPUActivity() {
         startActivity("GPU");
     }
-    public void toVideoActivity(){
+
+    public void toVideoActivity() {
         startActivity("Video");
     }
-    public void toAudioActivity(){
+
+    public void toAudioActivity() {
         startActivity("Audio");
     }
-    public void toMediaActivity(){
+
+    public void toMediaActivity() {
         startActivity("Media");
+    }
+
+    public void toImageActivity() {
+        startActivity("Image");
     }
 }

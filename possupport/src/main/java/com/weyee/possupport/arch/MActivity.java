@@ -1,6 +1,7 @@
 package com.weyee.possupport.arch;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -30,6 +31,9 @@ public class MActivity extends InnerBaseActivity {
     protected MHeaderViewAble mHeaderViewAble;
     protected AppBarLayout abl;
     protected FrameLayout flActivityContainer;
+
+    // 基类实现loading框
+    protected Dialog mDialog;
 
     @SuppressLint("ResourceType")
     @Override
@@ -75,6 +79,13 @@ public class MActivity extends InnerBaseActivity {
         mHeaderViewAble.setOnClickLeftMenuBackListener(v -> finish());
     }
 
+
+    /**
+     * 初始化loading框，默认没有实现
+     */
+    protected void initProgressAble() {
+    }
+
     @NonNull
     public Context getContext() {
         return this;
@@ -98,9 +109,11 @@ public class MActivity extends InnerBaseActivity {
         return true;
     }
 
+
     /**
      * 另外一种获取Presenter的方法
      * 弃用它，why？：因为每次调用都需要重新实例化对象，待优化
+     *
      * @param object
      * @param <T>
      * @return
@@ -114,8 +127,8 @@ public class MActivity extends InnerBaseActivity {
         } else if (!(type instanceof ParameterizedType)) {
             return null;
         } else {
-            ParameterizedType parameterizedType = (ParameterizedType)type;
-            Class clazz = (Class)parameterizedType.getActualTypeArguments()[0];
+            ParameterizedType parameterizedType = (ParameterizedType) type;
+            Class clazz = (Class) parameterizedType.getActualTypeArguments()[0];
             if (clazz == null) {
                 return null;
             } else {

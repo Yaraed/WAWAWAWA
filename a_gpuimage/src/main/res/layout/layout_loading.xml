@@ -18,23 +18,17 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
              android:orientation="vertical"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+             android:layout_gravity="center"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content">
 
-    <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical">
-
-    </androidx.recyclerview.widget.RecyclerView>
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-              android:layout_gravity="center"
-              android:id="@+id/tvCLick"
-              android:text="click"/>
-
-    <ListView android:layout_width="match_parent" android:layout_height="match_parent"></ListView>
+    <com.weyee.poswidget.stateview.view.LoadingView android:layout_width="wrap_content"
+                                                    android:id="@+id/loadingView"
+                                                    app:loading_view_size="30dp"
+                                                    android:layout_gravity="center"
+                                                    android:color="@android:color/black"
+                                                    android:layout_height="wrap_content"/>
 
 </FrameLayout>

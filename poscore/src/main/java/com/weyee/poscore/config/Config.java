@@ -25,7 +25,7 @@ public class Config {
         LogUtils.init();
         SpUtils.getDefault().init(null, 0);
         RouterManager.init(application, Environment.isDebug());
-        RxHttpUtils.getInstance().config().setBaseUrl("https://api.douban.com/")
+        RxHttpUtils.getInstance().config().setBaseUrl("http://gank.io/")
                 .setOkClient(new HttpClient
                         .Builder(application)
                         //全局的请求头信息

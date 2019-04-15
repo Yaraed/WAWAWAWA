@@ -7,9 +7,7 @@ import android.app.ProgressDialog
 import android.content.*
 import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
-import android.os.Build
-import android.os.Bundle
-import android.os.IBinder
+import android.os.*
 import android.provider.Settings
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
@@ -20,10 +18,12 @@ import com.letion.app.di.module.MainModule
 import com.letion.app.glide.Glide4Engine
 import com.letion.app.receiver.OnePixelReceiver
 import com.weyee.poscore.base.BaseActivity
+import com.weyee.poscore.base.ThreadPool
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.possupport.arch.RxLiftUtils
 import com.weyee.possupport.callback.Callback
 import com.weyee.sdk.api.rxutil.RxJavaUtils
+import com.weyee.sdk.dialog.LoadingDialog
 import com.weyee.sdk.dialog.QMUIBottomSheet
 import com.weyee.sdk.event.Bus
 import com.weyee.sdk.event.IEvent
@@ -45,6 +45,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
     private val CHOOSE = 1
     //private lateinit var presenter: MainPresenter
     private var dialog: LoadingDialog? = null
+    private var dialog2: ProgressDialog? = null
     private var onePixelReceiver: BroadcastReceiver? = null
     private lateinit var connection: ServiceConnection
     private var isBindService: Boolean = false
@@ -75,8 +76,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(36)
-        for (i in 0 until 36) {
+        val array = arrayOfNulls<String>(39)
+        for (i in 0 until 39) {
             array[i] = "这是第${i}个"
         }
 
@@ -146,6 +147,40 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     }
                     34 -> {
                         JetpackNavigation(this@MainActivity).toJetpackActivity()
+                    }
+                    35 -> kotlin.run {
+                        ThreadPool.run {
+                            val clazz = arrayOf(Handler::class.java)
+                            val c = RefelctTask::class.java.getConstructor(*clazz)
+                            Looper.prepare()
+                            c.isAccessible = true
+                            val task = c.newInstance(object : Handler(Looper.myLooper()){
+                                override fun handleMessage(msg: Message?) {
+                                    super.handleMessage(msg)
+                                    val result = msg?.obj as ReflectTask2.AsyncTaskResult<*>
+                                    when (msg.what) {
+                                        0x1 ->{
+                                            // There is only one result
+                                            val d = result.mTask::class.java
+                                            val m = d.getMethod("finish",String::class.java)
+                                            m.isAccessible = true
+                                            m.invoke(d,result.mData[0])
+                                        }
+
+                                        0x2 -> result.mTask.onProgressUpdate(*result.mData)
+                                    }
+                                }
+                            })
+                            task.execute()
+
+                            Looper.loop()
+                        }
+                    }
+                    36 -> {
+                        VirtualNavigation(this@MainActivity).toVLayoutActivity()
+                    }
+                    37 -> {
+                        GPUNavigation(this@MainActivity).toImageActivity()
                     }
                     else -> {
                         Bus.getDefault().get<IEvent>(1)?.value = NormalEvent()
@@ -373,8 +408,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
     override fun showProgress(progress: Int) {
         runOnUiThread {
-            if (dialog is ProgressDialog) {
-                (dialog as ProgressDialog).progress = progress
+            if (dialog2 is ProgressDialog && (dialog2 as ProgressDialog).isShowing) {
+                (dialog2 as ProgressDialog).progress = progress
             }
         }
     }

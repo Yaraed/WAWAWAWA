@@ -1,17 +1,16 @@
 package com.weyee.poscore.base.delegate;
 
 import android.os.Bundle;
-
 import androidx.annotation.Nullable;
+import androidx.fragment.app.FragmentManager;
 import com.weyee.poscore.base.BaseFragment;
 import com.weyee.poscore.di.component.AppComponent;
-
-import androidx.fragment.app.FragmentManager;
+import com.weyee.sdk.api.observer.listener.ProgressAble;
 
 /**
  * Created by liu-feng on 2017/6/5.
  */
-public interface IActivity {
+public interface IActivity extends ProgressAble {
     /**
      * 提供AppComponent(提供所有的单例对象)给实现类，进行Component依赖
      *
@@ -20,6 +19,14 @@ public interface IActivity {
     void setupActivityComponent(@Nullable AppComponent appComponent);
 
     boolean useEventBus();
+
+    /**
+     * 是否使用Loading框
+     *
+     * @return
+     */
+    boolean useProgressAble();
+
 
     /**
      * 如果initView返回0,框架则不会调用{@link android.app.Activity#setContentView(int)}
