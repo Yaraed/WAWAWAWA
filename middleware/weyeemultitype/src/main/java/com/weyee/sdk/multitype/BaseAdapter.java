@@ -137,7 +137,14 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>>
 
     @Override
     public boolean addAll(@Nullable List<T> list) {
+        return addAll(list, false);
+    }
+
+    @Override
+    public boolean addAll(@Nullable List<T> list, boolean clear) {
         if (list == null) return false;
+        if (clear)
+            mList.clear();
         boolean result = mList.addAll(list);
         notifyDataSetChanged();
         return result;

@@ -37,6 +37,7 @@ dependencies {
     api libsConfig.recyclerview_v7
     api libsConfig.material_v7
     api libsConfig.palette_v7
+    api libsConfig.work_v7
     api libsConfig.lifecycle_v7
     api libsConfig.viewmodel_v7
     api libsConfig.constraintlayout

@@ -11,6 +11,8 @@ interface AdapterHelper<T> {
 
     boolean addAll(@Nullable List<T> list);
 
+    boolean addAll(@Nullable List<T> list, boolean clear);
+
     boolean addAll(int position, @Nullable List<T> list);
 
     void add(@Nullable T data);

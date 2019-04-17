@@ -9,6 +9,10 @@ buildscript {
         mavenCentral()
         google()
         jcenter()
+//        maven { url 'https://plugins.gradle.org/m2/' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
 //        maven {
 //            url 'http://192.168.3.217:8081/repository/maven-public/'
 //            credentials {

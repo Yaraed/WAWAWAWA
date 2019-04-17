@@ -1,8 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.wuqi.a_service">
 
     <application>
-
         <service android:name=".StickService"/>
+
+        <activity android:name=".WorkerActivity">
+        </activity>
+        <activity android:name=".WanActivity">
+        </activity>
     </application>
+
 </manifest>

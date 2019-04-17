@@ -6,6 +6,7 @@ import com.weyee.sdk.api.RxHttpUtils;
 import com.weyee.sdk.api.base.HttpClient;
 import com.weyee.sdk.log.Environment;
 import com.weyee.sdk.log.LogUtils;
+import com.weyee.sdk.multitype.RefreshUtils;
 import com.weyee.sdk.player.PlayerUtils;
 import com.weyee.sdk.router.RouterManager;
 import com.weyee.sdk.toast.ToastUtils;
@@ -25,7 +26,7 @@ public class Config {
         LogUtils.init();
         SpUtils.getDefault().init(null, 0);
         RouterManager.init(application, Environment.isDebug());
-        RxHttpUtils.getInstance().config().setBaseUrl("http://gank.io/")
+        RxHttpUtils.getInstance().config().setBaseUrl("https://www.wanandroid.com/")
                 .setOkClient(new HttpClient
                         .Builder(application)
                         //全局的请求头信息
@@ -57,5 +58,13 @@ public class Config {
                         .build());
 
         PlayerUtils.init(application);
+
+        RefreshUtils.init();
+
+//        System.out.println("执行了几次了");
+//
+//        WorkManager.initialize(application,new Configuration.Builder()
+//                .setMinimumLoggingLevel(Log.VERBOSE)
+//                .build());
     }
 }

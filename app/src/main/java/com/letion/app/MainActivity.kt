@@ -77,8 +77,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(40)
-        for (i in 0 until 40) {
+        val array = arrayOfNulls<String>(41)
+        for (i in 0 until 41) {
             array[i] = "这是第${i}个"
         }
 
@@ -185,6 +185,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     }
                     38 -> {
                         ServiceUtils.startService(StickService::class.java)
+                    }
+                    39 -> {
+                        WorkerNavigation(this@MainActivity).toWanActivity()
                     }
                     else -> {
                         Bus.getDefault().get<IEvent>(1)?.value = NormalEvent()

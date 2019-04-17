@@ -4,6 +4,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: 'com.jakewharton.butterknife'
+
 def androidConfig = rootProject.ext.android
 def libsConfig = rootProject.ext.libs
 
@@ -48,6 +50,8 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_core"
 
     kapt libsConfig.arouterCompiler
+    kapt libsConfig.butterknifeCompiler
+    kapt libsConfig.dagger2Compiler
 
     implementation project(':poscore')
 }

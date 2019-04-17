@@ -35,8 +35,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<GlideIm
         requests = GlideApp.with(ctx);//如果context是activity则自动使用Activity的生命周期
 
         GlideRequest<Drawable> glideRequest = requests.load(config.getResource())
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .centerCrop();
+                .transition(DrawableTransitionOptions.withCrossFade());
 
         switch (config.getCacheStrategy()) {//缓存策略
             case 0:

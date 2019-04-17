@@ -32,4 +32,5 @@ public class Path {
     public static final String PDF = "/pdf/";
     public static final String Virtual = "/virtual/";
     public static final String Jetpack = "/jetpack/";
+    public static final String Service = "/service/";
 }
