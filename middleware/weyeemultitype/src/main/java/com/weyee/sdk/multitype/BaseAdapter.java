@@ -170,6 +170,11 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder<T>>
     @Override
     public void clear() {
         mList.clear();
+    }
+
+    @Override
+    public void clearAll() {
+        mList.clear();
         notifyDataSetChanged();
     }
 

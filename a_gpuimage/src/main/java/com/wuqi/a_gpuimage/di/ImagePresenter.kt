@@ -23,6 +23,11 @@ class ImagePresenter @Inject constructor(model: ImageModel?, rootView: ImageCont
                     mView.setImages(t)
                 }
 
+                override fun onCompleted() {
+                    super.onCompleted()
+                    mView.onCompleted()
+                }
+
             })
     }
 }

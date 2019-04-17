@@ -32,6 +32,7 @@ import com.weyee.sdk.log.LogUtils
 import com.weyee.sdk.router.*
 import com.weyee.sdk.toast.ToastUtils
 import com.weyee.sdk.util.sp.SpUtils
+import com.wuqi.a_service.StickService
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
 import kotlinx.android.synthetic.main.activity_main.*
@@ -76,8 +77,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(39)
-        for (i in 0 until 39) {
+        val array = arrayOfNulls<String>(40)
+        for (i in 0 until 40) {
             array[i] = "这是第${i}个"
         }
 
@@ -181,6 +182,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     }
                     37 -> {
                         GPUNavigation(this@MainActivity).toImageActivity()
+                    }
+                    38 -> {
+                        ServiceUtils.startService(StickService::class.java)
                     }
                     else -> {
                         Bus.getDefault().get<IEvent>(1)?.value = NormalEvent()

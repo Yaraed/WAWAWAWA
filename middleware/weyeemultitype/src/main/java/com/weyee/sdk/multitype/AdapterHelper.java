@@ -11,13 +11,15 @@ interface AdapterHelper<T> {
 
     boolean addAll(@Nullable List<T> list);
 
-    boolean addAll(int position,@Nullable List<T> list);
+    boolean addAll(int position, @Nullable List<T> list);
 
     void add(@Nullable T data);
 
-    void add(int position,@Nullable T data);
+    void add(int position, @Nullable T data);
 
     void clear();
+
+    void clearAll();
 
     boolean contains(@Nullable T data);
 
@@ -27,7 +29,7 @@ interface AdapterHelper<T> {
 
     void modify(@Nullable T oldData, @Nullable T newData);
 
-    void modify(int index,@Nullable T newData);
+    void modify(int index, @Nullable T newData);
 
     boolean remove(@Nullable T data);
 

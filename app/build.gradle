@@ -34,8 +34,21 @@ android {
         ndk {
             abiFilters "armeabi-v7a"
         }
+
+        flavorDimensions "default"
     }
+//    productFlavors {
+//        pro {
+//            applicationId = androidConfig.applicationId + ".pro"
+//        }
+//        free {
+//            applicationId = androidConfig.applicationId + ".free"
+//        }
+//    }
     buildTypes {
+//        debug{
+//            applicationIdSuffix ".debug"
+//        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -84,6 +97,7 @@ dependencies {
     implementation project(':a_http')
     implementation project(':a_gpuimage')
     implementation project(':a_pdf')
+    implementation project(':a_service')
     implementation project(':a_jetpack')
     implementation project(':a_vlayout')
     implementation project(':poscore')

@@ -55,6 +55,7 @@ ext {
             appcompat_v7            : "androidx.appcompat:appcompat:$dependVersion.androidXSdkVersion",
             recyclerview_v7         : "androidx.recyclerview:recyclerview:$dependVersion.androidXSdkVersion",
             material_v7             : "com.google.android.material:material:$dependVersion.androidXSdkVersion",
+            palette_v7              : "androidx.palette:palette:$dependVersion.androidXSdkVersion",
             lifecycle_v7            : "androidx.lifecycle:lifecycle-extensions:$dependVersion.lifecycleSdkVersion",
             viewmodel_v7            : "androidx.lifecycle:lifecycle-viewmodel:$dependVersion.lifecycleSdkVersion",
             constraintlayout        : "androidx.constraintlayout:constraintlayout:$dependVersion.constraintLayoutSdkVersion",

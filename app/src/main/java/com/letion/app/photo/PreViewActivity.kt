@@ -49,7 +49,7 @@ class PreViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
                     //.blurValue(15)
                     .isCircle(true)
                     .resource("http://youimg1.c-ctrip.com/target/tg/655/120/973/b1d405cc68214e7da7a8293183abd2c8.jpg")
-                    .listener { isComplete, percentage, _, _ ->
+                    .progress { isComplete, percentage, _, _ ->
                         if (isComplete) {
                             progressBar.visibility = View.GONE
                         }

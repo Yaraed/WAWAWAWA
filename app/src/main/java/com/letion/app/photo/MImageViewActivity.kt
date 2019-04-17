@@ -193,7 +193,7 @@ class MImageViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), Phot
                      * @param target          The [Target] we were trying to load the image into.
                      * @param isFirstResource `true` if this exception is for the first resource to load.
                      * @return `true` to prevent [Target.onLoadFailed] from being called on
-                     * `target`, typically because the listener wants to update the `target` or the object
+                     * `target`, typically because the progress wants to update the `target` or the object
                      * the `target` wraps itself or `false` to allow [Target.onLoadFailed]
                      * to be called on `target`.
                      */
@@ -220,7 +220,7 @@ class MImageViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), Phot
                      * load and `false` for the second.
                      *
                      * @return `true` to prevent [Target.onLoadFailed] from being called on
-                     * `target`, typically because the listener wants to update the `target` or the object
+                     * `target`, typically because the progress wants to update the `target` or the object
                      * the `target` wraps itself or `false` to allow [Target.onLoadFailed]
                      * to be called on `target`.
                      */

@@ -41,10 +41,15 @@ dependencies {
         transitive = true
     }
 
-    // refresh view TODO 需要进行上层封装
+
+
+    // refresh view TODO 需要进行上层封装,选其一
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-3'
     // 需要更多的header view可供选择，否则可以不添加
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-3'
+
+    // xrecyclerview，TODO 选其一
+    api 'com.jcodecraeer:xrecyclerview:1.5.9'
 }
 
 apply from : '../../maven.gradle'

@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.wuqi.a_service">
+
+    <application>
+
+        <service android:name=".StickService"/>
+    </application>
+</manifest>

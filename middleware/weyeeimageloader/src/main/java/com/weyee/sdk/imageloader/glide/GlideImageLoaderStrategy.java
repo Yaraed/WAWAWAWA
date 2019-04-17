@@ -94,11 +94,21 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<GlideIm
         if (config.getFallback() != 0)//设置请求 url 为空图片
             glideRequest.fallback(config.getFallback());
 
+        // 设置缩略图，float大小必须在0-1之间，当为0时，默认不展示缩略图
+        if (config.thumbnail() > 0f && config.thumbnail() < 1f) {
+            glideRequest.thumbnail(config.thumbnail());
+        }
+
+        // 监听图片加载成功或者失败
+        if (config.listener() != null){
+            glideRequest.listener(config.listener());
+        }
+
         /**
          * 必须保证listener不为空，且加载的资源类型必须是URL、URI才能进行监听,否则也是会过滤掉的
          */
-        if (config.getListener() != null && config.getResource() instanceof String) {
-            ProgressManager.addListener((String) config.getResource(), config.getListener());
+        if (config.getProgressListener() != null && config.getResource() instanceof String) {
+            ProgressManager.addListener((String) config.getResource(), config.getProgressListener());
             glideRequest.into(new GlideImageViewTarget((String) config.getResource(), config.getImageView()));
         } else {
             // 默认不监听进度更新时，采用默认的加载方式

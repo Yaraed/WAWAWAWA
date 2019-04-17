@@ -9,10 +9,10 @@
     <com.weyee.poswidget.stateview.StateLayout android:layout_width="match_parent"
                                                android:id="@+id/stateLayout"
                                                android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView android:layout_width="match_parent" android:layout_height="match_parent"
+        <com.jcodecraeer.xrecyclerview.XRecyclerView android:layout_width="match_parent" android:layout_height="match_parent"
                   android:id="@+id/listView">
 
-        </androidx.recyclerview.widget.RecyclerView>
+        </com.jcodecraeer.xrecyclerview.XRecyclerView>
 
     </com.weyee.poswidget.stateview.StateLayout>
 

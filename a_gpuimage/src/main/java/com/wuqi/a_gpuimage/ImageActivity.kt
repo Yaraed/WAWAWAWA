@@ -1,19 +1,25 @@
 package com.wuqi.a_gpuimage
 
+import android.graphics.drawable.BitmapDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.weyee.poscore.base.App
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poswidget.stateview.state.ContentState
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
+import com.weyee.sdk.imageloader.progress.RequestListener
 import com.weyee.sdk.multitype.BaseAdapter
 import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.router.Path
+import com.weyee.sdk.toast.ToastUtils
 import com.wuqi.a_gpuimage.di.DaggerImageComponent
 import com.wuqi.a_gpuimage.di.ImageContract
 import com.wuqi.a_gpuimage.di.ImageMoudle
@@ -25,6 +31,7 @@ import kotlinx.android.synthetic.main.activity_image.*
 class ImageActivity : BaseActivity<ImagePresenter>(), ImageContract.ImageView {
 
     private var list: MutableList<String>? = null
+    private var pageIndex: Int = 1
 
     override fun setupActivityComponent(appComponent: AppComponent?) {
         DaggerImageComponent
@@ -56,7 +63,23 @@ class ImageActivity : BaseActivity<ImagePresenter>(), ImageContract.ImageView {
                     override fun setData(data: String, position: Int) {
                         (context.applicationContext as App).appComponent.imageLoader().loadImage(
                             context,
-                            GlideImageConfig.builder().resource(data).imageView(getView(R.id.imageView)).build()
+                            GlideImageConfig.builder().resource(data)
+                                .thumbnail(.1f)
+                                .listener(object : RequestListener<BitmapDrawable>() {
+                                    override fun onLoadFailed() {
+                                        ToastUtils.show("图片加载失败")
+                                    }
+
+                                    override fun onResourceReady(resource: BitmapDrawable?): Boolean {
+                                        val p = Palette.generate(resource?.bitmap).lightVibrantSwatch
+
+                                        return if (p == null) false else {
+                                            getView<ImageView>(R.id.imageView).setBackgroundColor(p.rgb)
+                                            return true
+                                        }
+                                    }
+                                })
+                                .imageView(getView(R.id.imageView)).build()
                         )
                     }
 
@@ -64,16 +87,43 @@ class ImageActivity : BaseActivity<ImagePresenter>(), ImageContract.ImageView {
             }
 
         }
+
+        listView.setLoadingListener(object : XRecyclerView.LoadingListener {
+            override fun onLoadMore() {
+                pageIndex++
+                loadImage()
+            }
+
+            override fun onRefresh() {
+                pageIndex = 1
+                (listView.adapter as BaseAdapter<String>).clear()
+                loadImage()
+            }
+
+        })
     }
 
     override fun initData(savedInstanceState: Bundle?) {
-        mPresenter.getImages(10, 1)
+        loadImage()
+    }
 
+    override fun useProgressAble(): Boolean {
+        return !super.useProgressAble()
+    }
+
+    private fun loadImage() {
+        mPresenter.getImages(30, pageIndex)
     }
 
     override fun setImages(bean: List<String>?) {
         (listView.adapter as BaseAdapter<String>).addAll(bean)
     }
+
+    override fun onCompleted() {
+        listView.refreshComplete()
+        listView.loadMoreComplete()
+    }
+
 
     override fun showLoading() {
         stateLayout.showState { LoadingState.STATE }

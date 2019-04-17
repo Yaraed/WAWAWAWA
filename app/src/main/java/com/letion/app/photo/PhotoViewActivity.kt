@@ -33,8 +33,8 @@ import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
-import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.BaseAdapter
+import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.router.Path
 import kotlinx.android.synthetic.main.activity_photo_view.*
@@ -72,7 +72,7 @@ class PhotoViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
                                     //.blurValue(15)
                                     .isCircle(true)
                                     .resource(data)
-                                    .listener { isComplete, percentage, _, _ ->
+                                    .progress { isComplete, percentage, _, _ ->
                                         if (isComplete) {
                                             progressBar.visibility = View.GONE
                                         }
