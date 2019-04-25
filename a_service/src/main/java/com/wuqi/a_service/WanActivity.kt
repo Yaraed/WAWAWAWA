@@ -19,6 +19,7 @@ import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 import com.weyee.sdk.permission.MediaIntents
+import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.router.Path
 import com.wuqi.a_service.di.DaggerWanComponent
 import com.wuqi.a_service.di.WanModule
@@ -44,7 +45,7 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
 
     override fun initView(savedInstanceState: Bundle?) {
         BarUtils.setStatusBarAlpha(this@WanActivity, 112, true)
-        BarUtils.setStatusBarVisibility(this@WanActivity,true)
+        BarUtils.setStatusBarVisibility(this@WanActivity, true)
 
         refreshView.setOnRefreshListener {
             pageIndex = 1
@@ -62,10 +63,12 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
             ).build()
         )
 
+
         adapter = object : BaseAdapter<Any>(null,
             OnRecyclerViewItemClickListener<Any> { _, _, data, _ ->
                 if (data is Data) {
                     startActivity(MediaIntents.newOpenWebBrowserIntent(data.link))
+                    //WorkerNavigation(context).toDetailActivity(data.link)
                 }
             }) {
             override fun getHolder(v: View, viewType: Int): BaseHolder<Any> {
@@ -79,7 +82,13 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
                             getView<RecyclerView>(R.id.recyclerView).layoutManager =
                                 LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
                             getView<RecyclerView>(R.id.recyclerView).adapter =
-                                object : BaseAdapter<BannerBean>(data as List<BannerBean>) {
+                                object : BaseAdapter<BannerBean>(data as List<BannerBean>,
+                                    OnRecyclerViewItemClickListener<BannerBean> { _, _, _, position ->
+                                        MainNavigation(this@WanActivity).toPhotoViewActivity(
+                                            position,
+                                            data.map { it.imagePath }.toTypedArray()
+                                        )
+                                    }) {
                                     override fun getHolder(v: View, viewType: Int): BaseHolder<BannerBean> {
                                         return object : BaseHolder<BannerBean>(v) {
                                             override fun setData(image: BannerBean, p: Int) {

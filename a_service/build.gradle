@@ -53,5 +53,9 @@ dependencies {
     kapt libsConfig.butterknifeCompiler
     kapt libsConfig.dagger2Compiler
 
+    compileOnly(libsConfig.glide) {
+        exclude group: "com.android.support"
+    }
+
     implementation project(':poscore')
 }

@@ -1,6 +1,5 @@
 package com.weyee.poscore.base;
 
-import java.util.concurrent.Executor;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -15,7 +14,7 @@ public final class ThreadPool {
      *
      * @return
      */
-    private static Executor getExecutor() {
+    public static ExecutorService getExecutor() {
         if (EXECUTORS_INSTANCE == null) {
             synchronized (ThreadPool.class) {
                 if (EXECUTORS_INSTANCE == null) {

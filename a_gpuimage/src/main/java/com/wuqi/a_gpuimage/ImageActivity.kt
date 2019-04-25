@@ -13,7 +13,7 @@ import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poswidget.stateview.state.ContentState
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
-import com.weyee.sdk.imageloader.progress.RequestListener
+import com.weyee.sdk.imageloader.progress.OnRequestListener
 import com.weyee.sdk.multitype.BaseAdapter
 import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
@@ -65,9 +65,10 @@ class ImageActivity : BaseActivity<ImagePresenter>(), ImageContract.ImageView {
                             context,
                             GlideImageConfig.builder().resource(data)
                                 .thumbnail(.1f)
-                                .listener(object : RequestListener<BitmapDrawable>() {
-                                    override fun onLoadFailed() {
+                                .listener(object : OnRequestListener<BitmapDrawable> {
+                                    override fun onLoadFailed() : Boolean {
                                         ToastUtils.show("图片加载失败")
+                                        return true
                                     }
 
                                     override fun onResourceReady(resource: BitmapDrawable?): Boolean {

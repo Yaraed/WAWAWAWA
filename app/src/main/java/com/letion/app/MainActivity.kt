@@ -29,9 +29,11 @@ import com.weyee.sdk.event.Bus
 import com.weyee.sdk.event.IEvent
 import com.weyee.sdk.event.NormalEvent
 import com.weyee.sdk.log.LogUtils
+import com.weyee.sdk.permission.SystemIntents
 import com.weyee.sdk.router.*
 import com.weyee.sdk.toast.ToastUtils
 import com.weyee.sdk.util.sp.SpUtils
+import com.wuqi.a_service.SmsReceiver
 import com.wuqi.a_service.StickService
 import com.zhihu.matisse.Matisse
 import com.zhihu.matisse.MimeType
@@ -50,6 +52,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
     private var onePixelReceiver: BroadcastReceiver? = null
     private lateinit var connection: ServiceConnection
     private var isBindService: Boolean = false
+    private var receiver : BroadcastReceiver? = null
 
     /**
      * 如果initView返回0,框架则不会调用[android.app.Activity.setContentView]
@@ -77,8 +80,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(41)
-        for (i in 0 until 41) {
+        val array = arrayOfNulls<String>(44)
+        for (i in 0 until 44) {
             array[i] = "这是第${i}个"
         }
 
@@ -155,17 +158,17 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                             val c = RefelctTask::class.java.getConstructor(*clazz)
                             Looper.prepare()
                             c.isAccessible = true
-                            val task = c.newInstance(object : Handler(Looper.myLooper()){
+                            val task = c.newInstance(object : Handler(Looper.myLooper()) {
                                 override fun handleMessage(msg: Message?) {
                                     super.handleMessage(msg)
                                     val result = msg?.obj as ReflectTask2.AsyncTaskResult<*>
                                     when (msg.what) {
-                                        0x1 ->{
+                                        0x1 -> {
                                             // There is only one result
                                             val d = result.mTask::class.java
-                                            val m = d.getMethod("finish",String::class.java)
+                                            val m = d.getMethod("finish", String::class.java)
                                             m.isAccessible = true
-                                            m.invoke(d,result.mData[0])
+                                            m.invoke(d, result.mData[0])
                                         }
 
                                         0x2 -> result.mTask.onProgressUpdate(*result.mData)
@@ -188,6 +191,15 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     }
                     39 -> {
                         WorkerNavigation(this@MainActivity).toWanActivity()
+                    }
+                    40 -> {
+                        startActivity(SystemIntents.newPackageUnInstaller(packageName))
+                    }
+                    41 -> {
+                        WorkerNavigation(this@MainActivity).toLocationActivity()
+                    }
+                    42 -> {
+                        WorkerNavigation(this@MainActivity).toBitmapActivity()
                     }
                     else -> {
                         Bus.getDefault().get<IEvent>(1)?.value = NormalEvent()
@@ -239,11 +251,18 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         intentFilter.addAction("android.intent.action.SCREEN_ON")
         intentFilter.addAction("android.intent.action.USER_PRESENT")
         registerReceiver(onePixelReceiver, intentFilter)
+
+        receiver = SmsReceiver()
+        val filter = IntentFilter()
+        filter.addAction("android.provider.Telephony.SMS_RECEIVED")
+        filter.priority = 800
+        registerReceiver(receiver, filter)
     }
 
     override fun onDestroy() {
         super.onDestroy()
         unregisterReceiver(onePixelReceiver)
+        unregisterReceiver(receiver)
         ServiceUtils.stopService(BindService::class.java)
         ServiceUtils.unbindService(connection)
         ServiceUtils.stopService(SuspensionService::class.java)

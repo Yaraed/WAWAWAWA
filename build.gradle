@@ -41,7 +41,7 @@ allprojects {
         jcenter()
         maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://jitpack.io" }
+        maven { url "http://jitpack.io" }
 //        maven {
 //            url 'http://192.168.3.217:8081/repository/maven-public/'
 //            credentials {
@@ -54,6 +54,13 @@ allprojects {
 
     subprojects {
         project.configurations.all {
+            //每隔24小时检查远程依赖是否存在更新
+            resolutionStrategy.cacheChangingModulesFor 24, 'hours'
+            //每隔10分钟..
+            //resolutionStrategy.cacheChangingModulesFor 10, 'minutes'
+            // 采用动态版本声明的依赖缓存10分钟
+            resolutionStrategy.cacheDynamicVersionsFor 10*60, 'seconds'
+
             resolutionStrategy.eachDependency { details ->
                 if (details.requested.group == 'com.android.support'
                         && !details.requested.name.contains('multidex')) {

@@ -2,12 +2,48 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="com.wuqi.a_service">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.RECEIVE_SMS"/>
+    <uses-permission android:name="android.permission.VIBRATE"/>
+
     <application>
         <service android:name=".StickService"/>
 
         <activity android:name=".WorkerActivity">
         </activity>
         <activity android:name=".WanActivity">
+        </activity>
+
+        <!-- <receiver android:name=".SmsReceiver" tools:ignore="ExportedReceiver"> -->
+        <!-- <intent-filter android:priority="1000"> -->
+        <!-- <action android:name="android.provider.Telephony.SMS_RECEIVED"/> -->
+        <!-- </intent-filter> -->
+        <!-- </receiver> -->
+        <activity android:name=".LocationActivity">
+        </activity>
+        <activity android:name=".BitmapActivity">
+        </activity>
+        <activity
+                android:name=".SearchActivity"
+                android:launchMode="singleTop"
+                android:theme="@style/Theme.Transparent">
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+            </intent-filter>
+
+            <meta-data
+                    android:name="android.app.searchable"
+                    android:resource="@xml/searchable"/>
+        </activity>
+
+        <meta-data
+                android:name="android.app.default_searchable"
+                android:value=".SearchActivity"/>
+
+        <activity android:name=".DetailActivity">
         </activity>
     </application>
 

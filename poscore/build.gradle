@@ -49,6 +49,9 @@ dependencies {
     // RxJava2
     api libsConfig.rxJava
     api libsConfig.rxAndroid
+    api(libsConfig.rxBinding) {
+        exclude group: "io.reactivex.rxjava2"
+    }
     // RxLifecycle
     api(libsConfig.rxLifecycle) {
         exclude group: "io.reactivex.rxjava2"

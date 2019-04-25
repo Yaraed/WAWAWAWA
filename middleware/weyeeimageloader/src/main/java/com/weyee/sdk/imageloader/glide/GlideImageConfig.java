@@ -1,5 +1,6 @@
 package com.weyee.sdk.imageloader.glide;
 
+import android.graphics.Bitmap;
 import android.widget.ImageView;
 import androidx.annotation.FloatRange;
 import com.bumptech.glide.load.Transformation;
@@ -7,8 +8,9 @@ import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 import com.bumptech.glide.request.target.Target;
 import com.weyee.sdk.imageloader.BaseImageLoaderStrategy;
 import com.weyee.sdk.imageloader.ImageConfig;
+import com.weyee.sdk.imageloader.ImageLoader;
 import com.weyee.sdk.imageloader.progress.OnProgressListener;
-import com.weyee.sdk.imageloader.progress.RequestListener;
+import com.weyee.sdk.imageloader.progress.OnRequestListener;
 
 /**
  * Created by liu-feng on 16/4/15.
@@ -22,14 +24,14 @@ public class GlideImageConfig<T> extends ImageConfig {
      * 给图片添加 Glide 独有的 BitmapTransformation
      * <p>
      * 因为 BitmapTransformation 是 Glide 独有的类, 所以如果 BitmapTransformation 出现在 {@link GlideImageConfig} 中
-     * 会使 {@link com.weyee.sdk.imageloader.ImageLoader} 难以切换为其他图片加载框架, 在 {@link GlideImageConfig} 中只能配置基础类型和 Android 包里的类
+     * 会使 {@link ImageLoader} 难以切换为其他图片加载框架, 在 {@link GlideImageConfig} 中只能配置基础类型和 Android 包里的类
      * 此 API 会在后面的版本中被删除, 请使用其他 API 替代
      *
      * @param transformation {@link BitmapTransformation}
      * @deprecated 请使用 {@link #isCircle()}, {@link #isCenterCrop()}, {@link #isImageRadius()} 替代
      * 如果有其他自定义 BitmapTransformation 的需求, 请自行扩展 {@link BaseImageLoaderStrategy}
      */
-    private Transformation transformation;//glide用它来改变图形的形状
+    private Transformation<Bitmap> transformation;//glide用它来改变图形的形状
     private Target[] targets;
     private ImageView[] imageViews;
     private boolean isClearMemory;//清理内存缓存
@@ -48,7 +50,7 @@ public class GlideImageConfig<T> extends ImageConfig {
 
     // 2019.4更新功能 支持缩略图，支持监听加载成功和失败的回调
     private float thumbnail;
-    private RequestListener<T> listener;
+    private OnRequestListener<T> listener;
 
 
     private GlideImageConfig(Builder builder) {
@@ -80,7 +82,7 @@ public class GlideImageConfig<T> extends ImageConfig {
         return cacheStrategy;
     }
 
-    public Transformation getTransformation() {
+    public Transformation<Bitmap> getTransformation() {
         return transformation;
     }
 
@@ -140,7 +142,7 @@ public class GlideImageConfig<T> extends ImageConfig {
         return thumbnail;
     }
 
-    public RequestListener<T> listener() {
+    public OnRequestListener<T> listener() {
         return listener;
     }
 
@@ -156,7 +158,7 @@ public class GlideImageConfig<T> extends ImageConfig {
         private int errorPic;
         private int fallback; //请求 url 为空,则使用此图片作为占位符
         private int cacheStrategy;//0对应DiskCacheStrategy.all,1对应DiskCacheStrategy.NONE,2对应DiskCacheStrategy.SOURCE,3对应DiskCacheStrategy.RESULT
-        private Transformation transformation;//glide用它来改变图形的形状
+        private Transformation<Bitmap> transformation;//glide用它来改变图形的形状
         private Target[] targets;
         private ImageView[] imageViews;
         private boolean isClearMemory;//清理内存缓存
@@ -171,7 +173,7 @@ public class GlideImageConfig<T> extends ImageConfig {
 
         // 2019.4新增功能
         private float thumbnail;
-        private RequestListener<T> listener;
+        private OnRequestListener<T> listener;
 
         // 2019.3进度监听
         private OnProgressListener progress;
@@ -209,7 +211,7 @@ public class GlideImageConfig<T> extends ImageConfig {
             return this;
         }
 
-        public Builder transformation(Transformation transformation) {
+        public Builder transformation(Transformation<Bitmap> transformation) {
             this.transformation = transformation;
             return this;
         }
@@ -280,7 +282,7 @@ public class GlideImageConfig<T> extends ImageConfig {
          * @param listener
          * @return
          */
-        public Builder listener(RequestListener<T> listener) {
+        public Builder listener(OnRequestListener<T> listener) {
             this.listener = listener;
             return this;
         }

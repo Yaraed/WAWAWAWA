@@ -20,6 +20,8 @@
                 app:layout_constraintTop_toTopOf="parent"/>
     </ScrollView>
 
-    <ListView android:id="@+id/listView" android:layout_width="match_parent" android:layout_height="match_parent"/>
+    <ListView android:id="@+id/listView" android:layout_width="match_parent" android:layout_height="match_parent"
+    android:drawSelectorOnTop="false"
+    android:fadingEdge="none"/>
 
 </FrameLayout>

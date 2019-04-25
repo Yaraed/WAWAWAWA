@@ -37,6 +37,10 @@ android {
 
 }
 
+repositories {
+    jcenter()
+}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation 'androidx.appcompat:appcompat:1.0.0-alpha1'
@@ -48,5 +52,8 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
 
     kapt libsConfig.arouterCompiler
-    implementation ('com.github.barteksc:android-pdf-viewer:3.1.0-beta.1'){ changing = false}
+    implementation('com.github.barteksc:android-pdf-viewer:3.1.0-beta.1') {
+        exclude group: "com.github.barteksc", module: "pdfium-android"
+    }
+    implementation group: 'com.github.barteksc', name: 'pdfium-android', version: '1.9.0'
 }
