@@ -1,9 +1,15 @@
 package com.wuqi.a_service
 
+import android.content.res.ColorStateList
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import cn.hutool.core.util.RandomUtil
@@ -12,6 +18,7 @@ import com.blankj.utilcode.util.BarUtils
 import com.weyee.poscore.base.App
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
+import com.weyee.possupport.repeatclick.OnFastClickListener
 import com.weyee.sdk.imageloader.ImageLoader
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
 import com.weyee.sdk.multitype.BaseAdapter
@@ -24,6 +31,7 @@ import com.weyee.sdk.router.Path
 import com.wuqi.a_service.di.DaggerWanComponent
 import com.wuqi.a_service.di.WanModule
 import com.wuqi.a_service.wan.*
+import jp.wasabeef.recyclerview.animators.LandingAnimator
 import kotlinx.android.synthetic.main.activity_wan_android.*
 
 @Route(path = Path.Service + "Wan")
@@ -31,6 +39,7 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
     private lateinit var imageLoader: ImageLoader
     private var adapter: BaseAdapter<Any>? = null
     private var pageIndex = 1
+    private var showGridLayout = false
 
     override fun setupActivityComponent(appComponent: AppComponent?) {
         DaggerWanComponent
@@ -46,6 +55,31 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
     override fun initView(savedInstanceState: Bundle?) {
         BarUtils.setStatusBarAlpha(this@WanActivity, 112, true)
         BarUtils.setStatusBarVisibility(this@WanActivity, true)
+        BarUtils.addMarginTopEqualStatusBarHeight(headerView as ViewGroup)
+
+        headerView.isShowMenuLeftBackView(true)
+        headerView.setOnClickLeftMenuBackListener(object : OnFastClickListener() {
+            override fun onFastClick(v: View?) {
+                finish()
+            }
+        })
+
+        headerView.isShowMenuRightOneView(true)
+        headerView.setMenuRightOneIcon(R.drawable.ic_dehaze_black_24dp)
+        headerView.setOnClickRightMenuOneListener {
+            showGridLayout = !showGridLayout
+            headerView.setMenuRightOneIcon(if (showGridLayout) R.drawable.ic_dehaze_black_24dp else R.drawable.ic_apps_black_24dp)
+            (recyclerView.layoutManager as GridLayoutManager).spanCount = if (showGridLayout) 2 else 1
+            (recyclerView.layoutManager as GridLayoutManager).spanSizeLookup =
+                if (showGridLayout) object : GridLayoutManager.SpanSizeLookup() {
+                    override fun getSpanSize(position: Int): Int {
+                        return if (position == 0) 2 else 1
+                    }
+
+                }
+                else GridLayoutManager.DefaultSpanSizeLookup()
+            recyclerView.adapter?.notifyDataSetChanged()
+        }
 
         refreshView.setOnRefreshListener {
             pageIndex = 1
@@ -55,7 +89,15 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
             pageIndex++
             mPresenter.articles(pageIndex)
         }
-        recyclerView.layoutManager = LinearLayoutManager(context)
+        val layoutManager = GridLayoutManager(context, 2)
+        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return if (position == 0) 2 else 1
+            }
+
+        }
+        recyclerView.layoutManager = layoutManager
+        recyclerView.itemAnimator = LandingAnimator()
         recyclerView.setHasFixedSize(true)
         recyclerView.addItemDecoration(
             HorizontalDividerItemDecoration.Builder(context).color(Color.parseColor("#f1f1f1")).size(
@@ -116,20 +158,36 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
                             if (data !is Data) {
                                 return
                             }
+                            val url: Any = RandomUtil.randomEle(
+                                listOf(
+                                    R.drawable.ic_color_lens_black_24dp,
+                                    R.drawable.ic_sentiment_satisfied_black_24dp,
+                                    R.drawable.ic_apps_black_24dp,
+                                    "https://ws1.sinaimg.cn/large/0065oQSqly1g04lsmmadlj31221vowz7.jpg"
+                                )
+                            )
                             imageLoader.loadImage(
                                 context,
                                 GlideImageConfig.builder().resource(
-                                    RandomUtil.randomEle(
-                                        listOf(
-                                            R.drawable.ic_color_lens_black_24dp,
-                                            R.drawable.ic_sentiment_satisfied_black_24dp,
-                                            R.drawable.ic_apps_black_24dp,
-                                            "https://ws1.sinaimg.cn/large/0065oQSqly1g04lsmmadlj31221vowz7.jpg"
-                                        )
-                                    )
+                                    url
                                 )
                                     .isCircle(true).imageView(getView(R.id.ivIcon)).build()
                             )
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                getView<ImageView>(R.id.ivIcon).imageTintList = if (url is Int) ColorStateList.valueOf(
+                                    ContextCompat.getColor(
+                                        context,
+                                        RandomUtil.randomEle(
+                                            listOf(
+                                                android.R.color.holo_blue_bright,
+                                                android.R.color.holo_green_light,
+                                                android.R.color.holo_red_light,
+                                                android.R.color.holo_orange_light
+                                            )
+                                        )
+                                    )
+                                ) else null
+                            }
                             getView<TextView>(R.id.tvTitle).text = data.author
                             getView<TextView>(R.id.tvTime).text = data.niceDate
                             getView<TextView>(R.id.tvContent).text = data.title
@@ -149,6 +207,7 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
             }
         }
         recyclerView.adapter = adapter
+        refreshView.autoRefresh()
     }
 
     override fun initData(savedInstanceState: Bundle?) {

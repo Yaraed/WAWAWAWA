@@ -41,6 +41,10 @@ dependencies {
         transitive = true
     }
 
+    // item animators
+    api ('jp.wasabeef:recyclerview-animators:3.0.0'){
+        exclude module: "androidx.recyclerview:recyclerview"
+    }
 
 
     // refresh view TODO 需要进行上层封装,选其一

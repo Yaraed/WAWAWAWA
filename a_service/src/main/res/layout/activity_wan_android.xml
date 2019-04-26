@@ -18,4 +18,10 @@
 
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
+    <com.weyee.possupport.headerview.MHeaderView
+            android:id="@+id/headerView"
+            android:layout_width="match_parent"
+            android:background="@android:color/transparent"
+            android:layout_height="?attr/actionBarSize"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
