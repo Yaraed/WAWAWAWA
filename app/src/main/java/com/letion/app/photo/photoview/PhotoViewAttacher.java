@@ -168,7 +168,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, OnGe
         mGestureDetector = new GestureDetector(imageView.getContext(),
                 new GestureDetector.SimpleOnGestureListener() {
 
-                    // forward long click listener
+                    // forward long click progress
                     @Override
                     public void onLongPress(MotionEvent e) {
                         if (null != mLongClickListener) {
@@ -241,7 +241,7 @@ public class PhotoViewAttacher implements IPhotoView, View.OnTouchListener, OnGe
         final ImageView imageView = mImageView.get();
 
         if (null != imageView) {
-            // Remove this as a global layout listener
+            // Remove this as a global layout progress
             ViewTreeObserver observer = imageView.getViewTreeObserver();
             if (null != observer && observer.isAlive()) {
                 observer.removeGlobalOnLayoutListener(this);

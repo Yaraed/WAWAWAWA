@@ -9,4 +9,34 @@
         <item>根据销售量降序排序</item>
         <item>综合排序</item>
     </string-array>
+
+    <string-array name="notify_entry">
+        <item>淘宝样式</item>
+        <item>网易新闻样式</item>
+        <item>微信消息样式</item>
+        <item>系统截图通知样式</item>
+        <item>应用宝样式</item>
+        <item>Android系统更新样式</item>
+        <item>Android系统下载样式</item>
+        <item>Heads-up 样式</item>
+        <item>清空通知</item>
+    </string-array>
+
+    <string-array name="notify_entry_fit8">
+        <item>1.清除所有的Notification通知</item>
+        <item>2.在Activity中发送通知1，最简单的通知</item>
+        <item>3.在Activity中发送通知2，添加action</item>
+        <item>4.在Activity中发送通知3，设置通知栏左右滑动不删除</item>
+        <item>5.在Activity中发送自定义布局通知</item>
+        <item>6.在广播接收者中发送通知</item>
+        <item>7.在服务中发送通知</item>
+        <item>8.在Activity中连续发送3条通知</item>
+        <item>9.在Activity中发通知，设置通知不能被状态栏的清除按钮给清除掉,也不能被手动清除,但能通过 cancel() 方法清除</item>
+        <item>10.在Activity中发通知，设置用户单击通知后自动消失</item>
+        <item>11.设置铃声效果</item>
+        <item>12.设置震动效果</item>
+        <item>13.通知只执行一次,与默认的效果一样</item>
+        <item>14.带有进度条的通知栏</item>
+        <item>15.Android 8.0 适配问题</item>
+    </string-array>
 </resources>

@@ -2,6 +2,7 @@ package com.weyee.sdk.event;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.MutableLiveData;
 import io.reactivex.Scheduler;
 
 /**
@@ -47,5 +48,9 @@ public interface IEventBus {
                                      @Nullable final String tag,
                                      @Nullable final Scheduler scheduler,
                                      final Callback<T> callback) {
+    }
+
+    default @Nullable <T extends IEvent> MutableLiveData<T> get(Object target) {
+        return null;
     }
 }

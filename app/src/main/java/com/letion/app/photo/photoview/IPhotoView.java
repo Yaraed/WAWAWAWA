@@ -246,7 +246,7 @@ public interface IPhotoView {
     IPhotoView getIPhotoViewImplementation();
 
     /**
-     * Sets custom double tap listener, to intercept default given functions. To reset behavior to
+     * Sets custom double tap progress, to intercept default given functions. To reset behavior to
      * default, you can just pass in "null" or public field of PhotoViewAttacher.defaultOnDoubleTapListener
      *
      * @param newOnDoubleTapListener custom OnDoubleTapListener to be set on ImageView

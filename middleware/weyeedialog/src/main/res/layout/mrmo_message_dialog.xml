@@ -1,0 +1,52 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="270dp"
+              android:layout_height="wrap_content"
+              android:layout_gravity="center"
+              android:background="#ffffff"
+              android:orientation="vertical"
+              android:padding="15dp">
+
+    <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="top|left"
+            android:minLines="2"
+            android:textColor="#454953"
+            android:textSize="15sp"
+            tools:text="Title"/>
+
+    <RelativeLayout
+            android:id="@+id/menuView"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="10dp"
+            android:gravity="center_vertical|right">
+
+        <TextView
+                android:id="@+id/tvConfirm"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:text="确认"
+                android:textColor="#50A7FF"/>
+
+        <TextView
+                android:id="@+id/tvCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@+id/tvConfirm"
+                android:gravity="center"
+                android:maxLines="1"
+                android:paddingLeft="8dp"
+                android:paddingRight="8dp"
+                android:text="取消"
+                android:textColor="#999999"/>
+
+    </RelativeLayout>
+</LinearLayout>

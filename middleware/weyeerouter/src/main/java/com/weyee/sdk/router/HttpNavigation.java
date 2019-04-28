@@ -26,7 +26,7 @@ import android.content.Context;
  */
 public class HttpNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/http/";
+    private static final String MODULE_NAME = Path.Http;
 
     public HttpNavigation(Context context) {
         super(context);

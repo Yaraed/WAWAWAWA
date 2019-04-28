@@ -28,13 +28,13 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.sdk.router.GPUNavigation
+import com.weyee.sdk.router.Path
 import jp.co.cyberagent.android.gpuimage.GPUImage
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageBoxBlurFilter
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageGrayscaleFilter
 import kotlinx.android.synthetic.main.activity_gpu.*
 
-@Route(path = GPUNavigation.MODULE_NAME + "GPU")
+@Route(path = Path.GPU + "GPU")
 class GPUActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     override fun setupActivityComponent(appComponent: AppComponent?) {
 

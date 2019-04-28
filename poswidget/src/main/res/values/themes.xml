@@ -26,4 +26,5 @@
         <item name="ms_padding_top_size">6.5dp</item>
         <item name="ms_dropdown_offset">1dp</item>
     </style>
+
 </resources>

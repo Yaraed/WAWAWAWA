@@ -8,6 +8,7 @@ package com.weyee.sdk.api.observer.listener;
  * @date 2018/12/7 0007
  */
 public interface ProgressAble {
+    void initProgressAble();
     void showProgress();
     void hideProgress();
 }

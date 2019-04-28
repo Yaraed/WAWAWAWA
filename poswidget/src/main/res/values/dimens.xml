@@ -34,4 +34,5 @@
     <dimen name="config_size_spinner_text_phone">13sp</dimen>
 
     <dimen name="default_spinner_icon_padding_size">20dp</dimen>
+    <dimen name="default_content_padding_horizontal">16dp</dimen>
 </resources>

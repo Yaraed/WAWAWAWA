@@ -18,24 +18,10 @@
   -->
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              xmlns:app="http://schemas.android.com/apk/res-auto"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
 
-    <ImageView android:id="@+id/blurred_view" android:layout_width="match_parent" android:layout_height="match_parent" />
-
-    <!-- Here, we customize the blurring view with values different from the defaults. -->
-    <com.fivehundredpx.android.blur.BlurringView
-            android:id="@+id/blurring_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:visibility="gone"
-            app:blurRadius="11"
-            app:downsampleFactor="6"
-            app:overlayColor="#99FFFFFF"/>
-
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"/>
+    <ImageView android:id="@+id/blurred_view" android:layout_width="match_parent" android:layout_height="match_parent"/>
 
 </FrameLayout>

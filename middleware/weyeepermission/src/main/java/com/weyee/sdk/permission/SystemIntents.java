@@ -125,4 +125,19 @@ public class SystemIntents {
         intent.setType("file/*");
         return intent;
     }
+
+    /**
+     * package uninstall
+     *
+     * @param packageName
+     * @return
+     */
+    public static Intent newPackageUnInstaller(String packageName) {
+        Intent intent = new Intent();
+        intent.setAction("android.intent.action.VIEW");
+        intent.setAction("android.intent.action.DELETE");
+        intent.addCategory("android.intent.category.DEFAULT");
+        intent.setData(Uri.parse("package:" + packageName));
+        return intent;
+    }
 }

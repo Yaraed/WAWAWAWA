@@ -27,19 +27,21 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation libsConfig.testRunner
+    androidTestImplementation libsConfig.testEspresso
     // Support库
     api libsConfig.core_v7
     api libsConfig.appcompat_v7
     api libsConfig.recyclerview_v7
     api libsConfig.material_v7
+    api libsConfig.palette_v7
+    api libsConfig.work_v7
     api libsConfig.lifecycle_v7
+    api libsConfig.viewmodel_v7
     api libsConfig.constraintlayout
     api libsConfig.multidex
-
     // util
     api libsConfig.androidUtilCode
     // retrofit
@@ -47,6 +49,9 @@ dependencies {
     // RxJava2
     api libsConfig.rxJava
     api libsConfig.rxAndroid
+    api(libsConfig.rxBinding) {
+        exclude group: "io.reactivex.rxjava2"
+    }
     // RxLifecycle
     api(libsConfig.rxLifecycle) {
         exclude group: "io.reactivex.rxjava2"
@@ -69,7 +74,6 @@ dependencies {
     // butterknife
     api libsConfig.butterknife
     annotationProcessor libsConfig.butterknifeCompiler
-
     api project(':middleware:weyeeapi')
     api project(':middleware:weyeedialog')
     api project(':middleware:weyeeevent')
@@ -77,11 +81,17 @@ dependencies {
     api project(':middleware:weyeestorage')
     api project(':middleware:weyeetoast')
     api project(':middleware:weyeeimageloader')
-    api project(':middleware:weyeerouter')
+    api(project(':middleware:weyeerouter')) {
+        exclude group: "javax.inject"
+    }
     api project(':middleware:weyeepermission')
     api project(':middleware:weyeemultitype')
     api project(':middleware:weyeeplayer')
     api project(':middleware:weyeeaudio')
+    api project(':middleware:weyeemediaretriever')
+    api project(':middleware:weyeemedialoader')
+    api project(':middleware:weyeeutil')
+    api project(':middleware:weyeeaspectj')
     api project(':possupport')
     api project(':poswidget')
     //    // glide

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~
+  ~  Copyright 2017 liu-feng
+  ~
+  ~  Licensed under the Apache License, Version 2.0 (the "License");
+  ~  you may not use this file except in compliance with the License.
+  ~  You may obtain a copy of the License at
+  ~
+  ~       http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~  Unless required by applicable law or agreed to in writing, software
+  ~  distributed under the License is distributed on an "AS IS" BASIS,
+  ~  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~  See the License for the specific language governing permissions and
+  ~  imitations under the License.
+  ~
+  -->
+
+<resources>
+    <!--===============================Spinner======================================-->
+    <!--MaterialSpinner-->
+    <declare-styleable name="MaterialSpinner">
+        <!--下拉框选择的内容-->
+        <attr name="ms_entries" format="reference"/>
+        <!--下拉框箭头的颜色， 默认和字体的颜色一样-->
+        <attr name="ms_arrow_tint" format="color"/>
+        <!--下拉框是否有箭头， 默认是true-->
+        <attr name="ms_hide_arrow" format="boolean"/>
+        <!--下拉框背景的颜色-->
+        <attr name="ms_background_color" format="color"/>
+        <!--下拉框背景点击的效果-->
+        <attr name="ms_background_selector" format="integer"/>
+        <!--下拉框字体的颜色-->
+        <attr name="ms_text_color" format="color"/>
+
+        <!--下拉框 下拉条目最大的高度-->
+        <attr name="ms_dropdown_max_height" format="dimension"/>
+        <!--下拉框 下拉条目的样式，默认wrap_content-->
+        <attr name="ms_dropdown_height" format="dimension">
+            <enum name="fill_parent" value="-1"/>
+            <enum name="match_parent" value="-1"/>
+            <enum name="wrap_content" value="-2"/>
+        </attr>
+        <!--下拉框 下拉条目的背景-->
+        <attr name="ms_dropdown_bg" format="reference"/>
+        <!--是否在dialog中, 默认false-->
+        <attr name="ms_in_dialog" format="boolean"/>
+    </declare-styleable>
+
+    <!--EditSpinner-->
+    <declare-styleable name="EditSpinner">
+        <!--输入提示-->
+        <attr name="es_hint" format="string"/>
+        <!--输入框的高度-->
+        <attr name="es_height" format="dimension"/>
+        <!--输入框的字体大小-->
+        <attr name="es_textSize" format="dimension"/>
+        <!--输入框的字体颜色-->
+        <attr name="es_textColor" format="color"/>
+        <!--箭头图标的margin-->
+        <attr name="es_arrowMargin" format="dimension"/>
+        <!--箭头图标的资源-->
+        <attr name="es_arrowImage" format="reference"/>
+        <!--输入框的背景-->
+        <attr name="es_background" format="reference"/>
+        <attr name="es_maxLine" format="integer"/>
+        <!--默认可选性内容-->
+        <attr name="es_entries" format="reference"/>
+        <!--下拉框 下拉条目的背景-->
+        <attr name="es_dropdown_bg" format="reference"/>
+        <!--输入下拉框是否可编辑, 默认true-->
+        <attr name="es_enable" format="boolean"/>
+        <!--输入下拉框可输入的最大字符长度-->
+        <attr name="es_maxLength" format="integer"/>
+        <!--输入下拉框可输入的最大字符宽度-->
+        <attr name="es_maxEms" format="integer"/>
+        <!--输入下拉框在输入时是否显示筛选到的信息，默认true-->
+        <attr name="es_isShowFilterData" format="boolean"/>
+        <!--输入下拉框显示筛选信息时，是否显示key为醒目的颜色，默认false-->
+        <attr name="es_isFilterKey" format="boolean"/>
+
+    </declare-styleable>
+
+    <!--**********************************************
+    *                 Spinner                        *
+    ***********************************************-->
+    <attr name="config_size_spinner_text" format="dimension" />
+
+    <attr name="ms_padding_left_size" format="dimension" />
+    <attr name="ms_padding_top_size" format="dimension" />
+    <attr name="ms_item_height_size" format="dimension" />
+
+    <attr name="ms_dropdown_offset" format="dimension" />
+    <attr name="ms_arrow_size" format="dimension" />
+
+
+    <!--输入框文字-->
+    <attr name="config_size_edittext_input_text" format="dimension" />
+    <attr name="config_size_edittext_helper_text" format="dimension" />
+    <attr name="config_size_edittext_components_spacing" format="dimension" />
+    <attr name="config_size_edittext_left_padding" format="dimension" />
+    <attr name="config_size_edittext_radius" format="dimension" />
+    <attr name="config_size_edittext_height" format="dimension" />
+</resources>

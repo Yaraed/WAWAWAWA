@@ -29,6 +29,6 @@ public class SimpleThrowableAction implements Consumer<Throwable> {
 
     @Override
     public void accept(Throwable throwable) throws Exception {
-        LogUtils.d("订阅发生错误！", throwable);
+        LogUtils.e( throwable);
     }
 }

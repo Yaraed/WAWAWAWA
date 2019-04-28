@@ -367,6 +367,11 @@ public class MHeaderView extends Toolbar implements MHeaderViewAble {
         }
     }
 
+    @Override
+    public void reset() {
+        // 什么都不做，可以有多种实现方法，交给子类去实现吧
+    }
+
     private void isShowView(View view, boolean isShow) {
         if (isShow) {
             view.setVisibility(VISIBLE);
@@ -383,6 +388,8 @@ public class MHeaderView extends Toolbar implements MHeaderViewAble {
     private static Drawable getDrawable(Context context, int resId) {
         Drawable drawable = context.getResources().getDrawable(resId);
         drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+        //Drawable drawableUp= DrawableCompat.wrap(drawable);
+        //DrawableCompat.setTint(drawableUp, Color.parseColor("#FF73A3"));
         return drawable;
     }
 }

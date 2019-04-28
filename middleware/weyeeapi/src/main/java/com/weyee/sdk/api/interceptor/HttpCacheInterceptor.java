@@ -1,7 +1,7 @@
 package com.weyee.sdk.api.interceptor;
 
 import android.annotation.SuppressLint;
-import com.blankj.utilcode.util.NetworkUtils;
+import com.weyee.sdk.util.Tools;
 import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -22,7 +22,7 @@ public class HttpCacheInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
 
         Request request = chain.request();
-        boolean connected = NetworkUtils.isConnected();
+        boolean connected = Tools.isConnected();
         if (connected) {
             //如果有网络，缓存60s
             Response response = chain.proceed(request);

@@ -113,16 +113,16 @@ fun main(args: Array<String>?) {
         }
     }
 
-    val user = User("zhangsan","123456")
+    val user = User("zhangsan", "123456")
     user.name = "lisi"
 
     println(user.name)
 
-    val (name,pwd) = user
+    val (name, pwd) = user
 
     println("$name,$pwd")
 
-    val map  = HashMap<Long,User>()
+    val map = HashMap<Long, User>()
     map[1L] = user
     map.map { println(it) }
 
@@ -151,9 +151,39 @@ fun main(args: Array<String>?) {
         println("main: Now I can quit.")
     }
 
+    testString()
+
 }
 
 // 扩展函数
 fun String.spaceToCamelCase(): String {
     return this.toUpperCase()
+}
+
+/*
+* kotlin对字符串的加强，三个引号"""中可以包含换行、反斜杠等等特殊字符
+* */
+fun testString() {
+    val str1 = "abc"
+    val str2 = """line1\n
+        line2
+        line3
+        """
+    val js = """
+        function myFunction()
+        {
+            document.getElementById("demo").innerHTML="My First JavaScript Function";
+        }
+        """.trimIndent()
+    println(str1)
+    println(str2)
+    println(js)
+}
+
+class Test {
+    companion object {
+        fun empty(arg: String): Boolean {
+            return "" == arg
+        }
+    }
 }

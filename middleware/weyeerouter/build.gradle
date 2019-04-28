@@ -34,12 +34,18 @@ android {
 
 dependencies {
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation libsConfig.testRunner
+    androidTestImplementation libsConfig.testEspresso
     implementation libsConfig.appcompat_v7
     api libsConfig.arouter
     annotationProcessor libsConfig.arouterCompiler
     implementation project(':possupport')
+
+    // https://mvnrepository.com/artifact/javax.inject/javax.inject
+    compileOnly group: 'javax.inject', name: 'javax.inject', version: '1'
+
+    compileOnly project(':middleware:weyeeutil')
+
 }
 
 apply from : '../../maven.gradle'

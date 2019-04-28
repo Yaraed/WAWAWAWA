@@ -1,7 +1,7 @@
 package com.weyee.sdk.api.interceptor;
 
 import android.annotation.SuppressLint;
-import com.blankj.utilcode.util.NetworkUtils;
+import com.weyee.sdk.util.Tools;
 import okhttp3.CacheControl;
 import okhttp3.Interceptor;
 import okhttp3.Request;
@@ -22,7 +22,7 @@ public class LocalCacheInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
 
         Request request = chain.request();
-        boolean connected = NetworkUtils.isConnected();
+        boolean connected = Tools.isConnected();
         //如果没有网络，则启用 FORCE_CACHE
         if (!connected) {
             request = request.newBuilder()

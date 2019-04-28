@@ -1,7 +1,7 @@
 package com.weyee.sdk.api.interceptor;
 
-import com.blankj.utilcode.util.SPUtils;
 import com.weyee.sdk.api.config.Config;
+import com.weyee.sdk.util.sp.SpUtils;
 import okhttp3.Interceptor;
 import okhttp3.Response;
 
@@ -23,7 +23,7 @@ public class RecvCookiesInterceptor implements Interceptor {
         //这里获取请求返回的cookie
         if (!originalResponse.headers("Set-Cookie").isEmpty()) {
             HashSet<String> cookies = new HashSet<>(originalResponse.headers("Set-Cookie"));
-            SPUtils.getInstance().put(Config.COOKIE, cookies);
+            SpUtils.getDefault().put(Config.COOKIE, cookies);
         }
 
         return originalResponse;

@@ -26,7 +26,7 @@ import android.content.Context;
  */
 public class GPUNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/gpu/";
+    private static final String MODULE_NAME = Path.GPU;
 
     public GPUNavigation(Context context) {
         super(context);
@@ -40,13 +40,23 @@ public class GPUNavigation extends Navigation {
         return MODULE_NAME;
     }
 
-    public void toGPUActivity(){
+    public void toGPUActivity() {
         startActivity("GPU");
     }
-    public void toVideoActivity(){
+
+    public void toVideoActivity() {
         startActivity("Video");
     }
-    public void toAudioActivity(){
+
+    public void toAudioActivity() {
         startActivity("Audio");
+    }
+
+    public void toMediaActivity() {
+        startActivity("Media");
+    }
+
+    public void toImageActivity() {
+        startActivity("Image");
     }
 }

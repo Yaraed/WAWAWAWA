@@ -17,7 +17,7 @@ import static com.weyee.possupport.arch.Utils.*;
  * @describe ...
  * @date 2018/12/18 0018
  */
-public abstract class Navigation {
+abstract class Navigation {
     private Context context;
 
     public Context getContext() {

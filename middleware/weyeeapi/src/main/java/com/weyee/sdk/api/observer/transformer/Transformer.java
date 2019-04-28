@@ -1,6 +1,7 @@
 package com.weyee.sdk.api.observer.transformer;
 
 import android.app.Dialog;
+import com.weyee.sdk.api.observer.listener.ProgressAble;
 import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Action;
@@ -21,7 +22,7 @@ public class Transformer {
      * @return 返回Observable
      */
     public static <T> ObservableTransformer<T, T> switchSchedulers() {
-        return switchSchedulers(null);
+        return switchSchedulers((Dialog) null);
     }
 
     /**
@@ -45,6 +46,31 @@ public class Transformer {
                 .doFinally((Action) () -> {
                     if (dialog != null) {
                         dialog.dismiss();
+                    }
+                });
+    }
+
+    /**
+     * 带参数  显示loading对话框
+     *
+     * @param progressAble loading
+     * @param <T>    泛型
+     * @return 返回Observable
+     */
+    public static <T> ObservableTransformer<T, T> switchSchedulers(final ProgressAble progressAble) {
+        return upstream -> upstream
+                .subscribeOn(Schedulers.io())
+                .unsubscribeOn(Schedulers.io())
+                .doOnSubscribe(disposable -> {
+                    if (progressAble != null) {
+                        progressAble.showProgress();
+                    }
+                })
+                .subscribeOn(AndroidSchedulers.mainThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .doFinally((Action) () -> {
+                    if (progressAble != null) {
+                        progressAble.hideProgress();
                     }
                 });
     }

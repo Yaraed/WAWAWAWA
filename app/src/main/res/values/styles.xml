@@ -7,6 +7,8 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
+        <!--<item name="android:textColorPrimary">@android:color/primary_text_dark</item>-->
+
         <item name="android:windowActionBar">false</item>
         <!--slider-->
         <item name="android:windowIsTranslucent">true</item>
@@ -24,19 +26,6 @@
     <!--查看大图页面，全屏显示-->
     <style name="AppTheme.Photo" parent="AppTheme">
         <item name="android:windowFullscreen">true</item>
-    </style>
-
-
-    <style name="QMUI.LoadingDialog" parent="@style/QMUI.Dialog">
-        <item name="android:windowIsTranslucent">true</item>
-    </style>
-
-    <style name="QMUI.LoadingDialog.Progress" parent="android:Theme">
-        <item name="android:indeterminateDrawable">@drawable/rotate_dialog_loading</item>
-        <item name="android:minWidth">25dp</item>
-        <item name="android:minHeight">25dp</item>
-        <item name="android:maxWidth">60dp</item>
-        <item name="android:maxHeight">60dp</item>
     </style>
 
 </resources>

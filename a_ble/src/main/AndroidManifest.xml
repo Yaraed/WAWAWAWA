@@ -12,6 +12,8 @@
         </activity>
         <activity android:name=".BleHelperActivity">
         </activity>
+        <activity android:name=".FastBleActivity">
+        </activity>
     </application>
 
 </manifest>

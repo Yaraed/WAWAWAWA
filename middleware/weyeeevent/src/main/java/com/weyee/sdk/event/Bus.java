@@ -24,9 +24,11 @@ package com.weyee.sdk.event;
 public class Bus {
 
     public static IEventBus getDefault() {
+        // livedata bus实现
+        // return LiveDataBus.Holder.BUS;
         // rx bus实现
-        return RxBus.Holder.BUS;
+         return RxBus.Holder.BUS;
         // 默认实现event bus
-        //return EventBus.Holder.BUS;
+        // return EventBus.Holder.BUS;
     }
 }

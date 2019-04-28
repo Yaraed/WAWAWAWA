@@ -9,11 +9,25 @@ buildscript {
         mavenCentral()
         google()
         jcenter()
+//        maven { url 'https://plugins.gradle.org/m2/' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/google' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/groups/public/' }
+//        maven { url 'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
+//        maven {
+//            url 'http://192.168.3.217:8081/repository/maven-public/'
+//            credentials {
+//                username = "liufeng"
+//                password = "android"
+//            }
+//
+//        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.2.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.jakewharton:butterknife-gradle-plugin:10.1.0"
+        classpath 'com.hujiang.aspectjx:gradle-android-plugin-aspectjx:2.0.4'
+        classpath 'com.mogujie.gradle:tinyPicPlugin:1.1.4'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -23,23 +37,30 @@ buildscript {
 
 allprojects {
     repositories {
-//        maven{
-//            url 'http://192.168.3.142:8081/repository/maven-public/'
+        google()
+        jcenter()
+        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "http://jitpack.io" }
+//        maven {
+//            url 'http://192.168.3.217:8081/repository/maven-public/'
 //            credentials {
 //                username = "liufeng"
 //                password = "android"
 //            }
 //
 //        }
-        google()
-        jcenter()
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap' }
-        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
-        maven { url "https://jitpack.io" }
     }
 
     subprojects {
         project.configurations.all {
+            //每隔24小时检查远程依赖是否存在更新
+            resolutionStrategy.cacheChangingModulesFor 24, 'hours'
+            //每隔10分钟..
+            //resolutionStrategy.cacheChangingModulesFor 10, 'minutes'
+            // 采用动态版本声明的依赖缓存10分钟
+            resolutionStrategy.cacheDynamicVersionsFor 10*60, 'seconds'
+
             resolutionStrategy.eachDependency { details ->
                 if (details.requested.group == 'com.android.support'
                         && !details.requested.name.contains('multidex')) {

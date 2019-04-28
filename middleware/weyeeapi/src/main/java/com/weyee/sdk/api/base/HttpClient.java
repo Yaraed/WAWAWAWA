@@ -27,7 +27,6 @@ public class HttpClient {
 
     private static HttpClient instance;
     private OkHttpClient.Builder builder;
-    private boolean initCustomClient = false;
     private static final long defaultCacheSize = 1024 * 1024 * 100;
     private static final long defaultTimeout = 10;
 
@@ -55,17 +54,6 @@ public class HttpClient {
      */
     private OkHttpClient.Builder getBuilder() {
         return builder;
-    }
-
-    /**
-     * 是否设置默认的http client
-     * false 则使用默认的{@link RetrofitClient#getDefaultOkHttpClient()}
-     * true  则使用@{@link Builder#build()}
-     *
-     * @return
-     */
-    public boolean isInitCustomClient() {
-        return initCustomClient;
     }
 
     public static class Builder {
@@ -160,8 +148,12 @@ public class HttpClient {
             setTimeout();
             setHttpLoggingConfig();
             eventListener();
-            HttpClient.getInstance().initCustomClient = true;
+            dns();
             return HttpClient.getInstance().getBuilder().build();
+        }
+
+        private void dns() {
+            HttpClient.getInstance().getBuilder().dns(new HTTPDNSInterceptor());
         }
 
         private void eventListener() {

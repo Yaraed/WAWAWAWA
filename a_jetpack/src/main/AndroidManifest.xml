@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+          package="com.wuqi.a_jetpack">
+
+    <application>
+        <activity android:name=".JetpackActivity">
+        </activity>
+    </application>
+
+</manifest>

@@ -23,7 +23,9 @@ interface ILogger {
 
     void e(@NonNull String message, @Nullable Object... args);
 
-    void e(@Nullable Throwable throwable, @NonNull String message, @Nullable Object... args);
+    void e(@NonNull Throwable throwable);
+
+    void e(@NonNull Throwable throwable, @NonNull String message, @Nullable Object... args);
 
     void w(@NonNull String message, @Nullable Object... args);
 

@@ -1,19 +1,18 @@
 package com.weyee.poscore.di.module;
 
 import android.app.Application;
-
+import androidx.collection.ArrayMap;
 import com.weyee.poscore.base.integration.IRepositoryManager;
 import com.weyee.poscore.base.integration.RepositoryManager;
-
-import java.util.Map;
-
-import javax.inject.Singleton;
-
-import androidx.collection.ArrayMap;
 import com.weyee.sdk.imageloader.BaseImageLoaderStrategy;
 import com.weyee.sdk.imageloader.glide.GlideImageLoaderStrategy;
+import com.weyee.sdk.router.Nav;
+import com.weyee.sdk.router.NavImpl;
 import dagger.Module;
 import dagger.Provides;
+
+import javax.inject.Singleton;
+import java.util.Map;
 
 /**
  * Created by liu-feng on 2017/6/5.
@@ -42,6 +41,12 @@ public class AppModule {
     @Provides
     public IRepositoryManager provideRepositoryManager(RepositoryManager repositoryManager) {
         return repositoryManager;
+    }
+
+    @Singleton
+    @Provides
+    public Nav provideNavigation(NavImpl nav) {
+        return nav;
     }
 
     @Singleton

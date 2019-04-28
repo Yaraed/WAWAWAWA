@@ -29,14 +29,14 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation libsConfig.testRunner
+    androidTestImplementation libsConfig.testEspresso
     implementation libsConfig.fragment_v7
     implementation libsConfig.appcompat_v7
-    implementation libsConfig.androidUtilCode
     implementation(libsConfig.glide) {
         exclude group: "com.android.support"
     }
+    implementation libsConfig.okhttp3
     implementation(libsConfig.glideOkhttp3Integration) {
         exclude group: "com.squareup.okhttp3"
     }
@@ -47,6 +47,8 @@ dependencies {
 
     api libsConfig.dagger2
     implementation 'androidx.exifinterface:exifinterface:1.0.0'
+
+    compileOnly project(':middleware:weyeeutil')
 }
 
 apply from : '../../maven.gradle'

@@ -30,10 +30,10 @@ import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.permission.IntentEnum
-import com.weyee.sdk.router.IntentNavigation
+import com.weyee.sdk.router.Path
 import kotlinx.android.synthetic.main.activity_intent.*
 
-@Route(path = IntentNavigation.MODULE_NAME + "Intent")
+@Route(path = Path.Intent + "Intent")
 class IntentActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
 
     override fun setupActivityComponent(appComponent: AppComponent?) {

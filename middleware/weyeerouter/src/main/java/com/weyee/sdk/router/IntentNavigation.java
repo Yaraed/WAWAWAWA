@@ -26,7 +26,7 @@ import android.content.Context;
  */
 public class IntentNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/intent/";
+    private static final String MODULE_NAME = Path.Intent;
 
     public IntentNavigation(Context context) {
         super(context);

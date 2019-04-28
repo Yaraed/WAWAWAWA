@@ -16,6 +16,7 @@ ext {
 
     dependVersion = [
             androidXSdkVersion        : "1.0.0",
+            workerSdkVersion          : "2.0.0",
             constraintLayoutSdkVersion: "2.0.0-alpha2",
             lifecycleSdkVersion       : "2.0.0",
             multidexSdkVersion        : "2.0.0",
@@ -55,7 +56,10 @@ ext {
             appcompat_v7            : "androidx.appcompat:appcompat:$dependVersion.androidXSdkVersion",
             recyclerview_v7         : "androidx.recyclerview:recyclerview:$dependVersion.androidXSdkVersion",
             material_v7             : "com.google.android.material:material:$dependVersion.androidXSdkVersion",
+            palette_v7              : "androidx.palette:palette:$dependVersion.androidXSdkVersion",
+            work_v7                 : "androidx.work:work-runtime:$dependVersion.workerSdkVersion",
             lifecycle_v7            : "androidx.lifecycle:lifecycle-extensions:$dependVersion.lifecycleSdkVersion",
+            viewmodel_v7            : "androidx.lifecycle:lifecycle-viewmodel:$dependVersion.lifecycleSdkVersion",
             constraintlayout        : "androidx.constraintlayout:constraintlayout:$dependVersion.constraintLayoutSdkVersion",
             multidex                : "androidx.multidex:multidex:$dependVersion.multidexSdkVersion",
 
@@ -89,6 +93,9 @@ ext {
             butterknife             : "com.jakewharton:butterknife:$dependVersion.butterknifeSdkVersion",
             butterknifeCompiler     : "com.jakewharton:butterknife-compiler:$dependVersion.butterknifeSdkVersion",
             canaryDebug             : "com.squareup.leakcanary:leakcanary-android:$dependVersion.canarySdkVersion",
-            canaryRelease           : "com.squareup.leakcanary:leakcanary-android-no-op:$dependVersion.canarySdkVersion"
+            canaryRelease           : "com.squareup.leakcanary:leakcanary-android-no-op:$dependVersion.canarySdkVersion",
+
+            testRunner              : "androidx.test:runner:1.1.0",
+            testEspresso            : "androidx.test.espresso:espresso-core:3.1.0",
     ]
 }

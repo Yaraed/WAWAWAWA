@@ -26,7 +26,7 @@ import android.content.Context;
  */
 public class BleNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/ble/";
+    private static final String MODULE_NAME = Path.BLE;
 
     public BleNavigation(Context context) {
         super(context);
@@ -40,7 +40,11 @@ public class BleNavigation extends Navigation {
         return MODULE_NAME;
     }
 
-    public void toBleHelperActivity(){
+    public void toBleHelperActivity() {
         startActivity("BleHelper");
+    }
+
+    public void toFastBleActivity() {
+        startActivity("FastBle");
     }
 }

@@ -31,12 +31,12 @@ import com.weyee.poscore.mvp.IView
 import com.weyee.possupport.callback.Callback1
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
 import com.weyee.sdk.permission.*
-import com.weyee.sdk.router.IntentNavigation
+import com.weyee.sdk.router.Path
 import com.weyee.sdk.toast.ToastUtils
 import kotlinx.android.synthetic.main.activity_other.*
 
 
-@Route(path = IntentNavigation.MODULE_NAME + "Other")
+@Route(path = Path.Intent + "Other")
 class OtherActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
 
     override fun setupActivityComponent(appComponent: AppComponent?) {

@@ -21,6 +21,7 @@ package com.letion.app.photo
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
@@ -32,13 +33,13 @@ import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
+import com.weyee.sdk.multitype.BaseAdapter
 import com.weyee.sdk.multitype.BaseHolder
-import com.weyee.sdk.multitype.DefaultAdapter
 import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
-import com.weyee.sdk.router.MainNavigation
+import com.weyee.sdk.router.Path
 import kotlinx.android.synthetic.main.activity_photo_view.*
 
-@Route(path = MainNavigation.MODULE_NAME + "PImageView")
+@Route(path = Path.MAIN + "PImageView")
 class PhotoViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     override fun setupActivityComponent(appComponent: AppComponent?) {
     }
@@ -54,12 +55,13 @@ class PhotoViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
 
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.addItemDecoration(HorizontalDividerItemDecoration.Builder(context).size(1).build())
-        recyclerView.adapter = object : DefaultAdapter<String>(urls.asList()) {
+        recyclerView.adapter = object : BaseAdapter<String>(urls.asList()) {
             override fun getHolder(v: View, viewType: Int): BaseHolder<String> {
                 return object : BaseHolder<String>(v) {
                     override fun setData(data: String, position: Int) {
                         val imageView = itemView.findViewById<ImageView>(R.id.imageView)
                         val textView = itemView.findViewById<TextView>(R.id.textView)
+                        val progressBar = itemView.findViewById<ProgressBar>(R.id.progressBar)
 
                         App.obtainAppComponentFromContext(itemView.context)
                             .imageLoader().loadImage(
@@ -70,6 +72,12 @@ class PhotoViewActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
                                     //.blurValue(15)
                                     .isCircle(true)
                                     .resource(data)
+                                    .progress { isComplete, percentage, _, _ ->
+                                        if (isComplete) {
+                                            progressBar.visibility = View.GONE
+                                        }
+                                        progressBar.progress = percentage
+                                    }
                                     .build()
                             )
 

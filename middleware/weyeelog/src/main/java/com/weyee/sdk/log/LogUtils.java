@@ -14,43 +14,50 @@ public final class LogUtils {
     /**
      * 默认的日志记录为Logcat
      */
-    private static ILogger sILogger = new Logger();
 
     private LogUtils() {
 
     }
 
+    private static class Holder {
+        private static ILogger sILogger = new Logger();
+        //Holder.sILogger = new Timber();
+    }
+
     public static void init() {
-        //sILogger = new Timber();
-        sILogger.addAdapter(null);
+        Holder.sILogger.addAdapter(null);
     }
 
     public static void d(@NonNull String message, @Nullable Object... args) {
-        sILogger.d(message, args);
+        Holder.sILogger.d(message, args);
     }
 
     public static void e(@NonNull String message, @Nullable Object... args) {
-        sILogger.e(message, args);
+        Holder.sILogger.e(message, args);
     }
 
-    public static void e(@Nullable Throwable throwable, @NonNull String message, @Nullable Object... args) {
-        sILogger.e(throwable, message, args);
+    public static void e(@NonNull Throwable throwable) {
+        Holder.sILogger.e(throwable);
+    }
+
+    public static void e(@NonNull Throwable throwable, @NonNull String message, @Nullable Object... args) {
+        Holder.sILogger.e(throwable, message, args);
     }
 
     public static void w(@NonNull String message, @Nullable Object... args) {
-        sILogger.w(message, args);
+        Holder.sILogger.w(message, args);
     }
 
     public static void i(@NonNull String message, @Nullable Object... args) {
-        sILogger.i(message, args);
+        Holder.sILogger.i(message, args);
     }
 
     public static void v(@NonNull String message, @Nullable Object... args) {
-        sILogger.v(message, args);
+        Holder.sILogger.v(message, args);
     }
 
     public static void wtf(@NonNull String message, @Nullable Object... args) {
-        sILogger.wtf(message, args);
+        Holder.sILogger.wtf(message, args);
     }
 
     /**
@@ -59,7 +66,7 @@ public final class LogUtils {
      * @param json
      */
     public static void json(@Nullable String json) {
-        sILogger.json(json);
+        Holder.sILogger.json(json);
     }
 
     /**
@@ -68,14 +75,14 @@ public final class LogUtils {
      * @param xml
      */
     public static void xml(@Nullable String xml) {
-        sILogger.xml(xml);
+        Holder.sILogger.xml(xml);
     }
 
     public static void log(int priority, @Nullable String tag, @Nullable String message, @Nullable Throwable throwable) {
-        sILogger.log(priority, tag, message, throwable);
+        Holder.sILogger.log(priority, tag, message, throwable);
     }
 
     public static void clearLogAdapters() {
-        sILogger.clearLogAdapters();
+        Holder.sILogger.clearLogAdapters();
     }
 }

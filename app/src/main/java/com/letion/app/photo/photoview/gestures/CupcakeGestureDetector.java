@@ -121,7 +121,7 @@ public class CupcakeGestureDetector implements GestureDetector {
                                 .getYVelocity();
 
                         // If the velocity is greater than minVelocity, call
-                        // listener
+                        // progress
                         if (Math.max(Math.abs(vX), Math.abs(vY)) >= mMinimumVelocity) {
                             mListener.onFling(mLastTouchX, mLastTouchY, -vX,
                                     -vY);

@@ -10,6 +10,8 @@ import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
 import com.bumptech.glide.request.target.Target;
 import com.weyee.sdk.imageloader.BaseImageLoaderStrategy;
+import com.weyee.sdk.imageloader.progress.ProgressManager;
+import com.weyee.sdk.imageloader.progress.GlideRequestListener;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
@@ -22,11 +24,11 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<GlideIm
     @SuppressLint("CheckResult")
     @Override
     public void loadImage(Context ctx, GlideImageConfig config) {
-        if (ctx == null) throw new IllegalStateException("Context is required");
-        if (config == null) throw new IllegalStateException("GlideImageConfig is required");
+        if (ctx == null) throw new IllegalStateException("Context must be required");
+        if (config == null) throw new IllegalStateException("GlideImageConfig must be required");
         // if (TextUtils.isEmpty(config.getUrl())) throw new IllegalStateException("url is
         // required");
-        if (config.getImageView() == null) throw new IllegalStateException("imageview is required");
+        //if (config.getImageView() == null) throw new IllegalStateException("ImageView must be required");
 
 
         GlideRequests requests;
@@ -34,8 +36,7 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<GlideIm
         requests = GlideApp.with(ctx);//如果context是activity则自动使用Activity的生命周期
 
         GlideRequest<Drawable> glideRequest = requests.load(config.getResource())
-                .transition(DrawableTransitionOptions.withCrossFade())
-                .centerCrop();
+                .transition(DrawableTransitionOptions.withCrossFade());
 
         switch (config.getCacheStrategy()) {//缓存策略
             case 0:
@@ -93,8 +94,35 @@ public class GlideImageLoaderStrategy implements BaseImageLoaderStrategy<GlideIm
         if (config.getFallback() != 0)//设置请求 url 为空图片
             glideRequest.fallback(config.getFallback());
 
+        // 设置缩略图，float大小必须在0-1之间，当为0时，默认不展示缩略图
+        if (config.thumbnail() > 0f && config.thumbnail() < 1f) {
+            glideRequest.thumbnail(config.thumbnail());
+        }
 
-        glideRequest.into(config.getImageView());
+        // 监听图片加载成功或者失败
+        if (config.listener() != null && config.getImageView() != null) {
+            glideRequest.listener(new GlideRequestListener<>(config.listener()));
+        }
+
+        /**
+         * 必须保证listener不为空，且加载的资源类型必须是URL、URI才能进行监听,否则也是会过滤掉的
+         */
+        if (config.getImageView() == null) {
+            if (config.getTargets() != null && config.getTargets().length > 0) {
+                for (Target target : config.getTargets()) {
+                    glideRequest.into(target);
+                }
+            } else {
+                glideRequest.into(new GlideSimpleTarget<>(config.listener()));
+            }
+        } else if (config.getProgressListener() != null && config.getResource() instanceof String) {
+            ProgressManager.addListener((String) config.getResource(), config.getProgressListener());
+            glideRequest.into(new GlideImageViewTarget((String) config.getResource(), config.getImageView()));
+        } else {
+            // 默认不监听进度更新时，采用默认的加载方式
+            glideRequest.into(config.getImageView());
+        }
+
     }
 
     @SuppressLint("CheckResult")

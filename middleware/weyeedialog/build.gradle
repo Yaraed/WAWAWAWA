@@ -30,10 +30,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation libsConfig.testRunner
+    androidTestImplementation libsConfig.testEspresso
     implementation libsConfig.appcompat_v7
-    implementation libsConfig.androidUtilCode
+    compileOnly project(':middleware:weyeeutil')
 }
 
 apply from : '../../maven.gradle'

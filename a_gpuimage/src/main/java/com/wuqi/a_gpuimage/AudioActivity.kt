@@ -31,7 +31,7 @@ import com.weyee.poscore.mvp.IView
 import com.weyee.possupport.arch.RxLiftUtils
 import com.weyee.sdk.audio.StreamAudioPlayer
 import com.weyee.sdk.audio.StreamAudioRecorder
-import com.weyee.sdk.router.GPUNavigation
+import com.weyee.sdk.router.Path
 import com.weyee.sdk.toast.ToastUtils
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.Permission
@@ -43,7 +43,7 @@ import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
 
-@Route(path = GPUNavigation.MODULE_NAME + "Audio")
+@Route(path = Path.GPU + "Audio")
 class AudioActivity : BaseActivity<BasePresenter<BaseModel, IView>>() {
     private var mIsRecording: Boolean = false
     private var outputFile: File? = null

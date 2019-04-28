@@ -24,7 +24,10 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:icon,android:label, android:theme">
-        <activity android:name=".MainActivity">
+        <activity
+                android:name=".MainActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -57,6 +60,20 @@
         <activity android:name=".photo.PhotoViewActivity">
         </activity>
         <activity android:name=".SpinnerActivity">
+        </activity>
+
+        <service android:name=".SuspensionService"/>
+        <service
+                android:name=".BindService"
+                android:process=":remote"/>
+
+        <activity android:name=".photo.PreViewActivity">
+        </activity>
+        <activity android:name=".StateActivity">
+        </activity>
+        <activity android:name=".notify.NotifyActivity">
+        </activity>
+        <activity android:name=".notify.NotifyFit8Activity">
         </activity>
     </application>
 

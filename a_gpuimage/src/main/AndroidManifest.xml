@@ -22,9 +22,16 @@
     <application>
         <activity android:name=".GPUActivity">
         </activity>
-        <activity android:name=".VideoActivity">
+        <activity
+                android:name=".VideoActivity"
+                android:configChanges="keyboardHidden|orientation|screenSize"
+                android:screenOrientation="portrait">
         </activity>
         <activity android:name=".AudioActivity">
+        </activity>
+        <activity android:name=".MediaActivity">
+        </activity>
+        <activity android:name=".ImageActivity">
         </activity>
     </application>
 

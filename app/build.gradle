@@ -2,6 +2,8 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'tinyPIC'
+
 
 def androidConfig = rootProject.ext.android
 def libsConfig = rootProject.ext.libs
@@ -28,8 +30,25 @@ android {
 
         renderscriptTargetApi 21
         renderscriptSupportModeEnabled true
+
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
+
+        flavorDimensions "default"
     }
+//    productFlavors {
+//        pro {
+//            applicationId = androidConfig.applicationId + ".pro"
+//        }
+//        free {
+//            applicationId = androidConfig.applicationId + ".free"
+//        }
+//    }
     buildTypes {
+//        debug{
+//            applicationIdSuffix ".debug"
+//        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
@@ -38,6 +57,17 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    /**
+     * 防止mmkv和DoraemonKit，重复依赖libc++_shared.so包
+     */
+    packagingOptions {//加上这些代码
+        pickFirst 'lib/armeabi-v7a/libc++_shared.so'
+        pickFirst 'lib/armeabi-v8a/libc++_shared.so'
+        pickFirst 'lib/arm64-v8a/libc++_shared.so'
+        pickFirst 'lib/x86/libc++_shared.so'
+        pickFirst 'lib/x86_64/libc++_shared.so'
     }
 }
 
@@ -55,7 +85,7 @@ dependencies {
     implementation 'me.leolin:ShortcutBadger:1.1.22@aar'
     implementation 'com.zhihu.android:matisse:0.4.3'
     // 测试blur
-    implementation 'com.fivehundredpx:blurringview:1.0.0'
+    //implementation 'com.fivehundredpx:blurringview:1.0.0'
     // leakCanary
     debugImplementation libsConfig.canaryDebug
     releaseImplementation libsConfig.canaryRelease
@@ -66,6 +96,10 @@ dependencies {
     implementation project(':a_intent')
     implementation project(':a_http')
     implementation project(':a_gpuimage')
+    implementation project(':a_pdf')
+    implementation project(':a_service')
+    implementation project(':a_jetpack')
+    implementation project(':a_vlayout')
     implementation project(':poscore')
 
     // test
@@ -80,4 +114,12 @@ dependencies {
 
 repositories {
     maven { url 'https://github.com/500px/500px-android-blur/raw/master/releases/' }
+}
+
+tinyinfo {
+    apiKey = '4YrlKpNr3PrLNqyXCbS6nyxLkCd9Ywpk'
+    //是否跳过此task
+    //skip = true/false
+    //是否打印日志
+    //isShowLog = true/false
 }

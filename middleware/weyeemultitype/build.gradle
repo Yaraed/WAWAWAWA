@@ -29,8 +29,8 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.0'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.0'
+    androidTestImplementation libsConfig.testRunner
+    androidTestImplementation libsConfig.testEspresso
     implementation libsConfig.appcompat_v7
 
     // drakeet 选其一
@@ -41,10 +41,19 @@ dependencies {
         transitive = true
     }
 
-    // refresh view TODO 需要进行上层封装
+    // item animators
+    api ('jp.wasabeef:recyclerview-animators:3.0.0'){
+        exclude module: "androidx.recyclerview:recyclerview"
+    }
+
+
+    // refresh view TODO 需要进行上层封装,选其一
     api 'com.scwang.smartrefresh:SmartRefreshLayout:1.1.0-andx-3'
     // 需要更多的header view可供选择，否则可以不添加
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-3'
+
+    // xrecyclerview，TODO 选其一
+    api 'com.jcodecraeer:xrecyclerview:1.5.9'
 }
 
 apply from : '../../maven.gradle'

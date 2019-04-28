@@ -2,7 +2,6 @@ package com.weyee.sdk.api.observer.transmission;
 
 import androidx.annotation.NonNull;
 import io.reactivex.ObservableTransformer;
-import io.reactivex.schedulers.Schedulers;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,6 +26,7 @@ public class DownloadTransformer {
             byte[] buf = new byte[2048];
             int len;
             FileOutputStream fos = null;
+            File file;
             try {
                 is = responseBody.byteStream();
 
@@ -36,7 +36,7 @@ public class DownloadTransformer {
                 if (!dir.exists()) {
                     dir.mkdirs();
                 }
-                File file = new File(dir, fileName);
+                file = new File(dir, fileName);
                 fos = new FileOutputStream(file);
                 while ((len = is.read(buf)) != -1) {
                     sum += len;
@@ -48,7 +48,6 @@ public class DownloadTransformer {
                 }
                 fos.flush();
 
-                return file.getAbsolutePath();
 
             } finally {
                 try {
@@ -66,7 +65,8 @@ public class DownloadTransformer {
                 }
 
             }
-        }).subscribeOn(Schedulers.io())
-                .unsubscribeOn(Schedulers.io());
+
+            return file == null ? null : file.getAbsolutePath();
+        });
     }
 }

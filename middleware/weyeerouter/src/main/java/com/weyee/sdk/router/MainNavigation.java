@@ -8,7 +8,7 @@ import android.os.Bundle;
  */
 public class MainNavigation extends Navigation {
 
-    public static final String MODULE_NAME = "/main/";
+    private static final String MODULE_NAME = Path.MAIN;
 
     public MainNavigation(Context context) {
         super(context);
@@ -27,7 +27,12 @@ public class MainNavigation extends Navigation {
     }
 
     public void toPhotoViewActivity(String[] urls) {
+        toPhotoViewActivity(0, urls);
+    }
+
+    public void toPhotoViewActivity(int index, String[] urls) {
         Bundle bundle = new Bundle();
+        bundle.putInt("index", index);
         bundle.putStringArray("urls", urls);
         startActivity("PhotoView", bundle);
     }
@@ -35,7 +40,24 @@ public class MainNavigation extends Navigation {
     public void toImageViewActivity() {
         startActivity("PImageView");
     }
+
     public void toSpinnerActivity() {
         startActivity("Spinner");
+    }
+
+    public void toPreViewActivity() {
+        startActivity("PreView");
+    }
+
+    public void toStateActivity() {
+        startActivity("State");
+    }
+
+    public void toNotifyActivity() {
+        startActivity("Notify");
+    }
+
+    public void toNotifyFit8Activity() {
+        startActivity("NotifyFit8");
     }
 }

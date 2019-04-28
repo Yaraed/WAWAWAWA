@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                   xmlns:tools="http://schemas.android.com/tools"
+                                                   xmlns:app="http://schemas.android.com/apk/res-auto"
+                                                   android:orientation="vertical"
+                                                   android:layout_width="match_parent"
+                                                   android:padding="15dp"
+                                                   android:background="?android:attr/selectableItemBackground"
+                                                   android:layout_height="wrap_content">
+
+    <ImageView android:layout_width="20dp" android:layout_height="20dp"
+               android:id="@+id/ivIcon"
+               tools:src="@mipmap/ic_back"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              tools:text="刘枫9987"
+              android:id="@+id/tvTitle"
+              app:layout_constraintLeft_toRightOf="@id/ivIcon"
+              app:layout_constraintBottom_toBottomOf="@id/ivIcon"
+              android:textColor="@color/config_color_black"
+              android:layout_marginStart="5dp"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              android:id="@+id/tvTime"
+              android:textSize="12sp"
+              android:textColor="@android:color/darker_gray"
+              app:layout_constraintBottom_toBottomOf="@id/ivIcon"
+              app:layout_constraintRight_toRightOf="parent"
+              tools:text="2019.04.17"/>
+
+    <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
+              android:id="@+id/tvContent"
+              android:textColor="@color/config_color_black"
+              app:layout_constraintTop_toBottomOf="@id/ivIcon"
+              android:layout_marginTop="10dp"
+              tools:text="ConstraintLayout从发布到现在也得有两年的时间了，但是目前在项目中却很少用到他。今天闲下来记录一下，以后可以用来解决一些布局的嵌套问题。 ConstraintLayout是RelativeLayout的升级版本，但是比RelativeLayout更加强调约束，它能让你的布局更加扁平化，一般来说一个界面一层就够了。 而且它可以直接在布局编辑页面通过拖拖拖的方式就可以把控件摆放好，但是我还是习惯手写。"
+              android:lineSpacingMultiplier="1.2"/>
+
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+              tools:text="新闻资讯"
+              android:layout_marginTop="10dp"
+              app:layout_constraintTop_toBottomOf="@id/tvContent"
+              android:textColor="@color/colorPrimary"
+              android:id="@+id/tvCategory"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

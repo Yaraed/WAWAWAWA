@@ -27,13 +27,13 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
 import com.weyee.poscore.mvp.IView
-import com.weyee.sdk.router.HttpNavigation
+import com.weyee.sdk.router.Path
 
 /**
  * 守护进程的activity
  * 用于后台跑，当应用程序的所有的非守护进程关闭时，所有的守护进程也会关闭
  */
-@Route(path = HttpNavigation.MODULE_NAME + "Daemon")
+@Route(path = Path.Http + "Daemon")
 class DaemonActivity : BaseActivity<BasePresenter<BaseModel,IView>>() {
     override fun setupActivityComponent(appComponent: AppComponent?) {
 

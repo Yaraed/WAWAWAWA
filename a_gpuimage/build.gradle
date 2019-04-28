@@ -47,12 +47,17 @@ dependencies {
 
     implementation project(':poscore')
 
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$kotlinx_coroutines_core"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_core"
 
     kapt libsConfig.arouterCompiler
     kapt libsConfig.butterknifeCompiler
+    kapt libsConfig.dagger2Compiler
 
     implementation 'jp.co.cyberagent.android:gpuimage:2.0.3'
+
+    compileOnly(libsConfig.glide) {
+        exclude group: "com.android.support"
+    }
 }
