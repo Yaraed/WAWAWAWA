@@ -76,5 +76,11 @@ public interface MHeaderViewAble {
      */
     void isShowNewsHint(boolean isShow);
 
+    /**
+     * 要重置当前HeaderView的子控件的ID，否则当多个HeaderView存在时，隐藏其中一个，
+     * 还是会导致findViewById()错乱
+     */
+    void reset();
+
 
 }

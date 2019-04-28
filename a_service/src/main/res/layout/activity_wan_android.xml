@@ -19,9 +19,12 @@
     </com.scwang.smartrefresh.layout.SmartRefreshLayout>
 
     <com.weyee.possupport.headerview.MHeaderView
-            android:id="@+id/headerView"
+            android:id="@+id/header"
             android:layout_width="match_parent"
+            android:fitsSystemWindows="true"
+            android:clipToPadding="true"
+            android:clickable="true"
             android:background="@android:color/transparent"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="wrap_content" android:focusable="true"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,6 @@ import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -21,10 +20,7 @@ import com.weyee.poscore.di.component.AppComponent
 import com.weyee.possupport.repeatclick.OnFastClickListener
 import com.weyee.sdk.imageloader.ImageLoader
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
-import com.weyee.sdk.multitype.BaseAdapter
-import com.weyee.sdk.multitype.BaseHolder
-import com.weyee.sdk.multitype.HorizontalDividerItemDecoration
-import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
+import com.weyee.sdk.multitype.*
 import com.weyee.sdk.permission.MediaIntents
 import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.router.Path
@@ -38,8 +34,12 @@ import kotlinx.android.synthetic.main.activity_wan_android.*
 class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
     private lateinit var imageLoader: ImageLoader
     private var adapter: BaseAdapter<Any>? = null
-    private var pageIndex = 1
+    private var pageIndex = 0
     private var showGridLayout = false
+
+    private companion object {
+        val SIZE = 2
+    }
 
     override fun setupActivityComponent(appComponent: AppComponent?) {
         DaggerWanComponent
@@ -55,25 +55,27 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
     override fun initView(savedInstanceState: Bundle?) {
         BarUtils.setStatusBarAlpha(this@WanActivity, 112, true)
         BarUtils.setStatusBarVisibility(this@WanActivity, true)
-        BarUtils.addMarginTopEqualStatusBarHeight(headerView as ViewGroup)
 
-        headerView.isShowMenuLeftBackView(true)
-        headerView.setOnClickLeftMenuBackListener(object : OnFastClickListener() {
+        header.isShowMenuLeftBackView(true)
+        header.setTitle("玩Android")
+        header.setOnClickLeftMenuBackListener(object : OnFastClickListener() {
             override fun onFastClick(v: View?) {
                 finish()
             }
         })
 
-        headerView.isShowMenuRightOneView(true)
-        headerView.setMenuRightOneIcon(R.drawable.ic_dehaze_black_24dp)
-        headerView.setOnClickRightMenuOneListener {
+        header.isShowMenuRightOneView(true)
+        header.isShowMenuRightTwoView(true)
+        header.setMenuRightOneIcon(R.drawable.ic_more_vert_black_24dp)
+        header.setMenuRightTwoIcon(R.drawable.ic_dehaze_black_24dp)
+        header.setOnClickRightMenuTwoListener {
             showGridLayout = !showGridLayout
-            headerView.setMenuRightOneIcon(if (showGridLayout) R.drawable.ic_dehaze_black_24dp else R.drawable.ic_apps_black_24dp)
-            (recyclerView.layoutManager as GridLayoutManager).spanCount = if (showGridLayout) 2 else 1
+            header.setMenuRightTwoIcon(if (!showGridLayout) R.drawable.ic_dehaze_black_24dp else R.drawable.ic_apps_black_24dp)
+            (recyclerView.layoutManager as GridLayoutManager).spanCount = if (showGridLayout) SIZE else 1
             (recyclerView.layoutManager as GridLayoutManager).spanSizeLookup =
                 if (showGridLayout) object : GridLayoutManager.SpanSizeLookup() {
                     override fun getSpanSize(position: Int): Int {
-                        return if (position == 0) 2 else 1
+                        return if (position == 0) SIZE else 1
                     }
 
                 }
@@ -82,27 +84,45 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
         }
 
         refreshView.setOnRefreshListener {
-            pageIndex = 1
+            pageIndex = 0
             mPresenter.articles(pageIndex)
         }
         refreshView.setOnLoadMoreListener {
             pageIndex++
             mPresenter.articles(pageIndex)
         }
-        val layoutManager = GridLayoutManager(context, 2)
-        layoutManager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (position == 0) 2 else 1
-            }
-
+        val layoutManager = GridLayoutManager(context, 1).apply {
+            spanSizeLookup = GridLayoutManager.DefaultSpanSizeLookup()
         }
         recyclerView.layoutManager = layoutManager
-        recyclerView.itemAnimator = LandingAnimator()
+        recyclerView.itemAnimator = LandingAnimator().apply {
+            addDuration = 500
+            removeDuration = 500
+            moveDuration = 500
+            changeDuration = 500
+        }
         recyclerView.setHasFixedSize(true)
         recyclerView.addItemDecoration(
             HorizontalDividerItemDecoration.Builder(context).color(Color.parseColor("#f1f1f1")).size(
                 10
             ).build()
+        )
+        recyclerView.addItemDecoration(
+            VerticalDividerItemDecoration.Builder(context)
+                .visibilityProvider(object : FlexibleDividerDecoration.VisibilityProvider {
+                    override fun shouldHideDivider(position: Int, parent: RecyclerView?): Boolean {
+                        if (!showGridLayout) {
+                            return true
+                        } else if (position % SIZE == 0) {
+                            return true
+                        }
+                        return false
+                    }
+
+                })
+                .color(Color.parseColor("#f1f1f1")).size(
+                    10
+                ).build()
         )
 
 
@@ -219,7 +239,7 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
     }
 
     override fun setArticle(bean: ArticleBean?) {
-        adapter?.addAll(bean?.datas, pageIndex <= 1)
+        adapter?.addAll(bean?.datas, pageIndex <= 0)
     }
 
     override fun setBanner(bean: List<BannerBean>?) {
@@ -227,7 +247,7 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
     }
 
     override fun onCompleted() {
-        if (pageIndex <= 1) refreshView.finishRefresh() else refreshView.finishLoadMore()
+        if (pageIndex <= 0) refreshView.finishRefresh() else refreshView.finishLoadMore()
     }
 
     override fun hasToolbar(): Boolean {

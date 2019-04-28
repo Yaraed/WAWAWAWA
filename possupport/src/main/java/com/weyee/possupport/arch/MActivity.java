@@ -67,6 +67,8 @@ public class MActivity extends InnerBaseActivity {
             initHeaderView();
             BarUtils.setStatusBarColor(this, ContextCompat.getColor(this, R.color.colorPrimary), 112);
             BarUtils.addMarginTopEqualStatusBarHeight(rootContainer);
+        } else {
+            abl.removeView((View) mHeaderViewAble);
         }
     }
 

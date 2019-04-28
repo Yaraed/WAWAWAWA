@@ -17,8 +17,8 @@ class WanPresenter @Inject constructor(model: WanModel?, rootView: WanContract.W
     BasePresenter<WanContract.Model, WanContract.WanView>(model, rootView) {
 
     fun articles(page: Int) {
-        if (page <= 1) {
-            Observable.merge(mModel.articles(1), mModel.banners())
+        if (page <= 0) {
+            Observable.merge(mModel.articles(0), mModel.banners())
                 .compose(Transformer.switchSchedulers(progressAble))
                 .`as`(RxLiftUtils.bindLifecycle(lifecycleOwner))
                 .subscribe(object : ProgressSubscriber<Any>() {

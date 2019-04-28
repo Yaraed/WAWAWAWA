@@ -19,3 +19,6 @@
 支持在RecyclerView中单个Item变换各种状态
 
 5. Ticket(小票View)
+
+6. layout  
+@See [QMUI](https://github.com/Tencent/QMUI_Android)

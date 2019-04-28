@@ -37,4 +37,8 @@ public class WorkerNavigation extends Navigation {
         bundle.putString("url", url);
         startActivity("Detail", bundle);
     }
+
+    public void toUILayoutActivity() {
+        startActivity("UILayout");
+    }
 }

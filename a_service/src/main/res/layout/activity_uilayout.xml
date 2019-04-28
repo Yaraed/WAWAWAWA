@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".UILayoutActivity">
+
+    <com.wuqi.a_service.AdjustFrameLayout android:layout_width="match_parent"
+                                          android:layout_height="match_parent" tools:layout_editor_absoluteY="42dp"
+                                          tools:ignore="MissingConstraints">
+
+        <com.weyee.poswidget.layout.QMUILinearLayout android:layout_width="240dp"
+                                                     android:gravity="center"
+                                                     android:id="@+id/layout"
+                                                     android:layout_gravity="center_horizontal"
+                                                     android:layout_marginTop="40dp"
+                                                     android:background="@color/qmui_config_color_white"
+                                                     app:layout_constraintLeft_toLeftOf="parent"
+                                                     app:layout_constraintRight_toRightOf="parent"
+                                                     android:layout_height="240dp">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                      tools:text="QMUILinearLayout"/>
+        </com.weyee.poswidget.layout.QMUILinearLayout>
+
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:layout_gravity="bottom"
+                      android:padding="@dimen/default_content_padding_horizontal"
+                      android:orientation="vertical">
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="radius"/>
+
+                <SeekBar
+                        android:id="@+id/test_seekbar_radius"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="20"
+                        android:progress="0"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="alpha"/>
+
+                <SeekBar
+                        android:id="@+id/test_seekbar_alpha"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="100"
+                        android:progress="0"/>
+            </LinearLayout>
+
+            <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="10dp"
+                        android:text="elevation"/>
+
+                <SeekBar
+                        android:id="@+id/test_seekbar_elevation"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:max="20"
+                        android:progress="0"/>
+            </LinearLayout>
+
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="配置取消一个边的圆角（阴影会丢失）"/>
+
+            <RadioGroup android:layout_width="match_parent" android:layout_height="wrap_content"
+                        android:id="@+id/radioGroup"
+                        android:orientation="horizontal">
+                <RadioButton
+                        android:id="@+id/hide_radius_none"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="12sp"
+                        android:text="none"
+                        android:gravity="center"/>
+
+                <RadioButton
+                        android:id="@+id/hide_radius_top"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="12sp"
+                        android:text="top"
+                        android:background="@null"/>
+
+                <RadioButton
+                        android:id="@+id/hide_radius_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="12sp"
+                        android:text="right"
+                        android:background="@null"/>
+
+                <RadioButton
+                        android:id="@+id/hide_radius_bottom"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="12sp"
+                        android:text="bottom"
+                        android:background="@null"/>
+
+                <RadioButton
+                        android:id="@+id/hide_radius_left"
+                        android:layout_width="wrap_content"
+                        android:layout_height="40dp"
+                        android:textSize="12sp"
+                        android:text="left"
+                        android:background="@null"/>
+            </RadioGroup>
+
+        </LinearLayout>
+
+        <com.weyee.poswidget.layout.round.QMUIRoundButton android:layout_width="wrap_content"
+                                                          android:layout_gravity="center_horizontal"
+                                                          android:textAllCaps="false"
+                                                          android:paddingBottom="5dp"
+                                                          android:paddingLeft="16dp"
+                                                          android:paddingRight="16dp"
+                                                          android:paddingTop="5dp"
+                                                          android:text="圆角为短边的一半"
+                                                          android:textColor="@color/config_color_white"
+                                                          app:qmui_radius="5dp"
+                                                          app:qmui_backgroundColor="@color/colorAccent"
+                                                          android:layout_height="wrap_content"/>
+
+    </com.wuqi.a_service.AdjustFrameLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
