@@ -15,6 +15,11 @@ import java.util.Map;
  * @date 2018/12/10 0010
  */
 public interface BaseApiService {
+    /**
+     * 如果要实现多套不同规则的API，则baseUrl是必须重写的
+     */
+    String baseUrl = null;
+
     @GET()
     Flowable<ResponseBody> get(@Url String url, @QueryMap Map<String, String> maps);
 
@@ -27,7 +32,7 @@ public interface BaseApiService {
 
     @Multipart
     @POST()
-    Flowable<ResponseBody> upLoadFile(@Url String url, @Part() RequestBody requestBody);
+    Flowable<ResponseBody> uploadFile(@Url String url, @Part() RequestBody requestBody);
 
     @POST()
     Flowable<ResponseBody> uploadFiles(@Url String url, @Path("headers") Map<String, String> headers, @Part("filename") String description, @PartMap Map<String, RequestBody> maps);

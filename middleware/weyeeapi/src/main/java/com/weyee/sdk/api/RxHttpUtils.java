@@ -39,7 +39,7 @@ public class RxHttpUtils {
      * @return 返回
      */
     public static <K> K createApi(Class<K> cls) {
-        return GlobalRxHttp.createGApi(cls);
+        return GlobalRxHttp.getInstance().createGApi(cls);
     }
 
     /**

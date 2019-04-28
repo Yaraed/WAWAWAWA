@@ -1,53 +1,32 @@
 package com.weyee.sdk.api.base;
 
-import com.weyee.sdk.api.gson.GsonAdapter;
 import com.weyee.sdk.api.interceptor.*;
 import com.weyee.sdk.log.Environment;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
-import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
-import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
 
 import java.util.concurrent.TimeUnit;
 
 /**
- * <p>RetrofitClient工具类
+ * Retrofit的基类，用于支持多套API规则
  *
- * @author wuqi
- * @describe ...
- * @date 2018/12/7 0007
+ * @author wuqi by 2019/4/28.
  */
-public class RetrofitClient {
-    private static RetrofitClient instance;
-    private Retrofit.Builder mRetrofitBuilder;
+public interface BaseRetrofitClient<T> {
+    T baseUrl(String baseUrl);
 
-    private RetrofitClient() {
-        mRetrofitBuilder = new Retrofit.Builder()
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create(GsonAdapter.buildGson()));
-    }
+    T client(OkHttpClient okClient);
 
+    T build();
 
-    public static RetrofitClient getInstance() {
-        if (instance == null) {
-            synchronized (RetrofitClient.class) {
-                if (instance == null) {
-                    instance = new RetrofitClient();
-                }
-            }
-        }
-        return instance;
-    }
+    <K> K create(final Class<K> service);
 
     /**
      * 当没有配置默认的okhttp client，使用默认的
      *
      * @return
      */
-    private OkHttpClient getDefaultOkHttpClient() {
+    default OkHttpClient defaultOkHttpClient() {
         OkHttpClient.Builder builder = new OkHttpClient.Builder();
         builder.readTimeout(10, TimeUnit.SECONDS);
         builder.writeTimeout(10, TimeUnit.SECONDS);
@@ -66,16 +45,5 @@ public class RetrofitClient {
         builder.addInterceptor(new LocalCacheInterceptor()); // 本地缓存
         builder.eventListenerFactory(HttpEventListener.FACTORY); // 监听网络请求的时间
         return builder.build();
-    }
-
-    public Retrofit getRetrofit() {
-        if (!HttpClient.getInstance().isInitCustomClient()) {
-            return mRetrofitBuilder.client(getDefaultOkHttpClient()).build();
-        }
-        return mRetrofitBuilder.build();
-    }
-
-    public Retrofit.Builder getRetrofitBuilder() {
-        return mRetrofitBuilder;
     }
 }
