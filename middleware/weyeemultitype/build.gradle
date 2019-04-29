@@ -52,8 +52,8 @@ dependencies {
     // 需要更多的header view可供选择，否则可以不添加
     api 'com.scwang.smartrefresh:SmartRefreshHeader:1.1.0-andx-3'
 
-    // xrecyclerview，TODO 选其一
-    api 'com.jcodecraeer:xrecyclerview:1.5.9'
+    // xrecyclerview，性能不是很好，而且体验很差
+    //api 'com.jcodecraeer:xrecyclerview:1.5.9'
 }
 
 apply from : '../../maven.gradle'
