@@ -2,11 +2,11 @@ package com.wuqi.a_service.wan
 
 /**
  *
- * @author wuqi by 2019/4/17.
+ * @author wuqi by 2019/5/7.
  */
-data class ArticleBean(
+data class ProjectArticleBean(
     val curPage: Int,
-    val datas: List<ArticleBeanData>,
+    val datas: List<ProjectArticleBeanData>,
     val offset: Int,
     val over: Boolean,
     val pageCount: Int,
@@ -14,7 +14,7 @@ data class ArticleBean(
     val total: Int
 )
 
-data class ArticleBeanData(
+data class ProjectArticleBeanData(
     val apkLink: String,
     val author: String,
     val chapterId: Int,
@@ -33,7 +33,7 @@ data class ArticleBeanData(
     val publishTime: Long,
     val superChapterId: Int,
     val superChapterName: String,
-    val tags: List<ArticleBeanTag>,
+    val tags: List<ProjectArticleBeanTag>,
     val title: String,
     val type: Int,
     val userId: Int,
@@ -41,7 +41,7 @@ data class ArticleBeanData(
     val zan: Int
 )
 
-data class ArticleBeanTag(
+data class ProjectArticleBeanTag(
     val name: String,
     val url: String
 )

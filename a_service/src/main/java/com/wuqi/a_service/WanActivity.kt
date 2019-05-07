@@ -24,6 +24,7 @@ import com.weyee.sdk.multitype.*
 import com.weyee.sdk.permission.MediaIntents
 import com.weyee.sdk.router.MainNavigation
 import com.weyee.sdk.router.Path
+import com.weyee.sdk.router.WorkerNavigation
 import com.wuqi.a_service.di.DaggerWanComponent
 import com.wuqi.a_service.di.WanModule
 import com.wuqi.a_service.wan.*
@@ -82,6 +83,9 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
                 else GridLayoutManager.DefaultSpanSizeLookup()
             recyclerView.adapter?.notifyDataSetChanged()
         }
+        header.setOnClickRightMenuOneListener {
+            WorkerNavigation(this@WanActivity).toTabLayoutActivity()
+        }
 
         refreshView.setOnRefreshListener {
             pageIndex = 0
@@ -128,7 +132,7 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
 
         adapter = object : BaseAdapter<Any>(null,
             OnRecyclerViewItemClickListener<Any> { _, _, data, _ ->
-                if (data is Data) {
+                if (data is ArticleBeanData) {
                     startActivity(MediaIntents.newOpenWebBrowserIntent(data.link))
                     //WorkerNavigation(context).toDetailActivity(data.link)
                 }
@@ -175,7 +179,7 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
 
                     return object : BaseHolder<Any>(v) {
                         override fun setData(data: Any, position: Int) {
-                            if (data !is Data) {
+                            if (data !is ArticleBeanData) {
                                 return
                             }
                             val url: Any = RandomUtil.randomEle(

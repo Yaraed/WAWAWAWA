@@ -4,15 +4,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-import com.weyee.poscore.base.delegate.IFragment;
-import com.weyee.poscore.mvp.IPresenter;
-
-import javax.inject.Inject;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import com.weyee.poscore.base.delegate.IFragment;
+import com.weyee.poscore.mvp.IPresenter;
 import com.weyee.possupport.arch.MFragment;
+
+import javax.inject.Inject;
 
 /**
  * Created by liu-feng on 2017/6/5.
@@ -24,7 +22,7 @@ public abstract class BaseFragment<P extends IPresenter> extends MFragment imple
 
 
     public BaseFragment() {
-        //必须确保在Fragment实例化时setArguments()
+        //必须确保在Fragment实例化时setArguments(),但是这里有一个问题是，如果Fragment不是主动销毁的，系统重建时Fragment中的Bundle就无法保存了
         setArguments(new Bundle());
     }
 
