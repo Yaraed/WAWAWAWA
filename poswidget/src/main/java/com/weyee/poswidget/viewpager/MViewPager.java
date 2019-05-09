@@ -9,12 +9,14 @@ import androidx.annotation.Nullable;
 import androidx.viewpager.widget.ViewPager;
 
 /**
- * 禁止滑动的ViewPager，且取消默认的滑动动画
+ * 1. 禁止滑动的ViewPager，且取消默认的滑动动画
+ * 2. 解决多点触摸和viewpager自身的滑动事件冲突，导致crash： pointerIndex out of range
  *
  * @author wuqi by 2019/5/7.
  */
 public class MViewPager extends ViewPager {
     private boolean noScroll = false;
+    private boolean mIsDisallowIntercept = false;
 
     public MViewPager(@NonNull Context context) {
         super(context);
@@ -48,6 +50,28 @@ public class MViewPager extends ViewPager {
             return false;
         }
         return super.onInterceptTouchEvent(ev);
+    }
+
+    @Override
+    public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        // keep the info about if the innerViews do
+        // requestDisallowInterceptTouchEvent
+        mIsDisallowIntercept = disallowIntercept;
+        super.requestDisallowInterceptTouchEvent(disallowIntercept);
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent ev) {
+        // the incorrect array size will only happen in the multi-touch
+        // scenario.
+        if (ev.getPointerCount() > 1 && mIsDisallowIntercept) {
+            requestDisallowInterceptTouchEvent(false);
+            boolean handled = super.dispatchTouchEvent(ev);
+            requestDisallowInterceptTouchEvent(true);
+            return handled;
+        } else {
+            return super.dispatchTouchEvent(ev);
+        }
     }
 
     /**
