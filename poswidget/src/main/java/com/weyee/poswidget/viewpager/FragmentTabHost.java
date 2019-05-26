@@ -211,8 +211,7 @@ public class FragmentTabHost extends TabHost implements TabHost.OnTabChangeListe
         mOnTabChangeListener = l;
     }
 
-    public void addTab(@NonNull TabSpec tabSpec, @NonNull Class<?> clss,
-                       @Nullable Bundle args) {
+    public void addTab(@NonNull TabSpec tabSpec, @NonNull Class<?> clss,@Nullable Bundle args) {
         tabSpec.setContent(new DummyTabFactory(mContext));
 
         final String tag = tabSpec.getTag();

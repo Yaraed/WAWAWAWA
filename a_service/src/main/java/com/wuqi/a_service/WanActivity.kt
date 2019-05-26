@@ -18,6 +18,7 @@ import com.weyee.poscore.base.App
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.possupport.repeatclick.OnFastClickListener
+import com.weyee.sdk.dialog.MenuDialog
 import com.weyee.sdk.imageloader.ImageLoader
 import com.weyee.sdk.imageloader.glide.GlideImageConfig
 import com.weyee.sdk.multitype.*
@@ -84,7 +85,28 @@ class WanActivity : BaseActivity<WanPresenter>(), WanContract.WanView {
             recyclerView.adapter?.notifyDataSetChanged()
         }
         header.setOnClickRightMenuOneListener {
-            WorkerNavigation(this@WanActivity).toTabLayoutActivity()
+            val arrays = mutableListOf<String>()
+            arrays.add("TabLayout")
+            arrays.add("TabHost")
+            val dialog = MenuDialog(context).setAdapter(object : BaseAdapter<String>(arrays, { _, _, _, position ->
+                when (position) {
+                    0 -> WorkerNavigation(this@WanActivity).toTabLayoutActivity()
+                    1 -> WorkerNavigation(this@WanActivity).toTabHostActivity()
+                }
+            }) {
+                override fun getHolder(v: View, viewType: Int): BaseHolder<String> {
+                    return object : BaseHolder<String>(v) {
+                        override fun setData(data: String, position: Int) {
+                            getView<TextView>(android.R.id.text1).text = data
+                        }
+                    }
+                }
+
+                override fun getLayoutId(viewType: Int): Int = android.R.layout.simple_list_item_1
+
+            })
+            dialog.show()
+
         }
 
         refreshView.setOnRefreshListener {

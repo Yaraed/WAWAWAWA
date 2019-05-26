@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="wrap_content"
+                 app:layout_constraintBottom_toBottomOf="parent"
+                 android:id="@+id/frameTabHost"
+                 tools:background="@android:color/black">
+        <View android:layout_width="match_parent" android:layout_height="1dp"
+              android:background="@color/config_color_driver"
+              tools:background="@android:color/black"/>
+
+        <com.weyee.poswidget.viewpager.FragmentTabHost android:layout_width="match_parent"
+                                                       android:id="@android:id/tabhost"
+                                                       android:layout_marginTop="1px"
+                                                       android:layout_gravity="bottom"
+                                                       android:layout_height="45dp">
+
+        </com.weyee.poswidget.viewpager.FragmentTabHost>
+    </FrameLayout>
+
+
+    <FrameLayout android:layout_width="match_parent" android:layout_height="match_parent"
+                 android:id="@+id/frameLayout"
+                 app:layout_constraintBottom_toTopOf="@id/frameTabHost"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

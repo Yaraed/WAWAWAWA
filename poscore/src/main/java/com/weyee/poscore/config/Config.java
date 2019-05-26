@@ -1,6 +1,7 @@
 package com.weyee.poscore.config;
 
 import android.app.Application;
+import com.lansosdk.videoeditor.LanSoEditor;
 import com.weyee.possupport.AutoSizeConfig;
 import com.weyee.sdk.api.RxHttpUtils;
 import com.weyee.sdk.api.base.HttpClient;
@@ -60,6 +61,8 @@ public class Config {
         PlayerUtils.init(application);
 
         RefreshUtils.init();
+
+        LanSoEditor.initSDK(application,"xxx");
 
 //        System.out.println("执行了几次了");
 //

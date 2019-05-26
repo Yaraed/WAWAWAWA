@@ -49,6 +49,10 @@
         </activity>
         <activity android:name=".TabLayoutActivity">
         </activity>
+        <activity android:name=".tabhost.TabHostActivity">
+        </activity>
+        <activity android:name=".LotteryActivity">
+        </activity>
     </application>
 
 </manifest>

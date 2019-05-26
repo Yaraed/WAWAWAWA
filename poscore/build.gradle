@@ -94,6 +94,10 @@ dependencies {
     api project(':middleware:weyeeaspectj')
     api project(':possupport')
     api project(':poswidget')
+
+
+
+    api project(':lansongsdk')
     //    // glide
     //    implementation rootProject.ext.glide.glide
     //    implementation(rootProject.ext.glide.glideOkhttp) {

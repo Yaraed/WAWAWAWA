@@ -25,6 +25,7 @@
     <!--条目点击后的背景颜色-->
     <color name="config_color_white_pressed">#F2F6F9</color>
     <color name="config_color_black">#333333</color>
+    <color name="config_color_driver">#e6e6e6</color>
 
 
     <!--EditText-->

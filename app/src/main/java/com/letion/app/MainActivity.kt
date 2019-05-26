@@ -79,8 +79,8 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
 
         //presenter = MainPresenter(this)
 
-        val array = arrayOfNulls<String>(45)
-        for (i in 0 until 45) {
+        val array = arrayOfNulls<String>(46)
+        for (i in 0 until 46) {
             array[i] = "这是第${i}个"
         }
 
@@ -202,6 +202,9 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
                     }
                     43 -> {
                         WorkerNavigation(this@MainActivity).toUILayoutActivity()
+                    }
+                    44 -> {
+                        WorkerNavigation(this@MainActivity).toLotteryActivity()
                     }
                     else -> {
                         Bus.getDefault().get<IEvent>(1)?.value = NormalEvent()

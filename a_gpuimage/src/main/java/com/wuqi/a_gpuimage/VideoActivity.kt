@@ -30,7 +30,10 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.lansosdk.videoeditor.MediaInfo
+import com.lansosdk.videoeditor.VideoEditor
 import com.weyee.poscore.base.BaseActivity
+import com.weyee.poscore.base.ThreadPool
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
@@ -169,12 +172,26 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
 
     private fun initPlay() {
         if (!hasStart) {
-            val dataSource = DataSource("http://jiajunhui.cn/video/edwin_rolling_in_the_deep.flv")
-            dataSource.title = "音乐和艺术如何改变世界"
-            //videoView.setRenderType(IRender.RENDER_TYPE_SURFACE_VIEW)
-            videoView.setDataSource(dataSource)
-            videoView.start()
-            hasStart = true
+
+            ThreadPool.run {
+
+                MediaInfo.checkFile("http://jiajunhui.cn/video/edwin_rolling_in_the_deep.flv")
+                val videoEditor = VideoEditor()
+                val path = videoEditor.executeOverLayVideoFrame("http://jiajunhui.cn/video/edwin_rolling_in_the_deep.flv","https://ss3.baidu.com/-rVXeDTa2gU2pMbgoY3K/it/u=2506167350,1543071679&fm=202&src=766&mola=new&crop=v1",50,50)
+
+                val dataSource = DataSource(path)
+                dataSource.title = "音乐和艺术如何改变世界"
+                //videoView.setRenderType(IRender.RENDER_TYPE_SURFACE_VIEW)
+
+
+
+
+                videoView.setDataSource(dataSource)
+                videoView.start()
+                hasStart = true
+            }
+
+
         }
     }
 

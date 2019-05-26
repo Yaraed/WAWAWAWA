@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:orientation="vertical"
+                android:paddingTop="5dp"
+                android:paddingBottom="3dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+    <LinearLayout
+            android:id="@+id/ll_tap"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:orientation="vertical">
+
+        <ImageView
+                android:id="@+id/iv_tab_icon"
+                android:layout_width="20dp"
+                android:layout_height="20dp"/>
+
+        <TextView
+                android:id="@+id/tv_tab_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:textColor="@color/nav_text_selector"
+                android:textSize="15sp"/>
+    </LinearLayout>
+
+    <View
+            android:id="@+id/rtv_msg_tip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/ll_tap"
+            android:gravity="center"
+            android:textColor="#ffffff"
+            android:visibility="gone"/>
+
+</RelativeLayout>
