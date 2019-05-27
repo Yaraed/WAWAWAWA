@@ -27,6 +27,7 @@ import android.graphics.PixelFormat
 import android.os.Build
 import android.os.Debug
 import android.os.IBinder
+import android.provider.Settings
 import android.view.Gravity
 import android.view.View
 import android.view.WindowManager
@@ -34,8 +35,8 @@ import android.widget.FrameLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.BaseAdapter
+import com.weyee.sdk.multitype.BaseHolder
 import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
 
 /**
@@ -44,7 +45,7 @@ import com.weyee.sdk.multitype.OnRecyclerViewItemClickListener
  */
 @SuppressLint("Registered")
 class SuspensionService : Service() {
-    private lateinit var windowManger: WindowManager
+    private var windowManger: WindowManager? = null
     private var frameLayout: FrameLayout? = null
 
     override fun onBind(intent: Intent?): IBinder? {
@@ -53,12 +54,12 @@ class SuspensionService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        createTocuher()
+        createToucher()
     }
 
     override fun onDestroy() {
         if (frameLayout != null) {
-            windowManger.removeView(frameLayout)
+            windowManger?.removeView(frameLayout)
         }
         super.onDestroy()
     }
@@ -66,7 +67,10 @@ class SuspensionService : Service() {
     /**
      * 创建悬浮窗
      */
-    private fun createTocuher() {
+    private fun createToucher() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (!Settings.canDrawOverlays(this)) return
+        }
         windowManger = getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val params = WindowManager.LayoutParams()
 
@@ -95,7 +99,7 @@ class SuspensionService : Service() {
 
         frameLayout?.addView(recyclerView)
 
-        windowManger.addView(frameLayout, params)
+        windowManger?.addView(frameLayout, params)
 
         //主动计算出当前View的宽高信息.
         recyclerView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)

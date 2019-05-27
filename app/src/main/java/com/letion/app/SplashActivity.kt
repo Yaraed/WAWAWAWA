@@ -1,5 +1,9 @@
 package com.letion.app
 
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
@@ -50,11 +54,28 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-        RxJavaUtils.delay(3L, TimeUnit.SECONDS)
+        RxJavaUtils.delay(2L, TimeUnit.SECONDS)
             .`as`(RxLiftUtils.bindLifecycle(this))
             .subscribe {
-                finish()
-                startActivity(Intent(this, MainActivity::class.java))
+                toMain()
             }
+    }
+
+    private fun toMain(){
+        val animatorX = ObjectAnimator.ofFloat(window.decorView,"scaleX", 1f, 1.15f)
+        val animatorY = ObjectAnimator.ofFloat(window.decorView,"scaleY", 1f, 1.15f)
+
+        val animatorSet = AnimatorSet()
+        animatorSet.setDuration(1000).play(animatorX).with(animatorY)
+        animatorSet.start()
+        animatorSet.addListener(object: AnimatorListenerAdapter() {
+            override fun onAnimationEnd(animation: Animator?) {
+                // Preview Window设置的背景图如果不做处理，图片就会一直存在于内存中
+                window.setBackgroundDrawable(null)
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                finish()
+            }
+        })
+
     }
 }

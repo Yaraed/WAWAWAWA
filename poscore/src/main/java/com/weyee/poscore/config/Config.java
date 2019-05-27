@@ -1,10 +1,11 @@
 package com.weyee.poscore.config;
 
 import android.app.Application;
-import com.lansosdk.videoeditor.LanSoEditor;
 import com.weyee.possupport.AutoSizeConfig;
 import com.weyee.sdk.api.RxHttpUtils;
 import com.weyee.sdk.api.base.HttpClient;
+import com.weyee.sdk.api.rxutil.RxJavaUtils;
+import com.weyee.sdk.api.rxutil.task.RxUITask;
 import com.weyee.sdk.log.Environment;
 import com.weyee.sdk.log.LogUtils;
 import com.weyee.sdk.multitype.RefreshUtils;
@@ -23,7 +24,15 @@ import com.weyee.sdk.util.sp.SpUtils;
 public class Config {
     public static void init(Application application) {
         AutoSizeConfig.init();
-        ToastUtils.init(application);
+
+
+        RxJavaUtils.doInUIThread(new RxUITask<Application>(application) {
+            @Override
+            public void doInUIThread(Application o) {
+                ToastUtils.init(o);
+            }
+        });
+
         LogUtils.init();
         SpUtils.getDefault().init(null, 0);
         RouterManager.init(application, Environment.isDebug());
@@ -62,7 +71,6 @@ public class Config {
 
         RefreshUtils.init();
 
-        LanSoEditor.initSDK(application,"xxx");
 
 //        System.out.println("执行了几次了");
 //

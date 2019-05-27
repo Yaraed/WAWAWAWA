@@ -97,7 +97,6 @@ dependencies {
 
 
 
-    api project(':lansongsdk')
     //    // glide
     //    implementation rootProject.ext.glide.glide
     //    implementation(rootProject.ext.glide.glideOkhttp) {

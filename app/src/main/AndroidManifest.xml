@@ -61,6 +61,7 @@
         <activity android:name=".SpinnerActivity">
         </activity>
 
+        <service android:name=".config.InitializeService"/>
         <service android:name=".SuspensionService"/>
         <service
                 android:name=".BindService"
