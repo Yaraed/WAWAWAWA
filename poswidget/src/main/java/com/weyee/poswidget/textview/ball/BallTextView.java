@@ -1,9 +1,11 @@
 package com.weyee.poswidget.textview.ball;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import androidx.appcompat.widget.AppCompatTextView;
@@ -65,8 +67,12 @@ public class BallTextView extends AppCompatTextView {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         mPaint.setColor(getCurrentTextColor());
-        float cx = getLeft() + getWidth() / 2;
-        float cy = getTop() + getHeight() / 2;
+        @SuppressLint("DrawAllocation") Rect localRect = new Rect();
+        getGlobalVisibleRect(localRect);
+        //float cx = getLeft() + getWidth() / 2;
+        //float cy = getTop() + getHeight() / 2;
+        float cx = localRect.left + getWidth() / 2;
+        float cy = localRect.top + getHeight() / 2;
         canvas.drawCircle(cx, cy, getWidth() / 2 - borderSize, mPaint);
     }
 }

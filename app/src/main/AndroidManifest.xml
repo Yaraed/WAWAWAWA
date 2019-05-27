@@ -24,15 +24,19 @@
             android:theme="@style/AppTheme"
             tools:ignore="GoogleAppIndexingWarning"
             tools:replace="android:icon,android:label, android:theme">
-        <activity
-                android:name=".MainActivity"
-                android:launchMode="singleTask"
-                android:screenOrientation="portrait">
+        <activity android:name=".SplashActivity"
+                  android:theme="@style/AppTheme.Splash"
+                  android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
+        </activity>
+        <activity
+                android:name=".MainActivity"
+                android:launchMode="singleTask"
+                android:screenOrientation="portrait">
         </activity>
 
         <activity-alias
@@ -41,11 +45,6 @@
                 android:icon="@mipmap/icon_more_operation_save"
                 android:label="@string/app_name"
                 android:targetActivity=".MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
         </activity-alias>
 
         <meta-data

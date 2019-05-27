@@ -36,10 +36,10 @@ public class OnePixelReceiver extends BroadcastReceiver {
             System.out.println("打开1像素的页面");
         } else if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {   //屏幕打开 结束1像素
             context.sendBroadcast(new Intent("FINISH"));
-            Intent main = new Intent(Intent.ACTION_MAIN);
-            main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            main.addCategory(Intent.CATEGORY_HOME);
-            context.startActivity(main);
+//            Intent main = new Intent(Intent.ACTION_MAIN);
+//            main.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+//            main.addCategory(Intent.CATEGORY_HOME);
+//            context.startActivity(main);
             System.out.println("关闭1像素的页面");
         }
     }

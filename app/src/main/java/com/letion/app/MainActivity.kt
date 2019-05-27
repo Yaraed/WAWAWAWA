@@ -9,6 +9,7 @@ import android.content.pm.ActivityInfo
 import android.content.pm.PackageManager
 import android.os.*
 import android.provider.Settings
+import android.view.KeyEvent
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.blankj.utilcode.util.ServiceUtils
@@ -51,7 +52,7 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
     private var onePixelReceiver: BroadcastReceiver? = null
     private lateinit var connection: ServiceConnection
     private var isBindService: Boolean = false
-    private var receiver : BroadcastReceiver? = null
+    private var receiver: BroadcastReceiver? = null
 
     /**
      * 如果initView返回0,框架则不会调用[android.app.Activity.setContentView]
@@ -262,6 +263,20 @@ class MainActivity : BaseActivity<MainPresenter>(), MainContract.MainView {
         filter.addAction("android.provider.Telephony.SMS_RECEIVED")
         filter.priority = 800
         registerReceiver(receiver, filter)
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        LogUtils.d("onNewIntent")
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            // 仅当activity为task根（即首个启动activity）时才生效,必须移除栈内的所有activity
+            moveTaskToBack(false)
+            return true
+        }
+        return super.onKeyDown(keyCode, event)
     }
 
     override fun onDestroy() {
