@@ -16,6 +16,7 @@ public class BaseApplication extends Application implements App {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
+        System.out.println("启动：" + System.currentTimeMillis());
         if (mAppDelegate == null)
             this.mAppDelegate = new AppDelegate(base);
         this.mAppDelegate.attachBaseContext(this);

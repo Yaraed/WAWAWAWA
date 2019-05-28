@@ -25,6 +25,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        println("创建：" + System.currentTimeMillis())
         BarUtils.setStatusBarAlpha(this@SplashActivity, 112, true)
         BarUtils.setStatusBarVisibility(this@SplashActivity, false)
 
@@ -54,6 +55,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        println("展示：" + System.currentTimeMillis())
         RxJavaUtils.delay(2L, TimeUnit.SECONDS)
             .`as`(RxLiftUtils.bindLifecycle(this))
             .subscribe {
@@ -70,9 +72,9 @@ class SplashActivity : AppCompatActivity() {
         animatorSet.start()
         animatorSet.addListener(object: AnimatorListenerAdapter() {
             override fun onAnimationEnd(animation: Animator?) {
+                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 // Preview Window设置的背景图如果不做处理，图片就会一直存在于内存中
                 window.setBackgroundDrawable(null)
-                startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                 finish()
             }
         })
