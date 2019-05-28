@@ -25,7 +25,7 @@
     <dimen name="config_size_edittext_left_padding_phone">10dp</dimen>
     <dimen name="config_size_edittext_radius_phone">4dp</dimen>
     <dimen name="config_size_edittext_height_phone">30dp</dimen>
-    
+
     <!--**********************************************
     *                 Spinner                        *
     ***********************************************-->
@@ -35,4 +35,5 @@
 
     <dimen name="default_spinner_icon_padding_size">20dp</dimen>
     <dimen name="default_content_padding_horizontal">16dp</dimen>
+    <dimen name="default_activity_16dp">16dp</dimen>
 </resources>

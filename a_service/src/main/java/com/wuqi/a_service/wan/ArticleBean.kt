@@ -6,7 +6,7 @@ package com.wuqi.a_service.wan
  */
 data class ArticleBean(
     val curPage: Int,
-    val datas: List<Data>,
+    val datas: List<ArticleBeanData>,
     val offset: Int,
     val over: Boolean,
     val pageCount: Int,
@@ -14,7 +14,7 @@ data class ArticleBean(
     val total: Int
 )
 
-data class Data(
+data class ArticleBeanData(
     val apkLink: String,
     val author: String,
     val chapterId: Int,
@@ -33,7 +33,7 @@ data class Data(
     val publishTime: Long,
     val superChapterId: Int,
     val superChapterName: String,
-    val tags: List<Tag>,
+    val tags: List<ArticleBeanTag>,
     val title: String,
     val type: Int,
     val userId: Int,
@@ -41,7 +41,7 @@ data class Data(
     val zan: Int
 )
 
-data class Tag(
+data class ArticleBeanTag(
     val name: String,
     val url: String
 )

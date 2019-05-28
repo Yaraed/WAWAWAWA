@@ -10,10 +10,10 @@ import dagger.Provides
  * @author wuqi by 2019/4/12.
  */
 @Module
-class WanModule(val view: WanContract.WanView) {
+class WanModule(val view: WanContract.WanBaseView) {
     @ActivityScope
     @Provides
-    fun provideWanView(): WanContract.WanView = view
+    fun provideWanView(): WanContract.WanBaseView = view
 
     @ActivityScope
     @Provides

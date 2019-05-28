@@ -1,6 +1,7 @@
 package com.weyee.poscore.base;
 
 import android.os.Bundle;
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import com.weyee.poscore.mvp.IPresenter;
@@ -16,6 +17,9 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
     private boolean isViewCreated; // 界面是否已创建完成
     private boolean isVisibleToUser; // 是否对用户可见
     private boolean isDataLoaded; // 数据是否已请求
+
+    public BaseLazyFragment() {
+    }
 
     @Override
     public void initView(Bundle savedanceState) {
@@ -46,6 +50,7 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
 
     /**
      * 注意：该方法只会在show/hide方法调用时才会去调用
+     *
      * @param hidden
      */
     @Override
@@ -63,6 +68,24 @@ public abstract class BaseLazyFragment<P extends IPresenter> extends BaseFragmen
         super.onResume();
         isViewCreated = true;
         tryLoadData();
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        isViewCreated = false;
+        isVisibleToUser = false;
+        isDataLoaded = false;
+    }
+
+    /**
+     * 当Fragment是系统销毁的时候，保存Bundle信息，系统重建时会保存这个信息，只要重新走onCreate流程获取Bundle信息就可以了
+     *
+     * @param outState
+     */
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
     }
 
     /**

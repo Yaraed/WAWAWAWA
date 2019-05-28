@@ -41,4 +41,16 @@ public class WorkerNavigation extends Navigation {
     public void toUILayoutActivity() {
         startActivity("UILayout");
     }
+
+    public void toTabLayoutActivity() {
+        startActivity("TabLayout");
+    }
+
+    public void toTabHostActivity() {
+        startActivity("TabHost");
+    }
+
+    public void toLotteryActivity() {
+        startActivity("Lottery");
+    }
 }

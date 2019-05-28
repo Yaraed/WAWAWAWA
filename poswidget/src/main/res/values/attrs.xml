@@ -77,4 +77,9 @@
         <attr name="android:color"/>
     </declare-styleable>
 
+    <declare-styleable name="BallTextView">
+        <attr name="border" format="dimension"/>
+        <attr name="android:color"/>
+    </declare-styleable>
+
 </resources>

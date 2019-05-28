@@ -13,8 +13,8 @@ import javax.inject.Inject
  * @author wuqi by 2019/4/17.
  */
 @ActivityScope
-class WanPresenter @Inject constructor(model: WanModel?, rootView: WanContract.WanView?) :
-    BasePresenter<WanContract.Model, WanContract.WanView>(model, rootView) {
+class WanPresenter @Inject constructor(model: WanModel?, rootView: WanContract.WanBaseView?) :
+    BasePresenter<WanContract.Model, WanContract.WanBaseView>(model, rootView) {
 
     fun articles(page: Int) {
         if (page <= 0) {
@@ -24,15 +24,15 @@ class WanPresenter @Inject constructor(model: WanModel?, rootView: WanContract.W
                 .subscribe(object : ProgressSubscriber<Any>() {
                     override fun onSuccess(t: Any?) {
                         if (t is ArticleBean) {
-                            mView.setArticle(t)
+                            (mView as WanContract.WanView).setArticle(t)
                         } else if (t is List<*>) {
-                            mView.setBanner(t as List<BannerBean>)
+                            (mView as WanContract.WanView).setBanner(t as List<BannerBean>)
                         }
                     }
 
                     override fun onCompleted() {
                         super.onCompleted()
-                        mView.onCompleted()
+                        (mView as WanContract.WanView).onCompleted()
                     }
 
                 })
@@ -42,16 +42,30 @@ class WanPresenter @Inject constructor(model: WanModel?, rootView: WanContract.W
                 .`as`(RxLiftUtils.bindLifecycle(lifecycleOwner))
                 .subscribe(object : ProgressSubscriber<ArticleBean>() {
                     override fun onSuccess(t: ArticleBean?) {
-                        mView.setArticle(t)
+                        (mView as WanContract.WanView).setArticle(t)
                     }
 
                     override fun onCompleted() {
                         super.onCompleted()
-                        mView.onCompleted()
+                        (mView as WanContract.WanView).onCompleted()
                     }
 
                 })
         }
 
+    }
+
+    fun projects() {
+        mModel.projects()
+            .compose(Transformer.switchSchedulers(progressAble))
+            .`as`(RxLiftUtils.bindLifecycle(lifecycleOwner))
+            .subscribe(object : ProgressSubscriber<List<ProjectBean>>() {
+                override fun onSuccess(t: List<ProjectBean>?) {
+                    if (mView is WanContract.TabLayoutView) {
+                        (mView as WanContract.TabLayoutView).setProjects(t)
+                    }
+                }
+
+            })
     }
 }

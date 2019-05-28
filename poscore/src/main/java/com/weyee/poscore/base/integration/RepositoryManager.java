@@ -2,15 +2,14 @@ package com.weyee.poscore.base.integration;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
+import androidx.core.util.Preconditions;
+import com.weyee.sdk.api.RxCacheUtils;
+import com.weyee.sdk.api.RxHttpUtils;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
-
-import androidx.core.util.Preconditions;
-import com.weyee.sdk.api.RxHttpUtils;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 /**
  * 用来管理网络请求层,以及数据缓存层,以后可能添加数据库请求层
@@ -54,16 +53,24 @@ public class RepositoryManager implements IRepositoryManager {
 
     /**
      * 注入CacheService,在{@link IConfigModule#registerComponents(Context, IRepositoryManager)}中进行注入
+     * <p>
+     * 现在不自动注入，使用的是本地注入的方式，手动去调用该方法创建Cache Service
+     * 原因： ①自动注入生命周期不可控
+     * ②自动注入所有的Service都被注入，按需注入
+     * ③自动注入代码可读性很差
      *
      * @param services
      */
     @Override
     public void injectCacheService(Class<?>... services) {
-
+        for (Class<?> service : services) {
+            if (mCacheServiceCache.containsKey(service.getName())) continue;
+            mCacheServiceCache.put(service.getName(), RxCacheUtils.createApi(service));
+        }
     }
 
     /**
-     * 根据传入的Class获取对应的Retrift service
+     * 根据传入的Class获取对应的Retrofit service
      *
      * @param service
      * @param <T>
@@ -89,6 +96,9 @@ public class RepositoryManager implements IRepositoryManager {
     @SuppressLint("RestrictedApi")
     @Override
     public <T> T obtainCacheService(Class<T> cache) {
+        if (!mCacheServiceCache.containsKey(cache.getName())) {
+            injectCacheService(cache);
+        }
         Preconditions.checkState(mCacheServiceCache.containsKey(cache.getName()), "Unable to find %s,first call injectCacheService(%s) in IConfigModule");
         return (T) mCacheServiceCache.get(cache.getName());
     }

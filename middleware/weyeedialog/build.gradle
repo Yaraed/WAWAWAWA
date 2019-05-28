@@ -33,6 +33,7 @@ dependencies {
     androidTestImplementation libsConfig.testRunner
     androidTestImplementation libsConfig.testEspresso
     implementation libsConfig.appcompat_v7
+    implementation libsConfig.recyclerview_v7
     compileOnly project(':middleware:weyeeutil')
 }
 

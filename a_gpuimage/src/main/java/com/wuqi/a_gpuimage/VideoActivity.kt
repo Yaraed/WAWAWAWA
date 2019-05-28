@@ -31,6 +31,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.weyee.poscore.base.BaseActivity
+import com.weyee.poscore.base.ThreadPool
 import com.weyee.poscore.di.component.AppComponent
 import com.weyee.poscore.mvp.BaseModel
 import com.weyee.poscore.mvp.BasePresenter
@@ -169,12 +170,24 @@ class VideoActivity : BaseActivity<BasePresenter<BaseModel, IView>>(), OnPlayerE
 
     private fun initPlay() {
         if (!hasStart) {
-            val dataSource = DataSource("http://jiajunhui.cn/video/edwin_rolling_in_the_deep.flv")
-            dataSource.title = "音乐和艺术如何改变世界"
-            //videoView.setRenderType(IRender.RENDER_TYPE_SURFACE_VIEW)
-            videoView.setDataSource(dataSource)
-            videoView.start()
-            hasStart = true
+
+            ThreadPool.run {
+
+                val path = "http://jiajunhui.cn/video/edwin_rolling_in_the_deep.flv"
+
+                val dataSource = DataSource(path)
+                dataSource.title = "音乐和艺术如何改变世界"
+                //videoView.setRenderType(IRender.RENDER_TYPE_SURFACE_VIEW)
+
+
+
+
+                videoView.setDataSource(dataSource)
+                videoView.start()
+                hasStart = true
+            }
+
+
         }
     }
 

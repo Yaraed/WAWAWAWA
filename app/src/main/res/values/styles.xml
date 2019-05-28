@@ -28,4 +28,12 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
+    <!--引导页，全屏显示-->
+    <style name="AppTheme.Splash" parent="AppTheme">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowBackground">@mipmap/ic_splash</item>
+        <item name="android:windowDisablePreview">true</item>
+    </style>
+
 </resources>

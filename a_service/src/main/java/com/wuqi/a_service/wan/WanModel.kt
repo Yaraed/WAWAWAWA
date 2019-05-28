@@ -14,11 +14,21 @@ import javax.inject.Inject
 @ActivityScope
 class WanModel @Inject constructor(repositoryManager: IRepositoryManager?) : BaseModel(repositoryManager),
     WanContract.Model {
+
     override fun articles(page: Int): Observable<ArticleBean> {
         return mRepositoryManager.obtainRetrofitService(WanService::class.java).articles(page).map { it.data }
     }
 
     override fun banners(): Observable<List<BannerBean>> {
         return mRepositoryManager.obtainRetrofitService(WanService::class.java).banners().map { it.data }
+    }
+
+    override fun projects(): Observable<List<ProjectBean>> {
+        return mRepositoryManager.obtainRetrofitService(WanService::class.java).projests().map { it.data }
+    }
+
+    override fun projectArticles(page: Int, cid: Int): Observable<ProjectArticleBean> {
+        return mRepositoryManager.obtainRetrofitService(WanService::class.java).projestArtiles(page, cid)
+            .map { it.data }
     }
 }

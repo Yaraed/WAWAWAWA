@@ -12,9 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.multidex.MultiDex;
-import com.blankj.utilcode.util.ProcessUtils;
 import com.bumptech.glide.Glide;
-import com.squareup.leakcanary.LeakCanary;
 import com.weyee.poscore.base.delegate.AppDelegate;
 import com.weyee.poscore.base.integration.IConfigModule;
 import com.weyee.poscore.base.integration.IRepositoryManager;
@@ -72,19 +70,7 @@ public class Config implements IConfigModule {
 
             @Override
             public void onCreate(Application application) {
-                if (LeakCanary.isInAnalyzerProcess(application)) {
-                    // This process is dedicated to LeakCanary for heap analysis.
-                    // You should not init your app in this process.
-                    return;
-                }
-                LeakCanary.install(application);
-                if (ProcessUtils.isMainProcess()) {
-                    com.weyee.poscore.config.Config.init(application);
-
-                    //DoraemonKit.install(application);
-
-
-                }
+                InitializeService.start(application);
             }
 
             @Override
@@ -105,7 +91,7 @@ public class Config implements IConfigModule {
             @Override
             public void onTrimMemory(int level, Application application) {
                 // 用户点击了Home键或者Back键退出应用
-                if (level == TRIM_MEMORY_UI_HIDDEN){
+                if (level == TRIM_MEMORY_UI_HIDDEN) {
                     Glide.get(application).clearMemory();
                 }
                 GlideApp.get(application).trimMemory(level);

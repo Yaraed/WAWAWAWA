@@ -7,7 +7,6 @@ import android.widget.ImageView
 import androidx.palette.graphics.Palette
 import androidx.recyclerview.widget.GridLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.weyee.poscore.base.App
 import com.weyee.poscore.base.BaseActivity
 import com.weyee.poscore.di.component.AppComponent
@@ -66,7 +65,7 @@ class ImageActivity : BaseActivity<ImagePresenter>(), ImageContract.ImageView {
                             GlideImageConfig.builder().resource(data)
                                 .thumbnail(.1f)
                                 .listener(object : OnRequestListener<BitmapDrawable> {
-                                    override fun onLoadFailed() : Boolean {
+                                    override fun onLoadFailed(): Boolean {
                                         ToastUtils.show("图片加载失败")
                                         return true
                                     }
@@ -89,19 +88,15 @@ class ImageActivity : BaseActivity<ImagePresenter>(), ImageContract.ImageView {
 
         }
 
-        listView.setLoadingListener(object : XRecyclerView.LoadingListener {
-            override fun onLoadMore() {
-                pageIndex++
-                loadImage()
-            }
-
-            override fun onRefresh() {
-                pageIndex = 1
-                (listView.adapter as BaseAdapter<String>).clear()
-                loadImage()
-            }
-
-        })
+        refreshView.setOnRefreshListener {
+            pageIndex = 1
+            (listView.adapter as BaseAdapter<String>).clear()
+            loadImage()
+        }
+        refreshView.setOnLoadMoreListener {
+            pageIndex++
+            loadImage()
+        }
     }
 
     override fun initData(savedInstanceState: Bundle?) {
@@ -121,8 +116,7 @@ class ImageActivity : BaseActivity<ImagePresenter>(), ImageContract.ImageView {
     }
 
     override fun onCompleted() {
-        listView.refreshComplete()
-        listView.loadMoreComplete()
+        if (pageIndex <= 1) refreshView.finishRefresh() else refreshView.finishLoadMore()
     }
 
 
