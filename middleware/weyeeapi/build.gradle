@@ -44,6 +44,9 @@ dependencies {
     implementation libsConfig.okhttp3LoggerInterceptor
     implementation libsConfig.okhttp3Urlconnection
 
+    // 鉴于OKHTTP的网络缓存需要header的配合，每个接口需要去配置，比较麻烦,也不够灵活
+    implementation libsConfig.rxCache
+
     implementation project(':middleware:weyeetoast')
     implementation project(':middleware:weyeelog')
     compileOnly project(':middleware:weyeeutil')

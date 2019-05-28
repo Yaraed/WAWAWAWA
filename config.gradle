@@ -30,6 +30,7 @@ ext {
             autodisposeSdkVersion     : "1.1.0",
             retrofitSdkVersion        : "2.3.0",
             okhttpSdkVersion          : "3.9.0",
+            rx2SdkCache               : "1.8.3-2.x",
             dagger2SdkVersion         : "2.12",
             arouterSdkVersion         : "1.2.2",
             loggerVersion             : "2.2.0",
@@ -81,6 +82,7 @@ ext {
             okhttp3                 : "com.squareup.okhttp3:okhttp:$dependVersion.okhttpSdkVersion",
             okhttp3LoggerInterceptor: "com.squareup.okhttp3:logging-interceptor:$dependVersion.okhttpSdkVersion",
             okhttp3Urlconnection    : "com.squareup.okhttp3:okhttp-urlconnection:$dependVersion.okhttpSdkVersion",
+            rxCache                 : "com.github.VictorAlbertos.RxCache:runtime:$dependVersion.rx2SdkCache",
 
             dagger2                 : "com.google.dagger:dagger:$dependVersion.dagger2SdkVersion",
             dagger2Compiler         : "com.google.dagger:dagger-compiler:$dependVersion.dagger2SdkVersion",

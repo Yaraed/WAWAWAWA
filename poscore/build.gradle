@@ -46,6 +46,8 @@ dependencies {
     api libsConfig.androidUtilCode
     // retrofit
     api libsConfig.retrofit
+    // rxcache
+    api libsConfig.rxCache
     // RxJava2
     api libsConfig.rxJava
     api libsConfig.rxAndroid
